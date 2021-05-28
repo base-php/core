@@ -1,0 +1,11 @@
+{
+    "name": "nisadelgado/framework",
+    "description": "List of functions that serve as helpers for PHP base",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Nisa Delgado",
+            "email": "nisadelgado@gmail.com"
+        }
+    ],
+}
