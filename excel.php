@@ -1,5 +1,6 @@
 <?php
 
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -14,6 +15,13 @@ class Excel
 	{
 		$this->spreadsheet  = new Spreadsheet();
         $this->sheet 		= $this->spreadsheet->getActiveSheet();
+	}
+
+	public function read($filename)
+	{
+		$spreadsheet = IOFactory::load($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
+        $data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+        return $data;
 	}
 
 	public function color($cells, $color)
@@ -56,4 +64,9 @@ class Excel
 		$writer = new Xlsx($this->spreadsheet);
         $writer->save($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
 	}
+}
+
+function excel()
+{
+	return new Excel();
 }
