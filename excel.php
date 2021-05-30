@@ -1,112 +1,59 @@
 <?php
 
-/**
- * Generate file Excel
- */
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Excel
 {
-	/**
-     * View corresponding to the file.
-     *
-     * $view string
-     */
-	public $view;
+	public $spreadsheet;
 
-	/**
-     * Data corresponding to the file.
-     *
-     * $data array
-     */
-	public $data;
+	public $sheet;
 
-	/**
-     * Name of the downloaded file.
-     *
-     * $download string
-     */
-	public $download;
-
-	/**
-     * Name of the stored file.
-     *
-     * $store string
-     */
-	public $store;
-
-	/**
-     * Initialize the class to use from a global function.
-     *
-     * @return Excel
-     */
-    public static function init()
-    {
-        $class = new static;
-        return $class;
-    }
-
-	/**
-	 * Set variable view.
-	 *
-	 * @param $view string
-	 * @return Excel
-	 */
-	public function view($view)
+	public function __construct()
 	{
-		$this->view = $view;
-		return $this;
+		$this->spreadsheet  = new Spreadsheet();
+        $this->sheet 		= $this->spreadsheet->getActiveSheet();
 	}
 
-	/**
-	 * Set variable data.
-	 *
-	 * @param $data array|object
-	 * @return Excel
-	 */
-	public function data($data)
+	public function color($cells, $color)
 	{
-		$this->data = $data;
-		return $this;
+		$this->sheet->getStyle($cells)->getFont()->getColor()->setARGB($color);
 	}
 
-	/**
-	 * Force the download.
-	 *
-	 * @param $download string
-	 * @return Excel
-	 */
-	public function download($download)
+	public function background($cells, $color)
 	{
-		$this->download = $download;
-		header('Content-Type: application/vnd.ms-excel');
-	    header('Content-Disposition: attachment; filename=' . $this->download . '.xls');
-	    extract($this->data);
-	    include $_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $this->view . '.php';
-	    return $this;
+		$this->sheet->getStyle($cells)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor($color)->setARGB($color);
 	}
 
-	/**
-	 * Store the file.
-	 *
-	 * @param $store string
-	 * @return Excel
-	 */
-	public function store($store)
+	public function size($cells, $size)
 	{
-		ob_start();
-		$this->store = $store;
-		extract($this->data);
-		include $_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $this->view . '.php';
-		file_put_contents($this->store . '.xls', ob_get_clean());
-		return $this;
+		$this->sheet->getStyle($cells)->getFont()->setSize($size);
 	}
-}
 
-/**
- * Initialize global helper.
- *
- * @return Excel
- */
-function excel()
-{
-    return Excel::init();
+	public function bold($cells)
+	{
+		$this->sheet->getStyle($cells)->getFont()->setBold(true);
+	}
+
+	public function merge($cells)
+	{
+		$this->sheet->mergeCells($cells);
+	}
+
+	public function value($cells, $value)
+	{
+		$this->sheet->setCellValue($cells, $value);
+	}
+
+	public function autosize($cells)
+	{
+		$this->sheet->getColumnDimension($cells)->setAutoSize(true);
+	}
+
+	public function save($filename)
+	{
+		$writer = new Xlsx($this->spreadsheet);
+        $writer->save($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
+	}
 }
