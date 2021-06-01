@@ -195,13 +195,3 @@ class Email
         return $this;
     }
 }
-
-/**
- * Initialize global helper.
- *
- * @return Email
- */
-function email()
-{
-    return Email::init();
-}

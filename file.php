@@ -154,13 +154,3 @@ class File
         return unlink($file);
     }
 }
-
-/**
- * Initialize global helper.
- *
- * @return File
- */
-function files()
-{
-    return File::init();
-}

@@ -99,13 +99,3 @@ class Facebook
         return redirect('/');
     }
 }
-
-/**
- * Initialize global helper.
- *
- * @return Facebook
- */
-function facebook()
-{
-    return Facebook::init();
-}

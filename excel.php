@@ -141,13 +141,3 @@ class Excel
         $writer->save($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
 	}
 }
-
-/**
- * Initialize global helper.
- *
- * @return Excel
- */
-function excel()
-{
-	return new Excel();
-}

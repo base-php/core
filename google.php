@@ -88,13 +88,3 @@ class Google
     	echo $this->instance->createAuthUrl();
     }
 }
-
-/**
- * Initialize global helper.
- *
- * @return Google
- */
-function google()
-{
-    return Google::init();
-}

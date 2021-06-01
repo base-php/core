@@ -160,13 +160,3 @@ class Stripe
         ]);
     }
 }
-
-/**
- * Initialize global helper.
- *
- * @return Stripe
- */
-function stripe()
-{
-    return Stripe::init();
-}

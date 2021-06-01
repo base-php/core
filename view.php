@@ -13,7 +13,7 @@ function view($view, $data = [])
 	$componentes = Netflie\Componentes\Componentes::create($viewPath);
 
     if ($view == 'recover') {
-        $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/views/' . $view . '.blade.php');
+        $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
     } else {
         $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $view . '.blade.php');
     }

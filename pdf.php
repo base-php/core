@@ -149,13 +149,3 @@ class PDF
         return $this;
     }
 }
-
-/**
- * Initialize global helper.
- *
- * @return PDF
- */
-function pdf()
-{
-    return PDF::init();
-}
