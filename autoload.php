@@ -3,6 +3,7 @@
 include "app.php";
 include "assets.php";
 include "auth.php";
+include "commands/console.php";
 include "third/Router.php";
 include "third/Route.php";
 include "third/Controller.php";
