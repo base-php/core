@@ -15,18 +15,23 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 
 		if (file_exists('database/' . $file)) {
 			$sql = file_get_contents('database/' . $file);
+			$sql = trim($sql);
 
-			try {
-				foreach (explode(';', $sql) as $sentence) {
-					Illuminate\Database\Capsule\Manager::select($sentence);
+			if (strlen($sql)) {
+				try {
+					foreach (explode(';', $sql) as $sentence) {
+						if (strlen($sentence)) {
+							Illuminate\Database\Capsule\Manager::select($sentence);
+						}
+					}
+						
+					echo success($file . ' is ok.');
+					line_break();
 				}
-					
-				echo success($file . ' is ok.');
-				line_break();
-			}
-			catch (PDOException $e) {
-				echo danger($file . ' has an error: ' . $e->getMessage());
-				line_break();
+				catch (PDOException $e) {
+					echo danger($file . ' has an error: ' . $e->getMessage());
+					line_break();
+				}
 			}
 		} else {
 			echo danger("The file '$file' does not exist.");
@@ -38,18 +43,23 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 		foreach ($scandir as $item) {
 			if (!is_dir($item)) {
 				$sql = file_get_contents('database/' . $item);
+				$sql = trim($sql);
 
-				try {
-					foreach (explode(';', $sql) as $sentence) {
-						Illuminate\Database\Capsule\Manager::select($sentence);
+				if (strlen($sql)) {
+					try {
+						foreach (explode(';', $sql) as $sentence) {
+							if (strlen($sentence)) {
+								Illuminate\Database\Capsule\Manager::select($sentence);
+							}
+						}
+
+						echo success($item . ' is ok.');
+						echo line_break();
 					}
-
-					echo success($item . ' is ok.');
-					echo line_break();
-				}
-				catch (PDOException $e) {
-					echo danger($item . ' has an error: ' . $e->getMessage());
-					line_break();
+					catch (PDOException $e) {
+						echo danger($item . ' has an error: ' . $e->getMessage());
+						line_break();
+					}					
 				}
 			}
 		}		
