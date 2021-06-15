@@ -20,7 +20,7 @@ if (!isset($_SERVER['argv'][1])) {
 	echo line_break();
 
 	echo success('  create-database');
-	echo normal('	Create a database with the name set in config.');
+	echo normal('	Create a database with the name set in config file.');
 	echo line_break();
 
 	echo success('  create-middleware');

@@ -9,11 +9,16 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-database')
 	$password	= config('database', 'password');
 	$database	= config('database', 'database');
 
-	$pdo = new PDO("$driver:host=$host;", $username, $password);
-	$pdo->exec('CREATE DATABASE IF NOT EXISTS ' . $database);
+	if ($database != '') {
+		$pdo = new PDO("$driver:host=$host;", $username, $password);
+		$pdo->exec('CREATE DATABASE IF NOT EXISTS ' . $database);
 
-	echo success("Database '$database' created successfully.");
-	line_break();
+		echo success("Database '$database' created successfully.");
+		line_break();
+	} else {
+		echo danger("You must set a name for the database in the config.");
+		line_break();
+	}
 }
 
 
