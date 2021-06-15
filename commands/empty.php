@@ -19,6 +19,10 @@ if (!isset($_SERVER['argv'][1])) {
 	echo normal('	Create a controller with the given name.');
 	echo line_break();
 
+	echo success('  create-database');
+	echo normal('	Create a database with the name set in config.');
+	echo line_break();
+
 	echo success('  create-middleware');
 	echo normal('	Create a middleware with the given name.');
 	echo line_break();

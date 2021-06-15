@@ -1,5 +1,22 @@
 <?php
 
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-database') === 0) {
+	include 'vendor/nisadelgado/framework/database.php';
+
+	$driver		= config('database', 'driver');
+	$host 		= config('database', 'host');
+	$username	= config('database', 'username');
+	$password	= config('database', 'password');
+	$database	= config('database', 'database');
+
+	$pdo = new PDO("$driver:host=$host;", $username, $password);
+	$pdo->exec('CREATE DATABASE IF NOT EXISTS ' . $database);
+
+	echo success("Database '$database' created successfully.");
+	line_break();
+}
+
+
 if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) {
 	include 'vendor/nisadelgado/framework/database.php';
 
