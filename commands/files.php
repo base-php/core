@@ -92,6 +92,32 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-model=') =
 }
 
 
+// Create PDF
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-pdf=') === 0) {
+	$name = str_replace('create-pdf=', '', $_SERVER['argv'][1]);
+
+	if ($name == '') {
+		echo danger('You have not specified a name for the PDF.');
+		line_break();
+		exit;
+	}
+
+	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/PDF.php');
+	$content = str_replace('PDFName', $name, $content);
+
+	if (!file_exists('app/PDF')) {
+		mkdir('app/PDF');
+	}
+
+	$fopen = fopen('app/PDF/' . $name . '.php', 'w+');
+	fwrite($fopen, $content);
+	fclose($fopen);
+
+	echo success("PDF '$name' created successfully.");
+	line_break();
+}
+
+
 // Create SQL
 if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-sql=') === 0) {
 	$name = str_replace('create-sql=', '', $_SERVER['argv'][1]);

@@ -35,6 +35,10 @@ if (!isset($_SERVER['argv'][1])) {
 	echo normal('		Create a model with the given name.');
 	echo line_break();
 
+	echo success('  create-pdf');
+	echo normal('		Create a PDF file with the given name.');
+	echo line_break();
+
 	echo success('  create-sql');
 	echo normal('		Create a SQL file with the given name.');
 	echo line_break();

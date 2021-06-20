@@ -58,7 +58,8 @@ function google()
  */
 function pdf()
 {
-    return PDF::init();
+    $pdf = new PDF;
+    return $pdf;
 }
 
 /**
