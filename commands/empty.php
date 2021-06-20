@@ -23,6 +23,10 @@ if (!isset($_SERVER['argv'][1])) {
 	echo normal('	Create a database with the name set in config file.');
 	echo line_break();
 
+	echo success('  create-excel');
+	echo normal('		Create a Excel with the given name.');
+	echo line_break();
+
 	echo success('  create-mail');
 	echo normal('		Create a mail with the given name.');
 	echo line_break();

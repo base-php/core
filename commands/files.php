@@ -22,6 +22,32 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-controller
 }
 
 
+// Create excel
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-excel=') === 0) {
+	$name = str_replace('create-excel=', '', $_SERVER['argv'][1]);
+
+	if ($name == '') {
+		echo danger('You have not specified a name for the Excel.');
+		line_break();
+		exit;
+	}
+
+	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Excel.php');
+	$content = str_replace('ExcelName', $name, $content);
+
+	if (!file_exists('app/Excel')) {
+		mkdir('app/Excel');
+	}
+
+	$fopen = fopen('app/Excel/' . $name . '.php', 'w+');
+	fwrite($fopen, $content);
+	fclose($fopen);
+
+	echo success("Excel '$name' created successfully.");
+	line_break();
+}
+
+
 // Create mail
 if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-mail=') === 0) {
 	$name = str_replace('create-mail=', '', $_SERVER['argv'][1]);

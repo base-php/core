@@ -13,12 +13,20 @@ function email()
 
 /**
  * Helper for Excel class.
+ * 
+ * @param string $filename
+ * @param object $object
  *
  * @return Excel
  */
-function excel()
+function excel($filename, $object = '')
 {
-	return new Excel();
+    if ($object != '') {
+        $object->store($filename);
+    } else {
+        $excel = new App\Excel\Excel();
+        return $excel->read($filename);
+    }
 }
 
 /**

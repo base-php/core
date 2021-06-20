@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Excel;
+
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
@@ -36,19 +38,6 @@ class Excel
 	}
 
 	/**
-     * Read data from Excel file.
-     *
-     * @param $filename string
-     * @return array
-     */
-	public function read($filename)
-	{
-		$spreadsheet = IOFactory::load($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
-        $data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-        return $data;
-	}
-
-	/**
      * Set color to cell.
      *
      * @param $cells string
@@ -57,7 +46,11 @@ class Excel
      */
 	public function color($cells, $color)
 	{
-		$this->sheet->getStyle($cells)->getFont()->getColor()->setARGB($color);
+		$this->sheet
+			->getStyle($cells)
+			->getFont()
+			->getColor()
+			->setARGB($color);
 	}
 
 	/**
@@ -69,7 +62,12 @@ class Excel
      */
 	public function background($cells, $color)
 	{
-		$this->sheet->getStyle($cells)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor($color)->setARGB($color);
+		$this->sheet
+			->getStyle($cells)
+			->getFill()
+			->setFillType(Fill::FILL_SOLID)
+			->getStartColor($color)
+			->setARGB($color);
 	}
 
 	/**
@@ -81,7 +79,10 @@ class Excel
      */
 	public function size($cells, $size)
 	{
-		$this->sheet->getStyle($cells)->getFont()->setSize($size);
+		$this->sheet
+			->getStyle($cells)
+			->getFont()
+			->setSize($size);
 	}
 
 	/**
@@ -92,7 +93,10 @@ class Excel
      */
 	public function bold($cells)
 	{
-		$this->sheet->getStyle($cells)->getFont()->setBold(true);
+		$this->sheet
+			->getStyle($cells)
+			->getFont()
+			->setBold(true);
 	}
 
 	/**
@@ -103,7 +107,8 @@ class Excel
      */
 	public function merge($cells)
 	{
-		$this->sheet->mergeCells($cells);
+		$this->sheet
+			->mergeCells($cells);
 	}
 
 	/**
@@ -115,7 +120,8 @@ class Excel
      */
 	public function value($cells, $value)
 	{
-		$this->sheet->setCellValue($cells, $value);
+		$this->sheet
+			->setCellValue($cells, $value);
 	}
 
 	/**
@@ -126,18 +132,35 @@ class Excel
      */
 	public function autosize($cells)
 	{
-		$this->sheet->getColumnDimension($cells)->setAutoSize(true);
+		$this->sheet
+			->getColumnDimension($cells)
+			->setAutoSize(true);
 	}
 
 	/**
-     * Save Excel file.
+     * Save Excel file in given path.
      *
-     * @param $filename string
+     * @param $path string
      * @return void
      */
-	public function save($filename)
+	public function store($path)
 	{
+		$this->build();
+
 		$writer = new Xlsx($this->spreadsheet);
-        $writer->save($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
+        $writer->save($_SERVER['DOCUMENT_ROOT'] . '/' . $path);
+	}
+
+	/**
+     * Read data from Excel file.
+     *
+     * @param $filename string
+     * @return array
+     */
+	public function read($filename)
+	{
+		$spreadsheet = IOFactory::load($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
+        $data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+        return $data;
 	}
 }
