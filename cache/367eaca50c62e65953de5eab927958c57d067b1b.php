@@ -1,1 +1,0 @@
-<h1>Usuario registrado</h1><?php /**PATH C:\Users\Nisa Delgado\Downloads\base\vendor\nisadelgado\framework\cache/766957658c7901d5eccc028293f1e88a7324f649.blade.php ENDPATH**/ ?>

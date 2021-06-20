@@ -63,10 +63,9 @@ function google()
  *
  * @return PDF
  */
-function pdf()
+function pdf($object)
 {
-    $pdf = new PDF;
-    return $pdf;
+    return $object;
 }
 
 /**

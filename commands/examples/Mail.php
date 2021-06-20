@@ -26,7 +26,7 @@ class MailName extends Mail
 	public $attach = [];
 
 	/**
-     * Create a new message instance.
+     * Create a email instance.
      *
      * @return void
      */
@@ -36,12 +36,12 @@ class MailName extends Mail
 	}
 
 	/**
-     * Build the message.
+     * Build the email.
      *
      * @return $this
      */
 	public function build()
 	{
-		return $this->view();
+		return view();
 	}
 }
