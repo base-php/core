@@ -5,10 +5,9 @@
  *
  * @return Email
  */
-function email()
+function email($to, $object)
 {
-    $email = new Email;
-    return $email->init();
+    $object->send($to);
 }
 
 /**

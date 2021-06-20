@@ -17,7 +17,6 @@ include "config.php";
 include "debug.php";
 include "database.php";
 include "date.php";
-include "email.php";
 include "excel.php";
 include "facebook.php";
 include "file.php";

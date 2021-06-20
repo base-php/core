@@ -2,41 +2,30 @@
 
 namespace App\Mails;
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 class Mail
 {
-	public $from;
-	public $subject;
-	public $view;
-	public $with;
-	public $attach;
-
-	public function from($from)
+	public function send($to)
 	{
-		$this->from = $from;
-		return $this;
-	}
+		$mail = new PHPMailer();
+        $mail->setFrom($this->from);
+        $mail->Subject = $this->subject;
+        $mail->CharSet = 'UTF-8';
+        $mail->isHTML(true);
 
-	public function subject($subject)
-	{
-		$this->subject = $subject;
-		return $this;
-	}
+        $mail->addAddress($to);
 
-	public function view($view)
-	{
-		$this->view = $view;
-		return $this;
-	}
+        ob_start();
+        $this->build();
+        $mail->Body = ob_get_clean();
 
-	public function with($with)
-	{
-		$this->with = $with;
-		return $this;
-	}
+        if ($this->attach) {
+            foreach ($this->attach as $item) {
+                $mail->addAttachment($item);
+            }
+        }
 
-	public function attach($attach)
-	{
-		$this->attach[] = $attach;
-		return $this;
+        $mail->send();
 	}
 }
