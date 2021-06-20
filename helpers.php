@@ -7,7 +7,8 @@
  */
 function email()
 {
-    return Email::init();
+    $email = new Email;
+    return $email->init();
 }
 
 /**

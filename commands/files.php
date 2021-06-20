@@ -22,6 +22,32 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-controller
 }
 
 
+// Create mail
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-mail=') === 0) {
+	$name = str_replace('create-mail=', '', $_SERVER['argv'][1]);
+
+	if ($name == '') {
+		echo danger('You have not specified a name for the mail.');
+		line_break();
+		exit;
+	}
+
+	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Mail.php');
+	$content = str_replace('MailName', $name, $content);
+
+	if (!file_exists('app/Mails')) {
+		mkdir('app/Mails');
+	}
+
+	$fopen = fopen('app/Mails/' . $name . '.php', 'w+');
+	fwrite($fopen, $content);
+	fclose($fopen);
+
+	echo success("Mail '$name' created successfully.");
+	line_break();
+}
+
+
 // Create middleware
 if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-middleware=') === 0) {
 	$name = str_replace('create-middleware=', '', $_SERVER['argv'][1]);

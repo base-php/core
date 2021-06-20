@@ -25,6 +25,7 @@ include "google.php";
 include "http.php";
 include "input.php";
 include "json.php";
+include "mail.php";
 include "pdf.php";
 include "permissions.php";
 include "qr.php";
