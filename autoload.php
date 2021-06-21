@@ -28,6 +28,7 @@ include "mail.php";
 include "pdf.php";
 include "permissions.php";
 include "qr.php";
+include "redirect.php";
 include "request.php";
 include "session.php";
 include "stripe.php";

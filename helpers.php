@@ -1,5 +1,12 @@
 <?php
 
+function redirect($to)
+{
+    $redirect = new Redirect;
+    $redirect->to = $to;
+    return $redirect;
+}
+
 /**
  * Helper for Email class.
  *

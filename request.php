@@ -13,30 +13,15 @@ function errors()
 }
 
 /**
- * Clear flash messages.
- *
- * @return void
+ * Displays the validation text and subsequently deletes it from the session..
+ * 
+ * @return error
  */
-function clear()
+function error($data)
 {
-    unset($_SESSION['flashmessages']);
-}
-
-/**
- * Get an redirector.
- *
- * @param  string  $location
- * @param  array   $data
- * @return string
- */
-function redirect($location, $data = [])
-{
-    if ($data != []) {
-        foreach ($data as $key => $value) {
-            $_SESSION['flashmessages'][$key] = $value;
-        }
-    }
-    echo '<script>window.location.href = "' . $location . '"</script>';
+    echo $data;
+    $index = array_search($data, $_SESSION['flashmessages']['errors']);
+    unset($_SESSION['flashmessages']['errors'][$index]);
 }
 
 /**
@@ -52,7 +37,6 @@ function messages($data)
     } else {
         return false;
     }
-
 }
 
 /**
@@ -67,7 +51,6 @@ function message($data)
         echo $_SESSION['flashmessages'][$data];
         unset($_SESSION['flashmessages']);
     }
-
 }
 
 /**
@@ -83,7 +66,6 @@ function active($module)
     } else {
         echo (strpos($_SERVER['REQUEST_URI'], $module) == !false) ? 'active' : '';
     }
-
 }
 
 /**

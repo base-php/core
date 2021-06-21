@@ -83,6 +83,7 @@ class Validation
 		}
 
 		$_SESSION['flashmessages']['errors'] = $errors;
+		$_SESSION['flashmessages']['errors']['input'] = $_POST;
 
 		if (!empty($errors)) {
 			redirect($_SERVER['HTTP_REFERER']);
