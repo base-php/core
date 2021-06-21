@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Set or get session variable
+ * Set or get session variable.
  *
  * @param mixed $key
  * @param mixed $value

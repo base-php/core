@@ -10,6 +10,13 @@ use Dompdf\Options;
  */
 class PDF
 {
+    /**
+     * Generate PDF and force download.
+     * 
+     * @param string $filename
+     * 
+     * @return DOMPDF
+     */
     public function download($filename)
     {
         ob_start();
@@ -30,6 +37,13 @@ class PDF
         $dompdf->stream($filename);
     }
 
+    /**
+     * Generate PDF and store in path given.
+     * 
+     * @param string $filename
+     * 
+     * @return DOMPDF
+     */
     public function store($filename)
     {
         ob_start();

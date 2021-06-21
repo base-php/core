@@ -13,7 +13,7 @@ function errors()
 }
 
 /**
- * Displays the validation text and subsequently deletes it from the session..
+ * Displays the validation text and subsequently deletes it from the session.
  * 
  * @return error
  */

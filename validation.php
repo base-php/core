@@ -5,7 +5,7 @@ namespace App\Validations;
 use Illuminate\Database\Capsule\Manager as DB;
 
 /**
- * Base class for validations
+ * Base class for validations.
  */
 class Validation
 {

@@ -1,5 +1,34 @@
 <?php
 
+/**
+ * Quick access to the DB class.
+ * 
+ * @return DB
+ */
+function db()
+{
+    return new Illuminate\Database\Capsule\Manager();
+}
+
+/**
+ * Quick access to the HTTP class.
+ * 
+ * @param string $to
+ * 
+ * @return HTTP
+ */
+function redirect($to)
+{
+    return new HTTP();
+}
+
+/**
+ * Helper for redirection.
+ * 
+ * @param string $to
+ * 
+ * @return redirect
+ */
 function redirect($to)
 {
     $redirect = new Redirect;
@@ -68,6 +97,8 @@ function google()
 /**
  * Helper for PDF class.
  *
+ * @param object $object
+ * 
  * @return PDF
  */
 function pdf($object)

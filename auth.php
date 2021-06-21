@@ -4,7 +4,7 @@
  * Register new user.
  *
  * @param  array $user
- * @return void
+ * @return redirect
  */
 function register($user)
 {
@@ -33,7 +33,7 @@ function register($user)
  * Login a session.
  *
  * @param array $user
- * @return void
+ * @return redirect
  */
 function login($user)
 {
@@ -60,7 +60,7 @@ function login($user)
  * Get a session var.
  *
  * @param  mixed  $var
- * @param  array\boolean\string
+ * @param  array\boolean
  */
 function auth() {
     if (isset($_SESSION['id'])) {
@@ -74,7 +74,7 @@ function auth() {
 /**
  * Send email for reset password.
  *
- * @return void
+ * @return redirect
  */
 function forgot()
 {
@@ -99,7 +99,7 @@ function forgot()
 /**
  * Recover password.
  *
- * @return void
+ * @return redirect
  */
 function recover()
 {

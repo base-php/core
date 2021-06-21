@@ -5,7 +5,7 @@
  *
  * @param  string  $view
  * @param  array   $data
- * @return Jenssegers\Blade\Blade
+ * @return Blade
  */
 function view($view, $data = [])
 {

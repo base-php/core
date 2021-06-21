@@ -4,8 +4,18 @@ namespace App\Mails;
 
 use PHPMailer\PHPMailer\PHPMailer;
 
+/**
+ * Class for send email, require phpmailer/phpmailer package.
+ */
 class Mail
 {
+    /**
+     * Send email.
+     * 
+     * @param string $to
+     *
+     * @return PHPMailer
+     */
 	public function send($to)
 	{
 		$mail = new PHPMailer();

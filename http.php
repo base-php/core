@@ -8,12 +8,12 @@ use GuzzleHttp\Client;
 class HTTP
 {
 	/**
-	 * Body of the request response
+	 * Body of the request response.
 	 */
 	public $body;
 
 	/**
-	 * GET request
+	 * GET request.
 	 *
 	 * @param $url string
 	 * @param $data array
@@ -36,7 +36,7 @@ class HTTP
 	}
 
 	/**
-	 * POST request
+	 * POST request.
 	 *
 	 * @param $url string
 	 * @param $data array

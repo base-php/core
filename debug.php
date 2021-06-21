@@ -29,7 +29,7 @@ function localhost()
 }
 
 /**
- * Show object/array as table
+ * Show object/array as table.
  *
  * @param $query object|array
  * @return view
