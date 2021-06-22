@@ -1,8 +1,25 @@
 <?php
 
 /**
+ * Show data for input when validation fail.
+ * 
+ * @param string $input
+ * 
+ * @return string
+ */
+function old($input)
+{
+    if (isset($_SESSION['flashmessages']['inputs'][$input])) {
+        echo $_SESSION['flashmessages']['inputs'][$input];
+        unset($_SESSION['flashmessages']['inputs'][$input]);
+    } else {
+        return null;
+    }
+}
+
+/**
  * Errors of validations.
- *
+ * 
  * @return errors
  */
 function errors()
@@ -14,6 +31,8 @@ function errors()
 
 /**
  * Displays the validation text and subsequently deletes it from the session.
+ * 
+ * @param string $data
  * 
  * @return error
  */

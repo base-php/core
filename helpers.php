@@ -17,7 +17,7 @@ function db()
  * 
  * @return HTTP
  */
-function redirect($to)
+function http()
 {
     return new HTTP();
 }

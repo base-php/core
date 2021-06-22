@@ -21,8 +21,9 @@ class Validation
 		$errors = [];
 
 		foreach ($class->rules() as $key => $value) {
-			$validations = explode('|', $value);
+			$_SESSION['flashmessages']['inputs'] = $_POST;
 
+			$validations = explode('|', $value);
 
 			foreach ($validations as $validation) {				
 				if ($validation == 'required') {
@@ -83,7 +84,7 @@ class Validation
 		}
 
 		$_SESSION['flashmessages']['errors'] = $errors;
-		$_SESSION['flashmessages']['errors']['input'] = $_POST;
+		$_SESSION['flashmessages']['input'] = $_POST;
 
 		if (!empty($errors)) {
 			redirect($_SERVER['HTTP_REFERER']);
