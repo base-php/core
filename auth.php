@@ -85,12 +85,7 @@ function forgot()
             return redirect('/forgot-password')->with('error', 'No podemos encontrar un usuario con esa dirección de correo electrónico');
         }
 
-        email()->from('admin@' . $_SERVER['HTTP_HOST'])
-            ->to($user->email)
-            ->subject('Recuperación de contraseña de ' . config('application_name'))
-            ->view('recover')
-            ->data(compact('user'))
-            ->send();
+        email($user->email, new App\Mails\PasswordRecovery($user));
 
         return redirect('/forgot-password')->with('info', 'Revise su correo electrónico para recuperar su contraseña');
     }

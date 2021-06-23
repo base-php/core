@@ -13,13 +13,13 @@ class Redirect
 	public $to;
 
 	/**
-	 * Necessary method for Symfony class.
+	 * Construct method for class.
 	 *
 	 * @return string
 	 */
-	public function __toString()
+	public function __construct()
 	{
-		return '';
+		
 	}
 
 	/**
@@ -45,6 +45,16 @@ class Redirect
 	public function with($key, $value)
 	{
 		$_SESSION['flashmessages'][$key] = $value;
+	}
+
+	/**
+	 * Necessary method for Symfony class.
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return '';
 	}
 
 	/**
