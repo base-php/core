@@ -7,7 +7,7 @@
  */
 function can($module)
 {
-    $user = App\Models\User::where('id', logged('id'))
+    $user = App\Models\User::where('id', auth()->id)
         ->where('permissions', 'LIKE', '%' . $module . '%')
         ->get();
     if ($user->count() > 0) {
@@ -24,7 +24,7 @@ function can($module)
 function permission()
 {
     $module = explode('/', $_SERVER['REQUEST_URI']);
-    $user = App\Models\User::where('id', logged('id'))
+    $user = App\Models\User::where('id', auth()->id)
         ->where('permissions', 'LIKE', '%' . $module[1] . '%')
         ->get();
     if ($user->count() == 0) {
@@ -41,7 +41,7 @@ function permission()
  */
 function role($roles)
 {
-    $user = App\Models\User::where('id', logged('id'))
+    $user = App\Models\User::where('id', auth()->id)
         ->whereIn('role', $roles)
         ->get();
     if (count($user)) {

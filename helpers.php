@@ -5,9 +5,9 @@
  * 
  * @return DB
  */
-function db()
+class DB extends Illuminate\Database\Capsule\Manager
 {
-    return new Illuminate\Database\Capsule\Manager();
+
 }
 
 /**
