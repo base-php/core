@@ -17,7 +17,7 @@ $capsule = new Illuminate\Database\Capsule\Manager;
 $capsule->addConnection([
 	'driver'    => config('database', 'driver'),
     'host'      => config('database', 'host'),
-    'database'  => config('database', 'database'),
+    'database'  => (config('database', 'driver') == 'sqlite') ? config('database', 'database') . '.sqlite' : config('database', 'database'),
     'username'  => config('database', 'username'),
     'password'  => config('database', 'password'),
     'charset'   => 'utf8',

@@ -19,9 +19,11 @@ function register($user)
     }
 
     $user = App\Models\User::create([
-        'name'     => $user['name'],
-        'email'    => $user['email'],
-        'password' => md5($user['password']),
+        'name'          => $user['name'],
+        'email'         => $user['email'],
+        'password'      => md5($user['password']),
+        'date_create'   => date('Y-m-d H:i:s'),
+        'date_update'   => date('Y-m-d H:i:s')
     ]);
 
     $user->update(['hash' => md5($user->id)]);

@@ -7,11 +7,16 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-database')
 	$host 		= config('database', 'host');
 	$username	= config('database', 'username');
 	$password	= config('database', 'password');
-	$database	= config('database', 'database');
+	$database	= (config('database', 'driver') == 'sqlite') ? config('database', 'database') . '.sqlite' : config('database', 'database');
 
 	if ($database != '') {
-		$pdo = new PDO("$driver:host=$host;", $username, $password);
-		$pdo->exec('CREATE DATABASE IF NOT EXISTS ' . $database);
+		if ($driver == 'sqlite') {
+			$fopen = fopen($database, 'w+');
+			fclose($fopen);
+		} else {
+			$pdo = new PDO("$driver:host=$host;", $username, $password);
+			$pdo->exec('CREATE DATABASE IF NOT EXISTS ' . $database);
+		}
 
 		echo success("Database '$database' created successfully.");
 		line_break();
@@ -38,6 +43,10 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 		if (file_exists('database/' . $file)) {
 			$sql = file_get_contents('database/' . $file);
 			$sql = trim($sql);
+
+			if (config('database', 'driver') == 'sqlite') {
+				$sql = str_replace('AUTO_INCREMENT', 'AUTOINCREMENT', $sql);
+			}
 
 			if (strlen($sql)) {
 				try {
@@ -66,6 +75,10 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 			if (!is_dir($item)) {
 				$sql = file_get_contents('database/' . $item);
 				$sql = trim($sql);
+
+				if (config('database', 'driver') == 'sqlite') {
+					$sql = str_replace('AUTO_INCREMENT', 'AUTOINCREMENT', $sql);
+				}
 
 				if (strlen($sql)) {
 					try {
