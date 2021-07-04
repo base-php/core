@@ -3,6 +3,7 @@
 namespace App\Mails;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 /**
  * Class for send email, require phpmailer/phpmailer package.
@@ -19,12 +20,36 @@ class Mail
 	public function send($to)
 	{
 		$mail = new PHPMailer();
+
+        if ($_SERVER['REMOTE_ADDR'] == '::1') {
+            $mail->SMTPDebug    = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->Host         = config('smtp', 'host');
+            $mail->SMTPAuth     = true;
+            $mail->Username     = config('smtp', 'username');
+            $mail->Password     = config('smtp', 'password');
+            $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port         = config('smtp', 'port');    
+        }
+
         $mail->setFrom($this->from);
         $mail->Subject = $this->subject;
         $mail->CharSet = 'UTF-8';
         $mail->isHTML(true);
 
         $mail->addAddress($to);
+
+        if ($this->replyTo) {
+            $mail->addReplyTo($this->replyTo);
+        }
+
+        if ($this->cc) {
+            $mail->addCC($this->cc);
+        }
+
+        if ($this->bcc) {
+            $mail->addBCC($this->bcc);
+        }
 
         ob_start();
         $this->build();
