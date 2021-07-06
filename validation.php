@@ -80,6 +80,16 @@ class Validation
 						$errors[] = $class->messages()[$key . '.same'];
 					}
 				}
+
+				if (strpos($validation, '()') !== false) {
+					$function = str_replace('()', '', $validation);
+
+					$rule = $class->$function($key, $_POST[$key]);
+
+					if (!$rule) {
+						$errors[] = $class->messages()[$key . '.' . $function];
+					}
+				}
 			}
 		}
 
