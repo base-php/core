@@ -81,6 +81,60 @@ class Validation
 					}
 				}
 
+				if (strpos($validation, 'before') !== false) {
+					$date = explode(':', $validation);
+					$date_valiation = strtotime($date[1]);
+					$date_user = strtotime($_POST[$key]);
+
+					if ($date_user >= $date_valiation) {
+						$errors[] = $class->messages()[$key . '.before'];
+					}
+				}
+
+				if (strpos($validation, 'before_or_equal') !== false) {
+					$date = explode(':', $validation);
+					$date_valiation = strtotime($date[1]);
+					$date_user = strtotime($_POST[$key]);
+
+					if ($date_user > $date_valiation) {
+						$errors[] = $class->messages()[$key . '.before_or_equal'];
+					}
+				}
+
+				if (strpos($validation, 'after') !== false) {
+					$date = explode(':', $validation);
+					$date_valiation = strtotime($date[1]);
+					$date_user = strtotime($_POST[$key]);
+
+					if ($date_user <= $date_valiation) {
+						$errors[] = $class->messages()[$key . '.after'];
+					}
+				}
+
+				if (strpos($validation, 'after_or_equal') !== false) {
+					$date = explode(':', $validation);
+					$date_valiation = strtotime($date[1]);
+					$date_user = strtotime($_POST[$key]);
+
+					if ($date_user < $date_valiation) {
+						$errors[] = $class->messages()[$key . '.after_or_equal'];
+					}
+				}
+
+				if (strpos($validation, 'between') !== false) {
+					$dates = explode(':', $validation);
+					$dates = explode(',', $dates[1]);
+
+					$start = strtotime($dates[0]);
+					$end = strtotime($dates[1]);
+
+					$date_user = strtotime($_POST[$key]);
+
+					if ($date_user < $start || $date_user > $end) {
+						$errors[] = $class->messages()[$key . '.between'];
+					}
+				}
+
 				if (strpos($validation, '()') !== false) {
 					$function = str_replace('()', '', $validation);
 
