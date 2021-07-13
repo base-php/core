@@ -171,6 +171,9 @@ class Storage
         if (is_resource($content)) {
             $stream = $content;
             $this->instance->writeStream($path . '/' . $filename, $stream);
+
+            $this->filename = $filename;
+            $this->success = true;
         }
 
         return $this;
