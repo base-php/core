@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * Quick access to Storage class.
+ *
+ * @param string $adapter
+ * @return Storage
+*/
+function storage(string $adapter = 'local')
+{
+    return new Storage($adapter);
+}
+
+/**
  * Quick access to the DB class.
  * 
  * @return DB
