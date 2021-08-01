@@ -3,11 +3,21 @@
 if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-database') === 0) {
 	include 'vendor/nisadelgado/framework/database.php';
 
-	$driver		= config('database', 'driver');
-	$host 		= config('database', 'host');
-	$username	= config('database', 'username');
-	$password	= config('database', 'password');
-	$database	= (config('database', 'driver') == 'sqlite') ? config('database', 'database') . '.sqlite' : config('database', 'database');
+	$connection = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : 'default';
+
+	$config = include('app/config.php');
+
+	foreach ($config['database'] as $item) {
+		if ($item['name'] == $connection) {
+			$driver 	= $item['driver'];
+			$host 		= $item['host'];
+			$username 	= $item['username'];
+			$password 	= $item['password'];
+			$database 	= $item['database'];
+		}
+	}
+
+	$database = ($database == 'sqlite') ? $database . '.sqlite' : $database;
 
 	if ($database != '') {
 		if ($driver == 'sqlite') {
@@ -32,6 +42,20 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 
 	$case = strpos($_SERVER['argv'][1], '=');
 
+	$connection = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : 'default';
+
+	$config = include('app/config.php');
+
+	foreach ($config['database'] as $item) {
+		if ($item['name'] == $connection) {
+			$driver 	= $item['driver'];
+			$host 		= $item['host'];
+			$username 	= $item['username'];
+			$password 	= $item['password'];
+			$database 	= $item['database'];
+		}
+	}
+
 	if ($case) {
 		$file = str_replace('run-sql=', '', $_SERVER['argv'][1]);
 
@@ -44,7 +68,7 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 			$sql = file_get_contents('database/' . $file);
 			$sql = trim($sql);
 
-			if (config('database', 'driver') == 'sqlite') {
+			if ($driver == 'sqlite') {
 				$sql = str_replace('AUTO_INCREMENT', 'AUTOINCREMENT', $sql);
 			}
 
@@ -52,7 +76,7 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 				try {
 					foreach (explode(';', $sql) as $sentence) {
 						if (strlen($sentence)) {
-							Illuminate\Database\Capsule\Manager::select($sentence);
+							Illuminate\Database\Capsule\Manager::connection($connection)->select($sentence);
 						}
 					}
 						
@@ -76,7 +100,7 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 				$sql = file_get_contents('database/' . $item);
 				$sql = trim($sql);
 
-				if (config('database', 'driver') == 'sqlite') {
+				if ($driver == 'sqlite') {
 					$sql = str_replace('AUTO_INCREMENT', 'AUTOINCREMENT', $sql);
 				}
 
@@ -84,7 +108,7 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 					try {
 						foreach (explode(';', $sql) as $sentence) {
 							if (strlen($sentence)) {
-								Illuminate\Database\Capsule\Manager::select($sentence);
+								Illuminate\Database\Capsule\Manager::connection($connection)->select($sentence);
 							}
 						}
 

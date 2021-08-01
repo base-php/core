@@ -13,17 +13,25 @@
 |
 */
 
+$config = require('app/config.php');
+
 $capsule = new Illuminate\Database\Capsule\Manager;
-$capsule->addConnection([
-	'driver'    => config('database', 'driver'),
-    'host'      => config('database', 'host'),
-    'database'  => (config('database', 'driver') == 'sqlite') ? config('database', 'database') . '.sqlite' : config('database', 'database'),
-    'username'  => config('database', 'username'),
-    'password'  => config('database', 'password'),
-    'charset'   => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix'    => '',
-    'strict'	=> false
-]);
+
+foreach ($config['database'] as $item) {
+    $driver = ($item['driver'] == 'sqlite') ? $item['driver'] . '.sqlite' : $item['driver'];
+
+    $capsule->addConnection([
+    	'driver'    => $driver,
+        'host'      => $item['host'],
+        'database'  => $item['database'],
+        'username'  => $item['username'],
+        'password'  => $item['password'],
+        'charset'   => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix'    => '',
+        'strict'	=> false
+    ], $item['name']);
+}
+
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
