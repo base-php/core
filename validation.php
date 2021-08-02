@@ -91,16 +91,6 @@ class Validation
 					}
 				}
 
-				if (strpos($validation, 'before_or_equal') !== false) {
-					$date = explode(':', $validation);
-					$date_valiation = strtotime($date[1]);
-					$date_user = strtotime($_POST[$key]);
-
-					if ($date_user > $date_valiation) {
-						$errors[] = $class->messages()[$key . '.before_or_equal'];
-					}
-				}
-
 				if (strpos($validation, 'after') !== false) {
 					$date = explode(':', $validation);
 					$date_valiation = strtotime($date[1]);
@@ -108,16 +98,6 @@ class Validation
 
 					if ($date_user <= $date_valiation) {
 						$errors[] = $class->messages()[$key . '.after'];
-					}
-				}
-
-				if (strpos($validation, 'after_or_equal') !== false) {
-					$date = explode(':', $validation);
-					$date_valiation = strtotime($date[1]);
-					$date_user = strtotime($_POST[$key]);
-
-					if ($date_user < $date_valiation) {
-						$errors[] = $class->messages()[$key . '.after_or_equal'];
 					}
 				}
 
@@ -132,6 +112,32 @@ class Validation
 
 					if ($date_user < $start || $date_user > $end) {
 						$errors[] = $class->messages()[$key . '.between'];
+					}
+				}
+
+				if (strpos($validation, 'num') !== false) {
+					if (!is_numeric($_POST[$key])) {
+						$errors[] = $class->messages()[$key . '.num'];
+					}
+				}
+
+				if (strpos($validation, 'num_min') !== false) {
+					$num = explode(':', $validation);
+					$num_validation = $num[1];
+					$num_user = $_POST[$key];
+
+					if ($num_user >= $num_validation) {
+						$errors[] = $class->messages()[$key . '.num_min'];
+					}
+				}
+
+				if (strpos($validation, 'num_max') !== false) {
+					$num = explode(':', $validation);
+					$num_validation = $num[1];
+					$num_user = $_POST[$key];
+
+					if ($num_user <= $num_validation) {
+						$errors[] = $class->messages()[$key . '.num_max'];
 					}
 				}
 
