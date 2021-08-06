@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * Show message in debugbar console.
+ *
+ * @param  mixed
+ * @return void
+ */
+function debugbar($message)
+{
+    $_SESSION['debugbar'][] = $message;
+}
+
+/**
  * Dump the passed variables and end the script.
  *
  * @param  mixed
