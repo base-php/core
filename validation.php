@@ -59,15 +59,19 @@ class Validation
 				if (strpos($validation, 'unique') !== false) {
 					$unique = explode(':', $validation);
 					$unique = $unique[1];
+					$model = 'App\Models\\' . $unique;
 
 					if (post('id')) {
 						$id = post('id');
-						$query = DB::select("SELECT * FROM $unique WHERE $key = '$_POST[$key]' AND id != '$id'");
+						$query = $model::where($key, $_POST[$key])
+							->where('id', $id)
+							->get();
 					} else {
-						$query = DB::select("SELECT * FROM $unique WHERE $key = '$_POST[$key]'");
+						$query = $model::where($key, $_POST[$key])
+							->get();
 					}
 
-					if ($query) {
+					if ($query->count()) {
 						$errors[] = $class->messages()[$key . '.unique'];
 					}
 				}
