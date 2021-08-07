@@ -13,13 +13,6 @@ class Google
     public $instance;
 
     /**
-     * Redirect uri
-     *
-     * $redirect string
-     */
-    public $redirect = 'http://localhost:8080/login/google';
-
-    /**
      * Initialize the class to use from a global function.
      *
      * @return Google
@@ -30,8 +23,8 @@ class Google
 
         $google_client = new Google_Client();
 
-        $google_client->setClientId(config('client_id'));
-        $google_client->setClientSecret(config('client_secret'));
+        $google_client->setClientId(config('google', 'client_id'));
+        $google_client->setClientSecret(config('google', 'client_secret'));
 
         $google_client->addScope('email');
         $google_client->addScope('profile');
@@ -50,7 +43,7 @@ class Google
     {
         $client = $this->instance;
 
-        $client->setRedirectUri($this->redirect);
+        $client->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
 
         $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
         $client->setAccessToken($token['access_token']);
@@ -74,7 +67,7 @@ class Google
         $_SESSION['role']        = $user->role;
         $_SESSION['permissions'] = $user->permissions;
 
-        return redirect('/');
+        return redirect(config('google', 'redirect'));
     }
 
     /**
@@ -84,7 +77,7 @@ class Google
      */
     public function url()
     {
-    	$this->instance->setRedirectUri($this->redirect);
+    	$this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
     	echo $this->instance->createAuthUrl();
     }
 }

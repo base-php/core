@@ -96,6 +96,6 @@ class Facebook
         $_SESSION['role']        = $user->role;
         $_SESSION['permissions'] = $user->permissions;
 
-        return redirect('/');
+        return redirect(config('facebook', 'redirect'));
     }
 }

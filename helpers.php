@@ -82,7 +82,7 @@ function excel($filename, $object = '')
  */
 function facebook()
 {
-    return Facebook::init();
+    return Facebook::init()->url('https://localhost:8080/login/facebook');
 }
 
 /**
@@ -102,7 +102,7 @@ function files()
  */
 function google()
 {
-    return Google::init();
+    return Google::init()->url();
 }
 
 /**
