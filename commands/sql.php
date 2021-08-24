@@ -46,16 +46,6 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 
 	$config = include('app/config.php');
 
-	foreach ($config['database'] as $item) {
-		if ($item['name'] == $connection) {
-			$driver 	= $item['driver'];
-			$host 		= $item['host'];
-			$username 	= $item['username'];
-			$password 	= $item['password'];
-			$database 	= $item['database'];
-		}
-	}
-
 	if ($case) {
 		$file = str_replace('run-sql=', '', $_SERVER['argv'][1]);
 
@@ -65,29 +55,10 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 		}
 
 		if (file_exists('database/' . $file)) {
-			$sql = file_get_contents('database/' . $file);
-			$sql = trim($sql);
-
-			if ($driver == 'sqlite') {
-				$sql = str_replace('AUTO_INCREMENT', 'AUTOINCREMENT', $sql);
-			}
-
-			if (strlen($sql)) {
-				try {
-					foreach (explode(';', $sql) as $sentence) {
-						if (strlen($sentence)) {
-							Illuminate\Database\Capsule\Manager::connection($connection)->select($sentence);
-						}
-					}
-						
-					echo success($file . ' is ok.');
-					line_break();
-				}
-				catch (PDOException $e) {
-					echo danger($file . ' has an error: ' . $e->getMessage());
-					line_break();
-				}
-			}
+			$schema = $capsule->schema();
+			include 'database/' . $file;
+			echo success($file . ' is ok.');
+			echo line_break();
 		} else {
 			echo danger("The file '$file' does not exist.");
 			line_break();
@@ -97,29 +68,10 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 
 		foreach ($scandir as $item) {
 			if (!is_dir($item)) {
-				$sql = file_get_contents('database/' . $item);
-				$sql = trim($sql);
-
-				if ($driver == 'sqlite') {
-					$sql = str_replace('AUTO_INCREMENT', 'AUTOINCREMENT', $sql);
-				}
-
-				if (strlen($sql)) {
-					try {
-						foreach (explode(';', $sql) as $sentence) {
-							if (strlen($sentence)) {
-								Illuminate\Database\Capsule\Manager::connection($connection)->select($sentence);
-							}
-						}
-
-						echo success($item . ' is ok.');
-						echo line_break();
-					}
-					catch (PDOException $e) {
-						echo danger($item . ' has an error: ' . $e->getMessage());
-						line_break();
-					}					
-				}
+				$schema = $capsule->schema();
+				include 'database/' . $item;
+				echo success($item . ' is ok.');
+				echo line_break();
 			}
 		}		
 	}

@@ -156,7 +156,7 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-sql=') ===
 
 	$name = time() . '_' . $name;
 
-	$fopen = fopen('database/' . $name . '.sql', 'w+');
+	$fopen = fopen('database/' . $name . '.php', 'w+');
 	fclose($fopen);
 
 	echo success("SQL '$name.sql' created successfully.");
