@@ -21,7 +21,6 @@ class Validation
 		$errors = [];
 
 		foreach ($class->rules() as $key => $value) {
-			$_SESSION['flashmessages']['inputs'] = $_POST;
 
 			$validations = explode('|', $value);
 
@@ -64,7 +63,7 @@ class Validation
 					if (post('id')) {
 						$id = post('id');
 						$query = $model::where($key, $_POST[$key])
-							->where('id', $id)
+							->where('id', '!=', $id)
 							->get();
 					} else {
 						$query = $model::where($key, $_POST[$key])

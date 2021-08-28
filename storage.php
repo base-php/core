@@ -141,7 +141,7 @@ class Storage
     public function save($path, $content, $filename = ''): Storage
     {
         if (is_string($content)) {
-            if ($_FILES[$content]) {
+            if (isset($_FILES[$content])) {
                 if (is_array($_FILES[$content]['name'])) {
                     $i = 0;
 
@@ -157,13 +157,15 @@ class Storage
                     }
 
                 } else {
-                    $filename = ($filename != '') ? $filename : $_FILES[$content]['name'];
-                    $stream   = fopen($_FILES[$content]['tmp_name'], 'r');
+                    if ($_FILES[$content]['name']) {
+                        $filename = ($filename != '') ? $filename : $_FILES[$content]['name'];
+                        $stream   = fopen($_FILES[$content]['tmp_name'], 'r');
 
-                    $this->instance->writeStream($path . '/' . $filename, $stream);
+                        $this->instance->writeStream($path . '/' . $filename, $stream);
 
-                    $this->filename = $filename;
-                    $this->success = true;
+                        $this->filename = $filename;
+                        $this->success = true;                        
+                    }
                 }
             }
         }

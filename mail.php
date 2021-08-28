@@ -39,15 +39,15 @@ class Mail
 
         $mail->addAddress($to);
 
-        if ($this->replyTo) {
+        if (isset($this->replyTo)) {
             $mail->addReplyTo($this->replyTo);
         }
 
-        if ($this->cc) {
+        if (isset($this->cc)) {
             $mail->addCC($this->cc);
         }
 
-        if ($this->bcc) {
+        if (isset($this->bcc)) {
             $mail->addBCC($this->bcc);
         }
 

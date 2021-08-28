@@ -46,11 +46,6 @@ function login($user)
 
     if ($user) {
         $_SESSION['id'] = $user->id;
-        $_SESSION['name'] = $user->name;
-        $_SESSION['email'] = $user->email;
-        $_SESSION['role'] = $user->role;
-        $_SESSION['permissions'] = $user->permissions;
-        $_SESSION['photo'] = $user->photo;
 
         return redirect('/dashboard');
     } else {
@@ -66,7 +61,13 @@ function login($user)
  */
 function auth() {
     if (isset($_SESSION['id'])) {
-        $user = App\Models\User::find($_SESSION['id']);
+        if (isset($_SESSION['user'])) {
+            $user = $_SESSION['user'];
+        } else {
+            $user = App\Models\User::find($_SESSION['id']);
+            $_SESSION['user'] = $user;
+        }
+        
         return $user;
     }
 
@@ -114,7 +115,7 @@ function recover()
         $user->password = md5(post('password'));
         $user->save();
 
-        return redirect('/login')->with('error', 'Contraseña cambiada exitosamente, ahora puedes iniciar sesión.');
+        return redirect('/login')->with('info', 'Contraseña cambiada exitosamente, ahora puedes iniciar sesión.');
     }
 
 }

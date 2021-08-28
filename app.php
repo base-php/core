@@ -89,6 +89,8 @@ class App
 		$response = $app['router']->dispatch($request);
 		$response->send();
 
+		unset($_SESSION['user']);
+
 		if (config('errors')) {
 			foreach ($_SESSION['debugbar'] as $item) {
 				$debugbar["messages"]->addMessage($item);

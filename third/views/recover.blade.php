@@ -6,8 +6,7 @@
 
     <style>
         @php
-            echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/node_modules/bootstrap/dist/css/bootstrap.css');
-            echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/resources/assets/css/style.css');
+            echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/node_modules/tailwindcss/dist/tailwind.css');
         @endphp
 
         body {
