@@ -91,7 +91,7 @@ class App
 
 		unset($_SESSION['user']);
 
-		if (ajax() == false || config('errors') == true) {
+		if (ajax() == false && config('errors') == true) {
 			foreach ($_SESSION['debugbar'] as $item) {
 				$debugbar["messages"]->addMessage($item);
 			}
