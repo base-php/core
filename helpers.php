@@ -23,14 +23,13 @@ class DB extends Illuminate\Database\Capsule\Manager
 
 /**
  * Quick access to the HTTP class.
- * 
- * @param string $to
+ *
  * 
  * @return HTTP
  */
 function http()
 {
-    return new HTTP();
+    return new Illuminate\Http\Client\Factory;
 }
 
 /**

@@ -19,7 +19,6 @@ include "date.php";
 include "excel.php";
 include "facebook.php";
 include "google.php";
-include "http.php";
 include "input.php";
 include "json.php";
 include "mail.php";
