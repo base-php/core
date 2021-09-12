@@ -725,7 +725,7 @@ class Builder
      */
     public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
     {
-        $page = $page ?: $_GET['page'];
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
         $perPage = $perPage ?: $this->model->getPerPage();
 

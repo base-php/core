@@ -88,11 +88,11 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
     public function render($view = null, $data = [])
     {
         $paginator['paginator'] = $this;
-		$paginator['elements'] = $this -> elements ();
+        $paginator['elements'] = $this -> elements ();
 
         $uri = (isset($_SERVER['REDIRECT_URL'])) ? $_SERVER['REDIRECT_URL'] : $_SERVER['PATH_INFO'];
 
-		require_once 'views/bootstrap-4.blade.php';
+        require_once 'views/tailwind.blade.php';
     }
 
     /**
