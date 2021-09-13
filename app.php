@@ -24,14 +24,24 @@ class App
 
 		header('Access-Control-Allow-Origin: *');
 
-		date_default_timezone_set(config('timezone'));
+
+		// Config
+
+		$config = require 'app/config.php';
+
+		foreach ($config as $key => $value) {
+			$_ENV[$key] = $value;
+		}
+
+
+		date_default_timezone_set($_ENV['timezone']);
 
 		include 'database.php';
 
 
 		// Errors
 
-		if (config('errors') == false) {
+		if ($_ENV['errors'] == false) {
 			error_reporting(0);
 		}
 
@@ -91,7 +101,7 @@ class App
 
 		unset($_SESSION['user']);
 
-		if (ajax() == false && config('errors') == true) {
+		if (ajax() == false && $_ENV['errors'] == true) {
 			foreach ($_SESSION['debugbar'] as $item) {
 				$debugbar["messages"]->addMessage($item);
 			}

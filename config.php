@@ -9,7 +9,7 @@
 
 function config($var1, $var2 = '')
 {
-	$config = require('app/config.php');
+	$config = $_ENV;
 	
 	if (isset($var2) && $var2 != '') {
 		return $config[$var1][$var2];
