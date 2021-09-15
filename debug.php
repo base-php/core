@@ -8,7 +8,7 @@
  */
 function debugbar($message)
 {
-    $_SESSION['debugbar'][] = $message;
+    $_ENV['debugbar'][] = $message;
 }
 
 /**

@@ -58,7 +58,7 @@ class App
 
 		$debugbarRenderer = $debugbar->getJavascriptRenderer();
 
-		$_SESSION['debugbar'] = [];
+		$_ENV['debugbar'] = [];
 
 
 		// Container
@@ -102,7 +102,7 @@ class App
 		unset($_SESSION['user']);
 
 		if (ajax() == false && $_ENV['errors'] == true) {
-			foreach ($_SESSION['debugbar'] as $item) {
+			foreach ($_ENV['debugbar'] as $item) {
 				$debugbar["messages"]->addMessage($item);
 			}
 
