@@ -33,6 +33,8 @@ class App
 			$_ENV[$key] = $value;
 		}
 
+		$_ENV['view'] = false;
+
 
 		date_default_timezone_set($_ENV['timezone']);
 
@@ -101,7 +103,7 @@ class App
 
 		unset($_SESSION['user']);
 
-		if (ajax() == false && $_ENV['errors'] == true) {
+		if ($_ENV['view'] && $_ENV['errors']) {
 			foreach ($_ENV['debugbar'] as $item) {
 				$debugbar["messages"]->addMessage($item);
 			}

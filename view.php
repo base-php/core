@@ -21,4 +21,6 @@ function view($view, $data = [])
     }
 
 	echo $componentes->render($view, $data);
+
+    $_ENV['view'] = true;
 }

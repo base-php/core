@@ -128,7 +128,7 @@ function get($var = '')
  */
 function ajax()
 {
-    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) || isset($_GET['ajax'])) {
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
         return true;
     }
 
