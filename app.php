@@ -16,7 +16,7 @@ class App
 	 *
 	 * @return void
 	 */
-	public static function run()
+	public static function run(): void
 	{
 		// General settings
 
@@ -55,8 +55,8 @@ class App
 
 		$debugbar = new StandardDebugBar();
 
-	    $pdo = new DebugBar\DataCollector\PDO\TraceablePDO($capsule->getConnection()->getPdo());
-	    $debugbar->addCollector(new DebugBar\DataCollector\PDO\PDOCollector($pdo));
+		$pdo = new DebugBar\DataCollector\PDO\TraceablePDO($capsule->getConnection()->getPdo());
+		$debugbar->addCollector(new DebugBar\DataCollector\PDO\PDOCollector($pdo));
 
 		$debugbarRenderer = $debugbar->getJavascriptRenderer();
 
@@ -79,16 +79,16 @@ class App
 		include 'app/routes.php';
 
 		$route->fallback(function () {
-            if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/resources/views/errors/404.blade.php')) {
-                return view('errors/404');
-            } else {
-                $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views');
-                $componentes = \Netflie\Componentes\Componentes::create($viewPath);
+			if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/resources/views/errors/404.blade.php')) {
+				return view('errors/404');
+			} else {
+				$viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views');
+				$componentes = \Netflie\Componentes\Componentes::create($viewPath);
 
-                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/404.blade.php');
-                echo $componentes->render($view, []);
-            }
-        });
+				$view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/404.blade.php');
+				echo $componentes->render($view, []);
+			}
+		});
 
 		if (file_exists('app/helpers.php')) {
 			include 'app/helpers.php';

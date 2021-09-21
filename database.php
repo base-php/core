@@ -13,15 +13,13 @@
 |
 */
 
-$config = require('app/config.php');
-
 $capsule = new Illuminate\Database\Capsule\Manager;
 
-foreach ($config['database'] as $item) {
+foreach ($_ENV['database'] as $item) {
     $driver = ($item['driver'] == 'sqlite') ? $item['driver'] . '.sqlite' : $item['driver'];
 
     $capsule->addConnection([
-    	'driver'    => $driver,
+        'driver'    => $driver,
         'host'      => $item['host'],
         'database'  => $item['database'],
         'username'  => $item['username'],
@@ -29,7 +27,7 @@ foreach ($config['database'] as $item) {
         'charset'   => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
-        'strict'	=> false
+        'strict'    => false
     ], $item['name']);
 }
 

@@ -4,9 +4,9 @@
  * Generate an asset path for the application.
  *
  * @param  string  $file
- * @return string
+ * @return void
  */
-function asset($file)
+function asset(string $file): void
 {
     echo '//' . $_SERVER['HTTP_HOST'] . '/resources/assets/' . $file;
 }
@@ -15,9 +15,9 @@ function asset($file)
  * Generate an node path for the application.
  *
  * @param  string  $file
- * @return string
+ * @return void
  */
-function node($file)
+function node(string $file): void
 {
 	echo '//' . $_SERVER['HTTP_HOST'] . '/node_modules/' . $file;
 }

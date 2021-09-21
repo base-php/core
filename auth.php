@@ -1,12 +1,14 @@
 <?php
 
+use App\Models\User;
+
 /**
- * Register new user.
- *
- * @param  array $user
- * @return redirect
- */
-function register($user)
+* Register new user.
+*
+* @param  array $user
+* @return Redirect
+*/
+function register(array $user): Redirect
 {
     $email = App\Models\User::where('email', $user['email'])->get();
 
@@ -32,12 +34,12 @@ function register($user)
 }
 
 /**
- * Login a session.
- *
- * @param array $user
- * @return redirect
- */
-function login($user)
+* Login a session.
+*
+* @param array $user
+* @return Redirect|null
+*/
+function login(array $user): Redirect|null
 {
     $user = App\Models\User::where('email', $user['email'])
         ->where('password', md5($user['password']))
@@ -48,18 +50,17 @@ function login($user)
         $_SESSION['id'] = $user->id;
 
         return redirect('/dashboard');
-    } else {
-        return redirect('/login')->with('error', 'Datos incorrectos.');
     }
+
+    return redirect('/login')->with('error', 'Datos incorrectos.');
 }
 
 /**
- * Get a session var.
- *
- * @param  mixed  $var
- * @param  array\boolean
- */
-function auth() {
+* Get a session var.
+*
+* @param  User\bool
+*/
+function auth(): User|bool {
     if (isset($_SESSION['id'])) {
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
@@ -67,7 +68,7 @@ function auth() {
             $user = App\Models\User::find($_SESSION['id']);
             $_SESSION['user'] = $user;
         }
-        
+
         return $user;
     }
 
@@ -75,11 +76,11 @@ function auth() {
 }
 
 /**
- * Send email for reset password.
- *
- * @return redirect
- */
-function forgot()
+* Send email for reset password.
+*
+* @return Redirect
+*/
+function forgot(): Redirect
 {
     if (post()) {
         $user = App\Models\User::where('email', post('email'))->first();
@@ -95,11 +96,11 @@ function forgot()
 }
 
 /**
- * Recover password.
- *
- * @return redirect
- */
-function recover()
+* Recover password.
+*
+* @return Redirect
+*/
+function recover(): Redirect
 {
     if (post()) {
         $user = App\Models\User::where('hash', post('id'))->first();
@@ -117,15 +118,14 @@ function recover()
 
         return redirect('/login')->with('info', 'Contraseña cambiada exitosamente, ahora puedes iniciar sesión.');
     }
-
 }
 
 /**
- * Logout session.
- *
- * @return void
- */
-function logout()
+* Logout session.
+*
+* @return void
+*/
+function logout(): void
 {
     session_destroy();
 }
