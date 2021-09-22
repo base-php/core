@@ -51,12 +51,18 @@ class App
 		$whoops->prependHandler(new PrettyPageHandler);
 		$whoops->register();
 
-		// Debug
+		// Debugbar
 
 		$debugbar = new StandardDebugBar();
 
-		$pdo = new DebugBar\DataCollector\PDO\TraceablePDO($capsule->getConnection()->getPdo());
-		$debugbar->addCollector(new DebugBar\DataCollector\PDO\PDOCollector($pdo));
+		$collector = new DebugBar\DataCollector\PDO\PDOCollector();
+
+		foreach ($_ENV['database'] as $database) {
+			$pdo[$database['name']] = new DebugBar\DataCollector\PDO\TraceablePDO($capsule->getConnection($database['name'])->getPdo());
+			$collector->addConnection($pdo[$database['name']], $database['name']);
+		}
+
+		$debugbar->addCollector($collector);
 
 		$debugbarRenderer = $debugbar->getJavascriptRenderer();
 

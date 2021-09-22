@@ -4,10 +4,10 @@
  * Get var of the config file.
  *
  * @param  string $var
- * @return string
+ * @return string|array
  */
 
-function config($var1, $var2 = '')
+function config(string $var1, string $var2 = ''): string|array
 {
 	$config = $_ENV;
 	

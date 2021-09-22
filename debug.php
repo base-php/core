@@ -6,7 +6,7 @@
  * @param  mixed
  * @return void
  */
-function debugbar($message)
+function debugbar(string $message): void
 {
     $_ENV['debugbar'][] = $message;
 }
@@ -17,7 +17,7 @@ function debugbar($message)
  * @param  mixed
  * @return void
  */
-function d($object)
+function d(mixed $object): void
 {
     echo '<style>pre { font-family: "Fira Code"; }</style>';
     echo '<pre>';
@@ -29,9 +29,9 @@ function d($object)
 /**
  * Verify if the environment is local.
  *
- * @return boolean
+ * @return bool
  */
-function localhost()
+function localhost(): bool
 {
     if (strpos($_SERVER['HTTP_HOST'], 'localhost')) {
         return true;
@@ -43,9 +43,9 @@ function localhost()
  * Show object/array as table.
  *
  * @param $query object|array
- * @return view
+ * @return void
  */
-function table($query)
+function table(object|array $query): void
 {
     if (empty($query)) {
         return;
@@ -53,7 +53,7 @@ function table($query)
 
     $query = json($query);
 
-    echo '<style>table { margin-top: 5px; font-family: "Fira Code" } table,tr,th,td { border: 1px solid black; font-family: "Fira Code" } </style>';
+    echo '<style>table { margin-top: 5px; font-family: "Fira Code" } table,tr,th,td { border: 1px solid black; font-family: "Fira Code"; border-collapse: collapse; } </style>';
 
     echo '<table>';
 

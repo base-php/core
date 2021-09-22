@@ -4,9 +4,9 @@
  * Return current date with format given.
  *
  * @param  string $format
- * @return date
+ * @return string
  */
-function now($format = 'Y-m-d')
+function now(string $format = 'Y-m-d'): string
 {
     return date($format);
 }
@@ -16,9 +16,9 @@ function now($format = 'Y-m-d')
  *
  * @param  string $date
  * @param  string $format
- * @return date_format
+ * @return string
  */
-function format_date($date, $format)
+function format_date(string $date, string $format): string
 {
     $date = date_create($date);
     return date_format($date, $format);
@@ -28,9 +28,9 @@ function format_date($date, $format)
  * Return age of date given.
  *
  * @param  string $date
- * @return Carbon\Carbon
+ * @return string
  */
-function age($date)
+function age(string $date): string
 {
-	return Carbon\Carbon::parse($date)->age;
+    return Carbon\Carbon::parse($date)->age;
 }
