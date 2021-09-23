@@ -15,44 +15,44 @@ if (!isset($_SERVER['argv'][1])) {
 	echo warning('Available commands:');
 	echo line_break();
 
-	echo success('  create-controller');
+	echo success('  make-controller');
 	echo normal('	Create a controller with the given name.');
 	echo line_break();
 
-	echo success('  create-database');
-	echo normal('	Create a database with the name set in config file.');
+	echo success('  make-database');
+	echo normal('		Create a database with the name set in config file.');
 	echo line_break();
 
-	echo success('  create-excel');
+	echo success('  make-excel');
 	echo normal('		Create a Excel with the given name.');
 	echo line_break();
 
-	echo success('  create-mail');
+	echo success('  make-mail');
 	echo normal('		Create a mail with the given name.');
 	echo line_break();
 
-	echo success('  create-middleware');
+	echo success('  make-middleware');
 	echo normal('	Create a middleware with the given name.');
 	echo line_break();
 
-	echo success('  create-model');
+	echo success('  make-migration');
+	echo normal('	Create a migration file with the given name.');
+	echo line_break();
+
+	echo success('  make-model');
 	echo normal('		Create a model with the given name.');
 	echo line_break();
 
-	echo success('  create-pdf');
+	echo success('  make-pdf');
 	echo normal('		Create a PDF file with the given name.');
 	echo line_break();
 
-	echo success('  create-sql');
-	echo normal('		Create a SQL file with the given name.');
-	echo line_break();
-
-	echo success('  create-validation');
+	echo success('  make-validation');
 	echo normal('	Create a validation with the given name.');
 	echo line_break();
 
-	echo success('  run-sql');
-	echo normal('		Execute an SQL file on the database.');
+	echo success('  migrate');
+	echo normal('		Migrate all files to database.');
 	echo line_break();
 
 	echo success('  server');

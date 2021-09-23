@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Authentication with Google, require google/apiclient.
- */
+* Authentication with Google, require google/apiclient.
+*/
 class Google
 {
     /**
-     * Instance of the Google_Client class.
-     *
-     * $instance object
-     */
+    * Instance of the Google_Client class.
+    *
+    * $instance object
+    */
     public $instance;
 
     /**
-     * Initialize the class to use from a global function.
-     *
-     * @return Google
-     */
-    public static function init()
+    * Initialize the class to use from a global function.
+    *
+    * @return Google_Client
+    */
+    public static function init(): Google_Client
     {
         $class = new static;
 
@@ -35,11 +35,11 @@ class Google
     }
 
     /**
-     * Login with Google account.
-     *
-     * @return redirect
-     */
-    public function login()
+    * Login with Google account.
+    *
+    * @return Redirect
+    */
+    public function login(): Redirect
     {
         $client = $this->instance;
 
@@ -71,13 +71,13 @@ class Google
     }
 
     /**
-     * Create URL to log in to Google.
-     *
-     * @return string
-     */
-    public function url()
+    * Create URL to log in to Google.
+    *
+    * @return void
+    */
+    public function url(): void
     {
-    	$this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
-    	echo $this->instance->createAuthUrl();
+        $this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
+        echo $this->instance->createAuthUrl();
     }
 }

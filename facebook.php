@@ -1,44 +1,44 @@
 <?php
 
 /**
- * Authentication with Facebook, require facebook/graph-sdk.
- */
+* Authentication with Facebook, require facebook/graph-sdk.
+*/
 class Facebook
 {
     /**
-     * Helper of the Facebook SDK.
-     *
-     * $helper object
-     */
+    * Helper of the Facebook SDK.
+    *
+    * $helper object
+    */
     public $helper;
 
     /**
-     * Permissions of the Facebook app.
-     *
-     * $permissions array
-     */
+    * Permissions of the Facebook app.
+    *
+    * $permissions array
+    */
     public $permissions;
 
     /**
-     * Instance of the Facebook\Facebook class.
-     *
-     * $instance object
-     */
+    * Instance of the Facebook\Facebook class.
+    *
+    * $instance object
+    */
     public $instance;
 
     /**
-     * Initialize the class to use from a global function.
-     *
-     * @return Facebook
-     */
-    public static function init()
+    * Initialize the class to use from a global function.
+    *
+    * @return Facebook
+    */
+    public static function init(): Facebook
     {
         $class = new static;
 
         $facebook = new Facebook\Facebook([
-            'app_id'                => config('facebook', 'app_id'),
-            'app_secret'            => config('facebook', 'app_secret'),
-            'default_graph_version' => 'v2.10',
+        'app_id'                => config('facebook', 'app_id'),
+        'app_secret'            => config('facebook', 'app_secret'),
+        'default_graph_version' => 'v2.10',
         ]);
 
         $class->instance = $facebook;
@@ -51,22 +51,22 @@ class Facebook
     }
 
     /**
-     * Create URL to log in to Facebook.
-     *
-     * @param $callback string
-     * @return string
-     */
-    public function url($callback)
+    * Create URL to log in to Facebook.
+    *
+    * @param $callback string
+    * @return void
+    */
+    public function url(string $callback): void
     {
         echo $this->helper->getLoginUrl($callback, $this->permissions);
     }
 
     /**
-     * Login with Facebook account.
-     *
-     * @return redirect
-     */
-    public function login()
+    * Login with Facebook account.
+    *
+    * @return Redirect|void
+    */
+    public function login(): Redirect|void
     {
         try {
             $accessToken = $this->helper->getAccessToken();

@@ -1,8 +1,8 @@
 <?php
 
 // Create controllers
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-controller=') === 0) {
-	$name = str_replace('create-controller=', '', $_SERVER['argv'][1]);
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-controller=') === 0) {
+	$name = str_replace('make-controller=', '', $_SERVER['argv'][1]);
 
 	if ($name == '') {
 		echo danger('You have not specified a name for the controller.');
@@ -23,8 +23,8 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-controller
 
 
 // Create excel
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-excel=') === 0) {
-	$name = str_replace('create-excel=', '', $_SERVER['argv'][1]);
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-excel=') === 0) {
+	$name = str_replace('make-excel=', '', $_SERVER['argv'][1]);
 
 	if ($name == '') {
 		echo danger('You have not specified a name for the Excel.');
@@ -49,8 +49,8 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-excel=') =
 
 
 // Create mail
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-mail=') === 0) {
-	$name = str_replace('create-mail=', '', $_SERVER['argv'][1]);
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-mail=') === 0) {
+	$name = str_replace('make-mail=', '', $_SERVER['argv'][1]);
 
 	if ($name == '') {
 		echo danger('You have not specified a name for the mail.');
@@ -75,8 +75,8 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-mail=') ==
 
 
 // Create middleware
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-middleware=') === 0) {
-	$name = str_replace('create-middleware=', '', $_SERVER['argv'][1]);
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-middleware=') === 0) {
+	$name = str_replace('make-middleware=', '', $_SERVER['argv'][1]);
 
 	if ($name == '') {
 		echo danger('You have not specified a name for the middleware.');
@@ -97,8 +97,8 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-middleware
 
 
 // Create models
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-model=') === 0) {
-	$name = str_replace('create-model=', '', $_SERVER['argv'][1]);
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-model=') === 0) {
+	$name = str_replace('make-model=', '', $_SERVER['argv'][1]);
 
 	if ($name == '') {
 		echo danger('You have not specified a name for the model.');
@@ -119,8 +119,8 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-model=') =
 
 
 // Create PDF
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-pdf=') === 0) {
-	$name = str_replace('create-pdf=', '', $_SERVER['argv'][1]);
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-pdf=') === 0) {
+	$name = str_replace('make-pdf=', '', $_SERVER['argv'][1]);
 
 	if ($name == '') {
 		echo danger('You have not specified a name for the PDF.');
@@ -144,29 +144,37 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-pdf=') ===
 }
 
 
-// Create SQL
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-sql=') === 0) {
-	$name = str_replace('create-sql=', '', $_SERVER['argv'][1]);
+// Create migration
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-migration=') === 0) {
+	$name = str_replace('make-migration=', '', $_SERVER['argv'][1]);
 
 	if ($name == '') {
-		echo danger('You have not specified a name for the SQL.');
+		echo danger('You have not specified a name for the migration.');
 		line_break();
 		exit;
+	}
+
+	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Migration.php');
+	$content = str_replace('MigrationName', $name, $content);
+
+	if (!file_exists('database')) {
+		mkdir('database');
 	}
 
 	$name = time() . '_' . $name;
 
 	$fopen = fopen('database/' . $name . '.php', 'w+');
+	fwrite($fopen, $content);
 	fclose($fopen);
 
-	echo success("SQL '$name.sql' created successfully.");
+	echo success("Migration '$name' created successfully.");
 	line_break();
 }
 
 
 // Create validations
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-validation=') === 0) {
-	$name = str_replace('create-validation=', '', $_SERVER['argv'][1]);
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-validation=') === 0) {
+	$name = str_replace('make-validation=', '', $_SERVER['argv'][1]);
 
 	if ($name == '') {
 		echo danger('You have not specified a name for the validation.');
