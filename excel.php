@@ -29,9 +29,8 @@ class Excel
 	/**
 	* Initialize the class to use from a global function.
 	*
-	* @return void
 	*/
-	public function __construct(): void
+	public function __construct()
 	{
 		$this->spreadsheet  = new Spreadsheet();
 		$this->sheet 		= $this->spreadsheet->getActiveSheet();

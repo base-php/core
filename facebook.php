@@ -66,7 +66,7 @@ class Facebook
     *
     * @return Redirect|void
     */
-    public function login(): Redirect|void
+    public function login()
     {
         try {
             $accessToken = $this->helper->getAccessToken();
