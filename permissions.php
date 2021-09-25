@@ -3,9 +3,10 @@
 /**
  * Verify if user can vie module in menu.
  *
+ * @param string $module
  * @return boolean
  */
-function can($module)
+function can(string $module): bool
 {
     $user = App\Models\User::where('id', auth()->id)
         ->where('permissions', 'LIKE', '%' . $module . '%')
@@ -19,9 +20,9 @@ function can($module)
 /**
  * Verify if user can access module.
  *
- * @return boolean
+ * @return bool
  */
-function permission()
+function permission(): bool
 {
     $module = explode('/', $_SERVER['REQUEST_URI']);
     $user = App\Models\User::where('id', auth()->id)
@@ -39,7 +40,7 @@ function permission()
  * @param array $roles
  * @return boolean
  */
-function role($roles)
+function role(array $roles): bool
 {
     $user = App\Models\User::where('id', auth()->id)
         ->whereIn('role', $roles)

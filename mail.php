@@ -17,7 +17,7 @@ class Mail
      *
      * @return PHPMailer
      */
-	public function send($to)
+	public function send(string $to): void
 	{
 		$mail = new PHPMailer();
 

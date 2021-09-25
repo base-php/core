@@ -6,7 +6,7 @@
  * @param string $adapter
  * @return Storage
 */
-function storage(string $adapter = 'local')
+function storage(string $adapter = 'local'): Storage
 {
     return new Storage($adapter);
 }
@@ -25,9 +25,9 @@ class DB extends Illuminate\Database\Capsule\Manager
  * Quick access to the HTTP class.
  *
  * 
- * @return HTTP
+ * @return Factory
  */
-function http()
+function http(): Factory
 {
     return new Illuminate\Http\Client\Factory;
 }
@@ -39,7 +39,7 @@ function http()
  * 
  * @return redirect
  */
-function redirect($to)
+function redirect(string $to): Redirect
 {
     $redirect = new Redirect;
     $redirect->to = $to;
@@ -49,9 +49,9 @@ function redirect($to)
 /**
  * Helper for Email class.
  *
- * @return Email
+ * @return void
  */
-function email($to, $object)
+function email(string $to, object $object): void
 {
     $object->send($to);
 }
@@ -62,9 +62,9 @@ function email($to, $object)
  * @param string $filename
  * @param object $object
  *
- * @return Excel
+ * @return void|array
  */
-function excel($filename, $object = '')
+function excel(string $filename, $object)
 {
     if ($object != '') {
         $object->store($filename);
@@ -77,7 +77,7 @@ function excel($filename, $object = '')
 /**
  * Helper for Facebook login class.
  *
- * @return Facebook
+ * @return void
  */
 function facebook()
 {
@@ -85,19 +85,9 @@ function facebook()
 }
 
 /**
- * Helper for File class.
- *
- * @return File
- */
-function files()
-{
-    return File::init();
-}
-
-/**
  * Helper for Google login class.
  *
- * @return Google
+ * @return void
  */
 function google()
 {
@@ -111,7 +101,7 @@ function google()
  * 
  * @return PDF
  */
-function pdf($object)
+function pdf($object): PDF
 {
     return $object;
 }
@@ -121,7 +111,7 @@ function pdf($object)
  *
  * @return Stripe
  */
-function stripe()
+function stripe(): Stripe
 {
     return Stripe::init();
 }

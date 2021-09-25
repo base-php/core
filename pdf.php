@@ -15,9 +15,9 @@ class PDF
      * 
      * @param string $filename
      * 
-     * @return DOMPDF
+     * @return void
      */
-    public function download($filename)
+    public function download(string $filename): void
     {
         ob_start();
 
@@ -42,9 +42,9 @@ class PDF
      * 
      * @param string $filename
      * 
-     * @return DOMPDF
+     * @return void
      */
-    public function store($filename)
+    public function store(string $filename): void
     {
         ob_start();
 
