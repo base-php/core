@@ -23,13 +23,23 @@ class Redirect
 	}
 
 	/**
+	 * Necessary method for Symfony class.
+	 *
+	 * @return void
+	 */
+	public function __toString()
+	{
+		return '';
+	}
+
+	/**
 	 * Set redirect location.
 	 *
 	 * @param string $to
 	 * 
 	 * @return void
 	 */
-	public function redirect($to)
+	public function redirect(string $to): void
 	{
 		$this->to = $to;
 	}
@@ -42,25 +52,15 @@ class Redirect
 	 * 
 	 * @return void
 	 */
-	public function with($key, $value)
+	public function with(string $key, string $value): void
 	{
 		$_SESSION['flashmessages'][$key] = $value;
 	}
 
 	/**
-	 * Necessary method for Symfony class.
-	 *
-	 * @return string
-	 */
-	public function __toString()
-	{
-		return '';
-	}
-
-	/**
 	 * Make redirection.
 	 *
-	 * @return string
+	 * @return void
 	 */
 	public function __destruct()
 	{

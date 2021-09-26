@@ -5,9 +5,9 @@
  * 
  * @param string $input
  * 
- * @return string
+ * @return void|null
  */
-function old($input)
+function old(string $input)
 {
     if (isset($_SESSION['flashmessages']['inputs'][$input])) {
         echo $_SESSION['flashmessages']['inputs'][$input];
@@ -20,7 +20,7 @@ function old($input)
 /**
  * Errors of validations.
  * 
- * @return errors
+ * @return void
  */
 function errors()
 {
@@ -34,9 +34,9 @@ function errors()
  * 
  * @param string $data
  * 
- * @return error
+ * @return void
  */
-function error($data)
+function error(string $data): void
 {
     echo $data;
     $index = array_search($data, $_SESSION['flashmessages']['errors']);
@@ -47,9 +47,9 @@ function error($data)
  * Verify if have a flash message.
  *
  * @param  string $data
- * @return boolean
+ * @return bool
  */
-function messages($data)
+function messages(string $data): bool
 {
     if (isset($_SESSION['flashmessages'][$data])) {
         return true;
@@ -62,9 +62,9 @@ function messages($data)
  * Get a flash message and delete this.
  *
  * @param  string $data
- * @return string
+ * @return void
  */
-function message($data)
+function message(string $data): void
 {
     if (isset($_SESSION['flashmessages'][$data])) {
         echo $_SESSION['flashmessages'][$data];
@@ -73,27 +73,12 @@ function message($data)
 }
 
 /**
- * Verify if active module in menu.
- *
- * @param  string $module
- * @return string
- */
-function active($module)
-{
-    if ($module == '/') {
-        echo ($_SERVER['REQUEST_URI'] == '/') ? 'active' : '';
-    } else {
-        echo (strpos($_SERVER['REQUEST_URI'], $module) == !false) ? 'active' : '';
-    }
-}
-
-/**
  * Return POST request.
  *
  * @param  string $var
- * @return mixed
+ * @return array|string
  */
-function post($var = '')
+function post(string $var = ''): array|string
 {
     if ($var == '') {
         return $_POST;
@@ -108,9 +93,9 @@ function post($var = '')
  * Return GET request.
  *
  * @param  string $var
- * @return mixed
+ * @return array|string
  */
-function get($var = '')
+function get(string $var = ''): array|string
 {
     if ($var == '') {
         return $_GET;
@@ -124,9 +109,9 @@ function get($var = '')
 /**
  * Verify if the request is ajax.
  *
- * @return boolean
+ * @return bool
  */
-function ajax()
+function ajax(): bool
 {
     if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
         return true;
@@ -140,7 +125,7 @@ function ajax()
  *
  * @return  string
  */
-function query_string()
+function query_string(): string
 {
     return $_SERVER['QUERY_STRING'];
 }
@@ -150,7 +135,7 @@ function query_string()
  *
  * @return string
  */
-function host()
+function host(): string
 {
     return '//' . $_SERVER['HTTP_HOST'];
 }

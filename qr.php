@@ -6,7 +6,7 @@
  * @param  array $config
  * @return QRCode
  */
-function qr($config)
+function qr(array $config)
 {
     return QRcode::png($config['data'], $config['file'] . '.png', 'L', 10, 2);
 }

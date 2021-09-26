@@ -41,9 +41,9 @@ class Storage
      * Initialize the class and create the instance according to the given adapter.
      *
      * @param string $adapter
-     * @return Filesystem
+     * @return void
      */
-    public function __construct($adapter = 'local')
+    public function __construct(string $adapter = 'local')
     {
         if ($adapter == 'local') {
             $adapter        = new LocalFilesystemAdapter('/');
@@ -134,11 +134,11 @@ class Storage
      * Save resource on any of the disks.
      *
      * @param string $path
-     * @param string $adapter
+     * @param mixed $content
      * @param string $filename
      * @return Storage
      */
-    public function save($path, $content, $filename = ''): Storage
+    public function save(string $path, mixed $content, string $filename = ''): Storage
     {
         if (is_string($content)) {
             if (isset($_FILES[$content])) {

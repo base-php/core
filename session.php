@@ -7,7 +7,7 @@
  * @param mixed $value
  * @return mixed
  */
-function session($key = '', $value = '')
+function session(string $key = '', mixed $value = ''): mixed
 {
     if ($key != '' && $value != '') {
         return $_SESSION[$key] = $value;

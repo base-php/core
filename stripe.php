@@ -54,9 +54,9 @@ class Stripe
     /**
      * Initialize the class to use from a global function.
      *
-     * @return PDF
+     * @return Stripe
      */
-    public static function init()
+    public static function init(): Stripe
     {
         $class = new static;
         return $class;
@@ -68,7 +68,7 @@ class Stripe
      * @param $secret_key string
      * @return Stripe
      */
-    public function secret_key($secret_key)
+    public function secret_key(string $secret_key): Stripe
     {
         $this->secret_key = $secret_key;
         return $this;
@@ -80,7 +80,7 @@ class Stripe
      * @param $publishable_key string
      * @return Stripe
      */
-    public function publishable_key($publishable_key)
+    public function publishable_key(string $publishable_key): Stripe
     {
         $this->publishable_key = $publishable_key;
         return $this;
@@ -92,7 +92,7 @@ class Stripe
      * @param $email string
      * @return Stripe
      */
-    public function email($email)
+    public function email(string $email): Stripe
     {
         $this->email = $email;
         return $this;
@@ -104,7 +104,7 @@ class Stripe
      * @param $token string
      * @return Stripe
      */
-    public function token($token)
+    public function token(string $token): Stripe
     {
         $this->token = $token;
         return $this;
@@ -116,7 +116,7 @@ class Stripe
      * @param $amount float
      * @return Stripe
      */
-    public function amount($amount)
+    public function amount(string $amount): Stripe
     {
         $this->amount = $amount;
         return $this;
@@ -128,7 +128,7 @@ class Stripe
      * @param $amount string
      * @return Stripe
      */
-    public function currency($currency)
+    public function currency(string $currency): Stripe
     {
         $this->currency = $currency;
         return $this;
@@ -137,9 +137,9 @@ class Stripe
     /**
      * Create the customer and register the purchase.
      *
-     * @return Stripe
+     * @return void
      */
-    public function save()
+    public function save(): void
     {
         $stripe = [
             'secret_key'      => $this->secret_key,
