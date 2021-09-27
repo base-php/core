@@ -5,12 +5,12 @@
  *
  * @param  string  $view
  * @param  array   $data
- * @return Blade
+ * @return void
  */
-function view($view, $data = [])
+function view(string $view, array $data = []): void
 {
-	$viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/resources/views');
-	$componentes = Netflie\Componentes\Componentes::create($viewPath);
+    $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/resources/views');
+    $componentes = Netflie\Componentes\Componentes::create($viewPath);
 
     if ($view == 'recover') {
         $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
@@ -20,7 +20,7 @@ function view($view, $data = [])
         $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $view . '.blade.php');
     }
 
-	echo $componentes->render($view, $data);
+    echo $componentes->render($view, $data);
 
     $_ENV['view'] = true;
 }

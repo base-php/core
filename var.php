@@ -3,10 +3,10 @@
 /**
  * Verify if variable is defined and is not empty.
  *
- * @param  mixed $var
+ * @param  string $var
  * @return string
  */
-function set($var)
+function set(string $var): string
 {
     if (isset($var) && $var != '') {
         return $var;
@@ -20,7 +20,7 @@ function set($var)
  * @param  string $var2
  * @return string
  */
-function optionals($var1, $var2)
+function optionals(string $var1, string $var2): string
 {
     if (isset($var1) && $var1 != '') {
         return $var1;
