@@ -23,21 +23,21 @@
 
     <hr class="mb-5">
 
-    <p>Hola, {{ $user->name }}.</p>
+    <p>{{ __('auth.email_greeting') }}, {{ $user->name }}.</p>
 
-    <p>Estas recibiendo este correo electrónico porque hiciste una solicitud de recuperación de contraseña para tu cuenta</p>
+    <p>{{ __('auth.text') }}</p>
 
     <p>
-        <a class="btn btn-primary" href="{{ host() }}/recover/{{ md5($user->id) }}" href="">Recuperar contraseña</a>
+        <a class="btn btn-primary" href="{{ host() }}/recover/{{ md5($user->id) }}">{{ __('auth.email_recover_password') }}</a>
     </p>
 
-    <p>Si no realizaste esta solicitud, no se requiere realizar ninguna acción.</p>
+    <p>{{ __('email.email_warning') }}</p>
 
-    <p class="mb-5">Saludos, {{ config('application_name') }}.</p>
+    <p class="mb-5">{{ __('auth.email_fired') }}, {{ config('application_name') }}.</p>
 
     <hr class="mb-5">
 
-    <p>Si tienes problemas al hacer click en el botón 'Recuperar contraseña', copia y pega la siguiente URL en tu navegador web: <a href="http:{{ host() }}/recover/{{ md5($user->id) }}">http:{{ host() }}/recover/{{ md5($user->id) }}</a></p>
+    <p>{{ __('auth.email_footer') }}: <a href="http:{{ host() }}/recover/{{ md5($user->id) }}">http:{{ host() }}/recover/{{ md5($user->id) }}</a></p>
 
     <script src="{{ node('jquery/dist/jquery.js') }}"></script>
     <script src="{{ node('bootstrap/dist/js/bootstrap.js') }}"></script>

@@ -13,11 +13,11 @@ function register(array $user): Redirect
     $email = App\Models\User::where('email', $user['email'])->get();
 
     if ($email->count() > 0) {
-        return redirect('/register')->with('error', 'Correo electrónico ya se encuentra registrado.');
+        return redirect('/register')->with('error', __('auth.email_verified_error'));
     }
 
     if ($user['password'] != $user['confirm_password']) {
-        return redirect('/register')->with('error', 'Las contraseñas no coinciden.');
+        return redirect('/register')->with('error', __('auth.password_not_match'));
     }
 
     $user = App\Models\User::create([
@@ -30,7 +30,7 @@ function register(array $user): Redirect
 
     $user->update(['hash' => md5($user->id)]);
 
-    return redirect('/login')->with('info', 'Usuario registrado, ahora puedes iniciar sesión.');
+    return redirect('/login')->with('info', __('auth.register_success'));
 }
 
 /**
@@ -52,7 +52,7 @@ function login(array $user): Redirect|null
         return redirect('/dashboard');
     }
 
-    return redirect('/login')->with('error', 'Datos incorrectos.');
+    return redirect('/login')->with('error', __('auth.incorrect_data'));
 }
 
 /**
@@ -86,12 +86,12 @@ function forgot(): Redirect
         $user = App\Models\User::where('email', post('email'))->first();
 
         if (!$user) {
-            return redirect('/forgot-password')->with('error', 'No podemos encontrar un usuario con esa dirección de correo electrónico.');
+            return redirect('/forgot-password')->with('error', __('auth.email_not_match'));
         }
 
         email($user->email, new App\Mails\PasswordRecovery($user));
 
-        return redirect('/forgot-password')->with('info', 'Revise su correo electrónico para recuperar su contraseña.');
+        return redirect('/forgot-password')->with('info', __('auth.check_email'));
     }
 }
 
@@ -106,7 +106,7 @@ function recover(): Redirect
         $user = App\Models\User::where('hash', post('id'))->first();
 
         if (!$user) {
-            return redirect('/login')->with('error', 'Enlace de recuperación de contraseña inválido.');
+            return redirect('/login')->with('error', __('auth.link_invalid'));
         }
 
         if (post('password') != post('confirm_password')) {
@@ -116,7 +116,7 @@ function recover(): Redirect
         $user->password = md5(post('password'));
         $user->save();
 
-        return redirect('/login')->with('info', 'Contraseña cambiada exitosamente, ahora puedes iniciar sesión.');
+        return redirect('/login')->with('info', __('auth.password_not_match'));
     }
 }
 

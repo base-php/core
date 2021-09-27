@@ -35,6 +35,8 @@ class App
 
 		$_ENV['view'] = false;
 
+		language();
+
 
 		date_default_timezone_set($_ENV['timezone']);
 

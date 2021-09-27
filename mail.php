@@ -24,12 +24,12 @@ class Mail
         if ($_SERVER['REMOTE_ADDR'] == '::1') {
             $mail->SMTPDebug    = SMTP::DEBUG_SERVER;
             $mail->isSMTP();
-            $mail->Host         = config('smtp', 'host');
+            $mail->Host         = config('smtp')->host;
             $mail->SMTPAuth     = true;
-            $mail->Username     = config('smtp', 'username');
-            $mail->Password     = config('smtp', 'password');
+            $mail->Username     = config('smtp')->username;
+            $mail->Password     = config('smtp')->password;
             $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port         = config('smtp', 'port');    
+            $mail->Port         = config('smtp')->port;    
         }
 
         $mail->setFrom($this->from);

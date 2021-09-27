@@ -38,7 +38,7 @@ class MailName extends Mail
 	/**
      * Build the email.
      *
-     * @return $this
+     * @return view
      */
 	public function build()
 	{

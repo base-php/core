@@ -30,6 +30,7 @@ include "request.php";
 include "session.php";
 include "storage.php";
 include "stripe.php";
+include "translate.php";
 include "validation.php";
 include "var.php";
 include "third/Illuminate.ComponentTagCompiler.php";
