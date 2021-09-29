@@ -2,6 +2,7 @@
     "name": "nisadelgado/framework",
     "description": "List of functions that serve as helpers for PHP base",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Nisa Delgado",
