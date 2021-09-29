@@ -9,6 +9,11 @@
             "email": "nisadelgado@gmail.com"
         }
     ],
+    "autoload": {
+        "files": [
+            "autoload.php"
+        ]
+    },
     "require": {
         "fakerphp/faker": "1.16.0",
         "filp/whoops": "2.14.1",
