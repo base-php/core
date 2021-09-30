@@ -140,6 +140,8 @@ class Storage
      */
     public function save(string $path, mixed $content, string $filename = ''): Storage
     {
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/' . $path;
+        
         if (is_string($content)) {
             if (isset($_FILES[$content])) {
                 if (is_array($_FILES[$content]['name'])) {
