@@ -1,11 +1,14 @@
 <?php
 
+use DebugBar\DataCollector\PDO\PDOCollector;
+use DebugBar\DataCollector\PDO\TraceablePDO;
 use DebugBar\StandardDebugBar;
 use Illuminate\Container\Container;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RoutingServiceProvider;
+use Netflie\Componentes\Componentes;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
@@ -57,10 +60,10 @@ class App
 
 		$debugbar = new StandardDebugBar();
 
-		$collector = new DebugBar\DataCollector\PDO\PDOCollector();
+		$collector = new PDOCollector();
 
 		foreach ($_ENV['database'] as $database) {
-			$pdo[$database['name']] = new DebugBar\DataCollector\PDO\TraceablePDO($capsule->getConnection($database['name'])->getPdo());
+			$pdo[$database['name']] = new TraceablePDO($capsule->getConnection($database['name'])->getPdo());
 			$collector->addConnection($pdo[$database['name']], $database['name']);
 		}
 
@@ -91,7 +94,7 @@ class App
 				return view('errors/404');
 			} else {
 				$viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views');
-				$componentes = \Netflie\Componentes\Componentes::create($viewPath);
+				$componentes = Componentes::create($viewPath);
 
 				$view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/404.blade.php');
 				echo $componentes->render($view, []);

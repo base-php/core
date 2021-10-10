@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 /**
  * Returns text according to language.
  *
@@ -23,6 +25,8 @@ function __(string $key): string {
 */
 function language($lang = ''): void
 {
+	Carbon::setLocale($_ENV['language']);
+
 	$lang = ($lang) ? $lang : $_ENV['language'];
 	$files = scandir($_SERVER['DOCUMENT_ROOT'] . '/resources/lang/' . $lang);
 	$texts = [];

@@ -10,7 +10,7 @@ use App\Models\User;
 */
 function register(array $user): Redirect
 {
-    $email = App\Models\User::where('email', $user['email'])->get();
+    $email = User::where('email', $user['email'])->get();
 
     if ($email->count() > 0) {
         return redirect('/register')->with('error', __('auth.email_verified_error'));
@@ -20,7 +20,7 @@ function register(array $user): Redirect
         return redirect('/register')->with('error', __('auth.password_not_match'));
     }
 
-    $user = App\Models\User::create([
+    $user = User::create([
         'name'          => $user['name'],
         'email'         => $user['email'],
         'password'      => md5($user['password']),
@@ -41,7 +41,7 @@ function register(array $user): Redirect
 */
 function login(array $user): Redirect|null
 {
-    $user = App\Models\User::where('email', $user['email'])
+    $user = User::where('email', $user['email'])
         ->where('password', md5($user['password']))
         ->whereNull('oauth')
         ->first();
@@ -65,7 +65,7 @@ function auth(): User|bool {
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
         } else {
-            $user = App\Models\User::find($_SESSION['id']);
+            $user = User::find($_SESSION['id']);
             $_SESSION['user'] = $user;
         }
 
@@ -83,7 +83,7 @@ function auth(): User|bool {
 function forgot(): Redirect
 {
     if (post()) {
-        $user = App\Models\User::where('email', post('email'))->first();
+        $user = User::where('email', post('email'))->first();
 
         if (!$user) {
             return redirect('/forgot-password')->with('error', __('auth.email_not_match'));
@@ -103,7 +103,7 @@ function forgot(): Redirect
 function recover(): Redirect
 {
     if (post()) {
-        $user = App\Models\User::where('hash', post('id'))->first();
+        $user = User::where('hash', post('id'))->first();
 
         if (!$user) {
             return redirect('/login')->with('error', __('auth.link_invalid'));
