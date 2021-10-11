@@ -60,8 +60,8 @@ class Validation
 					$unique = $unique[1];
 					$model = 'App\Models\\' . $unique;
 
-					if (post('id')) {
-						$id = post('id');
+					if (request('id')) {
+						$id = request('id');
 						$query = $model::where($key, $_POST[$key])
 							->where('id', '!=', $id)
 							->get();

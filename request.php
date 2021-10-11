@@ -73,6 +73,23 @@ function message(string $data): void
 }
 
 /**
+ * Return request.
+ *
+ * @param  string $var
+ * @return array|string
+ */
+function request(string $var = ''): array|string
+{
+    if ($var == '') {
+        return $_REQUEST;
+    } else {
+        if (isset($_REQUEST[$var]) && $_REQUEST[$var] != '') {
+            return $_REQUEST[$var];
+        }
+    }
+}
+
+/**
  * Return POST request.
  *
  * @param  string $var

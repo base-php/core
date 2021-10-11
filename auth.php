@@ -83,7 +83,7 @@ function auth(): User|bool {
 function forgot(): Redirect
 {
     if (post()) {
-        $user = User::where('email', post('email'))->first();
+        $user = User::where('email', request('email'))->first();
 
         if (!$user) {
             return redirect('/forgot-password')->with('error', __('auth.email_not_match'));
@@ -103,17 +103,17 @@ function forgot(): Redirect
 function recover(): Redirect
 {
     if (post()) {
-        $user = User::where('hash', post('id'))->first();
+        $user = User::where('hash', request('id'))->first();
 
         if (!$user) {
             return redirect('/login')->with('error', __('auth.link_invalid'));
         }
 
-        if (post('password') != post('confirm_password')) {
-            return redirect('/recover/' . post('id'))->with('error', 'Las contraseñas no coinciden.');
+        if (request('password') != request('confirm_password')) {
+            return redirect('/recover/' . request('id'))->with('error', 'Las contraseñas no coinciden.');
         }
 
-        $user->password = md5(post('password'));
+        $user->password = md5(request('password'));
         $user->save();
 
         return redirect('/login')->with('info', __('auth.password_not_match'));
