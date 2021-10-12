@@ -31,6 +31,13 @@ class Storage
     public $filename;
 
     /**
+     * Content of the file to upload.
+     *
+     * @var string
+     */
+    public $content;
+
+    /**
      * Result of the previous operation.
      *
      * @var boolean
@@ -120,6 +127,18 @@ class Storage
     }
 
     /**
+     * Set content of the file to upload.
+     * 
+     * @param string $content
+     * @param Storage
+     */
+    public function content(string $content)
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
      * Get resource of the file from any of the disks.
      *
      * @param string $adapter
@@ -134,34 +153,33 @@ class Storage
      * Save resource on any of the disks.
      *
      * @param string $path
-     * @param mixed $content
      * @param string $filename
      * @return Storage
      */
-    public function save(string $path, mixed $content, string $filename = ''): Storage
+    public function save(string $path, string $filename = ''): Storage
     {
         $path = $_SERVER['DOCUMENT_ROOT'] . '/' . $path;
         
-        if (is_string($content)) {
-            if (isset($_FILES[$content])) {
-                if (is_array($_FILES[$content]['name'])) {
+        if (is_string($this->content)) {
+            if (isset($_FILES[$this->content])) {
+                if (is_array($_FILES[$this->content]['name'])) {
                     $i = 0;
 
-                    foreach ($_FILES[$content]['name'] as $item) {
-                        $stream = fopen($_FILES[$content]['tmp_name'][$i], 'r');
+                    foreach ($_FILES[$this->content]['name'] as $item) {
+                        $stream = fopen($_FILES[$this->content]['tmp_name'][$i], 'r');
 
-                        $this->instance->writeStream($path . '/' . $_FILES[$content]['name'][$i], $stream);
+                        $this->instance->writeStream($path . '/' . $_FILES[$this->content]['name'][$i], $stream);
 
-                        $this->filename[] = $_FILES[$content]['name'][$i];
+                        $this->filename[] = $_FILES[$this->content]['name'][$i];
                         $this->success = true;
 
                         $i = $i + 1;
                     }
 
                 } else {
-                    if ($_FILES[$content]['name']) {
-                        $filename = ($filename != '') ? $filename : $_FILES[$content]['name'];
-                        $stream   = fopen($_FILES[$content]['tmp_name'], 'r');
+                    if ($_FILES[$this->content]['name']) {
+                        $filename = ($filename != '') ? $filename : $_FILES[$this->content]['name'];
+                        $stream   = fopen($_FILES[$this->content]['tmp_name'], 'r');
 
                         $this->instance->writeStream($path . '/' . $filename, $stream);
 
@@ -172,8 +190,8 @@ class Storage
             }
         }
 
-        if (is_resource($content)) {
-            $stream = $content;
+        if (is_resource($this->content)) {
+            $stream = $this->content;
             $this->instance->writeStream($path . '/' . $filename, $stream);
 
             $this->filename = $filename;

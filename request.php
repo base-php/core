@@ -76,13 +76,19 @@ function message(string $data): void
  * Return request.
  *
  * @param  string $var
- * @return array|string
+ * @return mixed
  */
-function request(string $var = ''): array|string
+function request(string $var = '')
 {
     if ($var == '') {
         return $_REQUEST;
     } else {
+        if (isset($_FILES[$var]) && $_FILES[$var] != '') {
+            $storage = new Storage();
+            $storage->content = $var;
+            return $storage;
+        }
+
         if (isset($_REQUEST[$var]) && $_REQUEST[$var] != '') {
             return $_REQUEST[$var];
         }
