@@ -127,7 +127,18 @@ class Storage
     }
 
     /**
-     * Set content of the file to upload.
+     * Set adapter of the file to upload, using for request helper.
+     * 
+     * @param string $adapter
+     * @param Storage
+     */
+    public function adapter(string $adapter)
+    {
+        return $this->__construct($adapter);
+    }
+
+    /**
+     * Set content of the file to upload, using for request helper.
      * 
      * @param string $content
      * @param Storage
