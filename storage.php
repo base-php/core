@@ -59,7 +59,7 @@ class Storage
 
         // spatie/flysystem-dropbox
         if ($adapter == 'dropbox') {
-            $client         = new Client(config('dropbox', 'access_token'));
+            $client         = new Client(config('dropbox')->access_token);
             $adapter        = new DropboxAdapter($client);
             $this->instance = new Filesystem($adapter, ['case_sensitive' => false]);
         }
@@ -68,13 +68,13 @@ class Storage
         if ($adapter == 's3') {
             $client = new S3MultiRegionClient([
                 'credentials' => [
-                    'key'    => config('s3', 'key'),
-                    'secret' => config('s3', 'secret'),
+                    'key'    => config('s3')->key,
+                    'secret' => config('s3')->secret,
                 ],
                 'version'     => 'latest|version',
             ]);
 
-            $adapter        = new AwsS3Adapter($client, config('s3', 'bucket'));
+            $adapter        = new AwsS3Adapter($client, config('s3')->bucket);
             $this->instance = new Filesystem($adapter);
         }
 
@@ -82,10 +82,10 @@ class Storage
         if ($adapter == 'ftp') {
             $adapter = new FtpAdapter(
                 FtpConnectionOptions::fromArray([
-                    'host'     => config('ftp', 'host'),
-                    'root'     => config('ftp', 'root'),
-                    'username' => config('ftp', 'username'),
-                    'password' => config('ftp', 'password'),
+                    'host'     => config('ftp')->host,
+                    'root'     => config('ftp')->root,
+                    'username' => config('ftp')->username,
+                    'password' => config('ftp')->password,
                 ]),
                 new FtpConnectionProvider(),
                 new NoopCommandConnectivityChecker(),
@@ -99,19 +99,19 @@ class Storage
         if ($adapter == 'sftp') {
             $this->instance = new Filesystem(new SftpAdapter(
                 new SftpConnectionProvider(
-                    config('sftp', 'localhost'),
-                    config('sftp', 'username'),
-                    config('sftp', 'password'),
-                    config('sftp', 'private_key'),
-                    config('sftp', 'passphrase'),
-                    config('sftp', 'port'),
+                    config('sftp')->localhost,
+                    config('sftp')->username,
+                    config('sftp')->password,
+                    config('sftp')->private_key,
+                    config('sftp')->passphrase,
+                    config('sftp')->port,
                     true,
                     30,
                     10,
                     'fingerprint-string',
                     null
                 ),
-                config('sftp', 'root'),
+                config('sftp')->root,
                 PortableVisibilityConverter::fromArray([
                     'file' => [
                         'public'  => 0640,

@@ -23,8 +23,8 @@ class Google
 
         $google_client = new Google_Client();
 
-        $google_client->setClientId(config('google', 'client_id'));
-        $google_client->setClientSecret(config('google', 'client_secret'));
+        $google_client->setClientId(config('google')->client_id);
+        $google_client->setClientSecret(config('google')->client_secret);
 
         $google_client->addScope('email');
         $google_client->addScope('profile');
@@ -67,7 +67,7 @@ class Google
         $_SESSION['role']        = $user->role;
         $_SESSION['permissions'] = $user->permissions;
 
-        return redirect(config('google', 'redirect'));
+        return redirect(config('google')->redirect);
     }
 
     /**

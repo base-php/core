@@ -36,8 +36,8 @@ class Facebook
         $class = new static;
 
         $facebook = new Facebook\Facebook([
-        'app_id'                => config('facebook', 'app_id'),
-        'app_secret'            => config('facebook', 'app_secret'),
+        'app_id'                => config('facebook')->app_id,
+        'app_secret'            => config('facebook')->app_secret,
         'default_graph_version' => 'v2.10',
         ]);
 
@@ -96,6 +96,6 @@ class Facebook
         $_SESSION['role']        = $user->role;
         $_SESSION['permissions'] = $user->permissions;
 
-        return redirect(config('facebook', 'redirect'));
+        return redirect(config('facebook')->redirect);
     }
 }
