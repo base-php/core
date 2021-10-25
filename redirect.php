@@ -37,11 +37,12 @@ class Redirect
 	 *
 	 * @param string $to
 	 * 
-	 * @return void
+	 * @return Redirect
 	 */
-	public function redirect(string $to): void
+	public function redirect(string $to): Redirect
 	{
 		$this->to = $to;
+		return $this;
 	}
 
 	/**
@@ -50,17 +51,18 @@ class Redirect
 	 * @param string $key
 	 * @param string $value
 	 * 
-	 * @return void
+	 * @return Redirect
 	 */
-	public function with(string $key, string $value): void
+	public function with(string $key, string $value): Redirect
 	{
 		$_SESSION['flashmessages'][$key] = $value;
+		return $this;
 	}
 
 	/**
 	 * Make redirection.
 	 *
-	 * @return void
+	 * @return Redirect
 	 */
 	public function __destruct()
 	{
@@ -69,5 +71,7 @@ class Redirect
 				window.location.href = '$this->to';
 			</script>
 		";
+
+		return $this;
 	}
 }

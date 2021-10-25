@@ -1,17 +1,6 @@
 <?php
 
 /**
- * Quick access to Storage class.
- *
- * @param string $adapter
- * @return Storage
-*/
-function storage(string $adapter = 'local'): Storage
-{
-    return new Storage($adapter);
-}
-
-/**
  * Quick access to the DB class.
  * 
  * @return DB
@@ -19,31 +8,6 @@ function storage(string $adapter = 'local'): Storage
 class DB extends Illuminate\Database\Capsule\Manager
 {
 
-}
-
-/**
- * Quick access to the HTTP class.
- *
- * 
- * @return Factory
- */
-function http(): Factory
-{
-    return new Illuminate\Http\Client\Factory;
-}
-
-/**
- * Helper for redirection.
- * 
- * @param string $to
- * 
- * @return redirect
- */
-function redirect(string $to): Redirect
-{
-    $redirect = new Redirect;
-    $redirect->to = $to;
-    return $redirect;
 }
 
 /**
@@ -95,6 +59,31 @@ function google()
 }
 
 /**
+ * Quick access to the HTTP class.
+ *
+ * 
+ * @return Factory
+ */
+function http(): Factory
+{
+    return new Illuminate\Http\Client\Factory;
+}
+
+/**
+ * Helper for redirection.
+ * 
+ * @param string $to
+ * 
+ * @return redirect
+ */
+function redirect(string $to): Redirect
+{
+    $redirect = new Redirect;
+    $redirect->to = $to;
+    return $redirect;
+}
+
+/**
  * Helper for PDF class.
  *
  * @param object $object
@@ -107,6 +96,17 @@ function pdf($object): PDF
 }
 
 /**
+ * Quick access to Storage class.
+ *
+ * @param string $adapter
+ * @return Storage
+*/
+function storage(string $adapter = 'local'): Storage
+{
+    return new Storage($adapter);
+}
+
+/**
  * Helper for Stripe class.
  *
  * @return Stripe
@@ -114,4 +114,17 @@ function pdf($object): PDF
 function stripe(): Stripe
 {
     return Stripe::init();
+}
+
+/**
+ * Quick access to View class.
+ *
+ * @param  string  $view
+ * @param  array   $data
+ * @return void
+ */
+function view(string $view, array $data = []): View
+{
+    $class = new View();
+    return $class->render($view, $data);
 }

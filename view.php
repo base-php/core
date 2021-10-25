@@ -1,26 +1,43 @@
 <?php
 
-/**
- * Get the evaluated view contents for the given view.
- *
- * @param  string  $view
- * @param  array   $data
- * @return void
- */
-function view(string $view, array $data = []): void
-{
-    $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/resources/views');
-    $componentes = Netflie\Componentes\Componentes::create($viewPath);
+use Netflie\Componentes\Componentes;
 
-    if ($view == 'recover') {
-        $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
-    } else if ($view == '401') {
-        $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
-    } else {
-        $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $view . '.blade.php');
+class View
+{
+    /**
+     * Necessary method for Symfony class.
+     *
+     * @return void
+     */
+    public function __toString()
+    {
+        return '';
     }
 
-    echo $componentes->render($view, $data);
+    /**
+     * Get the evaluated view contents for the given view.
+     *
+     * @param  string  $view
+     * @param  array   $data
+     * @return void
+     */
+    public function render(string $view, array $data = []): View
+    {
+        $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/resources/views');
+        $componentes = Componentes::create($viewPath);
 
-    $_ENV['view'] = true;
+        if ($view == 'recover') {
+            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
+        } else if ($view == '401') {
+            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
+        } else {
+            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $view . '.blade.php');
+        }
+
+        echo $componentes->render($view, $data);
+
+        $_ENV['view'] = true;
+
+        return $this;
+    }
 }
