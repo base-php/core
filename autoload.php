@@ -26,6 +26,7 @@ include "pdf.php";
 include "permissions.php";
 include "qr.php";
 include "redirect.php";
+include "resources.php";
 include "request.php";
 include "session.php";
 include "storage.php";
