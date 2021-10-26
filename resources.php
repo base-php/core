@@ -6,6 +6,12 @@ class Resource
 {
 	public function __construct($data)
 	{
+		if (gettype($data) == 'object') {
+			if (strpos(get_class($data), 'Models') || get_class($data) == 'Illuminate\Database\Eloquent\Collection') {
+				$data = $data->toArray();
+			}
+		}
+
 		// For various records
 		if (isset($data[0])) {
 			$i = 0;
@@ -15,7 +21,7 @@ class Resource
 					$this->$key = $value;
 				}
 
-				foreach ($this->build() as $key => $value) {
+				foreach ($this->array() as $key => $value) {
 					$this->result[$i][$key] = $value;
 					unset($this->$key);
 				}
@@ -33,12 +39,10 @@ class Resource
 				$this->$key = $value;
 			}
 
-			foreach ($this->build() as $key => $value) {
+			foreach ($this->array() as $key => $value) {
 				$this->result[$key] = $value;
 				unset($this->$key);
 			}
-
-			$this->result = (object) $this->result;			
 		}
 	}
 }

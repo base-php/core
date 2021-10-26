@@ -12,21 +12,6 @@ function debugbar(string $message): void
 }
 
 /**
- * Dump the passed variables and end the script.
- *
- * @param  mixed
- * @return void
- */
-function d(mixed $object): void
-{
-    echo '<style>pre { font-family: "Fira Code"; }</style>';
-    echo '<pre>';
-    print_r($object);
-    echo '</pre>';
-    exit;
-}
-
-/**
  * Verify if the environment is local.
  *
  * @return bool

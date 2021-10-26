@@ -1,5 +1,7 @@
 <?php
 
+use Facebook\Facebook;
+
 /**
 * Authentication with Facebook, require facebook/graph-sdk.
 */
@@ -35,7 +37,7 @@ class Facebook
     {
         $class = new static;
 
-        $facebook = new Facebook\Facebook([
+        $facebook = new Facebook([
         'app_id'                => config('facebook')->app_id,
         'app_secret'            => config('facebook')->app_secret,
         'default_graph_version' => 'v2.10',
@@ -64,9 +66,9 @@ class Facebook
     /**
     * Login with Facebook account.
     *
-    * @return Redirect|void
+    * @return Facebook
     */
-    public function login()
+    public function login(): Facebook
     {
         try {
             $accessToken = $this->helper->getAccessToken();
@@ -96,6 +98,8 @@ class Facebook
         $_SESSION['role']        = $user->role;
         $_SESSION['permissions'] = $user->permissions;
 
-        return redirect(config('facebook')->redirect);
+        redirect(config('facebook')->redirect);
+
+        return $this;
     }
 }

@@ -19,7 +19,7 @@ class View
      *
      * @param  string  $view
      * @param  array   $data
-     * @return void
+     * @return View
      */
     public function render(string $view, array $data = []): View
     {

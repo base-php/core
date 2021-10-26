@@ -37,9 +37,9 @@ class Google
     /**
     * Login with Google account.
     *
-    * @return Redirect
+    * @return Google
     */
-    public function login(): Redirect
+    public function login(): Google
     {
         $client = $this->instance;
 
@@ -67,7 +67,9 @@ class Google
         $_SESSION['role']        = $user->role;
         $_SESSION['permissions'] = $user->permissions;
 
-        return redirect(config('google')->redirect);
+        redirect(config('google')->redirect);
+
+        return $this;
     }
 
     /**
