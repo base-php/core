@@ -12,7 +12,8 @@ class Resource
 			}
 		}
 
-		// For various records
+		// For various records.
+
 		if (isset($data[0])) {
 			$i = 0;
 

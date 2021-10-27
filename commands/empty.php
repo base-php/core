@@ -2,7 +2,7 @@
 
 if (!isset($_SERVER['argv'][1])) {
 	line_break();
-	echo normal('Base PHP 1.0.0 by Nisa Delgado.');
+	echo normal('Base PHP 1.3.62 by Nisa Delgado.');
 	line_break(2);
 
 	echo warning('Usage:');
@@ -45,6 +45,10 @@ if (!isset($_SERVER['argv'][1])) {
 
 	echo success('  make-pdf');
 	echo normal('		Create a PDF file with the given name.');
+	echo line_break();
+
+	echo success('  make-resource');
+	echo normal('		Create a resource file with the given name.');
 	echo line_break();
 
 	echo success('  make-validation');

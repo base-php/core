@@ -13,6 +13,10 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-controller='
 	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Controller.php');
 	$content = str_replace('ControllerName', $name, $content);
 
+	if (!file_exists('app/Controllers')) {
+		mkdir('app/Controllers');
+	}
+
 	$fopen = fopen('app/Controllers/' . $name . '.php', 'w+');
 	fwrite($fopen, $content);
 	fclose($fopen);
@@ -22,7 +26,7 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-controller='
 }
 
 
-// Create excel
+// Create Excel
 if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-excel=') === 0) {
 	$name = str_replace('make-excel=', '', $_SERVER['argv'][1]);
 
@@ -87,11 +91,43 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-middleware='
 	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Middleware.php');
 	$content = str_replace('MiddlewareName', $name, $content);
 
+	if (!file_exists('app/Middleware')) {
+		mkdir('app/Middleware');
+	}
+
 	$fopen = fopen('app/Middleware/' . $name . '.php', 'w+');
 	fwrite($fopen, $content);
 	fclose($fopen);
 
 	echo success("Middleware '$name' created successfully.");
+	line_break();
+}
+
+
+// Create migration
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-migration=') === 0) {
+	$name = str_replace('make-migration=', '', $_SERVER['argv'][1]);
+
+	if ($name == '') {
+		echo danger('You have not specified a name for the migration.');
+		line_break();
+		exit;
+	}
+
+	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Migration.php');
+	$content = str_replace('MigrationName', $name, $content);
+
+	if (!file_exists('database')) {
+		mkdir('database');
+	}
+
+	$name = time() . '_' . $name;
+
+	$fopen = fopen('database/' . $name . '.php', 'w+');
+	fwrite($fopen, $content);
+	fclose($fopen);
+
+	echo success("Migration '$name' created successfully.");
 	line_break();
 }
 
@@ -108,6 +144,10 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-model=') ===
 
 	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Model.php');
 	$content = str_replace('ModelName', $name, $content);
+
+	if (!file_exists('app/Models')) {
+		mkdir('app/Models');
+	}
 
 	$fopen = fopen('app/Models/' . $name . '.php', 'w+');
 	fwrite($fopen, $content);
@@ -144,30 +184,28 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-pdf=') === 0
 }
 
 
-// Create migration
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-migration=') === 0) {
-	$name = str_replace('make-migration=', '', $_SERVER['argv'][1]);
+// Create resources
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-resource=') === 0) {
+	$name = str_replace('make-resource=', '', $_SERVER['argv'][1]);
 
 	if ($name == '') {
-		echo danger('You have not specified a name for the migration.');
+		echo danger('You have not specified a name for the resource.');
 		line_break();
 		exit;
 	}
 
-	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Migration.php');
-	$content = str_replace('MigrationName', $name, $content);
+	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Resource.php');
+	$content = str_replace('ResourceName', $name, $content);
 
-	if (!file_exists('database')) {
-		mkdir('database');
+	if (!file_exists('app/Resources')) {
+		mkdir('app/Resources');
 	}
 
-	$name = time() . '_' . $name;
-
-	$fopen = fopen('database/' . $name . '.php', 'w+');
+	$fopen = fopen('app/Resources/' . $name . '.php', 'w+');
 	fwrite($fopen, $content);
 	fclose($fopen);
 
-	echo success("Migration '$name' created successfully.");
+	echo success("Resource '$name' created successfully.");
 	line_break();
 }
 
@@ -184,6 +222,10 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-validation='
 
 	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Validation.php');
 	$content = str_replace('ValidationName', $name, $content);
+
+	if (!file_exists('app/Validations')) {
+		mkdir('app/Validations');
+	}
 
 	$fopen = fopen('app/Validations/' . $name . '.php', 'w+');
 	fwrite($fopen, $content);
