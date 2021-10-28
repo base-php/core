@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Get var of the config file.
- *
- * @param  string $var
- * @return string|object
- */
-
 function config($var)
 {
 	if (isset($_ENV[$var]) && $_ENV[$var] != '') {

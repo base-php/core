@@ -1,40 +1,18 @@
 <?php
 
+use App\Models\User;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook as FacebookSDK;
 
-/**
-* Authentication with Facebook, require facebook/graph-sdk.
-*/
 class Facebook
 {
-    /**
-    * Helper of the Facebook SDK.
-    *
-    * $helper object
-    */
     public $helper;
-
-    /**
-    * Permissions of the Facebook app.
-    *
-    * $permissions array
-    */
+    
     public $permissions;
-
-    /**
-    * Instance of the Facebook\Facebook class.
-    *
-    * $instance object
-    */
+    
     public $instance;
-
-    /**
-    * Initialize the class to use from a global function.
-    *
-    * @return Facebook
-    */
+    
     public static function init()
     {
         $class = new static;
@@ -54,11 +32,6 @@ class Facebook
         return $class;
     }
 
-    /**
-    * Login with Facebook account.
-    *
-    * @return Facebook
-    */
     public function login()
     {
         try {
@@ -78,7 +51,7 @@ class Facebook
 
         $me = $response->getGraphUser();
 
-        $user = App\Models\User::firstOrCreate(
+        $user = User::firstOrCreate(
             [
                 'email' => $me->getEmail(),
                 'oauth' => 'Facebook',
@@ -96,13 +69,7 @@ class Facebook
 
         return $this;
     }
-
-    /**
-    * Create URL to log in to Facebook.
-    *
-    * @param $callback string
-    * @return void
-    */
+    
     public function url($callback)
     {
         echo $this->helper->getLoginUrl($callback, $this->permissions);

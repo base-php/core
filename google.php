@@ -1,22 +1,11 @@
 <?php
 
-/**
-* Authentication with Google, require google/apiclient.
-*/
+use App\Models\User;
+
 class Google
 {
-    /**
-    * Instance of the Google_Client class.
-    *
-    * $instance object
-    */
     public $instance;
-
-    /**
-    * Initialize the class to use from a global function.
-    *
-    * @return Google_Client
-    */
+    
     public static function init()
     {
         $class = new static;
@@ -33,23 +22,13 @@ class Google
 
         return $class;
     }
-
-    /**
-    * Create URL to log in to Google.
-    *
-    * @return void
-    */
+    
     public function url()
     {
         $this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
         echo $this->instance->createAuthUrl();
     }
-
-    /**
-    * Login with Google account.
-    *
-    * @return Google
-    */
+    
     public function login()
     {
         $client = $this->instance;
@@ -64,7 +43,7 @@ class Google
         $email =  $google_account_info->email;
         $name =  $google_account_info->name;
 
-        $user = App\Models\User::firstOrCreate(
+        $user = User::firstOrCreate(
             [
                 'email' => $email,
                 'oauth' => 'Google',

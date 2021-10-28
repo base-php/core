@@ -9,19 +9,19 @@ class ModelName extends Model
      *
      * @var string
      */
-    protected string $table = '';
+    protected $table = '';
 
      /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected string $primaryKey = '';
+    protected $primaryKey = '';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected array $fillable = [];
+    protected $fillable = [];
 }

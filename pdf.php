@@ -5,18 +5,8 @@ namespace App\PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-/**
- * Generate PDF file, require dompdf/dompdf package.
- */
 class PDF
 {
-    /**
-     * Generate PDF and force download.
-     * 
-     * @param string $filename
-     * 
-     * @return void
-     */
     public function download($filename)
     {
         ob_start();
@@ -37,13 +27,6 @@ class PDF
         $dompdf->stream($filename);
     }
 
-    /**
-     * Generate PDF and store in path given.
-     * 
-     * @param string $filename
-     * 
-     * @return void
-     */
     public function save($filename)
     {
         ob_start();

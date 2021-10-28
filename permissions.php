@@ -2,12 +2,6 @@
 
 use App\Models\User;
 
-/**
- * Verify if user can vie module in menu.
- *
- * @param string $module
- * @return boolean
- */
 function can($module)
 {
     $user = User::where('id', auth()->id)
@@ -19,11 +13,6 @@ function can($module)
     return false;
 }
 
-/**
- * Verify if user can access module.
- *
- * @return bool
- */
 function permission()
 {
     $module = explode('/', $_SERVER['REQUEST_URI']);
@@ -36,12 +25,6 @@ function permission()
     return false;
 }
 
-/**
- * Verify if roles can access module.
- *
- * @param array $roles
- * @return boolean
- */
 function role($roles)
 {
     $user = User::where('id', auth()->id)

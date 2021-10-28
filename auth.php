@@ -1,12 +1,8 @@
 <?php
 
+use App\Mails\PasswordRecovery;
 use App\Models\User;
 
-/**
-* Get a session var.
-*
-* @param  User\bool
-*/
 function auth() {
     if (isset($_SESSION['id'])) {
         if (isset($_SESSION['user'])) {
@@ -22,11 +18,6 @@ function auth() {
     return false;
 }
 
-/**
-* Send email for reset password.
-*
-* @return Redirect
-*/
 function forgot()
 {
     if (post()) {
@@ -36,18 +27,12 @@ function forgot()
             return redirect('/forgot-password')->with('error', __('auth.email_not_match'));
         }
 
-        email($user->email, new App\Mails\PasswordRecovery($user));
+        email($user->email, new PasswordRecovery($user));
 
         return redirect('/forgot-password')->with('info', __('auth.check_email'));
     }
 }
 
-/**
-* Login a session.
-*
-* @param array $user
-* @return Redirect|null
-*/
 function login($user)
 {
     $user = User::where('email', $user['email'])
@@ -64,21 +49,11 @@ function login($user)
     return redirect('/login')->with('error', __('auth.incorrect_data'));
 }
 
-/**
-* Logout session.
-*
-* @return void
-*/
 function logout()
 {
     session_destroy();
 }
 
-/**
-* Recover password.
-*
-* @return Redirect
-*/
 function recover()
 {
     if (post()) {
@@ -99,12 +74,6 @@ function recover()
     }
 }
 
-/**
-* Register new user.
-*
-* @param  array $user
-* @return Redirect
-*/
 function register($user)
 {
     $email = User::where('email', $user['email'])->get();

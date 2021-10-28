@@ -14,11 +14,6 @@ use Whoops\Run;
 
 class App
 {
-	/**
-	 * Start framework.
-	 *
-	 * @return void
-	 */
 	public static function run()
 	{
 		// General settings

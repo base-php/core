@@ -2,18 +2,16 @@
 
 namespace App\Middleware;
 
-use Closure;
-
 class MiddlewareName
 {
     /**
      * Handle an incoming request.
      *
-     * @param  Illuminate\Http\Request  $request
-     * @param  Closure  $next
+     * @param  $request
+     * @param  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, $next)
     {
         if () {
             return redirect();
