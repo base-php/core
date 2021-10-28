@@ -9,21 +9,21 @@ class MailName extends Mail
 	 * 
 	 * @var string $from
 	 */
-	public $from = '';
+	public string $from = '';
 
 	/**
 	 * Set subject for email.
 	 * 
 	 * @var string $subject
 	 */
-	public $subject = '';
+	public string $subject = '';
 
 	/**
 	 * Set attach for email.
 	 * 
 	 * @var array $attach
 	 */
-	public $attach = [];
+	public array $attach = [];
 
 	/**
      * Create a email instance.
@@ -38,9 +38,9 @@ class MailName extends Mail
 	/**
      * Build the email.
      *
-     * @return view
+     * @return View
      */
-	public function build()
+	public function build(): View
 	{
 		return view();
 	}

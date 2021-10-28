@@ -1,6 +1,8 @@
 <?php
 
-use Facebook\Facebook;
+use \Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Facebook as FacebookSDK;
 
 /**
 * Authentication with Facebook, require facebook/graph-sdk.
@@ -37,7 +39,7 @@ class Facebook
     {
         $class = new static;
 
-        $facebook = new Facebook([
+        $facebook = new FacebookSDK([
         'app_id'                => config('facebook')->app_id,
         'app_secret'            => config('facebook')->app_secret,
         'default_graph_version' => 'v2.10',
@@ -53,17 +55,6 @@ class Facebook
     }
 
     /**
-    * Create URL to log in to Facebook.
-    *
-    * @param $callback string
-    * @return void
-    */
-    public function url(string $callback): void
-    {
-        echo $this->helper->getLoginUrl($callback, $this->permissions);
-    }
-
-    /**
     * Login with Facebook account.
     *
     * @return Facebook
@@ -72,13 +63,16 @@ class Facebook
     {
         try {
             $accessToken = $this->helper->getAccessToken();
-
             $response = $this->instance->get('/me?fields=name,first_name,last_name,email,link,gender,picture', $accessToken);
-        } catch (\Facebook\Exceptions\FacebookResponseException $exception) {
+
+        } catch (FacebookResponseException $exception) {
             echo 'Graph returned an error: ' . $exception->getMessage();
+            return $this;
             exit;
-        } catch (\Facebook\Exceptions\FacebookSDKException $exception) {
+
+        } catch (FacebookSDKException $exception) {
             echo 'Facebook SDK returned an error: ' . $exception->getMessage();
+            return $this;
             exit;
         }
 
@@ -101,5 +95,16 @@ class Facebook
         redirect(config('facebook')->redirect);
 
         return $this;
+    }
+
+    /**
+    * Create URL to log in to Facebook.
+    *
+    * @param $callback string
+    * @return void
+    */
+    public function url(string $callback): void
+    {
+        echo $this->helper->getLoginUrl($callback, $this->permissions);
     }
 }

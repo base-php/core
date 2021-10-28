@@ -52,65 +52,6 @@ class Stripe
     public $currency;
 
     /**
-     * Initialize the class to use from a global function.
-     *
-     * @return Stripe
-     */
-    public static function init(): Stripe
-    {
-        $class = new static;
-        return $class;
-    }
-
-    /**
-     * Set secret key for Stripe API.
-     *
-     * @param $secret_key string
-     * @return Stripe
-     */
-    public function secret_key(string $secret_key): Stripe
-    {
-        $this->secret_key = $secret_key;
-        return $this;
-    }
-
-    /**
-     * Set publishable key for Stripe API.
-     *
-     * @param $publishable_key string
-     * @return Stripe
-     */
-    public function publishable_key(string $publishable_key): Stripe
-    {
-        $this->publishable_key = $publishable_key;
-        return $this;
-    }
-
-    /**
-     * Set email of the customer.
-     *
-     * @param $email string
-     * @return Stripe
-     */
-    public function email(string $email): Stripe
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * Set token for Stripe API.
-     *
-     * @param $token string
-     * @return Stripe
-     */
-    public function token(string $token): Stripe
-    {
-        $this->token = $token;
-        return $this;
-    }
-
-    /**
      * Set amount of the purchase.
      *
      * @param $amount float
@@ -131,6 +72,41 @@ class Stripe
     public function currency(string $currency): Stripe
     {
         $this->currency = $currency;
+        return $this;
+    }
+
+    /**
+     * Set email of the customer.
+     *
+     * @param $email string
+     * @return Stripe
+     */
+    public function email(string $email): Stripe
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Initialize the class to use from a global function.
+     *
+     * @return Stripe
+     */
+    public static function init(): Stripe
+    {
+        $class = new static;
+        return $class;
+    }    
+
+    /**
+     * Set publishable key for Stripe API.
+     *
+     * @param $publishable_key string
+     * @return Stripe
+     */
+    public function publishable_key(string $publishable_key): Stripe
+    {
+        $this->publishable_key = $publishable_key;
         return $this;
     }
 
@@ -158,5 +134,29 @@ class Stripe
             'amount'   => $this->amount,
             'currency' => $this->currency,
         ]);
+    }
+
+    /**
+     * Set secret key for Stripe API.
+     *
+     * @param $secret_key string
+     * @return Stripe
+     */
+    public function secret_key(string $secret_key): Stripe
+    {
+        $this->secret_key = $secret_key;
+        return $this;
+    }
+
+    /**
+     * Set token for Stripe API.
+     *
+     * @param $token string
+     * @return Stripe
+     */
+    public function token(string $token): Stripe
+    {
+        $this->token = $token;
+        return $this;
     }
 }

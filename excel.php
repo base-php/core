@@ -37,19 +37,16 @@ class Excel
 	}
 
 	/**
-	* Set color to cell.
+	* Redimension size to cell.
 	*
 	* @param $cells string
-	* @param $color string
 	* @return void
 	*/
-	public function color(string $cells, string $color): void
+	public function autosize(string $cells): void
 	{
 		$this->sheet
-			->getStyle($cells)
-			->getFont()
-			->getColor()
-			->setARGB($color);
+			->getColumnDimension($cells)
+			->setAutoSize(true);
 	}
 
 	/**
@@ -70,21 +67,6 @@ class Excel
 	}
 
 	/**
-	* Set font size to cell.
-	*
-	* @param $cells string
-	* @param $size string
-	* @return void
-	*/
-	public function size(string $cells, string $size): void
-	{
-		$this->sheet
-			->getStyle($cells)
-			->getFont()
-			->setSize($size);
-	}
-
-	/**
 	* Set font bold to cell.
 	*
 	* @param $cells string
@@ -99,6 +81,22 @@ class Excel
 	}
 
 	/**
+	* Set color to cell.
+	*
+	* @param $cells string
+	* @param $color string
+	* @return void
+	*/
+	public function color(string $cells, string $color): void
+	{
+		$this->sheet
+			->getStyle($cells)
+			->getFont()
+			->getColor()
+			->setARGB($color);
+	}
+
+	/**
 	* Merge cells.
 	*
 	* @param $cells string
@@ -108,6 +106,21 @@ class Excel
 	{
 		$this->sheet
 			->mergeCells($cells);
+	}
+
+	/**
+	* Set font size to cell.
+	*
+	* @param $cells string
+	* @param $size string
+	* @return void
+	*/
+	public function size(string $cells, string $size): void
+	{
+		$this->sheet
+			->getStyle($cells)
+			->getFont()
+			->setSize($size);
 	}
 
 	/**
@@ -124,33 +137,6 @@ class Excel
 	}
 
 	/**
-	* Redimension size to cell.
-	*
-	* @param $cells string
-	* @return void
-	*/
-	public function autosize(string $cells): void
-	{
-		$this->sheet
-			->getColumnDimension($cells)
-			->setAutoSize(true);
-	}
-
-	/**
-	* Save Excel file in given path.
-	*
-	* @param $path string
-	* @return void
-	*/
-	public function store(string $path): void
-	{
-		$this->build();
-
-		$writer = new Xlsx($this->spreadsheet);
-		$writer->save($_SERVER['DOCUMENT_ROOT'] . '/' . $path);
-	}
-
-	/**
 	* Read data from Excel file.
 	*
 	* @param $filename string
@@ -161,5 +147,19 @@ class Excel
 		$spreadsheet = IOFactory::load($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
 		$data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 		return $data;
+	}
+
+	/**
+	* Save Excel file in given path.
+	*
+	* @param $path string
+	* @return void
+	*/
+	public function save(string $path): void
+	{
+		$this->build();
+
+		$writer = new Xlsx($this->spreadsheet);
+		$writer->save($_SERVER['DOCUMENT_ROOT'] . '/' . $path);
 	}
 }

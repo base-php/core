@@ -26,6 +26,8 @@ class View
         $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/resources/views');
         $componentes = Componentes::create($viewPath);
 
+        $view = str_replace('.', '/', $view);
+
         if ($view == 'recover') {
             $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
         } else if ($view == '401') {

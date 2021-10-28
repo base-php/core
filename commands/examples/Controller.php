@@ -2,14 +2,17 @@
 
 namespace App\Controllers;
 
+use View;
+use Redirect;
+
 class ControllerName extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return view
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         
     }
@@ -17,9 +20,9 @@ class ControllerName extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return view
+     * @return View
      */
-    public function create()
+    public function create(): View
     {
         
     }
@@ -27,9 +30,9 @@ class ControllerName extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return redirect
+     * @return Redirect
      */
-    public function store()
+    public function store(): Redirect
     {
         
     }
@@ -38,9 +41,9 @@ class ControllerName extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return view
+     * @return View
      */
-    public function show($id)
+    public function show(int $id): View
     {
         
     }
@@ -49,9 +52,9 @@ class ControllerName extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return view
+     * @return View
      */
-    public function edit($id)
+    public function edit(int $id): View
     {
         
     }
@@ -59,9 +62,9 @@ class ControllerName extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return redirect
+     * @return Redirect
      */
-    public function update()
+    public function update(): Redirect
     {
         
     }
@@ -70,9 +73,9 @@ class ControllerName extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return redirect
+     * @return Redirect
      */
-    public function destroy($id)
+    public function destroy(int $id): Redirect
     {
         
     }

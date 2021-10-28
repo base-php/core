@@ -35,6 +35,17 @@ class Google
     }
 
     /**
+    * Create URL to log in to Google.
+    *
+    * @return void
+    */
+    public function url(): void
+    {
+        $this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
+        echo $this->instance->createAuthUrl();
+    }
+
+    /**
     * Login with Google account.
     *
     * @return Google
@@ -70,16 +81,5 @@ class Google
         redirect(config('google')->redirect);
 
         return $this;
-    }
-
-    /**
-    * Create URL to log in to Google.
-    *
-    * @return void
-    */
-    public function url(): void
-    {
-        $this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
-        echo $this->instance->createAuthUrl();
     }
 }

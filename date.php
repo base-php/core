@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Return current date with format given.
+ * Return age of date given.
  *
- * @param  string $format
+ * @param  string $date
  * @return string
  */
-function now(string $format = 'Y-m-d'): string
+function age(string $date): string
 {
-    return date($format);
+    return Carbon\Carbon::parse($date)->age;
 }
 
 /**
@@ -25,12 +25,12 @@ function format_date(string $date, string $format): string
 }
 
 /**
- * Return age of date given.
+ * Return current date with format given.
  *
- * @param  string $date
+ * @param  string $format
  * @return string
  */
-function age(string $date): string
+function now(string $format = 'Y-m-d'): string
 {
-    return Carbon\Carbon::parse($date)->age;
+    return date($format);
 }

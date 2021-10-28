@@ -1,11 +1,15 @@
 <?php
 
+use App\Excel\Excel;
+use Illuminate\Database\Capsule\Manager;
+use Illuminate\Http\Client\Factory;
+
 /**
  * Quick access to the DB class.
  * 
  * @return DB
  */
-class DB extends Illuminate\Database\Capsule\Manager
+class DB extends Manager
 {
 
 }
@@ -28,13 +32,13 @@ function email(string $to, object $object): void
  *
  * @return void|array
  */
-function excel(string $filename, $object)
+function excel(string $filename, $object): void
 {
     if ($object != '') {
         $object->store($filename);
     } else {
-        $excel = new App\Excel\Excel();
-        return $excel->read($filename);
+        $excel = new Excel();
+        $excel->read($filename);
     }
 }
 
@@ -43,7 +47,7 @@ function excel(string $filename, $object)
  *
  * @return void
  */
-function facebook()
+function facebook(): Facebook
 {
     return Facebook::init()->url('https://localhost:8080/login/facebook');
 }
@@ -53,7 +57,7 @@ function facebook()
  *
  * @return void
  */
-function google()
+function google(): Google
 {
     return Google::init()->url();
 }
@@ -66,7 +70,7 @@ function google()
  */
 function http(): Factory
 {
-    return new Illuminate\Http\Client\Factory;
+    return new Factory;
 }
 
 /**

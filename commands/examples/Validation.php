@@ -9,7 +9,7 @@ class UserStore extends Validation
 	*
 	* @return array
 	*/
-	public function rules()
+	public function rules(): array
 	{
 		return [];
 	}
@@ -19,7 +19,7 @@ class UserStore extends Validation
 	 *
 	 * @return array
 	 */
-	public function messages()
+	public function messages(): array
 	{
 		return [];
 	}

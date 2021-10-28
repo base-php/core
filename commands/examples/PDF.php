@@ -2,14 +2,16 @@
 
 namespace App\PDF;
 
+use View;
+
 class PDFName extends PDF
 {
 	/**
      * Determines if the page orientation will be horizontal or not.
      *
-     * $var boolean
+     * $var bool
      */
-	public $lanscape = false;
+	public bool $lanscape = false;
 
 	/**
      * Create a new message instance.
@@ -24,9 +26,9 @@ class PDFName extends PDF
 	/**
      * View of the generated PDF.
      *
-     * @return void
+     * @return View
      */
-	public function build()
+	public function build(): View
 	{
 		return view();
 	}

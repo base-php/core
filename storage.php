@@ -150,6 +150,17 @@ class Storage
     }
 
     /**
+     * Delete resource of any of the disks.
+     *
+     * @param string $path
+     * @return void
+     */
+    public function delete(string $path): void
+    {
+        $this->instance->delete($path);
+    }
+
+    /**
      * Get resource of the file from any of the disks.
      *
      * @param string $adapter
@@ -210,16 +221,5 @@ class Storage
         }
 
         return $this;
-    }
-
-    /**
-     * Delete resource of any of the disks.
-     *
-     * @param string $path
-     * @return void
-     */
-    public function delete(string $path): void
-    {
-        $this->instance->delete($path);
     }
 }
