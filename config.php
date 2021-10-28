@@ -7,7 +7,7 @@
  * @return string|object
  */
 
-function config(string $var): string|object
+function config($var)
 {
 	if (isset($_ENV[$var]) && $_ENV[$var] != '') {
 		if (is_array($_ENV[$var])) {

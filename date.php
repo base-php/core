@@ -6,7 +6,7 @@
  * @param  string $date
  * @return string
  */
-function age(string $date): string
+function age($date)
 {
     return Carbon\Carbon::parse($date)->age;
 }
@@ -18,7 +18,7 @@ function age(string $date): string
  * @param  string $format
  * @return string
  */
-function format_date(string $date, string $format): string
+function format_date($date, $format)
 {
     $date = date_create($date);
     return date_format($date, $format);
@@ -30,7 +30,7 @@ function format_date(string $date, string $format): string
  * @param  string $format
  * @return string
  */
-function now(string $format = 'Y-m-d'): string
+function now($format = 'Y-m-d')
 {
     return date($format);
 }

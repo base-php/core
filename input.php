@@ -7,7 +7,7 @@
  * @param  string $value
  * @return string
  */
-function checked(string $key, string $value): void
+function checked($key, $value)
 {
     if (is_array($key)) {
         foreach ($key as $item) {
@@ -27,7 +27,7 @@ function checked(string $key, string $value): void
  * @param  string       $value
  * @return void
  */
-function selected(string $key, string $value): void
+function selected($key, $value)
 {
     if (is_array($key)) {
         foreach ($key as $item) {

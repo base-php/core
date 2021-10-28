@@ -19,7 +19,7 @@ class App
 	 *
 	 * @return void
 	 */
-	public static function run(): void
+	public static function run()
 	{
 		// General settings
 

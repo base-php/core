@@ -17,7 +17,7 @@ class Google
     *
     * @return Google_Client
     */
-    public static function init(): Google_Client
+    public static function init()
     {
         $class = new static;
 
@@ -39,7 +39,7 @@ class Google
     *
     * @return void
     */
-    public function url(): void
+    public function url()
     {
         $this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
         echo $this->instance->createAuthUrl();
@@ -50,7 +50,7 @@ class Google
     *
     * @return Google
     */
-    public function login(): Google
+    public function login()
     {
         $client = $this->instance;
 

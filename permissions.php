@@ -1,14 +1,16 @@
 <?php
 
+use App\Models\User;
+
 /**
  * Verify if user can vie module in menu.
  *
  * @param string $module
  * @return boolean
  */
-function can(string $module): bool
+function can($module)
 {
-    $user = App\Models\User::where('id', auth()->id)
+    $user = User::where('id', auth()->id)
         ->where('permissions', 'LIKE', '%' . $module . '%')
         ->get();
     if ($user->count() > 0) {
@@ -22,10 +24,10 @@ function can(string $module): bool
  *
  * @return bool
  */
-function permission(): bool
+function permission()
 {
     $module = explode('/', $_SERVER['REQUEST_URI']);
-    $user = App\Models\User::where('id', auth()->id)
+    $user = User::where('id', auth()->id)
         ->where('permissions', 'LIKE', '%' . $module[1] . '%')
         ->get();
     if ($user->count() == 0) {
@@ -40,9 +42,9 @@ function permission(): bool
  * @param array $roles
  * @return boolean
  */
-function role(array $roles): bool
+function role($roles)
 {
-    $user = App\Models\User::where('id', auth()->id)
+    $user = User::where('id', auth()->id)
         ->whereIn('role', $roles)
         ->get();
     if (count($user)) {

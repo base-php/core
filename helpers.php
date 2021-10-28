@@ -19,7 +19,7 @@ class DB extends Manager
  *
  * @return void
  */
-function email(string $to, object $object): void
+function email($to, $object)
 {
     $object->send($to);
 }
@@ -32,7 +32,7 @@ function email(string $to, object $object): void
  *
  * @return void|array
  */
-function excel(string $filename, $object): void
+function excel($filename, $object)
 {
     if ($object != '') {
         $object->store($filename);
@@ -47,7 +47,7 @@ function excel(string $filename, $object): void
  *
  * @return void
  */
-function facebook(): Facebook
+function facebook()
 {
     return Facebook::init()->url('https://localhost:8080/login/facebook');
 }
@@ -57,7 +57,7 @@ function facebook(): Facebook
  *
  * @return void
  */
-function google(): Google
+function google()
 {
     return Google::init()->url();
 }
@@ -68,7 +68,7 @@ function google(): Google
  * 
  * @return Factory
  */
-function http(): Factory
+function http()
 {
     return new Factory;
 }
@@ -80,7 +80,7 @@ function http(): Factory
  * 
  * @return redirect
  */
-function redirect(string $to): Redirect
+function redirect($to)
 {
     $redirect = new Redirect;
     $redirect->to = $to;
@@ -94,7 +94,7 @@ function redirect(string $to): Redirect
  * 
  * @return PDF
  */
-function pdf($object): PDF
+function pdf($object)
 {
     return $object;
 }
@@ -105,19 +105,9 @@ function pdf($object): PDF
  * @param string $adapter
  * @return Storage
 */
-function storage(string $adapter = 'local'): Storage
+function storage($adapter = 'local')
 {
     return new Storage($adapter);
-}
-
-/**
- * Helper for Stripe class.
- *
- * @return Stripe
- */
-function stripe(): Stripe
-{
-    return Stripe::init();
 }
 
 /**
@@ -127,7 +117,7 @@ function stripe(): Stripe
  * @param  array   $data
  * @return void
  */
-function view(string $view, array $data = []): View
+function view($view, $data = [])
 {
     $class = new View();
     return $class->render($view, $data);

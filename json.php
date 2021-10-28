@@ -4,9 +4,9 @@
  * Encode or decode a object, array or json.
  *
  * @param  $structure mixed
- * @return json_encode\json_decode
+ * @return mixed
  */
-function json(mixed $structure)
+function json($structure)
 {
     if (is_array($structure) || is_object($structure)) {
         return json_encode($structure);

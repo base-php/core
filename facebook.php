@@ -1,6 +1,6 @@
 <?php
 
-use \Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook as FacebookSDK;
 
@@ -35,7 +35,7 @@ class Facebook
     *
     * @return Facebook
     */
-    public static function init(): Facebook
+    public static function init()
     {
         $class = new static;
 
@@ -59,7 +59,7 @@ class Facebook
     *
     * @return Facebook
     */
-    public function login(): Facebook
+    public function login()
     {
         try {
             $accessToken = $this->helper->getAccessToken();
@@ -103,7 +103,7 @@ class Facebook
     * @param $callback string
     * @return void
     */
-    public function url(string $callback): void
+    public function url($callback)
     {
         echo $this->helper->getLoginUrl($callback, $this->permissions);
     }

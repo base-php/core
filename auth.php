@@ -7,7 +7,7 @@ use App\Models\User;
 *
 * @param  User\bool
 */
-function auth(): User|bool {
+function auth() {
     if (isset($_SESSION['id'])) {
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
@@ -27,7 +27,7 @@ function auth(): User|bool {
 *
 * @return Redirect
 */
-function forgot(): Redirect
+function forgot()
 {
     if (post()) {
         $user = User::where('email', request('email'))->first();
@@ -48,7 +48,7 @@ function forgot(): Redirect
 * @param array $user
 * @return Redirect|null
 */
-function login(array $user): Redirect|null
+function login($user)
 {
     $user = User::where('email', $user['email'])
         ->where('password', md5($user['password']))
@@ -69,7 +69,7 @@ function login(array $user): Redirect|null
 *
 * @return void
 */
-function logout(): void
+function logout()
 {
     session_destroy();
 }
@@ -79,7 +79,7 @@ function logout(): void
 *
 * @return Redirect
 */
-function recover(): Redirect
+function recover()
 {
     if (post()) {
         $user = User::where('hash', request('id'))->first();
@@ -105,7 +105,7 @@ function recover(): Redirect
 * @param  array $user
 * @return Redirect
 */
-function register(array $user): Redirect
+function register($user)
 {
     $email = User::where('email', $user['email'])->get();
 

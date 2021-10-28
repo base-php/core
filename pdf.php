@@ -17,7 +17,7 @@ class PDF
      * 
      * @return void
      */
-    public function download(string $filename): void
+    public function download($filename)
     {
         ob_start();
 
@@ -44,7 +44,7 @@ class PDF
      * 
      * @return void
      */
-    public function store(string $filename): void
+    public function save($filename)
     {
         ob_start();
 

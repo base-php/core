@@ -6,7 +6,7 @@
  * @param  mixed
  * @return void
  */
-function debugbar(string $message): void
+function debugbar($message)
 {
     $_ENV['debugbar'][] = $message;
 }
@@ -16,57 +16,10 @@ function debugbar(string $message): void
  *
  * @return bool
  */
-function localhost(): bool
+function localhost()
 {
     if (strpos($_SERVER['HTTP_HOST'], 'localhost')) {
         return true;
     }
     return false;
-}
-
-/**
- * Show object/array as table.
- *
- * @param $query object|array
- * @return void
- */
-function table(object|array $query): void
-{
-    if (empty($query)) {
-        return;
-    }
-
-    $query = json($query);
-
-    echo '<style>table { margin-top: 5px; font-family: "Fira Code" } table,tr,th,td { border: 1px solid black; font-family: "Fira Code"; border-collapse: collapse; } </style>';
-
-    echo '<table>';
-
-    $i = 1;
-
-    foreach (json($query) as $item) {
-        $keys = get_object_vars($item);
-
-        echo '<tr>';
-
-        foreach ($keys as $key => $value) {
-          if ($i == 1) {
-              echo '<th>' . $key . '</th>'; 
-          }
-        }
-
-        $i = $i + 1;
-
-        echo '</tr>';
-
-        echo '<tr>';
-
-        foreach ($keys as $key => $value) {
-          echo '<td>' . $value . '</td>';
-        }
-
-        echo '</tr>';
-    }
-
-    echo '<table>';
 }

@@ -42,7 +42,7 @@ class Excel
 	* @param $cells string
 	* @return void
 	*/
-	public function autosize(string $cells): void
+	public function autosize($cells)
 	{
 		$this->sheet
 			->getColumnDimension($cells)
@@ -56,7 +56,7 @@ class Excel
 	* @param $color string
 	* @return void
 	*/
-	public function background(string $cells, string $color): void
+	public function background($cells, $color)
 	{
 		$this->sheet
 			->getStyle($cells)
@@ -72,7 +72,7 @@ class Excel
 	* @param $cells string
 	* @return void
 	*/
-	public function bold(string $cells): void
+	public function bold($cells)
 	{
 		$this->sheet
 			->getStyle($cells)
@@ -87,7 +87,7 @@ class Excel
 	* @param $color string
 	* @return void
 	*/
-	public function color(string $cells, string $color): void
+	public function color($cells, $color)
 	{
 		$this->sheet
 			->getStyle($cells)
@@ -102,7 +102,7 @@ class Excel
 	* @param $cells string
 	* @return void
 	*/
-	public function merge(string $cells): void
+	public function merge($cells)
 	{
 		$this->sheet
 			->mergeCells($cells);
@@ -115,7 +115,7 @@ class Excel
 	* @param $size string
 	* @return void
 	*/
-	public function size(string $cells, string $size): void
+	public function size($cells, $size)
 	{
 		$this->sheet
 			->getStyle($cells)
@@ -130,7 +130,7 @@ class Excel
 	* @param $value string
 	* @return void
 	*/
-	public function value(string $cells, string $value): void
+	public function value($cells, $value)
 	{
 		$this->sheet
 			->setCellValue($cells, $value);
@@ -142,7 +142,7 @@ class Excel
 	* @param $filename string
 	* @return array
 	*/
-	public function read(string $filename): array
+	public function read($filename)
 	{
 		$spreadsheet = IOFactory::load($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
 		$data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
@@ -155,7 +155,7 @@ class Excel
 	* @param $path string
 	* @return void
 	*/
-	public function save(string $path): void
+	public function save($path)
 	{
 		$this->build();
 

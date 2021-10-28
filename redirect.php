@@ -39,7 +39,7 @@ class Redirect
 	 * 
 	 * @return Redirect
 	 */
-	public function redirect(string $to): Redirect
+	public function redirect($to)
 	{
 		$this->to = $to;
 		return $this;
@@ -53,7 +53,7 @@ class Redirect
 	 * 
 	 * @return Redirect
 	 */
-	public function with(string $key, string $value): Redirect
+	public function with($key, $value)
 	{
 		$_SESSION['flashmessages'][$key] = $value;
 		return $this;

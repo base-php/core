@@ -6,7 +6,7 @@
  * @param  string  $file
  * @return void
  */
-function asset(string $file): void
+function asset($file)
 {
     echo '//' . $_SERVER['HTTP_HOST'] . '/resources/assets/' . $file;
 }
@@ -17,7 +17,7 @@ function asset(string $file): void
  * @param  string  $file
  * @return void
  */
-function node(string $file): void
+function node($file)
 {
 	echo '//' . $_SERVER['HTTP_HOST'] . '/node_modules/' . $file;
 }
