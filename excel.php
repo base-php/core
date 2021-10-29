@@ -7,10 +7,10 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-// composer require phpoffice/phpspreadsheet
-
 class Excel
 {
+	// phpoffice/phpspreadsheet
+	
 	public $spreadsheet;
 	
 	public $sheet;

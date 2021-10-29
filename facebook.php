@@ -7,6 +7,8 @@ use Facebook\Facebook as FacebookSDK;
 
 class Facebook
 {
+    // facebook/graph-sdk
+    
     public $helper;
     
     public $permissions;
@@ -14,7 +16,7 @@ class Facebook
     public $instance;
     
     public static function init()
-    {
+    {        
         $class = new static;
 
         $facebook = new FacebookSDK([

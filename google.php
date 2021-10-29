@@ -8,6 +8,8 @@ class Google
     
     public static function init()
     {
+        // google/apiclient
+        
         $class = new static;
 
         $google_client = new Google_Client();
