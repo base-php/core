@@ -7,6 +7,8 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+// composer require phpoffice/phpspreadsheet
+
 class Excel
 {
 	public $spreadsheet;
