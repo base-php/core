@@ -56,6 +56,13 @@ function pdf($object)
     return $object;
 }
 
+function qr($data)
+{
+    $qr = new QR;
+    $qr->data($data);
+    return $qr->generate();
+}
+
 function storage($adapter = 'local')
 {
     return new Storage($adapter);
