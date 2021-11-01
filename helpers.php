@@ -3,7 +3,7 @@
 use App\Excel\Excel;
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Http\Client\Factory As HttpClient;
+use Illuminate\Http\Client\Factory as HttpClient;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
