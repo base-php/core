@@ -3,11 +3,11 @@
 use App\Excel\Excel;
 use Illuminate\Database\Capsule\Manager;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Http\Client\Factory;
+use Illuminate\Http\Client\Factory As HttpClient;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
-use Illuminate\Validation\Factory;
+use Illuminate\Validation\Factory as Validation;
 
 class DB extends Manager
 {
@@ -41,7 +41,7 @@ function google()
 
 function http()
 {
-    return new Factory;
+    return new HttpClient;
 }
 
 function redirect($to)
@@ -75,7 +75,7 @@ function validation($data, $rules, $messages, $connection = 'default')
     $files      = new Filesystem();
     $loader     = new FileLoader($files, '');
     $translator = new Translator($loader, 'es');
-    $factory    = new Factory($translator);
+    $factory    = new Validation($translator);
 
     $verifier = new DatabasePresenceVerifier($capsule->getDatabaseManager($connection));
 
