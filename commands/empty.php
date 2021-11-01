@@ -2,7 +2,7 @@
 
 if (!isset($_SERVER['argv'][1])) {
 	line_break();
-	echo normal('Base PHP 1.3.62 by Nisa Delgado.');
+	echo normal('Base PHP 1.3.91 by Nisa Delgado.');
 	line_break(2);
 
 	echo warning('Usage:');
