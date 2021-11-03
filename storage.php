@@ -16,41 +16,15 @@ use Spatie\FlysystemDropbox\DropboxAdapter;
 
 class Storage
 {
-    /**
-     * Instance of Filesystem
-     *
-     * @var Filesystem
-     */
     public $instance;
 
-    /**
-     * Name of the previously uploaded file.
-     *
-     * @var string|array
-     */
     public $filename;
-
-    /**
-     * Content of the file to upload.
-     *
-     * @var string
-     */
+    
     public $content;
-
-    /**
-     * Result of the previous operation.
-     *
-     * @var boolean
-     */
+    
     public $success;
-
-    /**
-     * Initialize the class and create the instance according to the given adapter.
-     *
-     * @param string $adapter
-     * @return void
-     */
-    public function __construct(string $adapter = 'local')
+    
+    public function __construct($adapter = 'local')
     {
         if ($adapter == 'local') {
             $adapter        = new LocalFilesystemAdapter('/');
@@ -125,60 +99,29 @@ class Storage
             ));
         }
     }
-
-    /**
-     * Set adapter of the file to upload, using for request helper.
-     * 
-     * @param string $adapter
-     * @param Storage
-     */
-    public function adapter(string $adapter)
+    
+    public function adapter($adapter)
     {
         return $this->__construct($adapter);
     }
-
-    /**
-     * Set content of the file to upload, using for request helper.
-     * 
-     * @param string $content
-     * @param Storage
-     */
-    public function content(string $content)
+    
+    public function content($content)
     {
         $this->content = $content;
         return $this;
     }
-
-    /**
-     * Delete resource of any of the disks.
-     *
-     * @param string $path
-     * @return void
-     */
-    public function delete(string $path): void
+    
+    public function delete($path)
     {
         $this->instance->delete($path);
     }
-
-    /**
-     * Get resource of the file from any of the disks.
-     *
-     * @param string $adapter
-     * @return void
-     */
-    public function get(string $get)
+    
+    public function get($get)
     {
         return $this->instance->readStream($get);
     }
-
-    /**
-     * Save resource on any of the disks.
-     *
-     * @param string $path
-     * @param string $filename
-     * @return Storage
-     */
-    public function save(string $path, string $filename = ''): Storage
+    
+    public function save($path, $filename = '')
     {
         $path = $_SERVER['DOCUMENT_ROOT'] . '/' . $path;
         

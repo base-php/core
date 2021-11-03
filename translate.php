@@ -2,13 +2,8 @@
 
 use Carbon\Carbon;
 
-/**
- * Returns text according to language.
- *
- * @param string $key
- * @return string
-*/
-function __(string $key): string {
+function __($key)
+{
 	$array = explode('.', $key);
 
 	$file = $array[0];
@@ -23,7 +18,7 @@ function __(string $key): string {
  * @param string $lang
  * @return void
 */
-function language($lang = ''): void
+function language($lang = '')
 {
 	Carbon::setLocale($_ENV['language']);
 

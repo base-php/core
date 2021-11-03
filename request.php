@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Verify if the request is ajax.
- *
- * @return bool
- */
-function ajax(): bool
+function ajax()
 {
     if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
         return true;
@@ -14,25 +9,13 @@ function ajax(): bool
     return false;
 }
 
-/**
- * Displays the validation text and subsequently deletes it from the session.
- * 
- * @param string $data
- * 
- * @return void
- */
-function error(string $data): void
+function error($data)
 {
     echo $data;
     $index = array_search($data, $_SESSION['flashmessages']['errors']);
     unset($_SESSION['flashmessages']['errors'][$index]);
 }
 
-/**
- * Errors of validations.
- * 
- * @return void
- */
 function errors()
 {
     if (isset($_SESSION['flashmessages']['errors'])) {
@@ -40,13 +23,7 @@ function errors()
     }
 }
 
-/**
- * Return GET request.
- *
- * @param  string $var
- * @return array|string
- */
-function get(string $var = ''): array|string
+function get($var = '')
 {
     if ($var == '') {
         return $_GET;
@@ -57,23 +34,12 @@ function get(string $var = ''): array|string
     }
 }
 
-/**
- * Get host name.
- *
- * @return string
- */
-function host(): string
+function host()
 {
     return '//' . $_SERVER['HTTP_HOST'];
 }
 
-/**
- * Get a flash message and delete this.
- *
- * @param  string $data
- * @return void
- */
-function message(string $data): void
+function message($data)
 {
     if (isset($_SESSION['flashmessages'][$data])) {
         echo $_SESSION['flashmessages'][$data];
@@ -81,13 +47,7 @@ function message(string $data): void
     }
 }
 
-/**
- * Verify if have a flash message.
- *
- * @param  string $data
- * @return bool
- */
-function messages(string $data): bool
+function messages($data)
 {
     if (isset($_SESSION['flashmessages'][$data])) {
         return true;
@@ -96,13 +56,7 @@ function messages(string $data): bool
     }
 }
 
-/**
- * Show data for input when validation fail.
- * 
- * @param string $input
- * @return void|null
- */
-function old(string $input)
+function old($input)
 {
     if (isset($_SESSION['flashmessages']['inputs'][$input])) {
         echo $_SESSION['flashmessages']['inputs'][$input];
@@ -112,13 +66,7 @@ function old(string $input)
     }
 }
 
-/**
- * Return POST request.
- *
- * @param  string $var
- * @return array|string
- */
-function post(string $var = ''): array|string
+function post( $var = '')
 {
     if ($var == '') {
         return $_POST;
@@ -129,23 +77,12 @@ function post(string $var = ''): array|string
     }
 }
 
-/**
- * Get query string.
- *
- * @return  string
- */
-function query_string(): string
+function query_string()
 {
     return $_SERVER['QUERY_STRING'];
 }
 
-/**
- * Return request.
- *
- * @param  string $var
- * @return mixed
- */
-function request(string $var = '')
+function request($var = '')
 {
     if ($var == '') {
         return $_REQUEST;

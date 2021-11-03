@@ -1,13 +1,6 @@
 <?php
 
-/**
- * Set or get session variable.
- *
- * @param mixed $key
- * @param mixed $value
- * @return mixed
- */
-function session(string $key = '', mixed $value = ''): mixed
+function session($key = '', $value = '')
 {
     if ($key != '' && $value != '') {
         return $_SESSION[$key] = $value;

@@ -4,24 +4,12 @@ use Netflie\Componentes\Componentes;
 
 class View
 {
-    /**
-     * Necessary method for Symfony class.
-     *
-     * @return void
-     */
     public function __toString()
     {
         return '';
     }
-
-    /**
-     * Get the evaluated view contents for the given view.
-     *
-     * @param  string  $view
-     * @param  array   $data
-     * @return View
-     */
-    public function render(string $view, array $data = []): View
+    
+    public function render($view, $data = [])
     {
         $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/resources/views');
         $componentes = Componentes::create($viewPath);
