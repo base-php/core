@@ -10,5 +10,6 @@ class Console
 		include 'files.php';		
 		include 'server.php';
 		include 'sql.php';
+		include 'tests.php';
 	}
 }

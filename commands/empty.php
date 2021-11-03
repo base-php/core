@@ -61,5 +61,9 @@ if (!isset($_SERVER['argv'][1])) {
 
 	echo success('  server');
 	echo normal('		Build development server on port 8080.');
+	echo line_break();
+
+	echo success('  test');
+	echo normal('			Run unit tests.');
 	echo line_break(2);
 }
