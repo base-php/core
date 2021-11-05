@@ -31,7 +31,7 @@
         <a class="btn btn-primary" href="{{ host() }}/recover/{{ md5($user->id) }}">{{ __('auth.email_recover_password') }}</a>
     </p>
 
-    <p>{{ __('email.email_warning') }}</p>
+    <p>{{ __('auth.email_warning') }}</p>
 
     <p class="mb-5">{{ __('auth.email_fired') }}, {{ config('application_name') }}.</p>
 
