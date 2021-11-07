@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mails;
+namespace App\Exel;
 
 class ExcelName extends Mail
 {
