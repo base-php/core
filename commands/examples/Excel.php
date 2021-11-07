@@ -11,7 +11,7 @@ class ExcelName extends Excel
      */
 	public function __construct()
 	{
-		
+		parent::__construct();
 	}
 
 	/**
