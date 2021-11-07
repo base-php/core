@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Exel;
+namespace App\Excel;
 
-class ExcelName extends Mail
+class ExcelName extends Excel
 {
 	/**
      * Create a Excel instance.
