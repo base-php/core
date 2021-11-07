@@ -14,6 +14,7 @@ include 'third/Paginator.php';
 include 'third/LengthAwarePaginator.php';
 include 'third/Builder.php';
 include 'config.php';
+include 'db.php';
 include 'debug.php';
 include 'date.php';
 include 'excel.php';

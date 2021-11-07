@@ -1,18 +1,12 @@
 <?php
 
 use App\Excel\Excel;
-use Illuminate\Database\Capsule\Manager;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Client\Factory as HttpClient;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory as Validation;
-
-class DB extends Manager
-{
-
-}
 
 function email($to, $object)
 {
