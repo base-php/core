@@ -13,13 +13,13 @@ function email($to, $object)
     $object->send($to);
 }
 
-function excel($filename, $object)
+function excel($filename, $object = '')
 {
     if ($object != '') {
         $object->store($filename);
     } else {
         $excel = new Excel();
-        $excel->read($filename);
+        return $excel->read($filename);
     }
 }
 
