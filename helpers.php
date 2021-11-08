@@ -75,7 +75,7 @@ function validation($data, $rules, $messages, $connection = 'default')
 
     $factory->setPresenceVerifier($verifier);
 
-    $validation = $factory->make(request(), $rules(), $messages());
+    $validation = $factory->make($data, $rules, $messages);
 
     if ($validation->errors()->all()) {
         $errors = $validation->errors()->all();
