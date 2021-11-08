@@ -210,6 +210,28 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-resource=') 
 }
 
 
+// Create test
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-test=') === 0) {
+	$name = str_replace('make-test=', '', $_SERVER['argv'][1]);
+
+	if ($name == '') {
+		echo danger('You have not specified a name for the test.');
+		line_break();
+		exit;
+	}
+
+	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Test.php');
+	$content = str_replace('TestName', $name, $content);
+
+	$fopen = fopen('tests/' . $name . '.php', 'w+');
+	fwrite($fopen, $content);
+	fclose($fopen);
+
+	echo success("Test '$name' created successfully.");
+	line_break();
+}
+
+
 // Create validations
 if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-validation=') === 0) {
 	$name = str_replace('make-validation=', '', $_SERVER['argv'][1]);
