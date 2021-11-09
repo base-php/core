@@ -3,7 +3,8 @@
 use App\Mails\PasswordRecovery;
 use App\Models\User;
 
-function auth() {
+function auth()
+{
     if (isset($_SESSION['id'])) {
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
