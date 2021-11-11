@@ -59,6 +59,10 @@ if (!isset($_SERVER['argv'][1])) {
 	echo normal('	Create a validation with the given name.');
 	echo line_break();
 
+	echo success('  metrics');
+	echo normal('		Generate a static analysis with PhpMetrics.');
+	echo line_break();
+
 	echo success('  migrate');
 	echo normal('		Migrate all files to database.');
 	echo line_break();
