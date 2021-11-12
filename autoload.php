@@ -30,6 +30,7 @@ include 'redirect.php';
 include 'resources.php';
 include 'request.php';
 include 'rule.php';
+include 'rule.interface.php';
 include 'session.php';
 include 'storage.php';
 include 'translate.php';
