@@ -51,6 +51,10 @@ if (!isset($_SERVER['argv'][1])) {
 	echo normal('		Create a resource file with the given name.');
 	echo line_break();
 
+	echo success('  make-rule');
+	echo normal('		Create a rule file with the given name.');
+	echo line_break();
+
 	echo success('  make-test');
 	echo normal('		Create a test with the given name.');
 	echo line_break();

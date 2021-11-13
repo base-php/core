@@ -210,6 +210,32 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-resource=') 
 }
 
 
+// Create rule
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-rule=') === 0) {
+	$name = str_replace('make-rule=', '', $_SERVER['argv'][1]);
+
+	if ($name == '') {
+		echo danger('You have not specified a name for the rule.');
+		line_break();
+		exit;
+	}
+
+	$content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Rule.php');
+	$content = str_replace('RuleName', $name, $content);
+
+	if (!file_exists('app/Rules')) {
+		mkdir('app/Rules');
+	}
+
+	$fopen = fopen('app/Rules/' . $name . '.php', 'w+');
+	fwrite($fopen, $content);
+	fclose($fopen);
+
+	echo success("Rule '$name' created successfully.");
+	line_break();
+}
+
+
 // Create test
 if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'make-test=') === 0) {
 	$name = str_replace('make-test=', '', $_SERVER['argv'][1]);
