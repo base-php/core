@@ -9,8 +9,8 @@ class Console
 		include 'empty.php';
 		include 'files.php';
 		include 'metrics.php';		
+		include 'migrate.php';
 		include 'server.php';
-		include 'sql.php';
 		include 'tests.php';
 	}
 }

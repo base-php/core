@@ -37,7 +37,7 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'create-database')
 }
 
 
-if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) {
+if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'migrate') === 0) {
 	include 'vendor/nisadelgado/framework/database.php';
 
 	$case = strpos($_SERVER['argv'][1], '=');
@@ -47,7 +47,7 @@ if (isset($_SERVER['argv'][1]) && strpos($_SERVER['argv'][1], 'run-sql') === 0) 
 	$config = include('app/config.php');
 
 	if ($case) {
-		$file = str_replace('run-sql=', '', $_SERVER['argv'][1]);
+		$file = str_replace('migrate=', '', $_SERVER['argv'][1]);
 
 		if ($file == '') {
 			echo danger('You have not specified the name of the file to run.');
