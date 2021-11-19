@@ -44,7 +44,9 @@ function login($user)
     if ($user) {
         $_SESSION['id'] = $user->id;
 
-        return redirect('/dashboard');
+        $redirect = (isset($user['redirect'])) ? $user['redirect'] : '/dashboard';
+
+        return redirect($redirect);
     }
 
     return redirect('/login')->with('error', __('auth.incorrect_data'));

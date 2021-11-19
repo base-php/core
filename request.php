@@ -98,3 +98,12 @@ function request($var = '')
         }
     }
 }
+
+function server($var = '')
+{
+    if ($var == '') {
+        return $_SERVER;
+    }
+
+    return $_SERVER[$var];
+}
