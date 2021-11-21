@@ -44,7 +44,7 @@ function login($user)
     if ($user) {
         $_SESSION['id'] = $user->id;
 
-        $redirect = (isset($user['redirect'])) ? $user['redirect'] : '/dashboard';
+        $redirect = (isset($user['redirect'])) ? $user['redirect'] : config('redirect_login');
 
         return redirect($redirect);
     }
