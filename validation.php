@@ -10,7 +10,9 @@ use Illuminate\Validation\Factory;
 
 class Validation
 {
-    public $connection = 'default';
+    public $connection;
+
+    public $redirect;
 
     public function __construct()
     {
@@ -20,6 +22,8 @@ class Validation
         $loader     = new FileLoader($files, '');
         $translator = new Translator($loader, 'es');
         $factory    = new Factory($translator);
+
+        $this->connection = ($this->connection) ? $this->connection : 'default';
 
         $verifier = new DatabasePresenceVerifier($capsule->getDatabaseManager($this->connection));
 
@@ -32,6 +36,8 @@ class Validation
 
             $_SESSION['flashmessages']['errors'] = $errors;
             $_SESSION['flashmessages']['input']  = request();
+
+            $this->redirect = ($this->redirect) ? $this->redirect : $_SERVER['HTTP_REFERER'];
 
             redirect($_SERVER['HTTP_REFERER']);
             return exit;
