@@ -62,7 +62,7 @@ function storage($adapter = 'local')
     return new Storage($adapter);
 }
 
-function validation($data, $rules, $messages, $connection = 'default')
+function validation($data, $rules, $messages, $redirect)
 {
     include 'database.php';
 
@@ -71,7 +71,7 @@ function validation($data, $rules, $messages, $connection = 'default')
     $translator = new Translator($loader, 'es');
     $factory    = new Validation($translator);
 
-    $verifier = new DatabasePresenceVerifier($capsule->getDatabaseManager($connection));
+    $verifier = new DatabasePresenceVerifier($capsule->getDatabaseManager());
 
     $factory->setPresenceVerifier($verifier);
 
@@ -81,9 +81,11 @@ function validation($data, $rules, $messages, $connection = 'default')
         $errors = $validation->errors()->all();
 
         $_SESSION['flashmessages']['errors'] = $errors;
-        $_SESSION['flashmessages']['input']  = request();
+        $_SESSION['flashmessages']['input']  = $data;
 
-        redirect($_SERVER['HTTP_REFERER']);
+        $redirect = ($redirect) ? $redirect : $_SERVER['HTTP_REFERER'];
+
+        redirect($redirect);
         return exit;
     }
 }

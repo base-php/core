@@ -22,6 +22,7 @@ include 'facebook.php';
 include 'google.php';
 include 'input.php';
 include 'json.php';
+include 'lang.php';
 include 'mail.php';
 include 'pdf.php';
 include 'permissions.php';

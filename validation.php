@@ -10,8 +10,6 @@ use Illuminate\Validation\Factory;
 
 class Validation
 {
-    public $connection;
-
     public $redirect;
 
     public function __construct()
@@ -23,9 +21,7 @@ class Validation
         $translator = new Translator($loader, 'es');
         $factory    = new Factory($translator);
 
-        $this->connection = ($this->connection) ? $this->connection : 'default';
-
-        $verifier = new DatabasePresenceVerifier($capsule->getDatabaseManager($this->connection));
+        $verifier = new DatabasePresenceVerifier($capsule->getDatabaseManager());
 
         $factory->setPresenceVerifier($verifier);
 
@@ -39,7 +35,7 @@ class Validation
 
             $this->redirect = ($this->redirect) ? $this->redirect : $_SERVER['HTTP_REFERER'];
 
-            redirect($_SERVER['HTTP_REFERER']);
+            redirect($this->redirect);
             return exit;
         }
     }

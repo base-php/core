@@ -14,7 +14,7 @@ use Whoops\Run;
 
 class App
 {
-	public static function run()
+    public static function run()
 	{
 		// General settings
 
@@ -33,8 +33,7 @@ class App
 
 		$_ENV['view'] = false;
 
-		language();
-
+		Lang::set();
 
 		date_default_timezone_set($_ENV['timezone']);
 
