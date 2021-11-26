@@ -15,6 +15,10 @@ if (!isset($_SERVER['argv'][1])) {
 	echo warning('Available commands:');
 	echo line_break();
 
+	echo success('  analyse');
+	echo normal('	Run static analysis with phpstan/phpstan.');
+	echo line_break();
+
 	echo success('  make-controller');
 	echo normal('	Create a controller with the given name.');
 	echo line_break();
@@ -61,10 +65,6 @@ if (!isset($_SERVER['argv'][1])) {
 
 	echo success('  make-validation');
 	echo normal('	Create a validation with the given name.');
-	echo line_break();
-
-	echo success('  metrics');
-	echo normal('		Generate a static analysis with PhpMetrics.');
 	echo line_break();
 
 	echo success('  migrate');
