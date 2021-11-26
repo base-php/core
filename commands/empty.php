@@ -16,7 +16,7 @@ if (!isset($_SERVER['argv'][1])) {
 	echo line_break();
 
 	echo success('  analyse');
-	echo normal('	Run static analysis with phpstan/phpstan.');
+	echo normal('		Run static analysis with phpstan/phpstan.');
 	echo line_break();
 
 	echo success('  make-controller');
