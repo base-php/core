@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-class Uppercase implements Rule
+class RuleName implements Rule
 {
     /**
      * Determine if the validation rule passes.
