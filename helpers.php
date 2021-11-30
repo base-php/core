@@ -16,7 +16,7 @@ function email($to, $object)
 function excel($filename, $object = '')
 {
     if ($object != '') {
-        $object->store($filename);
+        $object->save($filename);
     } else {
         $excel = new Excel();
         return $excel->read($filename);

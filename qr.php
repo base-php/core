@@ -10,7 +10,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class QR
 {
-    // endroid/qr-code
+    // endroid/qr-code@4.4.1
     
     public $data;
 
@@ -48,7 +48,7 @@ class QR
 
     public function save($path)
     {
-        return $this->result->saveToFile(__DIR__ . $path);
+        return $this->result->saveToFile($_SERVER['DOCUMENT_ROOT'] . '/' . $path);
     }
 
     public function url()
