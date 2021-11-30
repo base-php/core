@@ -4,9 +4,11 @@ use Symfony\Component\Console\Application;
 
 class Console
 {
-	public static function run()
-	{
-		$application = new Application('Base PHP 1.3.91 by Nisa Delgado');
+    public static function run()
+    {
+        $config = require 'app/config.php';
+
+        $application = new Application('Base PHP ' . $config['version'] . ' by Nisa Delgado');
 
         $application->add(new Analyse());
         $application->add(new MakeController());
@@ -25,6 +27,16 @@ class Console
         $application->add(new Test());
         $application->add(new Server());
 
+        if (file_exists('app/Commands')) {
+            foreach (scandir('app/Commands') as $command) {
+                if (!is_dir($command)) {
+                    $class = 'App\Commands\\' . str_replace('.php', '', $command);
+
+                    $application->add(new $class());
+                }
+            }
+        }
+
         $application->run();
-	}
+    }
 }
