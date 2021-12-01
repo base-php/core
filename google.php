@@ -8,7 +8,7 @@ class Google
     
     public static function init()
     {
-        // google/apiclient
+        // google/apiclient@2.12.0
         
         $class = new static;
 

@@ -30,7 +30,7 @@ function facebook()
 
 function google()
 {
-    return Google::init()->url();
+    return Google::init();
 }
 
 function http()
