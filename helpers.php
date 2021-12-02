@@ -30,7 +30,13 @@ function facebook()
 
 function google()
 {
-    return Google::init();
+    return Google::init()->url();
+}
+
+function info($text)
+{
+    echo "\033[32m$text\033[0m";
+    echo "\n";
 }
 
 function http()

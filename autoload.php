@@ -3,6 +3,7 @@
 include 'app.php';
 include 'assets.php';
 include 'auth.php';
+include 'command.php';
 include 'commands/analyse.php';
 include 'commands/console.php';
 include 'commands/controller.php';
