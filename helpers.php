@@ -25,12 +25,12 @@ function excel($filename, $object = '')
 
 function facebook()
 {
-    return Facebook::init()->url('https://localhost:8080/login/facebook');
+    return Facebook::init();
 }
 
 function google()
 {
-    return Google::init()->url();
+    return Google::init();
 }
 
 function info($text)

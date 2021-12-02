@@ -14,5 +14,4 @@ function lang($key)
     } catch (Exception $e) {
         return $key;
     }
-
 }

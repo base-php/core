@@ -72,8 +72,9 @@ class Facebook
         return $this;
     }
     
-    public function url($callback)
+    public function url()
     {
+        $callback = 'http://' . $_SERVER['HTTP_HOST'] . '/login/facebook';
         echo $this->helper->getLoginUrl($callback, $this->permissions);
     }
 }

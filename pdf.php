@@ -7,7 +7,7 @@ use Dompdf\Options;
 
 class PDF
 {
-    // dompdf/dompdf@1.1.1
+    // dompdf/dompdf
 
     public function download($filename)
     {

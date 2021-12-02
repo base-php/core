@@ -10,7 +10,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class QR
 {
-    // endroid/qr-code@4.4.1
+    // endroid/qr-code
     
     public $data;
 

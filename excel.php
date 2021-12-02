@@ -9,7 +9,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Excel
 {
-	// phpoffice/phpspreadsheet@1.20.0
+	// phpoffice/phpspreadsheet
 	
 	public $spreadsheet;
 	
