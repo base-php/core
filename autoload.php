@@ -5,6 +5,7 @@ include 'assets.php';
 include 'auth.php';
 include 'command.php';
 include 'commands/analyse.php';
+include 'commands/command.php';
 include 'commands/console.php';
 include 'commands/controller.php';
 include 'commands/database.php';
