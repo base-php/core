@@ -1518,7 +1518,7 @@ class Shell extends Application
         try {
             $client = $this->config->getChecker();
             if (!$client->isLatest()) {
-                $this->output->writeln(\sprintf('New version is available (current: %s, latest: %s)', self::VERSION, $client->getLatest()));
+                
             }
         } catch (\InvalidArgumentException $e) {
             $this->output->writeln($e->getMessage());
