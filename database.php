@@ -2,7 +2,9 @@
 
 $capsule = new Illuminate\Database\Capsule\Manager;
 
-foreach ($_ENV['database'] as $item) {
+$config = require 'app/config.php';
+
+foreach ($config['database'] as $item) {
     $driver = ($item['driver'] == 'sqlite') ? $item['driver'] . '.sqlite' : $item['driver'];
 
     $capsule->addConnection([

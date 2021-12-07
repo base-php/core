@@ -27,6 +27,7 @@ class Console
         $application->add(new Migrate());
         $application->add(new Test());
         $application->add(new Server());
+        $application->add(new Shell());
 
         if (file_exists('app/Commands')) {
             foreach (scandir('app/Commands') as $command) {
