@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RoutingServiceProvider;
 use Netflie\Componentes\Componentes;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 
 class App
 {
@@ -43,6 +45,10 @@ class App
 		if ($_ENV['errors'] == false) {
 			error_reporting(0);
 		}
+
+        $whoops = new Run;
+        $whoops->prependHandler(new PrettyPageHandler);
+        $whoops->register();
 
 		// Debugbar
 
