@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RoutingServiceProvider;
 use Netflie\Componentes\Componentes;
-use Spatie\Ignition\Ignition;
 
 class App
 {
@@ -44,8 +43,6 @@ class App
 		if ($_ENV['errors'] == false) {
 			error_reporting(0);
 		}
-
-		Ignition::make()->register();
 
 		// Debugbar
 
