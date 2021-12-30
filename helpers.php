@@ -1,6 +1,7 @@
 <?php
 
 use App\Excel\Excel;
+use Faker\Factory;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Client\Factory as HttpClient;
 use Illuminate\Translation\FileLoader;
@@ -26,6 +27,11 @@ function excel($filename, $object = '')
 function facebook()
 {
     return Facebook::init();
+}
+
+function faker()
+{
+    return Faker\Factory::create();
 }
 
 function google()
