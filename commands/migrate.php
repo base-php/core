@@ -16,6 +16,8 @@ class Migrate extends Command
 
     protected function execute($input, $output)
     {
+        include 'vendor/nisadelgado/framework/database.php';
+
         $file = $input->getArgument('file');
 
         if ($file) {

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -20,6 +21,13 @@ class MakeMigration extends Command
 
         $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Migration.php');
         $content = str_replace('MigrationName', $name, $content);
+
+        $var = Str::singular($name);
+        $var = strtolower($var);
+        $content = str_replace('VarName', $var, $content);
+
+        $model = ucfirst(Str::singular($name));
+        $content = str_replace('ModelName', $model, $content);
 
         if (!file_exists('database')) {
             mkdir('database');
