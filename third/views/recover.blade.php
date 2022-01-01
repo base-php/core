@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        @php
-            echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/node_modules/tailwindcss/dist/tailwind.css');
-        @endphp
-
         body {
             background-color: white;
         }
     </style>
 
+    <script>
+        @php
+            echo file_get_contents('https://cdn.tailwindcss.com');
+        @endphp
+    </script>
 </head>
 <body>
     <h1 class="mb-5">

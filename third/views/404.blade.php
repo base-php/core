@@ -12,8 +12,9 @@
 <link rel="icon" href="{{ asset('img/app/favicon.ico') }}">
 
 <link rel="stylesheet" href="{{ node('@tailwindcss/forms/dist/forms.css') }}">
-<link rel="stylesheet" href="{{ node('tailwindcss/dist/tailwind.css') }}">
 <link rel="stylesheet" href="{{ node('@fortawesome/fontawesome-free/css/all.css') }}">
+
+<script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 <body>
