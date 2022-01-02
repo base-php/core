@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\Auth;
 use App\Mails\PasswordRecovery;
 use App\Models\User;
 
@@ -36,6 +37,8 @@ function forgot()
 
 function login($user)
 {
+    $auth = new Auth();
+
     $user = User::where('email', $user['email'])
         ->where('password', md5($user['password']))
         ->whereNull('oauth')
@@ -44,7 +47,7 @@ function login($user)
     if ($user) {
         $_SESSION['id'] = $user->id;
 
-        $redirect = (isset($user['redirect'])) ? $user['redirect'] : config('redirect_login');
+        $redirect = (isset($user['redirect'])) ? $user['redirect'] : $auth->redirect_login;
 
         return redirect($redirect);
     }
