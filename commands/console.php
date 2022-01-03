@@ -12,6 +12,7 @@ class Console
 
         $application->add(new Analyse());
         $application->add(new ClearCache());
+        $application->add(new Expose());
         $application->add(new MakeCommand());
         $application->add(new MakeController());
         $application->add(new MakeDatabase());
