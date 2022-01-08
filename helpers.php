@@ -4,10 +4,17 @@ use App\Excel\Excel;
 use Faker\Factory;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Client\Factory as HttpClient;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory as Validation;
+
+function arr()
+{
+    return new Arr;
+}
 
 function email($to, $object)
 {
@@ -72,6 +79,11 @@ function qr($data)
 function storage($adapter = 'local')
 {
     return new Storage($adapter);
+}
+
+function str()
+{
+    return new Str;
 }
 
 function validation($data, $rules, $messages, $redirect)
