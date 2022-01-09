@@ -26,12 +26,12 @@ function forgot()
         $user = User::where('email', request('email'))->first();
 
         if (!$user) {
-            return redirect('/forgot-password')->with('error', __('auth.email_not_match'));
+            return redirect('/forgot-password')->with('error', lang('auth.email_not_match'));
         }
 
         email($user->email, new PasswordRecovery($user));
 
-        return redirect('/forgot-password')->with('info', __('auth.check_email'));
+        return redirect('/forgot-password')->with('info', lang('auth.check_email'));
     }
 }
 
@@ -52,7 +52,7 @@ function login($user)
         return redirect($redirect);
     }
 
-    return redirect('/login')->with('error', __('auth.incorrect_data'));
+    return redirect('/login')->with('error', lang('auth.incorrect_data'));
 }
 
 function logout()
@@ -66,7 +66,7 @@ function recover()
         $user = User::where('hash', request('id'))->first();
 
         if (!$user) {
-            return redirect('/login')->with('error', __('auth.link_invalid'));
+            return redirect('/login')->with('error', lang('auth.link_invalid'));
         }
 
         if (request('password') != request('confirm_password')) {
@@ -76,7 +76,7 @@ function recover()
         $user->password = md5(request('password'));
         $user->save();
 
-        return redirect('/login')->with('info', __('auth.password_not_match'));
+        return redirect('/login')->with('info', lang('auth.password_not_match'));
     }
 }
 
@@ -85,11 +85,11 @@ function register($user)
     $email = User::where('email', $user['email'])->get();
 
     if ($email->count() > 0) {
-        return redirect('/register')->with('error', __('auth.email_verified_error'));
+        return redirect('/register')->with('error', lang('auth.email_verified_error'));
     }
 
     if ($user['password'] != $user['confirm_password']) {
-        return redirect('/register')->with('error', __('auth.password_not_match'));
+        return redirect('/register')->with('error', lang('auth.password_not_match'));
     }
 
     $user = User::create([
@@ -102,5 +102,5 @@ function register($user)
 
     $user->update(['hash' => md5($user->id)]);
 
-    return redirect('/login')->with('info', __('auth.register_success'));
+    return redirect('/login')->with('info', lang('auth.register_success'));
 }
