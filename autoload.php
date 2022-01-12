@@ -3,6 +3,7 @@
 include 'app.php';
 include 'assets.php';
 include 'auth.php';
+include 'backup.php';
 include 'command.php';
 include 'commands/analyse.php';
 include 'commands/clear-cache.php';

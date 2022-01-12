@@ -16,6 +16,11 @@ function arr()
     return new Arr;
 }
 
+function backup($connection = '')
+{
+    return new Backup($connection);
+}
+
 function email($to, $object)
 {
     $object->send($to);
