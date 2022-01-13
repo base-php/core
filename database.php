@@ -7,12 +7,12 @@ $root = (php_sapi_name() == 'cli') ? '' : $_SERVER['DOCUMENT_ROOT'] . '/';
 $config = require $root . 'app/config.php';
 
 foreach ($config['database'] as $item) {
-    $driver = ($item['driver'] == 'sqlite') ? $item['driver'] . '.sqlite' : $item['driver'];
+    $database = ($item['driver'] == 'sqlite') ? $item['database'] . '.sqlite' : $item['database'];
 
     $capsule->addConnection([
-        'driver'    => $driver,
+        'driver'    => $item['driver'],
         'host'      => $item['host'],
-        'database'  => $item['database'],
+        'database'  => $database,
         'username'  => $item['username'],
         'password'  => $item['password'],
         'charset'   => 'utf8',
