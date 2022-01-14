@@ -11,6 +11,7 @@ class Console
         $application = new Application('Base PHP ' . $config['version'] . ' by Nisa Delgado');
 
         $application->add(new Analyse());
+        $application->add(new MakeBackup());
         $application->add(new ClearCache());
         $application->add(new Expose());
         $application->add(new MakeCommand());
