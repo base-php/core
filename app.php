@@ -15,109 +15,109 @@ use Whoops\Run;
 class App
 {
     public static function run()
-	{
-		// General settings
+    {
+        // General settings
 
-		session_start();
+        session_start();
 
-		header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Origin: *');
 
 
-		// Config
+        // Config
 
-		$config = require 'app/config.php';
+        $config = require 'app/config.php';
 
-		foreach ($config as $key => $value) {
-			$_ENV[$key] = $value;
+        foreach ($config as $key => $value) {
+            $_ENV[$key] = $value;
 		}
 
-		$_ENV['view'] = false;
+        $_ENV['view'] = false;
 
-		Lang::set();
+        Lang::set();
 
-		date_default_timezone_set($_ENV['timezone']);
+        date_default_timezone_set($_ENV['timezone']);
 
-		include 'database.php';
+        include 'database.php';
 
 
-		// Errors
+        // Errors
 
-		if ($_ENV['errors'] == false) {
-			error_reporting(0);
-		}
+        if ($_ENV['errors'] == false) {
+            error_reporting(0);
+        }
 
         $whoops = new Run;
         $whoops->prependHandler(new PrettyPageHandler);
         $whoops->register();
 
-		// Debugbar
+        // Debugbar
 
-		$debugbar = new StandardDebugBar();
+        $debugbar = new StandardDebugBar();
 
-		$collector = new PDOCollector();
+        $collector = new PDOCollector();
 
-		foreach ($_ENV['database'] as $database) {
-			$pdo[$database['name']] = new TraceablePDO($capsule->getConnection($database['name'])->getPdo());
-			$collector->addConnection($pdo[$database['name']], $database['name']);
-		}
+        foreach ($_ENV['database'] as $database) {
+            $pdo[$database['name']] = new TraceablePDO($capsule->getConnection($database['name'])->getPdo());
+        	$collector->addConnection($pdo[$database['name']], $database['name']);
+        }
 
-		$debugbar->addCollector($collector);
+        $debugbar->addCollector($collector);
 
-		$debugbarRenderer = $debugbar->getJavascriptRenderer();
+        $debugbarRenderer = $debugbar->getJavascriptRenderer();
 
-		$_ENV['debugbar'] = [];
-
-
-		// Container
-
-		$app = new Container;
-		Facade::setFacadeApplication($app);
-		$app['app'] = $app;
-		$app['env'] = 'production';
-		with(new EventServiceProvider($app))->register();
-		with(new RoutingServiceProvider($app))->register();
+        $_ENV['debugbar'] = [];
 
 
-		// Router
+        // Container
 
-		$route = $app['router'];
-		include 'app/routes.php';
-
-		$route->fallback(function () {
-			if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/resources/views/errors/404.blade.php')) {
-				return view('errors/404');
-			} else {
-				$viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views');
-				$componentes = Componentes::create($viewPath);
-
-				$view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/404.blade.php');
-				echo $componentes->render($view, []);
-			}
-		});
-
-		if (file_exists('app/helpers.php')) {
-			include 'app/helpers.php';
-		}
+        $app = new Container;
+        Facade::setFacadeApplication($app);
+        $app['app'] = $app;
+        $app['env'] = 'production';
+        with(new EventServiceProvider($app))->register();
+        with(new RoutingServiceProvider($app))->register();
 
 
-		// Response
+        // Router
 
-		$request  = Request::createFromGlobals();
-		$response = $app['router']->dispatch($request);
-		$response->send();
+        $route = $app['router'];
+        include 'app/routes.php';
 
-		unset($_SESSION['user']);
+        $route->fallback(function () {
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/resources/views/errors/404.blade.php')) {
+                return view('errors/404');
+            } else {
+                $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views');
+                $componentes = Componentes::create($viewPath);
 
-		if ($_ENV['view'] && $_ENV['errors']) {
-			foreach ($_ENV['debugbar'] as $item) {
-				$debugbar["messages"]->addMessage($item);
-			}
+                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/404.blade.php');
+                echo $componentes->render($view, []);
+            }
+        });
 
-			echo $debugbarRenderer->renderHead();
+        if (file_exists('app/helpers.php')) {
+            include 'app/helpers.php';
+        }
 
-			$render = $debugbarRenderer->render();
 
-			echo $render;
-		}
-	}
+        // Response
+
+        $request  = Request::createFromGlobals();
+        $response = $app['router']->dispatch($request);
+        $response->send();
+
+        unset($_SESSION['user']);
+
+        if ($_ENV['view'] && $_ENV['errors']) {
+            foreach ($_ENV['debugbar'] as $item) {
+                $debugbar["messages"]->addMessage($item);
+            }
+
+            echo $debugbarRenderer->renderHead();
+
+            $render = $debugbarRenderer->render();
+
+            echo $render;
+        }
+    }
 }

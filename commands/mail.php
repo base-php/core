@@ -22,7 +22,7 @@ class MakeMail extends Command
         $content = str_replace('MailName', $name, $content);
 
         if (!file_exists('app/Mails')) {
-            mkdir('app/Mails');
+        	mkdir('app/Mails');
         }
 
         $fopen = fopen('app/Mails/' . $name . '.php', 'w+');
