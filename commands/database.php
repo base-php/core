@@ -38,9 +38,16 @@ class MakeDatabase extends Command
             if ($driver == 'sqlite') {
                 $fopen = fopen($database, 'w+');
                 fclose($fopen);
-            } else {
+            }
+
+            if ($driver == 'mysql') {
                 $pdo = new PDO("$driver:host=$host;", $username, $password);
                 $pdo->exec('CREATE DATABASE IF NOT EXISTS ' . $database);
+            }
+
+            if ($driver == 'pgsql') {
+                $pdo = new PDO("$driver:host=$host;", $username, $password);
+                $pdo->exec('CREATE DATABASE ' . $database);
             }
 
             $text = "<info>Database '$database' created successfully.</info>";
