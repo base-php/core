@@ -4,14 +4,13 @@ class Redirect
 {
     public $to;
 
-    public function __construct()
-    {
-
-    }
-
     public function __toString()
     {
-        return '';
+        return "
+            <script>
+                window.location.href = '$this->to';
+            </script>
+        ";
     }
 
     public function redirect($to)
@@ -28,12 +27,6 @@ class Redirect
 
     public function __destruct()
     {
-        echo "
-            <script>
-                window.location.href = '$this->to';
-            </script>
-        ";
-
         return $this;
     }
 }
