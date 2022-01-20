@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RoutingServiceProvider;
 use Netflie\Componentes\Componentes;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
+use Spatie\Ignition\Ignition;
 
 class App
 {
@@ -29,7 +28,7 @@ class App
 
         foreach ($config as $key => $value) {
             $_ENV[$key] = $value;
-		}
+        }
 
         $_ENV['view'] = false;
 
@@ -37,20 +36,9 @@ class App
 
         date_default_timezone_set($_ENV['timezone']);
 
-        include 'database.php';
-
-
-        // Errors
-
-        if ($_ENV['errors'] == false) {
-            error_reporting(0);
-        }
-
-        $whoops = new Run;
-        $whoops->prependHandler(new PrettyPageHandler);
-        $whoops->register();
-
         // Debugbar
+
+        include 'database.php';
 
         $debugbar = new StandardDebugBar();
 
@@ -58,7 +46,7 @@ class App
 
         foreach ($_ENV['database'] as $database) {
             $pdo[$database['name']] = new TraceablePDO($capsule->getConnection($database['name'])->getPdo());
-        	$collector->addConnection($pdo[$database['name']], $database['name']);
+            $collector->addConnection($pdo[$database['name']], $database['name']);
         }
 
         $debugbar->addCollector($collector);
@@ -66,6 +54,15 @@ class App
         $debugbarRenderer = $debugbar->getJavascriptRenderer();
 
         $_ENV['debugbar'] = [];
+
+
+        // Errors
+
+        if ($_ENV['errors'] == false) {
+            error_reporting(0);
+        } else {
+            Ignition::make()->register();
+        }
 
 
         // Container

@@ -262,7 +262,9 @@ class ComponentTagCompiler
             return $class;
         }
 
-        if (class_exists($class = $this->guessClassName($component))) {
+        $class = $this->guessClassName($component) ? $this->guessClassName($component) : '';
+
+        if (class_exists($class)) {
             return $class;
         }
 

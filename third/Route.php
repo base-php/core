@@ -748,6 +748,7 @@ class Route
     {
         $this->updatePrefixOnAction($prefix);
 
+        $prefix = ($prefix) ? $prefix : '';
         $uri = rtrim($prefix, '/').'/'.ltrim($this->uri, '/');
 
         return $this->setUri($uri !== '/' ? trim($uri, '/') : $uri);
@@ -761,6 +762,7 @@ class Route
      */
     protected function updatePrefixOnAction($prefix)
     {
+        $prefix = ($prefix) ? $prefix : '';
         if (! empty($newPrefix = trim(rtrim($prefix, '/').'/'.ltrim($this->action['prefix'] ?? '', '/'), '/'))) {
             $this->action['prefix'] = $newPrefix;
         }
