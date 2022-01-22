@@ -325,15 +325,17 @@ class Router implements BindingRegistrar, RegistrarContract
      */
     public function resource($name, $controller, array $options = [])
     {
-        if ($this->container && $this->container->bound(ResourceRegistrar::class)) {
-            $registrar = $this->container->make(ResourceRegistrar::class);
-        } else {
-            $registrar = new ResourceRegistrar($this);
-        }
+        $this->get('/' . $name, $controller . '@index');
 
-        return new PendingResourceRegistration(
-            $registrar, $name, $controller, $options
-        );
+        $this->get('/' . $name . '/show/{id}', $controller . '@show');
+
+        $this->get('/' . $name . '/create', $controller . '@create');
+        $this->post('/' . $name . '/store', $controller . '@store');
+
+        $this->get('/' . $name . '/edit/{id}', $controller . '@edit');
+        $this->post('/' . $name . '/update', $controller . '@update');
+
+        $this->get('/' . $name . '/delete/{id}', $controller . '@delete');
     }
 
     /**
