@@ -165,4 +165,13 @@ class Storage
 
         return $this;
     }
+
+    function download($file, $name = '')
+    {
+        $file = $_SERVER['DOCUMENT_ROOT'] . '/' . $file;
+        header('Content-Type: application/octet-stream');
+        header('Content-Transfer-Encoding: Binary');
+        header('Content-disposition: attachment; filename="' . $file . '"');
+        readfile($file);
+    }
 }
