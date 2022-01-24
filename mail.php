@@ -7,9 +7,9 @@ use PHPMailer\PHPMailer\SMTP;
 
 class Mail
 {
-	public function send($to)
-	{
-		$mail = new PHPMailer();
+    public function send($to)
+    {
+        $mail = new PHPMailer();
 
         if ($_SERVER['REMOTE_ADDR'] == '::1') {
             $mail->SMTPDebug    = SMTP::DEBUG_SERVER;
@@ -52,5 +52,5 @@ class Mail
         }
 
         $mail->send();
-	}
+    }
 }
