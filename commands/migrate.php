@@ -20,16 +20,14 @@ class Migrate extends Command
 
         $file = $input->getArgument('file');
 
-        $text = '';
-
         if ($file) {
             if (file_exists('database/' . $file)) {
                 $schema = $capsule->schema();
                 include 'database/' . $file;
-                $text .= "<info>$file is ok.</info>";
+                $output->writeln("<info>$file is ok.</info>");
 
             } else {
-                $text .= "<error>The file '$file' does not exist.</error>";
+                $output->writeln("<error>The file '$file' does not exist.</error>");
             }
 
         } else {
@@ -39,12 +37,10 @@ class Migrate extends Command
                 if (!is_dir($item)) {
                     $schema = $capsule->schema();
                     include 'database/' . $item;
-                    $text .= "<info>$item is ok.</info>";
+                    $output->writeln("<info>$item is ok.</info>");
                 }
             }
         }
-
-        $output->write($text);
 
         return Command::SUCCESS;
     }
