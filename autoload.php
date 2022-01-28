@@ -38,6 +38,8 @@ include 'third/LengthAwarePaginator.php';
 include 'third/Builder.php';
 include 'third/Shell.php';
 include 'third/JavascriptRenderer.php';
+include 'third/DebugBar.php';
+include 'third/TracedStatement.php';
 include 'config.php';
 include 'db.php';
 include 'debug.php';
