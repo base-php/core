@@ -111,14 +111,9 @@ class Storage
         return $this;
     }
     
-    public function delete($path)
-    {
-        $this->instance->delete($path);
-    }
-    
     public function get($get)
     {
-        return $this->instance->readStream($get);
+        return $this->instance->readStream($_SERVER['DOCUMENT_ROOT'] . '/' . $get);
     }
     
     public function save($path, $filename = '')
@@ -131,14 +126,16 @@ class Storage
                     $i = 0;
 
                     foreach ($_FILES[$this->content]['name'] as $item) {
-                        $stream = fopen($_FILES[$this->content]['tmp_name'][$i], 'r');
+                        if ($_FILES[$this->content]['tmp_name'][$i][0] != '') {
+                            $stream = fopen($_FILES[$this->content]['tmp_name'][$i][0], 'r');
 
-                        $this->instance->writeStream($path . '/' . $_FILES[$this->content]['name'][$i], $stream);
+                            $this->instance->writeStream($path . '/' . $_FILES[$this->content]['name'][$i][0], $stream);
 
-                        $this->filename[] = $_FILES[$this->content]['name'][$i];
-                        $this->success = true;
+                            $this->filename[] = $_FILES[$this->content]['name'][$i][0];
+                            $this->success = true;
 
-                        $i = $i + 1;
+                            $i = $i + 1;
+                        }
                     }
 
                 } else {
@@ -173,5 +170,10 @@ class Storage
         header('Content-Transfer-Encoding: Binary');
         header('Content-disposition: attachment; filename="' . $file . '"');
         readfile($file);
+    }
+
+    public function delete($path)
+    {
+        $this->instance->delete($_SERVER['DOCUMENT_ROOT'] . '/' . $path);
     }
 }
