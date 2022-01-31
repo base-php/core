@@ -4,19 +4,13 @@ class Redirect
 {
     public $to;
 
-    public function __toString()
+    public function redirect()
     {
-        return "
+        echo "
             <script>
                 window.location.href = '$this->to';
             </script>
         ";
-    }
-
-    public function redirect($to)
-    {
-        $this->to = $to;
-        return $this;
     }
 
     public function with($key, $value)

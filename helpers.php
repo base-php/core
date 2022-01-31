@@ -66,7 +66,7 @@ function redirect($to)
 {
     $redirect = new Redirect;
     $redirect->to = $to;
-    return $redirect;
+    return $redirect->redirect();
 }
 
 function pdf($object)
