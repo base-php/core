@@ -86,11 +86,6 @@ function storage($adapter = 'local')
     return new Storage($adapter);
 }
 
-function str()
-{
-    return new Str;
-}
-
 function validation($data, $rules, $messages, $redirect)
 {
     include 'database.php';
