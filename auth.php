@@ -4,20 +4,30 @@ use App\Controllers\Auth;
 use App\Mails\PasswordRecovery;
 use App\Models\User;
 
-function auth()
+function auth($id = '')
 {
-    if (isset($_SESSION['id'])) {
-        if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
-        } else {
-            $user = User::find($_SESSION['id']);
-            $_SESSION['user'] = $user;
-        }
+    if ($id != '') {
+        $user = User::find($id);
 
-        return $user;
+        if ($user) {
+            $_SESSION['id'] = $user->id;
+        }
     }
 
-    return false;
+    if ($id == '') {
+        if (isset($_SESSION['id'])) {
+            if (isset($_SESSION['user'])) {
+                $user = $_SESSION['user'];
+            } else {
+                $user = User::find($_SESSION['id']);
+                $_SESSION['user'] = $user;
+            }
+
+            return $user;
+        }
+
+        return false;
+    }
 }
 
 function forgot()
