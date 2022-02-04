@@ -1,11 +1,11 @@
 <?php
 
 use App\Excel\Excel;
-use Faker\Factory;
+use Carbon\Carbon;
+use Faker\Factory as Faker;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Client\Factory as HttpClient;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
@@ -19,6 +19,11 @@ function arr()
 function backup($connection = '')
 {
     return new Backup($connection);
+}
+
+function carbon()
+{
+    return new Carbon;
 }
 
 function email($to, $object)
@@ -43,7 +48,7 @@ function facebook()
 
 function faker()
 {
-    return Faker\Factory::create();
+    return Faker::create();
 }
 
 function google()
@@ -92,7 +97,7 @@ function validation($data, $rules, $messages, $redirect)
 
     $files      = new Filesystem();
     $loader     = new FileLoader($files, '');
-    $translator = new Translator($loader, 'es');
+    $translator = new Translator($loader, $_ENV['language']);
     $factory    = new Validation($translator);
 
     $verifier = new DatabasePresenceVerifier($capsule->getDatabaseManager());

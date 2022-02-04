@@ -18,7 +18,6 @@ class Mail
             $mail->SMTPAuth     = true;
             $mail->Username     = config('smtp')->username;
             $mail->Password     = config('smtp')->password;
-            $mail->SMTPSecure   = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port         = config('smtp')->port;    
         }
 
