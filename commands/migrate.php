@@ -18,11 +18,17 @@ class Migrate extends Command
     {
         include 'vendor/nisadelgado/framework/database.php';
 
+        $config = include 'app/config.php';
+
+        foreach ($config['database'] as $item) {
+            $name = $item['name'];
+            $schema[$name] = $capsule->getConnection($name)->getSchemaBuilder();
+        }
+
         $file = $input->getArgument('file');
 
         if ($file) {
             if (file_exists('database/' . $file)) {
-                $schema = $capsule->schema();
                 include 'database/' . $file;
                 $output->writeln("<info>$file is ok.</info>");
 
@@ -35,7 +41,6 @@ class Migrate extends Command
 
             foreach ($scandir as $item) {
                 if (!is_dir($item)) {
-                    $schema = $capsule->schema();
                     include 'database/' . $item;
                     $output->writeln("<info>$item is ok.</info>");
                 }
