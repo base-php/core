@@ -50,7 +50,7 @@ function login($user)
     $auth = new Auth();
 
     $user = User::where('email', $user['email'])
-        ->where('password', md5($user['password']))
+        ->where('password', encrypt($user['password']))
         ->whereNull('oauth')
         ->first();
 
@@ -83,7 +83,7 @@ function recover()
             return redirect('/recover/' . request('id'))->with('error', 'Las contraseñas no coinciden.');
         }
 
-        $user->password = md5(request('password'));
+        $user->password = encrypt(request('password'));
         $user->save();
 
         return redirect('/login')->with('info', lang('auth.password_not_match'));
@@ -105,12 +105,12 @@ function register($user)
     $user = User::create([
         'name'          => $user['name'],
         'email'         => $user['email'],
-        'password'      => md5($user['password']),
+        'password'      => encrypt($user['password']),
         'date_create'   => date('Y-m-d H:i:s'),
         'date_update'   => date('Y-m-d H:i:s')
     ]);
 
-    $user->update(['hash' => md5($user->id)]);
+    $user->update(['hash' => encrypt($user->id)]);
 
     return redirect('/login')->with('info', lang('auth.register_success'));
 }

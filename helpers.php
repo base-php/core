@@ -31,6 +31,11 @@ function email($to, $object)
     $object->send($to);
 }
 
+function encrypt($text)
+{
+    return md5($text);
+}
+
 function excel($filename, $object = '')
 {
     if ($object != '') {

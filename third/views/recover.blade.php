@@ -23,7 +23,7 @@
     <p>{{ lang('auth.text') }}</p>
 
     <p>
-        <a class="btn btn-primary" href="{{ host() }}/recover/{{ md5($user->id) }}">{{ lang('auth.email_recover_password') }}</a>
+        <a class="btn btn-primary" href="{{ host() }}/recover/{{ encrypt($user->id) }}">{{ lang('auth.email_recover_password') }}</a>
     </p>
 
     <p>{{ lang('auth.email_warning') }}</p>
@@ -32,7 +32,7 @@
 
     <hr class="mb-5">
 
-    <p>{{ lang('auth.email_footer') }}: <a href="http:{{ host() }}/recover/{{ md5($user->id) }}">http:{{ host() }}/recover/{{ md5($user->id) }}</a></p>
+    <p>{{ lang('auth.email_footer') }}: <a href="http:{{ host() }}/recover/{{ encrypt($user->id) }}">http:{{ host() }}/recover/{{ encrypt($user->id) }}</a></p>
 
     <script src="{{ node('jquery/dist/jquery.js') }}"></script>
     <script src="{{ node('bootstrap/dist/js/bootstrap.js') }}"></script>
