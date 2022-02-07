@@ -36,25 +36,6 @@ class App
 
         date_default_timezone_set($_ENV['timezone']);
 
-        // Debugbar
-
-        include 'database.php';
-
-        $debugbar = new StandardDebugBar();
-
-        $collector = new PDOCollector();
-
-        foreach ($_ENV['database'] as $database) {
-            $pdo[$database['name']] = new TraceablePDO($capsule->getConnection($database['name'])->getPdo());
-            $collector->addConnection($pdo[$database['name']], $database['name']);
-        }
-
-        $debugbar->addCollector($collector);
-
-        $debugbarRenderer = $debugbar->getJavascriptRenderer();
-
-        $_ENV['debugbar'] = [];
-
 
         // Errors
 
@@ -104,17 +85,5 @@ class App
         $response->send();
 
         unset($_SESSION['user']);
-
-        if ($_ENV['view'] && $_ENV['errors']) {
-            foreach ($_ENV['debugbar'] as $item) {
-                $debugbar["messages"]->addMessage($item);
-            }
-
-            echo $debugbarRenderer->renderHead();
-
-            $render = $debugbarRenderer->render();
-
-            echo $render;
-        }
     }
 }
