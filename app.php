@@ -36,6 +36,8 @@ class App
 
         date_default_timezone_set($_ENV['timezone']);
 
+        include 'database.php';
+
 
         // Errors
 
