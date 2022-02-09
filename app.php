@@ -1,8 +1,5 @@
 <?php
 
-use DebugBar\DataCollector\PDO\PDOCollector;
-use DebugBar\DataCollector\PDO\TraceablePDO;
-use DebugBar\StandardDebugBar;
 use Illuminate\Container\Container;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Support\Facades\Facade;

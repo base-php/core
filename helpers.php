@@ -67,6 +67,7 @@ function info($text)
     echo "\n";
 }
 
+// guzzlehttp/guzzle
 function http()
 {
     return new HttpClient;
