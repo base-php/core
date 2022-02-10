@@ -76,8 +76,7 @@ function http()
 function redirect($to)
 {
     $redirect = new Redirect;
-    $redirect->to = $to;
-    return $redirect->redirect();
+    return $redirect->redirect($to);
 }
 
 function pdf($object)

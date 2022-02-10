@@ -4,13 +4,10 @@ class Redirect
 {
     public $to;
 
-    public function redirect()
+    public function redirect($to)
     {
-        echo "
-            <script>
-                window.location.href = '$this->to';
-            </script>
-        ";
+        $this->to = $to;
+        return $this;
     }
 
     public function with($key, $value)
@@ -21,6 +18,12 @@ class Redirect
 
     public function __destruct()
     {
+        echo "
+            <script>
+                window.location.href = '$this->to';
+            </script>
+        ";
+
         return $this;
     }
 }
