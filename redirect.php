@@ -4,6 +4,11 @@ class Redirect
 {
     public $to;
 
+    public function __toString()
+    {
+        return '';
+    }
+
     public function redirect($to)
     {
         $this->to = $to;

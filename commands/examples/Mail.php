@@ -2,6 +2,8 @@
 
 namespace App\Mails;
 
+use View;
+
 class MailName extends Mail
 {
     /**

@@ -18,6 +18,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 use Illuminate\Support\Traits\Macroable;
 use JsonSerializable;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
@@ -33,13 +34,6 @@ class Router implements BindingRegistrar, RegistrarContract
     use Macroable {
         __call as macroCall;
     }
-
-    /**
-     * The namespace from controllers
-     *
-     * @var string
-     */
-    protected $namespace = 'App\Controllers\\';
 
     /**
      * The event dispatcher instance.
@@ -325,17 +319,15 @@ class Router implements BindingRegistrar, RegistrarContract
      */
     public function resource($name, $controller, array $options = [])
     {
-        $this->get('/' . $name, $controller . '@index');
+        if ($this->container && $this->container->bound(ResourceRegistrar::class)) {
+            $registrar = $this->container->make(ResourceRegistrar::class);
+        } else {
+            $registrar = new ResourceRegistrar($this);
+        }
 
-        $this->get('/' . $name . '/show/{id}', $controller . '@show');
-
-        $this->get('/' . $name . '/create', $controller . '@create');
-        $this->post('/' . $name . '/store', $controller . '@store');
-
-        $this->get('/' . $name . '/edit/{id}', $controller . '@edit');
-        $this->post('/' . $name . '/update', $controller . '@update');
-
-        $this->get('/' . $name . '/delete/{id}', $controller . '@delete');
+        return new PendingResourceRegistration(
+            $registrar, $name, $controller, $options
+        );
     }
 
     /**
@@ -477,7 +469,7 @@ class Router implements BindingRegistrar, RegistrarContract
         // an acceptable array format before registering it and creating this route
         // instance itself. We need to build the Closure that will call this out.
         if ($this->actionReferencesController($action)) {
-            $action = $this->convertToControllerAction($this->namespace . $action);
+            $action = $this->convertToControllerAction($action);
         }
 
         $route = $this->newRoute(
@@ -523,10 +515,11 @@ class Router implements BindingRegistrar, RegistrarContract
             $action = ['uses' => $action];
         }
 
-        // Here we'll merge any group "uses" statement if necessary so that the action
-        // has the proper clause for this property. Then we can simply set the name
-        // of the controller on the action and return the action array for usage.
+        // Here we'll merge any group "controller" and "uses" statements if necessary so that
+        // the action has the proper clause for this property. Then, we can simply set the
+        // name of this controller on the action plus return the action array for usage.
         if ($this->hasGroupStack()) {
+            $action['uses'] = $this->prependGroupController($action['uses']);
             $action['uses'] = $this->prependGroupNamespace($action['uses']);
         }
 
@@ -548,8 +541,33 @@ class Router implements BindingRegistrar, RegistrarContract
     {
         $group = end($this->groupStack);
 
-        return isset($group['namespace']) && strpos($class, '\\') !== 0
+        return isset($group['namespace']) && ! str_starts_with($class, '\\')
                 ? $group['namespace'].'\\'.$class : $class;
+    }
+
+    /**
+     * Prepend the last group controller onto the use clause.
+     *
+     * @param  string  $class
+     * @return string
+     */
+    protected function prependGroupController($class)
+    {
+        $group = end($this->groupStack);
+
+        if (! isset($group['controller'])) {
+            return $class;
+        }
+
+        if (class_exists($class)) {
+            return $class;
+        }
+
+        if (str_contains($class, '@')) {
+            return $class;
+        }
+
+        return $group['controller'].'@'.$class;
     }
 
     /**
@@ -654,6 +672,8 @@ class Router implements BindingRegistrar, RegistrarContract
     {
         $this->current = $route = $this->routes->match($request);
 
+        $route->setContainer($this->container);
+
         $this->container->instance(Route::class, $route);
 
         return $route;
@@ -711,16 +731,34 @@ class Router implements BindingRegistrar, RegistrarContract
      */
     public function gatherRouteMiddleware(Route $route)
     {
-        $excluded = collect($route->excludedMiddleware())->map(function ($name) {
+        return $this->resolveMiddleware($route->gatherMiddleware(), $route->excludedMiddleware());
+    }
+
+    /**
+     * Resolve a flat array of middleware classes from the provided array.
+     *
+     * @param  array  $middleware
+     * @param  array  $excluded
+     * @return array
+     */
+    public function resolveMiddleware(array $middleware, array $excluded = [])
+    {
+        $excluded = collect($excluded)->map(function ($name) {
             return (array) MiddlewareNameResolver::resolve($name, $this->middleware, $this->middlewareGroups);
         })->flatten()->values()->all();
 
-        $middleware = collect($route->gatherMiddleware())->map(function ($name) {
+        $middleware = collect($middleware)->map(function ($name) {
             return (array) MiddlewareNameResolver::resolve($name, $this->middleware, $this->middlewareGroups);
         })->flatten()->reject(function ($name) use ($excluded) {
             if (empty($excluded)) {
                 return false;
-            } elseif (in_array($name, $excluded, true)) {
+            }
+
+            if ($name instanceof Closure) {
+                return false;
+            }
+
+            if (in_array($name, $excluded, true)) {
                 return true;
             }
 
@@ -778,11 +816,14 @@ class Router implements BindingRegistrar, RegistrarContract
             $response = (new HttpFoundationFactory)->createResponse($response);
         } elseif ($response instanceof Model && $response->wasRecentlyCreated) {
             $response = new JsonResponse($response, 201);
+        } elseif ($response instanceof Stringable) {
+            $response = new Response($response->__toString(), 200, ['Content-Type' => 'text/html']);
         } elseif (! $response instanceof SymfonyResponse &&
                    ($response instanceof Arrayable ||
                     $response instanceof Jsonable ||
                     $response instanceof ArrayObject ||
                     $response instanceof JsonSerializable ||
+                    $response instanceof \stdClass ||
                     is_array($response))) {
             $response = new JsonResponse($response);
         } elseif (! $response instanceof SymfonyResponse) {
@@ -803,6 +844,7 @@ class Router implements BindingRegistrar, RegistrarContract
      * @return \Illuminate\Routing\Route
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @throws \Illuminate\Routing\Exceptions\BackedEnumCaseNotFoundException
      */
     public function substituteBindings($route)
     {
@@ -816,12 +858,13 @@ class Router implements BindingRegistrar, RegistrarContract
     }
 
     /**
-     * Substitute the implicit Eloquent model bindings for the route.
+     * Substitute the implicit route bindings for the given route.
      *
      * @param  \Illuminate\Routing\Route  $route
      * @return void
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @throws \Illuminate\Routing\Exceptions\BackedEnumCaseNotFoundException
      */
     public function substituteImplicitBindings($route)
     {
@@ -949,6 +992,18 @@ class Router implements BindingRegistrar, RegistrarContract
         if (! in_array($middleware, $this->middlewareGroups[$group])) {
             $this->middlewareGroups[$group][] = $middleware;
         }
+
+        return $this;
+    }
+
+    /**
+     * Flush the router's middleware groups.
+     *
+     * @return $this
+     */
+    public function flushMiddlewareGroups()
+    {
+        $this->middlewareGroups = [];
 
         return $this;
     }
@@ -1182,26 +1237,6 @@ class Router implements BindingRegistrar, RegistrarContract
     }
 
     /**
-     * Register the typical authentication routes for an application.
-     *
-     * @return void
-     */
-    public function auth()
-    {
-        $this->get('/register', 'Auth@register');
-        $this->post('/register', 'Auth@register');
-        $this->get('/login', 'Auth@index');
-        $this->post('/login', 'Auth@login');
-        $this->get('/login/facebook', 'Auth@facebook');
-        $this->get('/login/google', 'Auth@google');
-        $this->get('/logout', 'Auth@logout');
-        $this->get('/forgot-password', 'Auth@forgot_password');
-        $this->post('/forgot-password', 'Auth@forgot_password');
-        $this->get('/recover/{id}', 'Auth@recover');
-        $this->post('/recover/{id}', 'Auth@recover');
-    }
-
-    /**
      * Set the unmapped global resource parameters to singular.
      *
      * @param  bool  $singular
@@ -1300,6 +1335,19 @@ class Router implements BindingRegistrar, RegistrarContract
     }
 
     /**
+     * Set the container instance used by the router.
+     *
+     * @param  \Illuminate\Container\Container  $container
+     * @return $this
+     */
+    public function setContainer(Container $container)
+    {
+        $this->container = $container;
+
+        return $this;
+    }
+
+    /**
      * Dynamically handle calls into the router instance.
      *
      * @param  string  $method
@@ -1316,8 +1364,21 @@ class Router implements BindingRegistrar, RegistrarContract
             return (new RouteRegistrar($this))->attribute($method, is_array($parameters[0]) ? $parameters[0] : $parameters);
         }
 
-        if (isset($parameters[0])) {
-            return (new RouteRegistrar($this))->attribute($method, $parameters[0]);
-        }
+        return (new RouteRegistrar($this))->attribute($method, array_key_exists(0, $parameters) ? $parameters[0] : true);
+    }
+
+    public function auth()
+    {
+        $this->get('/register', [\Auth::class, 'register']);
+        $this->post('/register', [\Auth::class, 'register']);
+        $this->get('/login', [\Auth::class, 'index']);
+        $this->post('/login', [\Auth::class, 'login']);
+        $this->get('/login/facebook', [\Auth::class, 'facebook']);
+        $this->get('/login/google', [\Auth::class, 'google']);
+        $this->get('/logout', [\Auth::class, 'logout']);
+        $this->get('/forgot-password', [\Auth::class, 'forgot_password']);
+        $this->post('/forgot-password', [\Auth::class, 'forgot_password']);
+        $this->get('/recover/{id}', [\Auth::class, 'recover']);
+        $this->post('/recover/{id}', [\Auth::class, 'recover']);
     }
 }

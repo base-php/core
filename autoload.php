@@ -41,7 +41,6 @@ include 'date.php';
 include 'excel.php';
 include 'facebook.php';
 include 'google.php';
-include 'input.php';
 include 'json.php';
 include 'lang.php';
 include 'mail.php';

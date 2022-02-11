@@ -40,12 +40,6 @@ class QR
         return $this;
     }
 
-    public function output()
-    {
-        header('Content-Type: ' . $this->result->getMimeType());
-        echo $this->result->getString();
-    }
-
     public function save($path)
     {
         return $this->result->saveToFile($_SERVER['DOCUMENT_ROOT'] . '/' . $path);
