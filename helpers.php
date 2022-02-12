@@ -115,7 +115,7 @@ function validation($data, $rules, $messages, $redirect)
         $errors = $validation->errors()->all();
 
         $_SESSION['flashmessages']['errors'] = $errors;
-        $_SESSION['flashmessages']['input']  = $data;
+        $_SESSION['flashmessages']['inputs']  = $data;
 
         $redirect = ($redirect) ? $redirect : $_SERVER['HTTP_REFERER'];
 

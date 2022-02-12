@@ -31,7 +31,7 @@ class Validation
             $errors = $validation->errors()->all();
 
             $_SESSION['flashmessages']['errors'] = $errors;
-            $_SESSION['flashmessages']['input']  = request();
+            $_SESSION['flashmessages']['inputs']  = request();
 
             $this->redirect = ($this->redirect) ? $this->redirect : $_SERVER['HTTP_REFERER'];
 

@@ -42,8 +42,7 @@ function host()
 function message($data)
 {
     if (isset($_SESSION['flashmessages'][$data])) {
-        echo $_SESSION['flashmessages'][$data];
-        unset($_SESSION['flashmessages']);
+        return $_SESSION['flashmessages'][$data];
     }
 }
 
@@ -59,8 +58,7 @@ function messages($data)
 function old($input)
 {
     if (isset($_SESSION['flashmessages']['inputs'][$input])) {
-        echo $_SESSION['flashmessages']['inputs'][$input];
-        unset($_SESSION['flashmessages']['inputs'][$input]);
+        return $_SESSION['flashmessages']['inputs'][$input];
     } else {
         return null;
     }

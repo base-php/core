@@ -84,5 +84,6 @@ class App
         $response->send();
 
         unset($_SESSION['user']);
+        unset($_SESSION['flashmessages']);
     }
 }
