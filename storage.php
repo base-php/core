@@ -163,12 +163,14 @@ class Storage
         return $this;
     }
 
-    function download($file, $name = '')
+    public static function download($file, $name = '')
     {
+        $filename = ($name != '') ? $name : $file;
         $file = $_SERVER['DOCUMENT_ROOT'] . '/' . $file;
+
         header('Content-Type: application/octet-stream');
         header('Content-Transfer-Encoding: Binary');
-        header('Content-disposition: attachment; filename="' . $file . '"');
+        header('Content-disposition: attachment; filename="' . $filename . '"');
         readfile($file);
     }
 
