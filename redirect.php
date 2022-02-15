@@ -6,7 +6,7 @@ class Redirect
 
     public function __toString()
     {
-        return '';
+        $this->__destruct();
     }
 
     public function redirect($to)
