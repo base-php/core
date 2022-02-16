@@ -2,17 +2,16 @@
 
 namespace Illuminate\Pagination;
 
-use Countable;
 use ArrayAccess;
-use JsonSerializable;
-use IteratorAggregate;
-use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
-use Illuminate\Contracts\Support\Jsonable;
-use Illuminate\Contracts\Support\Arrayable;
+use Countable;
 use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Support\Collection;
+use IteratorAggregate;
+use JsonSerializable;
 
-class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Countable, IteratorAggregate, JsonSerializable, Jsonable, PaginatorContract
+class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Countable, IteratorAggregate, Jsonable, JsonSerializable, PaginatorContract
 {
     /**
      * Determine if there are more items in the data source.
@@ -27,18 +26,20 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
      * @param  mixed  $items
      * @param  int  $perPage
      * @param  int|null  $currentPage
-     * @param  array  $options (path, query, fragment, pageName)
+     * @param  array  $options  (path, query, fragment, pageName)
      * @return void
      */
     public function __construct($items, $perPage, $currentPage = null, array $options = [])
     {
+        $this->options = $options;
+
         foreach ($options as $key => $value) {
             $this->{$key} = $value;
         }
 
         $this->perPage = $perPage;
         $this->currentPage = $this->setCurrentPage($currentPage);
-        $this->path = $this->path != '/' ? rtrim($this->path, '/') : $this->path;
+        $this->path = $this->path !== '/' ? rtrim($this->path, '/') : $this->path;
 
         $this->setItems($items);
     }
@@ -66,7 +67,7 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
     {
         $this->items = $items instanceof Collection ? $items : Collection::make($items);
 
-        $this->hasMore = count($this->items) > ($this->perPage);
+        $this->hasMore = $this->items->count() > $this->perPage;
 
         $this->items = $this->items->slice(0, $this->perPage);
     }
@@ -105,18 +106,18 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
     public function render($view = null, $data = [])
     {
         $paginator['paginator'] = $this;
-		require_once 'resources/views/simple-bootstrap-4.blade.php';
+        require_once 'resources/views/simple-bootstrap-4.blade.php';
     }
 
     /**
      * Manually indicate that the paginator does have more pages.
      *
-     * @param  bool  $value
+     * @param  bool  $hasMore
      * @return $this
      */
-    public function hasMorePagesWhen($value = true)
+    public function hasMorePagesWhen($hasMore = true)
     {
-        $this->hasMore = $value;
+        $this->hasMore = $hasMore;
 
         return $this;
     }
@@ -139,13 +140,15 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
     public function toArray()
     {
         return [
-            'per_page' => $this->perPage(),
             'current_page' => $this->currentPage(),
-            'next_page_url' => $this->nextPageUrl(),
-            'prev_page_url' => $this->previousPageUrl(),
-            'from' => $this->firstItem(),
-            'to' => $this->lastItem(),
             'data' => $this->items->toArray(),
+            'first_page_url' => $this->url(1),
+            'from' => $this->firstItem(),
+            'next_page_url' => $this->nextPageUrl(),
+            'path' => $this->path(),
+            'per_page' => $this->perPage(),
+            'prev_page_url' => $this->previousPageUrl(),
+            'to' => $this->lastItem(),
         ];
     }
 
@@ -154,7 +157,7 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
      *
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }
