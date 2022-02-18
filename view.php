@@ -16,12 +16,21 @@ class View
 
         $view = str_replace('.', '/', $view);
 
-        if ($view == 'recover') {
-            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
-        } else if ($view == '401') {
-            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
-        } else {
+        $find = false;
+
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $view . '.blade.php')) {
             $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $view . '.blade.php');
+            $find = true;
+        }
+
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php')) {
+            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/' . $view . '.blade.php');
+            $find = true;
+        }
+
+        if ($find == false) {
+            $view = str_replace('/', '.', $view);
+            throw new Exception("View [$view] not found");
         }
 
         echo $componentes->render($view, $data);

@@ -1,43 +1,46 @@
-<?php if ($paginator['paginator']->hasPages()): ?>
+@if ($paginator['paginator']->hasPages())
+    <nav>
+        <ul class="pagination">
+            {{-- Previous Page Link --}}
+            @if ($paginator['paginator']->onFirstPage())
+                <li class="disabled" aria-disabled="true" aria-label="pagination.previous">
+                    <span aria-hidden="true">&lsaquo;</span>
+                </li>
+            @else
+                <li>
+                    <a href="{{ $uri . $paginator['paginator']->previousPageUrl() }}" rel="prev" aria-label="pagination.previous">&lsaquo;</a>
+                </li>
+            @endif
 
-    <ul class="pagination">
-        <?php if ($paginator['paginator']->onFirstPage()): ?>
-            <li class="disabled"><span>&laquo;</span></li>
+            {{-- Pagination Elements --}}
+            @foreach ($paginator['elements'] as $element)
+                {{-- "Three Dots" Separator --}}
+                @if (is_string($element))
+                    <li class="disabled" aria-disabled="true"><span>{{ $element }}</span></li>
+                @endif
 
-        <?php else: ?>
-            <li><a href="<?php echo $_SERVER['REDIRECT_URL'] . $paginator['paginator']->previousPageUrl(); ?>" rel="prev">&laquo;</a></li>
+                {{-- Array Of Links --}}
+                @if (is_array($element))
+                    @foreach ($element as $page => $url)
+                        @if ($page == $paginator['paginator']->currentPage())
+                            <li class="active" aria-current="page"><span>{{ $page }}</span></li>
+                        @else
+                            <li><a href="{{ $uri . $url }}">{{ $page }}</a></li>
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
 
-        <?php endif;?>
-
-        <?php foreach ($paginator['elements'] as $element): ?>
-
-            <?php if (is_string($element)): ?>
-                <li class="disabled"><span><?php echo $element; ?></span></li>
-            <?php endif;?>
-
-            <?php if (is_array($element)): ?>
-                <?php foreach ($element as $page => $url): ?>
-
-                    <?php if ($page == $paginator['paginator']->currentPage()): ?>
-                        <li class="active"><span><?php echo $page; ?></span></li>
-
-                    <?php else: ?>
-                        <li><a href="<?php echo $_SERVER['REDIRECT_URL'] . $url; ?>"><?php echo $page; ?></a></li>
-                    <?php endif;?>
-
-                <?php endforeach;?>
-
-            <?php endif;?>
-
-        <?php endforeach;?>
-
-        <?php if ($paginator['paginator']->hasMorePages()): ?>
-            <li><a href="<?php echo $_SERVER['REDIRECT_URL'] . $paginator['paginator']->nextPageUrl(); ?>" rel="next">&raquo;</a></li>
-
-        <?php else: ?>
-            <li class="disabled"><span>&raquo;</span></li>
-
-        <?php endif;?>
-    </ul>
-
-<?php endif;?>
+            {{-- Next Page Link --}}
+            @if ($paginator['paginator']->hasMorePages())
+                <li>
+                    <a href="{{ $uri . $paginator['paginator']->nextPageUrl() }}" rel="next" aria-label="pagination.next">&rsaquo;</a>
+                </li>
+            @else
+                <li class="disabled" aria-disabled="true" aria-label="pagination.next">
+                    <span aria-hidden="true">&rsaquo;</span>
+                </li>
+            @endif
+        </ul>
+    </nav>
+@endif

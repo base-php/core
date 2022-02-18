@@ -1,20 +1,19 @@
-<?php if ($paginator['paginator']->hasPages()): ?>
+@if ($paginator['paginator']->hasPages())
+    <nav>
+        <ul class="pagination">
+            {{-- Previous Page Link --}}
+            @if ($paginator['paginator']->onFirstPage())
+                <li class="disabled" aria-disabled="true"><span>{!! lang('pagination.previous') !!}</span></li>
+            @else
+                <li><a href="{{ $uri . $paginator['paginator']->previousPageUrl() }}" rel="prev">{!! lang('pagination.previous') !!}</a></li>
+            @endif
 
-    <ul class="pagination">
-        <?php if ($paginator['paginator']->onFirstPage()): ?>
-            <li class="disabled"><span>&laquo;</span></li>
-
-        <?php else: ?>
-            <li><a href="<?php echo $_SERVER['REDIRECT_URL'] . $paginator['paginator']->previousPageUrl(); ?>" rel="prev">&laquo;</a></li>
-        <?php endif;?>
-
-        <?php if ($paginator['paginator']->hasMorePages()): ?>
-            <li><a href="<?php echo $_SERVER['REDIRECT_URL'] . $paginator['paginator']->nextPageUrl(); ?>" rel="next">&raquo;</a></li>
-
-        <?php else: ?>
-            <li class="disabled"><span>&raquo;</span></li>
-
-        <?php endif;?>
-
-    </ul>
-<?php endif;?>
+            {{-- Next Page Link --}}
+            @if ($paginator['paginator']->hasMorePages())
+                <li><a href="{{ $uri . $paginator['paginator']->nextPageUrl() }}" rel="next">{!! lang('pagination.next') !!}</a></li>
+            @else
+                <li class="disabled" aria-disabled="true"><span>{!! lang('pagination.next') !!}</span></li>
+            @endif
+        </ul>
+    </nav>
+@endif

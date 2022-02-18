@@ -833,7 +833,7 @@ class Builder implements BuilderContract
      */
     public function simplePaginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
     {
-        $page = $page ?: Paginator::resolveCurrentPage($pageName);
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
         $perPage = $perPage ?: $this->model->getPerPage();
 

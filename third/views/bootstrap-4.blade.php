@@ -1,53 +1,46 @@
-<?php if ($paginator['paginator']->hasPages()): ?>
-    <ul class="pagination">
-        <?php if ($paginator['paginator']->onFirstPage()): ?>
-            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
-
-        <?php else: ?>
-            <li class="page-item">
-                <a class="page-link" href="<?php echo $uri . $paginator['paginator']->previousPageUrl(); ?>" rel="prev">&laquo;</a>
-            </li>
-        <?php endif;?>
-
-        <?php foreach ($paginator['elements'] as $element): ?>
-
-            <?php if (is_string($element)): ?>
-                <li class="page-item disabled">
-                    <span class="page-link"><?php echo $element; ?></span>
+@if ($paginator['paginator']->hasPages())
+    <nav>
+        <ul class="pagination">
+            {{-- Previous Page Link --}}
+            @if ($paginator['paginator']->onFirstPage())
+                <li class="page-item disabled" aria-disabled="true" aria-label="pagination.previous">
+                    <span class="page-link" aria-hidden="true">&lsaquo;</span>
                 </li>
-            <?php endif;?>
+            @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $uri . $paginator['paginator']->previousPageUrl() }}" rel="prev" aria-label="pagination.previous">&lsaquo;</a>
+                </li>
+            @endif
 
-            <?php if (is_array($element)): ?>
-                <?php foreach ($element as $page => $url): ?>
-                    <?php if ($page == $paginator['paginator']->currentPage()): ?>
-                        <li class="page-item active">
-                            <span class="page-link"><?php echo $page; ?></span>
-                        </li>
+            {{-- Pagination Elements --}}
+            @foreach ($paginator['elements'] as $element)
+                {{-- "Three Dots" Separator --}}
+                @if (is_string($element))
+                    <li class="page-item disabled" aria-disabled="true"><span class="page-link">{{ $element }}</span></li>
+                @endif
 
-                    <?php else: ?>
-                        <li class="page-item">
-                            <a class="page-link" href="<?php echo $uri . $url; ?>">
-                                <?php echo $page; ?>
-                            </a>
-                        </li>
-                    <?php endif;?>
+                {{-- Array Of Links --}}
+                @if (is_array($element))
+                    @foreach ($element as $page => $url)
+                        @if ($page == $paginator['paginator']->currentPage())
+                            <li class="page-item active" aria-current="page"><span class="page-link">{{ $page }}</span></li>
+                        @else
+                            <li class="page-item"><a class="page-link" href="{{ $uri . $url }}">{{ $page }}</a></li>
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
 
-                <?php endforeach;?>
-
-            <?php endif;?>
-
-        <?php endforeach;?>
-
-        <?php if ($paginator['paginator']->hasMorePages()): ?>
-            <li class="page-item">
-                <a class="page-link" href="<?php echo $uri . $paginator['paginator']->nextPageUrl(); ?>" rel="next">
-                    &raquo;
-                </a>
-            </li>
-
-        <?php else: ?>
-            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-        <?php endif;?>
-    </ul>
-
-<?php endif;?>
+            {{-- Next Page Link --}}
+            @if ($paginator['paginator']->hasMorePages())
+                <li class="page-item">
+                    <a class="page-link" href="{{ $uri . $paginator['paginator']->nextPageUrl() }}" rel="next" aria-label="pagination.next">&rsaquo;</a>
+                </li>
+            @else
+                <li class="page-item disabled" aria-disabled="true" aria-label="pagination.next">
+                    <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                </li>
+            @endif
+        </ul>
+    </nav>
+@endif

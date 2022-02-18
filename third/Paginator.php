@@ -106,7 +106,14 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
     public function render($view = null, $data = [])
     {
         $paginator['paginator'] = $this;
-        require_once 'resources/views/simple-bootstrap-4.blade.php';
+        //$paginator['elements'] = $this->elements();
+
+        $uri = (isset($_SERVER['REDIRECT_URL'])) ? $_SERVER['REDIRECT_URL'] : $_SERVER['PATH_INFO'];
+
+        $view = $view ?? 'tailwind';
+        $view = 'simple-' . $view;
+
+        return view($view, compact('paginator', 'uri'));
     }
 
     /**
