@@ -14,29 +14,6 @@ class Validation
 
     public function __construct()
     {
-        include 'database.php';
-
-        $files      = new Filesystem();
-        $loader     = new FileLoader($files, '');
-        $translator = new Translator($loader, 'es');
-        $factory    = new Factory($translator);
-
-        $verifier = new DatabasePresenceVerifier($capsule->getDatabaseManager());
-
-        $factory->setPresenceVerifier($verifier);
-
-        $validation = $factory->make(request(), $this->rules(), $this->messages());
-
-        if ($validation->errors()->all()) {
-            $errors = $validation->errors()->all();
-
-            $_SESSION['flashmessages']['errors'] = $errors;
-            $_SESSION['flashmessages']['inputs']  = request();
-
-            $this->redirect = ($this->redirect) ? $this->redirect : $_SERVER['HTTP_REFERER'];
-
-            redirect($this->redirect);
-            return exit;
-        }
+        return validation(request(), $this->rules(), $this->messages(), $this->redirect);
     }
 }
