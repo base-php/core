@@ -23,12 +23,15 @@ class Storage
     public $content;
     
     public $success;
+
+    public $adapter;
     
     public function __construct($adapter = 'local')
     {
         if ($adapter == 'local') {
             $adapter        = new LocalFilesystemAdapter('/');
             $this->instance = new Filesystem($adapter);
+            $this->adapter  = 'local';
         }
 
         // spatie/flysystem-dropbox
@@ -36,6 +39,7 @@ class Storage
             $client         = new Client(config('dropbox')->access_token);
             $adapter        = new DropboxAdapter($client);
             $this->instance = new Filesystem($adapter, ['case_sensitive' => false]);
+            $this->adapter  = 'dropbox';
         }
 
         // league/flysystem-aws-s3-v3
@@ -50,6 +54,7 @@ class Storage
 
             $adapter        = new AwsS3Adapter($client, config('s3')->bucket);
             $this->instance = new Filesystem($adapter);
+            $this->adapter  = 's3';
         }
 
         // league/flysystem-ftp
@@ -67,6 +72,7 @@ class Storage
             );
 
             $this->instance = new Filesystem($adapter);
+            $this->adapter  = 'ftp';
         }
 
         // league/flysystem-sftp
@@ -97,12 +103,15 @@ class Storage
                     ],
                 ])
             ));
+
+            $this->adapter = 'sftp';
         }
     }
     
-    public function adapter($adapter)
+    public function disk($adapter)
     {
-        return $this->__construct($adapter);
+        $this->__construct($adapter);
+        return $this;
     }
     
     public function content($content)
@@ -113,12 +122,14 @@ class Storage
     
     public function get($get)
     {
-        return $this->instance->readStream($_SERVER['DOCUMENT_ROOT'] . '/' . $get);
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        return $this->instance->readStream($root . '/' . $get);
     }
     
     public function save($path, $filename = '')
     {
-        $path = $_SERVER['DOCUMENT_ROOT'] . '/' . $path;
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        $path = $root . '/' . $path;
         
         if (is_string($this->content)) {
             if (isset($_FILES[$this->content])) {
@@ -126,12 +137,12 @@ class Storage
                     $i = 0;
 
                     foreach ($_FILES[$this->content]['name'] as $item) {
-                        if ($_FILES[$this->content]['tmp_name'][$i][0] != '') {
-                            $stream = fopen($_FILES[$this->content]['tmp_name'][$i][0], 'r');
+                        if ($_FILES[$this->content]['tmp_name'][$i] != '') {
+                            $stream = fopen($_FILES[$this->content]['tmp_name'][$i], 'r');
 
-                            $this->instance->writeStream($path . '/' . $_FILES[$this->content]['name'][$i][0], $stream);
+                            $this->instance->writeStream($path . '/' . $_FILES[$this->content]['name'][$i], $stream);
 
-                            $this->filename[] = $_FILES[$this->content]['name'][$i][0];
+                            $this->filename[] = $_FILES[$this->content]['name'][$i];
                             $this->success = true;
 
                             $i = $i + 1;
@@ -176,6 +187,7 @@ class Storage
 
     public function delete($path)
     {
-        $this->instance->delete($_SERVER['DOCUMENT_ROOT'] . '/' . $path);
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        $this->instance->delete($root . '/' . $path);
     }
 }
