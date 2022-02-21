@@ -3,10 +3,10 @@
 use Aws\S3\S3MultiRegionClient;
 use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use League\Flysystem\Filesystem;
-use League\Flysystem\FTP\FtpAdapter;
-use League\Flysystem\FTP\FtpConnectionOptions;
-use League\Flysystem\FTP\FtpConnectionProvider;
-use League\Flysystem\FTP\NoopCommandConnectivityChecker;
+use League\Flysystem\Ftp\FtpAdapter;
+use League\Flysystem\Ftp\FtpConnectionOptions;
+use League\Flysystem\Ftp\FtpConnectionProvider;
+use League\Flysystem\Ftp\NoopCommandConnectivityChecker;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\PhpseclibV2\SftpAdapter;
 use League\Flysystem\PhpseclibV2\SftpConnectionProvider;
@@ -36,10 +36,10 @@ class Storage
 
         // spatie/flysystem-dropbox
         if ($adapter == 'dropbox') {
-            $client         = new Client(config('dropbox')->access_token);
-            $adapter        = new DropboxAdapter($client);
-            $this->instance = new Filesystem($adapter, ['case_sensitive' => false]);
-            $this->adapter  = 'dropbox';
+            $client                 = new Client(config('dropbox'));
+            $this->adapterInstance  = new DropboxAdapter($client);
+            $this->instance         = new Filesystem($this->adapterInstance, ['case_sensitive' => false]);
+            $this->adapter          = 'dropbox';
         }
 
         // league/flysystem-aws-s3-v3
@@ -52,9 +52,9 @@ class Storage
                 'version'     => 'latest|version',
             ]);
 
-            $adapter        = new AwsS3Adapter($client, config('s3')->bucket);
-            $this->instance = new Filesystem($adapter);
-            $this->adapter  = 's3';
+            $this->adapterInstance  = new AwsS3Adapter($client, config('s3')->bucket);
+            $this->instance         = new Filesystem($this->adapterInstance);
+            $this->adapter          = 's3';
         }
 
         // league/flysystem-ftp
@@ -172,6 +172,17 @@ class Storage
         }
 
         return $this;
+    }
+
+    public function url($file)
+    {
+        if ($this->adapter == 'dropbox') {
+            return $this->adapterInstance->getUrl($file);
+        }
+
+        if ($this->adapter == 's3') {
+            return $this->adapterInstance->url($file);
+        }
     }
 
     public static function download($file, $name = '')
