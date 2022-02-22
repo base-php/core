@@ -107,23 +107,58 @@ class Storage
             $this->adapter = 'sftp';
         }
     }
+
+    public function content($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    public function delete($path)
+    {
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        $this->instance->delete($root . '/' . $path);
+    }
+
+    public function dir($path)
+    {
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        return $this->instance->listContents($root . '/' . $path)->toArray();;
+    }
     
     public function disk($adapter)
     {
         $this->__construct($adapter);
         return $this;
     }
-    
-    public function content($content)
+
+    public static function download($file, $name = '')
     {
-        $this->content = $content;
-        return $this;
+        $filename = ($name != '') ? $name : $file;
+        $file = $_SERVER['DOCUMENT_ROOT'] . '/' . $file;
+
+        header('Content-Type: application/octet-stream');
+        header('Content-Transfer-Encoding: Binary');
+        header('Content-disposition: attachment; filename="' . $filename . '"');
+        readfile($file);
     }
-    
+
     public function get($get)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
         return $this->instance->readStream($root . '/' . $get);
+    }
+
+    public function mime($path)
+    {
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        return $this->instance->mimeType($root . '/' . $path);
+    }
+
+    public function modified($path)
+    {
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        return date('Y-m-d h:i:s', $this->instance->lastModified($root . '/' . $path));
     }
     
     public function save($path, $filename = '')
@@ -183,22 +218,5 @@ class Storage
         if ($this->adapter == 's3') {
             return $this->adapterInstance->url($file);
         }
-    }
-
-    public static function download($file, $name = '')
-    {
-        $filename = ($name != '') ? $name : $file;
-        $file = $_SERVER['DOCUMENT_ROOT'] . '/' . $file;
-
-        header('Content-Type: application/octet-stream');
-        header('Content-Transfer-Encoding: Binary');
-        header('Content-disposition: attachment; filename="' . $filename . '"');
-        readfile($file);
-    }
-
-    public function delete($path)
-    {
-        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        $this->instance->delete($root . '/' . $path);
     }
 }
