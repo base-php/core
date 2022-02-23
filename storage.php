@@ -123,7 +123,7 @@ class Storage
     public function dir($path)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        return $this->instance->listContents($root . '/' . $path)->toArray();;
+        return $this->instance->listContents($root . '/' . $path)->toArray();
     }
     
     public function disk($adapter)
@@ -132,7 +132,7 @@ class Storage
         return $this;
     }
 
-    public static function download($file, $name = '')
+    public function download($file, $name = '')
     {
         $filename = ($name != '') ? $name : $file;
         $file = $_SERVER['DOCUMENT_ROOT'] . '/' . $file;
@@ -141,6 +141,18 @@ class Storage
         header('Content-Transfer-Encoding: Binary');
         header('Content-disposition: attachment; filename="' . $filename . '"');
         readfile($file);
+    }
+
+    public function exists($file)
+    {
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        return $this->instance->fileExists($root . '/' . $file);
+    }
+
+    public function file($file)
+    {
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        $this->instance->write($root . '/' . $file, '');
     }
 
     public function get($get)
@@ -153,6 +165,12 @@ class Storage
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
         return $this->instance->mimeType($root . '/' . $path);
+    }
+
+    public function mkdir($dir)
+    {
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        $this->instance->createDirectory($dir);
     }
 
     public function modified($path)
@@ -209,6 +227,12 @@ class Storage
         return $this;
     }
 
+    public function size($file)
+    {
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        return $this->instance->fileSize($root . '/' . $file);
+    }
+
     public function url($file)
     {
         if ($this->adapter == 'dropbox') {
@@ -218,5 +242,7 @@ class Storage
         if ($this->adapter == 's3') {
             return $this->adapterInstance->url($file);
         }
+
+        return $file;
     }
 }
