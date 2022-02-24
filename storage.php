@@ -108,6 +108,12 @@ class Storage
         }
     }
 
+    public function basename($file)
+    {
+        $pathinfo = pathinfo($file);
+        return $pathinfo['filename'];
+    }
+
     public function content($content)
     {
         $this->content = $content;
@@ -149,6 +155,12 @@ class Storage
         return $this->instance->fileExists($root . '/' . $file);
     }
 
+    public function extension($file)
+    {
+        $pathinfo = pathinfo($file);
+        return $pathinfo['extension'];
+    }
+
     public function file($file)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
@@ -177,6 +189,12 @@ class Storage
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
         return date('Y-m-d h:i:s', $this->instance->lastModified($root . '/' . $path));
+    }
+
+    public function rename($old, $new)
+    {
+        $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
+        $this->instance->move($root . '/' . $old, $root . '/' . $new);
     }
     
     public function save($path, $filename = '')
