@@ -111,6 +111,7 @@ function server($var = '')
     $array['referer']           = $_SERVER['HTTP_REFERER'] ?? null;
     $array['root']              = $_SERVER['DOCUMENT_ROOT'];
     $array['software']          = $_SERVER['SERVER_SOFTWARE'];
+    $array['uri']               = $_SERVER['REQUEST_URI'];
 
     if ($var) {
         return $array[$var];
