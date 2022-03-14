@@ -99,19 +99,19 @@ function request($var = '')
 
 function server($var = '')
 {
-    $array['admin']             = $_SERVER['SERVER_ADMIN'];
-    $array['browser_visitor']   = $_SERVER['HTTP_USER_AGENT'];
-    $array['filename']          = $_SERVER['SCRIPT_FILENAME'];
-    $array['host']              = $_SERVER['HTTP_HOST'];
-    $array['ip_server']         = $_SERVER['SERVER_ADDR'];
-    $array['ip_visitor']        = $_SERVER['REMOTE_ADDR'];
-    $array['method']            = $_SERVER['REQUEST_METHOD'];
-    $array['protocol']          = $_SERVER['REQUEST_SCHEME'];
-    $array['query']             = $_SERVER['QUERY_STRING'];
+    $array['admin']             = $_SERVER['SERVER_ADMIN'] ?? null;
+    $array['browser_visitor']   = $_SERVER['HTTP_USER_AGENT'] ?? null;
+    $array['filename']          = $_SERVER['SCRIPT_FILENAME'] ?? null;
+    $array['host']              = $_SERVER['HTTP_HOST'] ?? null;
+    $array['ip_server']         = $_SERVER['SERVER_ADDR'] ?? null;
+    $array['ip_visitor']        = $_SERVER['REMOTE_ADDR'] ?? null;
+    $array['method']            = $_SERVER['REQUEST_METHOD'] ?? null;
+    $array['protocol']          = $_SERVER['REQUEST_SCHEME'] ?? null;
+    $array['query']             = $_SERVER['QUERY_STRING'] ?? null;
     $array['referer']           = $_SERVER['HTTP_REFERER'] ?? null;
-    $array['root']              = $_SERVER['DOCUMENT_ROOT'];
-    $array['software']          = $_SERVER['SERVER_SOFTWARE'];
-    $array['uri']               = $_SERVER['REQUEST_URI'];
+    $array['root']              = $_SERVER['DOCUMENT_ROOT'] ?? null;
+    $array['software']          = $_SERVER['SERVER_SOFTWARE'] ?? null;
+    $array['uri']               = $_SERVER['REQUEST_URI'] ?? null;
 
     if ($var) {
         return $array[$var];
