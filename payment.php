@@ -2,7 +2,7 @@
 
 use Omnipay\Omnipay;
 
-class Payments
+class Payment
 {
 	// league/omnipay
 	

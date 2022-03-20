@@ -79,6 +79,13 @@ function redirect($to)
     return $redirect->redirect($to);
 }
 
+function payment($gateway)
+{
+    $payment = new Payment();
+    $payment->gateway($gateway);
+    return $payment;
+}
+
 function pdf($object)
 {
     return $object;
