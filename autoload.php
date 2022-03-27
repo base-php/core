@@ -1,5 +1,6 @@
 <?php
 
+include '2fa.php';
 include 'app.php';
 include 'assets.php';
 include 'auth.php';

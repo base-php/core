@@ -11,6 +11,11 @@ use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory as Validation;
 
+function two_fa()
+{
+    return new TwoFA;
+}
+
 function arr()
 {
     return new Arr;
