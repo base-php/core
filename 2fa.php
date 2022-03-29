@@ -15,7 +15,7 @@ class TwoFA
     public function __construct()
     {
         $this->instance = new Google2FA();
-        $this->key      = auth()->2fa;
+        $this->key      = auth()->two_fa;
     }
 
     public function verify($code)
