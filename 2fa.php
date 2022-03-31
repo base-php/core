@@ -1,12 +1,10 @@
 <?php
 
-use Endroid\QrCode\QrCode;
-use PragmaRX\Google2FA\Google2FA;
+use PragmaRX\Google2FAQRCode\Google2FA;
 
 class TwoFA
 {
-    // endroid/qr-code
-    // pragmarx/google2fa-qrcode
+    // pragmarx/google2fa-qrcode & endroid/qr-code
 
     public $instance;
 
@@ -23,19 +21,12 @@ class TwoFA
         return $this->instace->verifyKey($this->key, $code);
     }
 
-    public function qr($size)
+    public function qr()
     {
-        $value = $this->instance->getQRCodeUrl(
+        return $this->instance->getQRCodeInline(
             config('application_name'),
             '',
             $this->key
         );
-
-        $qr = new QrCode($value);
-        $qr->setSize($size);
-
-        $url = $qr->writeDataUri();
-
-        return $url;
     }
 }
