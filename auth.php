@@ -114,3 +114,17 @@ function register($user)
 
     return redirect('/login')->with('info', lang('auth.register_success'));
 }
+
+function two_fa($id)
+{
+    $user = User::find($id);
+
+    if ($user->two_fa) {
+        $user->two_fa = null;
+    } else {
+        $two_fa = new TwoFA();
+        $user->two_fa = $two_fa->key();
+    }
+
+    $user->save();
+}

@@ -13,7 +13,11 @@ class TwoFA
     public function __construct()
     {
         $this->instance = new Google2FA();
-        $this->key      = auth()->two_fa;
+    }
+
+    public function key()
+    {
+        return $this->instance->generateSecretKey();
     }
 
     public function verify($code)
@@ -21,12 +25,12 @@ class TwoFA
         return $this->instace->verifyKey($this->key, $code);
     }
 
-    public function qr()
+    public function qr($key)
     {
         return $this->instance->getQRCodeInline(
             config('application_name'),
             '',
-            $this->key
+            $key
         );
     }
 }
