@@ -1379,7 +1379,5 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->post('/forgot-password', [\Auth::class, 'forgot_password']);
         $this->get('/recover/{id}', [\Auth::class, 'recover']);
         $this->post('/recover/{id}', [\Auth::class, 'recover']);
-        $this->get('/2fa', [\Auth::class, 'two_fa']);
-        $this->post('/2fa', [\Auth::class, 'two_fa']);
     }
 }

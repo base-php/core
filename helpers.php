@@ -103,6 +103,11 @@ function storage($adapter = 'local')
     return new Storage($adapter);
 }
 
+function two_fa()
+{
+    return new TwoFA;
+}
+
 function validation($data, $rules, $messages, $redirect)
 {
     include 'database.php';
