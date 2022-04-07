@@ -2,11 +2,14 @@
 
 function session($key = '', $value = '')
 {
-    if ($key != '' && $value != '') {
-        return $_SESSION[$key] = $value;
-    } elseif ($key != '' && isset($_SESSION[$key])) {
-        return $_SESSION[$key];
-    } else {
-        return $_SESSION;
+    if ($key && $value) {
+        $_SESSION[$key] = $value;
+        return 1;
     }
+
+    if ($key) {
+        return $_SESSION[$key] ?? null;
+    }
+
+    return $_SESSION;
 }
