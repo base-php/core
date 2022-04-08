@@ -1368,16 +1368,14 @@ class Router implements BindingRegistrar, RegistrarContract
 
     public function auth()
     {
-        $this->get('/register', [\Auth::class, 'register']);
-        $this->post('/register', [\Auth::class, 'register']);
+        $this->match(['get', 'post'], '/register', [\Auth::class, 'register']);
         $this->get('/login', [\Auth::class, 'index']);
         $this->post('/login', [\Auth::class, 'login']);
         $this->get('/login/facebook', [\Auth::class, 'facebook']);
         $this->get('/login/google', [\Auth::class, 'google']);
         $this->get('/logout', [\Auth::class, 'logout']);
-        $this->get('/forgot-password', [\Auth::class, 'forgot_password']);
-        $this->post('/forgot-password', [\Auth::class, 'forgot_password']);
-        $this->get('/recover/{id}', [\Auth::class, 'recover']);
-        $this->post('/recover/{id}', [\Auth::class, 'recover']);
+        $this->match(['get', 'post'], '/forgot-password', [\Auth::class, 'forgot_password']);
+        $this->match(['get', 'post'], '/recover/{id}', [\Auth::class, 'recover']);
+        $this->match(['get', 'post'], '/2fa', [\Auth::class, 'two_fa']);
     }
 }
