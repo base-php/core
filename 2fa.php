@@ -8,8 +8,6 @@ class TwoFA
 
     public $instance;
 
-    public $key;
-
     public function __construct()
     {
         $this->instance = new Google2FA();
@@ -20,9 +18,9 @@ class TwoFA
         return $this->instance->generateSecretKey();
     }
 
-    public function verify($code)
+    public function verify($key, $code)
     {
-        return $this->instace->verifyKey($this->key, $code);
+        return $this->instace->verifyKey($key, $code);
     }
 
     public function qr($key)

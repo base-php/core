@@ -55,10 +55,6 @@ function login($user)
         ->first();
 
     if ($user) {
-        if ($user->two_fa) {
-            return redirect('/2fa');
-        }
-
         $_SESSION['id'] = $user->id;
 
         $redirect = (isset($user['redirect'])) ? $user['redirect'] : $auth->redirect_login;

@@ -1,6 +1,7 @@
 <?php
 
 use App\Excel\Excel;
+use App\Models\User;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Filesystem\Filesystem;
@@ -103,8 +104,19 @@ function storage($adapter = 'local')
     return new Storage($adapter);
 }
 
-function two_fa()
+function two_fa($code = '')
 {
+    if ($code) {
+        $two_fa = new TwoFA();
+        $verify = $two_fa->verify(auth()->key, $code);
+
+        if ($verify) {
+            return redirect('/dashboard');
+        }
+
+        return redirect(server('uri'))->with('error', lang('auth.2fa_code_error'));
+    }
+
     return new TwoFA;
 }
 

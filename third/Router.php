@@ -1376,6 +1376,6 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->get('/logout', [\Auth::class, 'logout']);
         $this->match(['get', 'post'], '/forgot-password', [\Auth::class, 'forgot_password']);
         $this->match(['get', 'post'], '/recover/{id}', [\Auth::class, 'recover']);
-        $this->match(['get', 'post'], '/2fa', [\Auth::class, 'two_fa']);
+        $this->match(['get', 'post'], '/2fa/{id}', [\Auth::class, 'two_fa']);
     }
 }
