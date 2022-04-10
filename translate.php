@@ -11,7 +11,7 @@ function lang($key)
     	$key = $array[1];
 
     	return $_ENV['translate'][$file][$key];
-    } catch (Exception $e) {
+    } catch (Exception $exception) {
         return $key;
     }
 }
