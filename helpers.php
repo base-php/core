@@ -104,17 +104,11 @@ function storage($adapter = 'local')
     return new Storage($adapter);
 }
 
-function two_fa($code = '')
+function two_fa()
 {
-    if ($code) {
-        $two_fa = new TwoFA();
-        $verify = $two_fa->verify(auth()->key, $code);
-
-        if ($verify) {
-            return redirect('/dashboard');
-        }
-
-        return redirect(server('uri'))->with('error', lang('auth.2fa_code_error'));
+    if (post()) {
+        $two_fa = new TwoFA;
+        return $two_fa->verify();
     }
 
     return new TwoFA;

@@ -18,16 +18,24 @@ class TwoFA
         return $this->instance->generateSecretKey();
     }
 
-    public function verify($key, $code)
+    public function verify()
     {
-        return $this->instace->verifyKey($key, $code);
+        $verify = $this->instance->verifyKey(auth()->two_fa, request('code'));
+
+        if ($verify) {
+            session('2fa', auth()->two_fa);
+            $redirect = request('redirect') ? request('redirect') : $auth->redirect_login;
+            return redirect($redirect);
+        }
+
+        return redirect(server('referer'))->with('error', lang('auth.2fa_error_code'));
     }
 
     public function qr($key)
     {
         return $this->instance->getQRCodeInline(
             config('application_name'),
-            '',
+            auth()->email,
             $key
         );
     }
