@@ -74,6 +74,11 @@ function http()
     return new HttpClient;
 }
 
+function notification($users, $class)
+{
+    $class->send($users);
+}
+
 function redirect($to)
 {
     $redirect = new Redirect;
