@@ -14,6 +14,10 @@ class Notification
 			if (in_array('database', $this->via())) {
 				$this->database($user, $this->array());
 			}
+
+            if (in_array('email', $this->via())) {
+                email($user->email, $this->mail());
+            }
 		}		
 	}
 
