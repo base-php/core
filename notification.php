@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Notifications;
+namespace App\Notifications;
 
 use App\Models\Notification as NotificationModel;
 
@@ -8,7 +8,7 @@ class Notification
 {
 	public function send($users)
 	{
-		$users = is_iterable($users) ? $users : collect($users);
+       $users = is_iterable($users) ? $users : collect([$users]);
 
 		foreach ($users as $user) {
 			if (in_array('database', $this->via())) {
@@ -16,7 +16,7 @@ class Notification
 			}
 
             if (in_array('email', $this->via())) {
-                email($user->email, $this->mail());
+                email($user->email, $this->email());
             }
 		}		
 	}

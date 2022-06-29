@@ -12,7 +12,6 @@ class Mail
         $mail = new PHPMailer();
 
         if ($_SERVER['REMOTE_ADDR'] == '::1') {
-            $mail->SMTPDebug    = SMTP::DEBUG_SERVER;
             $mail->isSMTP();
             $mail->Host         = config('smtp')->host;
             $mail->SMTPAuth     = true;
