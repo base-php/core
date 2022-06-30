@@ -29,7 +29,9 @@ class Notification
 			'id_user' => $user->id
 		];
 
-		$data = array_push($data, $array);
+		foreach ($array as $key => $value) {
+            $data[$key] = $value;
+        }
 
 		NotificationModel::create([
 			'type'			=> $type,
