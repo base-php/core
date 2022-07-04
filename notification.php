@@ -11,12 +11,18 @@ class Notification
        $users = is_iterable($users) ? $users : collect([$users]);
 
 		foreach ($users as $user) {
-			if (in_array('database', $this->via())) {
-				$this->database($user, $this->array());
-			}
+            foreach ($this->via() as $via) {
+                if ($via == 'database') {
+                    $this->database($user, $this->array());
+                }
 
-            if (in_array('email', $this->via())) {
-                email($user->email, $this->email());
+                if ($via == 'email') {
+                    email($user->email, $this->email());
+                }
+
+                if ($via != 'database' && $via != 'email') {
+                    $this->$via();
+                }
             }
 		}		
 	}
