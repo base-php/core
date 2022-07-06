@@ -1,6 +1,6 @@
 <?php
 
-use App\Controllers\Auth;
+use App\Controllers\AuthController;
 use App\Mails\PasswordRecovery;
 use App\Models\User;
 
@@ -47,7 +47,7 @@ function forgot()
 
 function login($user)
 {
-    $auth = new Auth();
+    $auth = new AuthController();
 
     $user = User::where('email', $user['email'])
         ->where('password', encrypt($user['password']))
