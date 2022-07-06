@@ -1368,14 +1368,14 @@ class Router implements BindingRegistrar, RegistrarContract
 
     public function auth()
     {
-        $this->match(['get', 'post'], '/register', [\Auth::class, 'register']);
-        $this->get('/login', [\Auth::class, 'index']);
-        $this->post('/login', [\Auth::class, 'login']);
-        $this->get('/login/facebook', [\Auth::class, 'facebook']);
-        $this->get('/login/google', [\Auth::class, 'google']);
-        $this->get('/logout', [\Auth::class, 'logout']);
-        $this->match(['get', 'post'], '/forgot-password', [\Auth::class, 'forgot_password']);
-        $this->match(['get', 'post'], '/recover/{id}', [\Auth::class, 'recover']);
-        $this->match(['get', 'post'], '/2fa/{id}', [\Auth::class, 'two_fa']);
+        $this->match(['get', 'post'], '/register', [\AuthController::class, 'register']);
+        $this->get('/login', [\AuthController::class, 'index']);
+        $this->post('/login', [\AuthController::class, 'login']);
+        $this->get('/login/facebook', [\AuthController::class, 'facebook']);
+        $this->get('/login/google', [\AuthController::class, 'google']);
+        $this->get('/logout', [\AuthController::class, 'logout']);
+        $this->match(['get', 'post'], '/forgot-password', [\AuthController::class, 'forgot_password']);
+        $this->match(['get', 'post'], '/recover/{id}', [\AuthController::class, 'recover']);
+        $this->match(['get', 'post'], '/2fa/{id}', [\AuthController::class, 'two_fa']);
     }
 }
