@@ -17,6 +17,32 @@ function arr()
     return new Arr;
 }
 
+function auth($id = '')
+{
+    if ($id != '') {
+        $user = User::find($id);
+
+        if ($user) {
+            $_SESSION['id'] = $user->id;
+        }
+    }
+
+    if ($id == '') {
+        if (isset($_SESSION['id'])) {
+            if (isset($_SESSION['user'])) {
+                $user = $_SESSION['user'];
+            } else {
+                $user = User::find($_SESSION['id']);
+                $_SESSION['user'] = $user;
+            }
+
+            return $user;
+        }
+
+        return false;
+    }
+}
+
 function backup($connection = '')
 {
     return new Backup($connection);
