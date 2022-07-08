@@ -130,6 +130,21 @@ function qr($data)
     return $qr->generate();
 }
 
+function session($key = '', $value = '')
+{
+    $session = new Session;
+
+    if ($key && $value) {
+        return $session->set($key, $value);
+    }
+
+    if ($key) {
+        return $session->get($key);
+    }
+
+    return $session;
+}
+
 function storage($adapter = 'local')
 {
     return new Storage($adapter);
