@@ -20,6 +20,7 @@ class Console
         $application->add(new MakeMiddleware());
         $application->add(new MakeMigration());
         $application->add(new MakeModel());
+        $application->add(new MakeNotification());
         $application->add(new MakePdf());
         $application->add(new MakeResource());
         $application->add(new MakeRule());

@@ -18,6 +18,7 @@ include 'commands/middleware.php';
 include 'commands/migrate.php';
 include 'commands/migration.php';
 include 'commands/model.php';
+include 'commands/notification.php';
 include 'commands/pdf.php';
 include 'commands/resource.php';
 include 'commands/rule.php';
