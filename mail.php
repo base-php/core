@@ -50,5 +50,7 @@ class Mail
         }
 
         $mail->send();
+
+        return $this;
     }
 }
