@@ -29,7 +29,7 @@ class NotificationName extends Notification
      *
      * @return void
      */
-    public function email(): void
+    public function email()
     {
 
     }
