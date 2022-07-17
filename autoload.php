@@ -47,7 +47,6 @@ include 'json.php';
 include 'lang.php';
 include 'mail.php';
 include 'notification.php';
-include 'payment.php';
 include 'pdf.php';
 include 'permissions.php';
 include 'qr.php';
