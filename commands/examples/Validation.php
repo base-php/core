@@ -2,7 +2,7 @@
 
 namespace App\Validations;
 
-class UserStore extends Validation
+class ValidationName extends Validation
 {
 	/**
 	* Get the validation rules that apply to the request.
