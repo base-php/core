@@ -1,7 +1,7 @@
 <?php
 
 use App\Controllers\AuthController;
-use App\Mails\PasswordRecovery;
+use App\Mails\PasswordRecoveryEmail;
 use App\Models\User;
 
 class Auth
@@ -15,7 +15,7 @@ class Auth
                 return redirect('/forgot-password')->with('error', lang('auth.email_not_match'));
             }
 
-            email($user->email, new PasswordRecovery($user));
+            email($user->email, new PasswordRecoveryEmail($user));
 
             return redirect('/forgot-password')->with('info', lang('auth.check_email'));
         }
