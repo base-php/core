@@ -10,8 +10,9 @@ class Console
 
         $application = new Application('Base PHP ' . $config['version'] . ' by Nisa Delgado');
 
-        $application->add(new MakeBackup());
         $application->add(new ClearCache());
+        $application->add(new Inspire());
+        $application->add(new MakeBackup());
         $application->add(new MakeCommand());
         $application->add(new MakeController());
         $application->add(new MakeDatabase());

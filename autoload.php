@@ -13,6 +13,7 @@ include 'commands/console.php';
 include 'commands/controller.php';
 include 'commands/database.php';
 include 'commands/excel.php';
+include 'commands/inspire.php';
 include 'commands/mail.php';
 include 'commands/middleware.php';
 include 'commands/migrate.php';
