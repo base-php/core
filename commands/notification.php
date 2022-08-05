@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeNotification extends Command
 {
@@ -29,8 +30,8 @@ class MakeNotification extends Command
         fwrite($fopen, $content);
         fclose($fopen);
 
-        $text = "<info>Notification '$name' created successfully.</info>";
-        $output->writeln($text);
+        $style = new SymfonyStyle($input, $output);
+        $style->success("Notification '$name' created successfully.");
 
         return Command::SUCCESS;
     }

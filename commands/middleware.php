@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeMiddleware extends Command
 {
@@ -29,8 +30,8 @@ class MakeMiddleware extends Command
         fwrite($fopen, $content);
         fclose($fopen);
 
-        $text = "<info>Middleware '$name' created successfully.</info>";
-        $output->writeln($text);
+        $style = new SymfonyStyle($input, $output);
+        $style->success("Middleware '$name' created successfully.");
 
         return Command::SUCCESS;
     }

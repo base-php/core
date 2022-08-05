@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ClearCache extends Command
 {
@@ -12,8 +13,8 @@ class ClearCache extends Command
     {
         array_map('unlink', glob('vendor/nisadelgado/framework/cache/*'));
 
-        $text = "<info>Compiled view cleared!</info>";
-        $output->writeln($text);
+        $style = new SymfonyStyle($input, $output);
+        $style->success('Compiled view cleared.');
 
         return Command::SUCCESS;
     }

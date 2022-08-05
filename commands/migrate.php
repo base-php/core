@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class Migrate extends Command
 {
@@ -27,13 +28,15 @@ class Migrate extends Command
 
         $file = $input->getArgument('file');
 
+        $style = new SymfonyStyle($input, $output);
+
         if ($file) {
             if (file_exists('database/' . $file)) {
                 include 'database/' . $file;
-                $output->writeln("<info>$file is ok.</info>");
+                $style->success("$file is ok.");
 
             } else {
-                $output->writeln("<error>The file '$file' does not exist.</error>");
+                $style->error("The file '$file' does not exist.");
             }
 
         } else {
@@ -42,7 +45,7 @@ class Migrate extends Command
             foreach ($scandir as $item) {
                 if (!is_dir($item)) {
                     include 'database/' . $item;
-                    $output->writeln("<info>$item is ok.</info>");
+                    $style->success("$item is ok.");
                 }
             }
         }

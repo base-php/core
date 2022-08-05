@@ -3,6 +3,7 @@
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeMigration extends Command
 {
@@ -39,8 +40,8 @@ class MakeMigration extends Command
         fwrite($fopen, $content);
         fclose($fopen);
 
-        $text = "<info>Migration '$name' created successfully.</info>";
-        $output->writeln($text);
+        $style = new SymfonyStyle($input, $output);
+        $style->success("Migration '$name' created successfully.");
 
         return Command::SUCCESS;
     }

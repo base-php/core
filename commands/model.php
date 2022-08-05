@@ -3,6 +3,7 @@
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeModel extends Command
 {
@@ -31,7 +32,8 @@ class MakeModel extends Command
         fwrite($fopen, $content);
         fclose($fopen);
 
-        $output->writeln("<info>Model '$name' created successfully.</info>");
+        $style = new SymfonyStyle($input, $output);
+        $style->success("Model '$name' created successfully.");
 
         $all = $input->getOption('all');
 
@@ -49,7 +51,7 @@ class MakeModel extends Command
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $output->writeln("<info>Controller '$controller' created successfully.</info>");
+            $style->success("Controller '$controller' created successfully.");
 
 
             $migration = str()->plural($name);
@@ -74,7 +76,7 @@ class MakeModel extends Command
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $output->writeln("<info>Migration '$name' created successfully.</info>");
+            $style->success("Migration '$name' created successfully.");
         }
 
         return Command::SUCCESS;

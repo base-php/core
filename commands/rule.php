@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeRule extends Command
 {
@@ -29,8 +30,8 @@ class MakeRule extends Command
         fwrite($fopen, $content);
         fclose($fopen);
 
-        $text = "<info>Rule '$name' created successfully.</info>";
-        $output->writeln($text);
+        $style = new SymfonyStyle($input, $output);
+        $style->success("Rule '$name' created successfully.");
 
         return Command::SUCCESS;
     }

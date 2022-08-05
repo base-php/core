@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeResource extends Command
 {
@@ -29,8 +30,8 @@ class MakeResource extends Command
         fwrite($fopen, $content);
         fclose($fopen);
 
-        $text = "<info>Resource '$name' created successfully.</info>";
-        $output->writeln($text);
+        $style = new SymfonyStyle($input, $output);
+        $style->success("Resource '$name' created successfully.");
 
         return Command::SUCCESS;
     }

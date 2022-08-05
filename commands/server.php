@@ -17,7 +17,9 @@ class Server extends Command
     protected function execute($input, $output)
     {
         $port = ($input->getArgument('port')) ? $input->getArgument('port') : 8080;
+
         system('php -S localhost:' . $port);
+        
         return Command::SUCCESS;
     }
 }

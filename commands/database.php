@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeDatabase extends Command
 {
@@ -21,6 +22,8 @@ class MakeDatabase extends Command
         include 'vendor/nisadelgado/framework/database.php';
 
         $config = include('app/config.php');
+
+        $style = new SymfonyStyle($input, $output);
 
         foreach ($config['database'] as $item) {
             if ($item['name'] == $connection) {
@@ -50,12 +53,10 @@ class MakeDatabase extends Command
                 $pdo->exec('CREATE DATABASE ' . $database);
             }
 
-            $text = "<info>Database '$database' created successfully.</info>";
+            $style->success("Database '$database' created successfully.");
         } else {
-            $text = "<error>You must set a name for the database in the config.</error>";
+            $style->error("You must set a name for the database in the config.");
         }
-
-        $output->writeln($text);
 
         return Command::SUCCESS;
     }

@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakePdf extends Command
 {
@@ -29,8 +30,8 @@ class MakePdf extends Command
         fwrite($fopen, $content);
         fclose($fopen);
 
-        $text = "<info>PDF '$name' created successfully.</info>";
-        $output->writeln($text);
+        $style = new SymfonyStyle($input, $output);
+        $style->success("PDF '$name' created successfully.");
 
         return Command::SUCCESS;
     }

@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeBackup extends Command
 {
@@ -19,7 +20,12 @@ class MakeBackup extends Command
     {
         $connection = ($input->getArgument('connection')) ? $input->getArgument('connection') : 'default';
         $filename   = ($input->getArgument('filename')) ? $input->getArgument('filename') : '';
+
         backup($connection)->filename($filename);
+
+        $style = new SymfonyStyle($input, $output);
+        $style->success('Database backup created successfully.');
+
         return Command::SUCCESS;
     }
 }

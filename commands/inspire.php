@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class Inspire extends Command
 {
@@ -19,10 +20,9 @@ class Inspire extends Command
         $quote = $quotes[$rand]['text'];
         $author = $quotes[$rand]['author'];
 
-        $output->writeln('');
-        $output->writeln("\"$quote\"");
-        $output->writeln("- $author");
-        $output->writeln('');
+        $style = new SymfonyStyle($input, $output);
+        $style->text(['"' . $quote . '"', '- ' . $author]);
+        $style->newLine();
 
         return Command::SUCCESS;
     }

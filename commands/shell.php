@@ -15,6 +15,7 @@ class Shell extends Command
         $shell = new Psysh();
         $shell->setIncludes(['vendor/nisadelgado/framework/database.php']);
         $shell->run();
+        
         return Command::SUCCESS;
     }
 }

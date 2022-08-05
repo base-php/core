@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeTest extends Command
 {
@@ -25,8 +26,8 @@ class MakeTest extends Command
         fwrite($fopen, $content);
         fclose($fopen);
 
-        $text = "<info>Test '$name' created successfully.</info>";
-        $output->writeln($text);
+        $style = new SymfonyStyle($input, $output);
+        $style->success("Test '$name' created successfully.");
 
         return Command::SUCCESS;
     }
