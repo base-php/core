@@ -7,18 +7,15 @@ class Inspire extends Command
 {
     protected static $defaultName = 'inspire';
 
-    protected static $defaultDescription = 'Display an inspiring quote';
+    protected static $defaultDescription = 'Muestra una frase motivacional';
 
     protected function execute($input, $output)
     {
-        $quotes = file_get_contents('https://type.fit/api/quotes');
-        $quotes = json_decode($quotes, true);
+        $quotes = file_get_contents('https://frasedeldia.azurewebsites.net/api/phrase');
+        $quotes = json_decode($quotes);
 
-        $count = count($quotes);
-        $rand = rand(0, $count);
-
-        $quote = $quotes[$rand]['text'];
-        $author = $quotes[$rand]['author'];
+        $quote = $quotes->phrase;
+        $author = $quotes->author;
 
         $style = new SymfonyStyle($input, $output);
         $style->text(['"' . $quote . '"', '- ' . $author]);
