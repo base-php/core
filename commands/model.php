@@ -9,12 +9,12 @@ class MakeModel extends Command
 {
     protected static $defaultName = 'make:model';
 
-    protected static $defaultDescription = 'Create a model file with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de modelo';
 
     public function configure()
     {
         $this->addArgument('name', InputArgument::REQUIRED);
-        $this->addOption('all', 'a', InputOption::VALUE_NONE, 'Create migration, model and controller');
+        $this->addOption('all', 'a', InputOption::VALUE_NONE, 'Genera las clases de migración, modelo y controlador.');
     }
 
     protected function execute($input, $output)
@@ -33,12 +33,12 @@ class MakeModel extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Model '$name' created successfully.");
+        $style->success("Modelo '$name' creado satisfactoriamente.");
 
         $all = $input->getOption('all');
 
         if ($all) {
-            $controller = str()->plural($name);
+            $controller = $name . 'Controller';
 
             $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Controller.php');
             $content = str_replace('ControllerName', $controller, $content);
@@ -51,7 +51,7 @@ class MakeModel extends Command
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $style->success("Controller '$controller' created successfully.");
+            $style->success("Controlador '$controller' creado satisfactoriamente.");
 
 
             $migration = str()->plural($name);
@@ -76,7 +76,7 @@ class MakeModel extends Command
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $style->success("Migration '$name' created successfully.");
+            $style->success("Migración '$name' creada satisfactoriamente.");
         }
 
         return Command::SUCCESS;

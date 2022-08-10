@@ -9,12 +9,12 @@ class MakeController extends Command
 {
     protected static $defaultName = 'make:controller';
 
-    protected static $defaultDescription = 'Create a controller with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de controlador';
 
     public function configure()
     {
         $this->addArgument('name', InputArgument::REQUIRED);
-        $this->addOption('all', 'a', InputOption::VALUE_NONE, 'Create migration, model and controller');
+        $this->addOption('all', 'a', InputOption::VALUE_NONE, 'Genera las clases de migración, modelo y controlador.');
     }
 
     protected function execute($input, $output)
@@ -33,12 +33,14 @@ class MakeController extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Controller '$name' created successfully.");
+        $style->success("Controlador '$name' creado satisfactoriamente.");
 
         $all = $input->getOption('all');
 
         if ($all) {
             $model = str()->singular($name);
+            $model = str_replace('Controller', '', $model);
+
             $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Model.php');
             $content = str_replace('ModelName', $model, $content);
 
@@ -50,10 +52,11 @@ class MakeController extends Command
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $style->success("Model '$model' created successfully.");
+            $style->success("Modelo '$model' creado satisfactoriamente.");
 
 
-            $migration = strtolower(str()->snake($name));
+            $migration = strtolower(str()->snake($model));
+            $migration = str()->plural($migration);
 
             $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Migration.php');
             $content = str_replace('MigrationName', $migration, $content);
@@ -75,7 +78,7 @@ class MakeController extends Command
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $style->success("Migration '$migration' created successfully.");
+            $style->success("Migración '$migration' creada satisfactoriamente.");
         }
 
         return Command::SUCCESS;
