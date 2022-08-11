@@ -8,7 +8,7 @@ class MakeDatabase extends Command
 {
     protected static $defaultName = 'make:database';
 
-    protected static $defaultDescription = 'Create a database with the name set in config file';
+    protected static $defaultDescription = 'Crea las bases de datos establecidas en el archivo config';
 
     public function configure()
     {
@@ -53,9 +53,14 @@ class MakeDatabase extends Command
                 $pdo->exec('CREATE DATABASE ' . $database);
             }
 
-            $style->success("Database '$database' created successfully.");
+            if ($driver == 'sqlsrv') {
+                $pdo = new PDO("$driver:server=$host;", $username, $password);
+                $pdo->exec('CREATE DATABASE ' . $database);
+            }
+
+            $style->success("Base de datos '$database' creado satisfactoriamente..");
         } else {
-            $style->error("You must set a name for the database in the config.");
+            $style->error("Debe establecer un nombre para la base de datos en el archivo config.");
         }
 
         return Command::SUCCESS;
