@@ -13,6 +13,7 @@ class Console
         $application->add(new About());
         $application->add(new ClearCache());
         $application->add(new Docs());
+        $application->add(new Env());
         $application->add(new Inspire());
         $application->add(new MakeBackup());
         $application->add(new MakeCommand());
