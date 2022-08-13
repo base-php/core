@@ -8,7 +8,7 @@ class MakeMiddleware extends Command
 {
     protected static $defaultName = 'make:middleware';
 
-    protected static $defaultDescription = 'Create a middleware with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de middleware';
 
     public function configure()
     {
@@ -31,7 +31,7 @@ class MakeMiddleware extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Middleware '$name' created successfully.");
+        $style->success("Clase de middleware '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }

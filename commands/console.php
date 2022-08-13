@@ -11,7 +11,6 @@ class Console
         $application = new Application('Base PHP ' . $config['version'] . ' by Nisa Delgado');
 
         $application->add(new About());
-        $application->add(new ClearCache());
         $application->add(new Docs());
         $application->add(new Env());
         $application->add(new Inspire());
@@ -35,6 +34,7 @@ class Console
         $application->add(new Test());
         $application->add(new Server());
         $application->add(new Shell());
+        $application->add(new ViewClear());
 
         if (file_exists('app/Commands')) {
             foreach (scandir('app/Commands') as $command) {

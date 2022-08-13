@@ -8,7 +8,7 @@ class MakeTest extends Command
 {
     protected static $defaultName = 'make:test';
 
-    protected static $defaultDescription = 'Create a test file with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de prueba';
 
     public function configure()
     {
@@ -27,7 +27,7 @@ class MakeTest extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Test '$name' created successfully.");
+        $style->success("Clase de prueba '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }

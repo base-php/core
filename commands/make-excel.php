@@ -4,11 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class MakeMail extends Command
+class MakeExcel extends Command
 {
-    protected static $defaultName = 'make:mail';
+    protected static $defaultName = 'make:excel';
 
-    protected static $defaultDescription = 'Create a mail with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de Excel';
 
     public function configure()
     {
@@ -19,19 +19,19 @@ class MakeMail extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Mail.php');
-        $content = str_replace('MailName', $name, $content);
+        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Excel.php');
+        $content = str_replace('ExcelName', $name, $content);
 
-        if (!file_exists('app/Mails')) {
-        	mkdir('app/Mails');
+        if (!file_exists('app/Excel')) {
+            mkdir('app/Excel');
         }
 
-        $fopen = fopen('app/Mails/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Excel/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Mail '$name' created successfully.");
+        $style->success("Clase de Excel '$name' created successfully.");
 
         return Command::SUCCESS;
     }

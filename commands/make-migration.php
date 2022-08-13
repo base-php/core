@@ -9,7 +9,7 @@ class MakeMigration extends Command
 {
     protected static $defaultName = 'make:migration';
 
-    protected static $defaultDescription = 'Create a migration file with the given name';
+    protected static $defaultDescription = 'Crea un nuevo archivo de migración';
 
     public function configure()
     {
@@ -41,7 +41,7 @@ class MakeMigration extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Migration '$name' created successfully.");
+        $style->success("Archivo de migración '$name' creado satisfactoriamente.");
 
         return Command::SUCCESS;
     }

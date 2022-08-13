@@ -8,7 +8,7 @@ class MakeValidation extends Command
 {
     protected static $defaultName = 'make:validation';
 
-    protected static $defaultDescription = 'Create a validation file with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de validación';
 
     public function configure()
     {
@@ -31,7 +31,7 @@ class MakeValidation extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Validation '$name' created successfully.");
+        $style->success("Clase de validación '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }

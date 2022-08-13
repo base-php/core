@@ -8,7 +8,7 @@ class MakeResource extends Command
 {
     protected static $defaultName = 'make:resource';
 
-    protected static $defaultDescription = 'Create a resource file with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de recurso';
 
     public function configure()
     {
@@ -31,7 +31,7 @@ class MakeResource extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Resource '$name' created successfully.");
+        $style->success("Clase de recurso '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }

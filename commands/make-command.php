@@ -8,7 +8,7 @@ class MakeCommand extends Command
 {
     protected static $defaultName = 'make:command';
 
-    protected static $defaultDescription = 'Create a command with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de comando';
 
     public function configure()
     {
@@ -31,7 +31,7 @@ class MakeCommand extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Command '$name' created successfully.");
+        $style->success("Clase de comando '$name' created successfully.");
 
         return Command::SUCCESS;
     }

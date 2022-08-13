@@ -4,11 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class MakeExcel extends Command
+class MakeRule extends Command
 {
-    protected static $defaultName = 'make:excel';
+    protected static $defaultName = 'make:rule';
 
-    protected static $defaultDescription = 'Create a Excel with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de regla';
 
     public function configure()
     {
@@ -19,19 +19,19 @@ class MakeExcel extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Excel.php');
-        $content = str_replace('ExcelName', $name, $content);
+        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Rule.php');
+        $content = str_replace('RuleName', $name, $content);
 
-        if (!file_exists('app/Excel')) {
-            mkdir('app/Excel');
+        if (!file_exists('app/Rules')) {
+            mkdir('app/Rules');
         }
 
-        $fopen = fopen('app/Excel/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Rules/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Excel '$name' created successfully.");
+        $style->success("Clase de regla '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }

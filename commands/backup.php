@@ -8,7 +8,7 @@ class MakeBackup extends Command
 {
     protected static $defaultName = 'backup';
 
-    protected static $defaultDescription = 'Generates backup of a database connection';
+    protected static $defaultDescription = 'Genera copa de seguridad de la conexión a base de datos dada';
 
     public function configure()
     {
@@ -24,7 +24,7 @@ class MakeBackup extends Command
         backup($connection)->filename($filename);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success('Database backup created successfully.');
+        $style->success('Copa de seguridad creada satisfactoriamente.');
 
         return Command::SUCCESS;
     }

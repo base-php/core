@@ -8,7 +8,7 @@ class Shell extends Command
 {
     protected static $defaultName = 'shell';
 
-    protected static $defaultDescription = 'Enter to interactive shell';
+    protected static $defaultDescription = 'Interactuar con tu aplicación';
 
     protected function execute($input, $output)
     {

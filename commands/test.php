@@ -7,7 +7,7 @@ class Test extends Command
 {
     protected static $defaultName = 'test';
 
-    protected static $defaultDescription = 'Run unit tests';
+    protected static $defaultDescription = 'Ejecuta las pruebas de la aplicación';
 
     public function configure()
     {

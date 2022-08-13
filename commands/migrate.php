@@ -8,7 +8,7 @@ class Migrate extends Command
 {
     protected static $defaultName = 'migrate';
 
-    protected static $defaultDescription = 'Migrate all files to database';
+    protected static $defaultDescription = 'Ejecuta las migraciones de base de datos';
 
     public function configure()
     {
@@ -33,10 +33,10 @@ class Migrate extends Command
         if ($file) {
             if (file_exists('database/' . $file)) {
                 include 'database/' . $file;
-                $style->success("$file is ok.");
+                $style->success("$file está ok.");
 
             } else {
-                $style->error("The file '$file' does not exist.");
+                $style->error("El archivo '$file' no existe.");
             }
 
         } else {
@@ -45,7 +45,7 @@ class Migrate extends Command
             foreach ($scandir as $item) {
                 if (!is_dir($item)) {
                     include 'database/' . $item;
-                    $style->success("$item is ok.");
+                    $style->success("$item está ok.");
                 }
             }
         }

@@ -8,7 +8,7 @@ class MakeNotification extends Command
 {
     protected static $defaultName = 'make:notification';
 
-    protected static $defaultDescription = 'Create a notificacion with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de notificación';
 
     public function configure()
     {
@@ -31,7 +31,7 @@ class MakeNotification extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Notification '$name' created successfully.");
+        $style->success("Clase de notificación '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }

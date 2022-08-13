@@ -4,11 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class MakePdf extends Command
+class MakeMail extends Command
 {
-    protected static $defaultName = 'make:pdf';
+    protected static $defaultName = 'make:mail';
 
-    protected static $defaultDescription = 'Create a PDF file with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de email';
 
     public function configure()
     {
@@ -19,19 +19,19 @@ class MakePdf extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/PDF.php');
-        $content = str_replace('PDFName', $name, $content);
+        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Mail.php');
+        $content = str_replace('MailName', $name, $content);
 
-        if (!file_exists('app/PDF')) {
-            mkdir('app/PDF');
+        if (!file_exists('app/Mails')) {
+        	mkdir('app/Mails');
         }
 
-        $fopen = fopen('app/PDF/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Mails/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("PDF '$name' created successfully.");
+        $style->success("Clase de email '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }

@@ -58,7 +58,7 @@ class MakeDatabase extends Command
                 $pdo->exec('CREATE DATABASE ' . $database);
             }
 
-            $style->success("Base de datos '$database' creado satisfactoriamente..");
+            $style->success("Base de datos '$database' en '$driver' creada satisfactoriamente..");
         } else {
             $style->error("Debe establecer un nombre para la base de datos en el archivo config.");
         }

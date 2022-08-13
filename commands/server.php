@@ -7,7 +7,7 @@ class Server extends Command
 {
     protected static $defaultName = 'server';
 
-    protected static $defaultDescription = 'Build development server';
+    protected static $defaultDescription = 'Servir la aplicación en el servidor de desarrollo de PHP';
 
     public function configure()
     {

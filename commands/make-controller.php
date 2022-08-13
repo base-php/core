@@ -33,7 +33,7 @@ class MakeController extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Controlador '$name' creado satisfactoriamente.");
+        $style->success("Clase de controlador '$name' creado satisfactoriamente.");
 
         $all = $input->getOption('all');
 
@@ -52,7 +52,7 @@ class MakeController extends Command
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $style->success("Modelo '$model' creado satisfactoriamente.");
+            $style->success("Clase de modelo '$model' creado satisfactoriamente.");
 
 
             $migration = strtolower(str()->snake($model));
@@ -78,7 +78,7 @@ class MakeController extends Command
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $style->success("Migración '$migration' creada satisfactoriamente.");
+            $style->success("Archivo de migración '$migration' creado satisfactoriamente.");
         }
 
         return Command::SUCCESS;

@@ -4,11 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class MakeRule extends Command
+class MakePdf extends Command
 {
-    protected static $defaultName = 'make:rule';
+    protected static $defaultName = 'make:pdf';
 
-    protected static $defaultDescription = 'Create a rule file with the given name';
+    protected static $defaultDescription = 'Crea una nueva clase de PDF';
 
     public function configure()
     {
@@ -19,19 +19,19 @@ class MakeRule extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Rule.php');
-        $content = str_replace('RuleName', $name, $content);
+        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/PDF.php');
+        $content = str_replace('PDFName', $name, $content);
 
-        if (!file_exists('app/Rules')) {
-            mkdir('app/Rules');
+        if (!file_exists('app/PDF')) {
+            mkdir('app/PDF');
         }
 
-        $fopen = fopen('app/Rules/' . $name . '.php', 'w+');
+        $fopen = fopen('app/PDF/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Rule '$name' created successfully.");
+        $style->success("Clase de PDF '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }
