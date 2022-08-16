@@ -41,6 +41,7 @@ class ModelShow extends Command
 
         $attributes = [];
         $fields = [];
+        $relations = [];
 
         if ($database == 'mysql') {
             $fields = DB::select("SHOW COLUMNS FROM $table");
