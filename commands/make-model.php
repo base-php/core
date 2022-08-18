@@ -21,7 +21,7 @@ class MakeModel extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Model.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/Model.php');
         $content = str_replace('ModelName', $name, $content);
 
         if (!file_exists('app/Models')) {
@@ -40,7 +40,7 @@ class MakeModel extends Command
         if ($all) {
             $controller = $name . 'Controller';
 
-            $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Controller.php');
+            $content = file_get_contents('vendor/base-php/core/commands/examples/Controller.php');
             $content = str_replace('ControllerName', $controller, $content);
 
             if (!file_exists('app/Controllers')) {
@@ -56,7 +56,7 @@ class MakeModel extends Command
 
             $migration = str()->plural($name);
 
-            $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Migration.php');
+            $content = file_get_contents('vendor/base-php/core/commands/examples/Migration.php');
             $content = str_replace('MigrationName', strtolower($migration), $content);
 
             $var = str()->singular($migration);

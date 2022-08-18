@@ -19,7 +19,7 @@ class MakePdf extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/PDF.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/PDF.php');
         $content = str_replace('PDFName', $name, $content);
 
         if (!file_exists('app/PDF')) {

@@ -19,7 +19,7 @@ class MakeTest extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Test.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/Test.php');
         $content = str_replace('TestName', $name, $content);
 
         $fopen = fopen('tests/' . $name . '.php', 'w+');

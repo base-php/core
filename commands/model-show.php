@@ -17,12 +17,12 @@ class ModelShow extends Command
 
     protected function execute($input, $output)
     {
-        include 'vendor/nisadelgado/framework/database.php';
+        include 'vendor/base-php/core/database.php';
 
         $model = $input->getArgument('model');
 
         $config = require 'app/config.php';
-        include 'vendor/nisadelgado/framework/database.php';
+        include 'vendor/base-php/core/database.php';
 
         foreach ($config['database'] as $item) {
             $name = $item['name'];

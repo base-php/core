@@ -19,7 +19,7 @@ class MakeNotification extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Notification.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/Notification.php');
         $content = str_replace('NotificationName', $name, $content);
 
         if (!file_exists('app/Notifications')) {

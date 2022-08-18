@@ -20,7 +20,7 @@ class MakeMigration extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Migration.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/Migration.php');
         $content = str_replace('MigrationName', $name, $content);
 
         $var = Str::singular($name);

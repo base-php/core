@@ -16,7 +16,7 @@ class Componentes
 
     public function __construct(Filesystem $files, string $viewPath)
     {
-        $cachePath = $_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/cache';
+        $cachePath = $_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/cache';
 
         $this->app = Container::getInstance();
         $this->app->files = $files;

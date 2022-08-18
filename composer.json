@@ -1,5 +1,5 @@
 {
-    "name": "nisadelgado/framework",
+    "name": "base-php/core",
     "description": "List of functions that serve as helpers for PHP base",
     "type": "library",
     "license": "MIT",

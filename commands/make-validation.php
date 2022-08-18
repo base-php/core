@@ -19,7 +19,7 @@ class MakeValidation extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Validation.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/Validation.php');
         $content = str_replace('ValidationName', $name, $content);
 
         if (!file_exists('app/Validations')) {

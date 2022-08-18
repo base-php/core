@@ -13,7 +13,7 @@ class Shell extends Command
     protected function execute($input, $output)
     {
         $shell = new Psysh();
-        $shell->setIncludes(['vendor/nisadelgado/framework/database.php']);
+        $shell->setIncludes(['vendor/base-php/core/database.php']);
         $shell->run();
         
         return Command::SUCCESS;

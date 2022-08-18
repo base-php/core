@@ -19,7 +19,7 @@ class MakeRule extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Rule.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/Rule.php');
         $content = str_replace('RuleName', $name, $content);
 
         if (!file_exists('app/Rules')) {

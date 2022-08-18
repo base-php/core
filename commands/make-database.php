@@ -19,7 +19,7 @@ class MakeDatabase extends Command
     {
         $connection = ($input->getArgument('connection')) ? $input->getArgument('connection') : 'default';
 
-        include 'vendor/nisadelgado/framework/database.php';
+        include 'vendor/base-php/core/database.php';
 
         $config = include('app/config.php');
 

@@ -17,7 +17,7 @@ class Migrate extends Command
 
     protected function execute($input, $output)
     {
-        include 'vendor/nisadelgado/framework/database.php';
+        include 'vendor/base-php/core/database.php';
 
         $config = include 'app/config.php';
 

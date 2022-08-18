@@ -64,10 +64,10 @@ class App
             if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/resources/views/errors/404.blade.php')) {
                 return view('errors/404');
             } else {
-                $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views');
+                $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/third/views');
                 $componentes = Componentes::create($viewPath);
 
-                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/nisadelgado/framework/third/views/404.blade.php');
+                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/third/views/404.blade.php');
                 echo $componentes->render($view, []);
             }
         });

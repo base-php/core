@@ -11,7 +11,7 @@ class ViewClear extends Command
 
     protected function execute($input, $output)
     {
-        array_map('unlink', glob('vendor/nisadelgado/framework/cache/*'));
+        array_map('unlink', glob('vendor/base-php/core/cache/*'));
 
         $style = new SymfonyStyle($input, $output);
         $style->success('Las vistas compiladas se borraron correctamente.');

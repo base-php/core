@@ -19,7 +19,7 @@ class MakeCommand extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/nisadelgado/framework/commands/examples/Command.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/Command.php');
         $content = str_replace('CommandName', $name, $content);
 
         if (!file_exists('app/Commands')) {
