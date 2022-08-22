@@ -3,7 +3,6 @@
 include '2fa.php';
 include 'app.php';
 include 'assets.php';
-include 'auth.php';
 include 'backup.php';
 include 'command.php';
 include 'commands/about.php';
