@@ -80,7 +80,9 @@ function facebook()
 
 function faker()
 {
-    return Faker::create();
+    $config = require('app/config.php');
+    $locale = $config['language'] . '_' . strtoupper($config['language']);
+    return Faker::create($locale);
 }
 
 function google()
