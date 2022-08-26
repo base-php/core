@@ -9,14 +9,6 @@ $config = require $root . 'app/config.php';
 foreach ($config['database'] as $item) {
     $database = ($item['driver'] == 'sqlite') ? $item['database'] . '.sqlite' : $item['database'];
 
-    // jenssegers/mongodb
-
-    $capsule->getDatabaseManager()->extend('mongodb', function($config, $name) {
-        $config['name'] = $name;
-
-        return new Jenssegers\Mongodb\Connection($config);
-    });
-
     $capsule->addConnection([
         'driver'    => $item['driver'],
         'host'      => $item['host'],

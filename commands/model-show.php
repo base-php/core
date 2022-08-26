@@ -73,10 +73,6 @@ class ModelShow extends Command
             }            
         }
 
-        if ($database == 'mongodb') {
-            $attributes[] = ['Esta característica no está disponible para este controlador'];
-        }
-
         $methods = get_class_methods($class);
 
         $definedPerUserMethods = array_splice($methods, 0, array_search('getFillable', $methods));
