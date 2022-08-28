@@ -140,7 +140,8 @@ class Storage
 
     public function download($file, $name = '')
     {
-        $filename = ($name != '') ? $name : $file;
+        $filename = ($name != '') ? $name : basename($file);
+
         $file = $_SERVER['DOCUMENT_ROOT'] . '/' . $file;
 
         header('Content-Type: application/octet-stream');
