@@ -53,6 +53,11 @@ function carbon()
     return new Carbon;
 }
 
+function dispatch($job)
+{
+    return new Job($job);
+}
+
 function email($to, $object)
 {
     $object->send($to);
