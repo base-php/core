@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\Notification as NotificationModel;
+use DB;
 
 class Notification
 {
@@ -39,7 +39,7 @@ class Notification
             $data[$key] = $value;
         }
 
-		NotificationModel::create([
+		DB::table('notifications')->insert([
 			'type'			=> $type,
 			'data'			=> $data,
 			'date_create'	=> now('Y-m-d H:i:s'),
