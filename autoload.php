@@ -51,6 +51,7 @@ include 'job.php';
 include 'json.php';
 include 'lang.php';
 include 'mail.php';
+include 'notifiable.php';
 include 'notification.php';
 include 'pdf.php';
 include 'permissions.php';
