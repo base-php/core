@@ -14,4 +14,14 @@ trait Notifiable
 
 		return $notifications;
 	}
+
+	public function unreadNotifications()
+	{
+		$notifications = DB::table('notifications')
+			->where('data->id_user', $this->id)
+			->whereNull('date_read')
+			->get();
+
+		return $notifications;
+	}
 }
