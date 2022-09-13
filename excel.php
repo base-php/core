@@ -17,8 +17,8 @@ class Excel
 
     public function __construct()
     {
-        $this->spreadsheet  = new Spreadsheet();
-        $this->sheet 		= $this->spreadsheet->getActiveSheet();
+        $this->spreadsheet = new Spreadsheet();
+        $this->sheet = $this->spreadsheet->getActiveSheet();
     }
 
     public function autosize($cells)

@@ -6,6 +6,15 @@ use DB;
 
 trait Notifiable
 {
+	public function markAsRead()
+	{
+		$now = now('Y-m-d h:i:s');
+
+		DB::table('notifications')
+			->whereNull('date_read')
+			->update(['date_read' => $now]);
+	}
+
 	public function notifications()
 	{
 		$notifications = DB::table('notifications')
