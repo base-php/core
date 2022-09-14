@@ -22,6 +22,16 @@ class Test extends TestCase
 		return $this->fail('Valor no existe en base de datos');
 	}
 
+	public function assertSee($text1, $text2)
+	{
+		if (strpos($text1, $text2) !== false) {
+			return $this->assertTrue(true);
+		}
+
+		return $this->fail('No se encontró el texto');
+	}
+
+
 	public function get($route)
 	{
 		$url = "localhost:8080/$route";
