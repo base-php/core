@@ -24,6 +24,11 @@ trait Notifiable
 		return $notifications;
 	}
 
+	public function notify($class)
+	{
+		$class->send($this);
+	}
+
 	public function unreadNotifications()
 	{
 		$notifications = DB::table('notifications')
