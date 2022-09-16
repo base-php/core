@@ -4,9 +4,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class MakeBackup extends Command
+class DBBackup extends Command
 {
-    protected static $defaultName = 'backup';
+    protected static $defaultName = 'db:backup';
 
     protected static $defaultDescription = 'Genera copa de seguridad de la conexión a base de datos dada';
 
@@ -18,13 +18,26 @@ class MakeBackup extends Command
 
     protected function execute($input, $output)
     {
+        $config = include 'app/config.php';
+
         $connection = ($input->getArgument('connection')) ? $input->getArgument('connection') : 'default';
-        $filename   = ($input->getArgument('filename')) ? $input->getArgument('filename') : '';
+
+        $i = array_search('default', array_column($config['database'], 'name'));
+
+        $filename = $config['database'][$i]['database'] . '_' . time();
+
+        if ($config['database'][$i]['driver'] != 'sqlite') {
+            $filename = $filename . '.sql';
+        } else {
+            $filename = $filename . '.sqlite';
+        }
+
+        $filename = ($input->getArgument('filename')) ? $input->getArgument('filename') : $filename;
 
         backup($connection)->filename($filename);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success('Copa de seguridad creada satisfactoriamente.');
+        $style->success('Copia de seguridad creada satisfactoriamente.');
 
         return Command::SUCCESS;
     }
