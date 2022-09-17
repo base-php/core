@@ -19,6 +19,7 @@ class Console
         $application->add(new MakeController());
         $application->add(new MakeDatabase());
         $application->add(new MakeExcel());
+        $application->add(new MakeJob());
         $application->add(new MakeMail());
         $application->add(new MakeMiddleware());
         $application->add(new MakeMigration());

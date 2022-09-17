@@ -15,6 +15,7 @@ include 'commands/make-command.php';
 include 'commands/make-controller.php';
 include 'commands/make-database.php';
 include 'commands/make-excel.php';
+include 'commands/make-job.php';
 include 'commands/make-mail.php';
 include 'commands/make-middleware.php';
 include 'commands/make-migration.php';
