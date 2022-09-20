@@ -28,6 +28,7 @@ include 'commands/make-test.php';
 include 'commands/make-validation.php';
 include 'commands/migrate.php';
 include 'commands/model-show.php';
+include 'commands/notifications-table.php';
 include 'commands/server.php';
 include 'commands/shell.php';
 include 'commands/test.php';
