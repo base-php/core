@@ -4,7 +4,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class MakeMail extends Command
+class MakeJob extends Command
 {
     protected static $defaultName = 'make:job';
 

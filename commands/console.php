@@ -11,10 +11,10 @@ class Console
         $application = new Application('Base PHP ' . $config['version'] . ' by Nisa Delgado');
 
         $application->add(new About());
+        $application->add(new DBBackup());
         $application->add(new Docs());
         $application->add(new Env());
         $application->add(new Inspire());
-        $application->add(new MakeBackup());
         $application->add(new MakeCommand());
         $application->add(new MakeController());
         $application->add(new MakeDatabase());
@@ -33,9 +33,10 @@ class Console
         $application->add(new Migrate());
         $application->add(new ModelShow());
         $application->add(new NotificationsTable());
-        $application->add(new Test());
+        $application->add(new QueueTable());
         $application->add(new Server());
         $application->add(new Shell());
+        $application->add(new Test());
         $application->add(new ViewClear());
 
         if (file_exists('app/Commands')) {
