@@ -11,6 +11,7 @@ class Console
         $application = new Application('Base PHP ' . $config['version'] . ' by Nisa Delgado');
 
         $application->add(new About());
+        $application->add(new AuthInstall());
         $application->add(new DBBackup());
         $application->add(new Docs());
         $application->add(new Env());

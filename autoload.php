@@ -6,6 +6,7 @@ include 'assets.php';
 include 'backup.php';
 include 'command.php';
 include 'commands/about.php';
+include 'commands/auth-install.php';
 include 'commands/console.php';
 include 'commands/db-backup.php';
 include 'commands/docs.php';
