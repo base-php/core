@@ -31,6 +31,11 @@ class Test extends TestCase
 		return $this->fail('No se encontró el texto');
 	}
 
+	public function command($command)
+	{
+		$this->output = exec($command);
+		return $this;
+	}
 
 	public function get($route)
 	{
