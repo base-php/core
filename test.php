@@ -37,6 +37,15 @@ class Test extends TestCase
 		return $this;
 	}
 
+	public function expectsOutput($expect)
+	{
+		if ($expect == $this->output) {
+			return $this->assertTrue(true);
+		}
+
+		return $this->fail('El resultado del comando no es el esperado');
+	}
+
 	public function get($route)
 	{
 		$url = "localhost:8080/$route";
