@@ -11,11 +11,14 @@ class Session
     {
         if ($key != '') {
             unset($_SESSION[$key]);
-            return 1;
         }
 
         unset($_SESSION);
-        return 1;
+    }
+
+    public function flash($key, $value)
+    {
+        $_SESSION['flashmessages'][$key] = $value;
     }
 
     public function get($key)
