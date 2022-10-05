@@ -9,4 +9,6 @@ function config($var)
 
         return $_ENV[$var];
     }
+
+    return null;
 }

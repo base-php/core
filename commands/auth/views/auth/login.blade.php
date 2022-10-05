@@ -26,14 +26,14 @@
                 {{ lang('auth.login') }}
             </x-button>
 
-            @if(config('facebook')->app_id)
+            @if(config('facebook'))
                 <x-social-button url="{{ facebook()->url() }}" color="blue-600">
                     <i class="fab fa-facebook mr-2"></i>
                     {{ lang('auth.login') }}
                 </x-social-button>
             @endif
 
-            @if(config('google')->client_id)
+            @if(config('google'))
                 <x-social-button url="{{ google()->url() }}" color="red-600">
                     <i class="fab fa-google mr-2"></i>
                     {{ lang('auth.login') }}
