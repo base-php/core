@@ -54,6 +54,7 @@ include 'google.php';
 include 'job.php';
 include 'json.php';
 include 'lang.php';
+include 'longs/traits/logs.php';
 include 'mail.php';
 include 'notifiable.php';
 include 'notification.php';
