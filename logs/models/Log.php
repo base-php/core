@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 trait Log
 {
 	public function __construct()

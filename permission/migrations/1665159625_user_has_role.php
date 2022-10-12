@@ -2,7 +2,7 @@
 
 $schema['default']->dropIfExists();
 
-$schema['default']->create('user_has_roles', function ($table) {
+$schema['default']->create('user_has_role', function ($table) {
 	$table->id();
 
 	$table->int('id_user');
