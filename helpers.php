@@ -107,6 +107,11 @@ function http()
     return new HttpClient;
 }
 
+function logs()
+{
+    return DB::table('logs');
+}
+
 function redirect($to)
 {
     $redirect = new Redirect;
