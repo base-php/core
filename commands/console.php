@@ -16,6 +16,7 @@ class Console
         $application->add(new Docs());
         $application->add(new Env());
         $application->add(new Inspire());
+        $application->add(new LogsTable());
         $application->add(new MakeCommand());
         $application->add(new MakeController());
         $application->add(new MakeDatabase());
