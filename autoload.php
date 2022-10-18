@@ -56,6 +56,7 @@ include 'json.php';
 include 'lang.php';
 include 'logs/commands/logs-table.php';
 include 'logs/models/Log.php';
+include 'permission/models/Role.php';
 include 'permission/traits/HasRole.php';
 include 'mail.php';
 include 'notifiable.php';
