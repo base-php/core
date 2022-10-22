@@ -16,7 +16,7 @@ class Role extends Model
         $role = $this->id;
 
         foreach ($permissions as $permission) {
-            DB::statement("INSERT INTO (id_role, id_permission) SELECT '$role', id FROM permission WHERE name = '$permission'");
+            DB::statement("INSERT INTO role_has_permissions (id_role, id_permission) SELECT '$role', id FROM permission WHERE name = '$permission'");
         }
     }
 
@@ -29,5 +29,15 @@ class Role extends Model
             ->get();
 
         return $permissions;
+    }
+
+    public function revokePermissionTo($permissions)
+    {
+        $permissions = is_array($permissions) ? $permissions : (array) $permissions;
+        $role = $this->id;
+
+        foreach ($permissions as $permission) {
+            DB::statement("DELETE FROM role_has_permissions WHERE id IN (SELECT id FROM permissions WHERE name = '$permission')");
+        }
     }
 }
