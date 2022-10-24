@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use DB;
+
 trait HasRole
 {
 	public function assignRole($name)
@@ -40,5 +42,14 @@ trait HasRole
 		}
 
 		return false;
+	}
+
+	public function getRole()
+	{
+		$id_user = $this->id;
+
+		$role = DB::select("SELECT r.name FROM role r LEFT JOIN user_has_role u ON r.id = u.id_role WHERE u.id_user = '$id_user'");
+
+		return $role->name;
 	}
 }
