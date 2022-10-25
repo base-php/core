@@ -48,8 +48,16 @@ trait HasRole
 	{
 		$id_user = $this->id;
 
-		$role = DB::select("SELECT r.name FROM role r LEFT JOIN user_has_role u ON r.id = u.id_role WHERE u.id_user = '$id_user'");
+		$role = DB::table('roles')
+			->leftJoin('user_has_role', 'roles.id', '=', 'user_has_role.id_role')
+			->where('user_has_role.id_role', $id_user)
+			->get();
 
 		return $role->name;
+	}
+
+	public function removeRole($role)
+	{
+		DB::statement("DELETE FROM user_has_role WHERE id IN (SELECT id FROM roles WHERE name = '$role')");
 	}
 }
