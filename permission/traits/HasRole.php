@@ -60,4 +60,18 @@ trait HasRole
 	{
 		DB::statement("DELETE FROM user_has_role WHERE id IN (SELECT id FROM roles WHERE name = '$role')");
 	}
+
+	public function role($role)
+	{
+		$db = DB::table('user_has_role')
+			->leftJoin('roles', 'roles.id', '=', 'user_has_role.id_role')
+			->where('roles.name', $role)
+			->get();
+
+		if ($db->count()) {
+			return true;
+		}
+
+		return false;
+	}
 }
