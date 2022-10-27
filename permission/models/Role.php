@@ -15,10 +15,17 @@ class Role extends Model
     public function givePermissionTo($permissions)
     {
         $permissions = is_array($permissions) ? $permissions : (array) $permissions;
-        $role = $this->id;
+        $id_role = $this->id;
 
         foreach ($permissions as $permission) {
-            DB::statement("INSERT INTO role_has_permissions (id_role, id_permission) SELECT '$role', id FROM permission WHERE name = '$permission'");
+            DB::table('role_has_permissions')
+                ->insertUsing(
+                    ['id_role', 'id_permission'],
+                    
+                    DB::table('permission')
+                        ->select($id_role, 'id')
+                        ->where('name', $permission)
+                )
         }
     }
 
@@ -36,10 +43,33 @@ class Role extends Model
     public function revokePermissionTo($permissions)
     {
         $permissions = is_array($permissions) ? $permissions : (array) $permissions;
-        $role = $this->id;
 
         foreach ($permissions as $permission) {
-            DB::statement("DELETE FROM role_has_permissions WHERE id IN (SELECT id FROM permissions WHERE name = '$permission')");
+            DB::table('role_has_permissions')
+                ->whereExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('permissions')
+                        ->where('name', $permission)
+                })
+                ->delete();
+        }
+    }
+
+    public function syncPermissions($permissions)
+    {
+        $id_role = $this->id_role;
+
+        DB::table('role_has_permissions')->where('id_role', $id_role)->delete();
+
+        foreach ($permissions as $permission) {
+            DB::table('role_has_permissions')
+                ->insertUsing(
+                    ['id_role', 'id_permission'],
+
+                    DB::table('permission')
+                        ->select($id_role, 'id')
+                        ->where('name', $permission)
+                );
         }
     }
 }

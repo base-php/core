@@ -8,18 +8,16 @@ trait HasRole
 {
 	public function assignRole($name)
 	{
-		$role = DB::table('roles')
-			->where('name', $name)
-			->first();
-
 		DB::table('user_has_role')
 			->where('id_user', $this->id)
 			->delete();
 
-		DB::table('user_has_role')->insert([
-			'id_user' => $this->id,
-			'id_role' => $role->id
-		]);
+		DB::table('user_has_role')
+			->insertUsing(
+				['id_user', 'id_role'],
+				
+				[$this->id, DB::table('roles')->select('id')->where('name', $name)]
+			);
 	}
 
 	public function can($permission)
@@ -58,7 +56,13 @@ trait HasRole
 
 	public function removeRole($role)
 	{
-		DB::statement("DELETE FROM user_has_role WHERE id IN (SELECT id FROM roles WHERE name = '$role')");
+		DB::table('user_has_role')
+			->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('roles')
+                    ->where('name', $permission)
+            })
+			->delete();
 	}
 
 	public function role($role)
