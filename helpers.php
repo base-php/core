@@ -48,6 +48,11 @@ function backup($connection = '')
     return new Backup($connection);
 }
 
+function can($permission)
+{
+    return auth()->can($permission);
+}
+
 function carbon()
 {
     return new Carbon;
