@@ -35,6 +35,7 @@ class Console
         $application->add(new Migrate());
         $application->add(new ModelShow());
         $application->add(new NotificationsTable());
+        $application->add(new PermissionsTable());
         $application->add(new QueueTable());
         $application->add(new Server());
         $application->add(new Shell());
