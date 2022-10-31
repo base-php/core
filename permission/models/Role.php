@@ -6,7 +6,7 @@ use DB;
 
 class Role extends Model
 {
-	protected $table = 'roles';
+    protected $table = 'roles';
 
     protected $primaryKey = 'id';
 
@@ -25,7 +25,7 @@ class Role extends Model
                     DB::table('permission')
                         ->select($id_role, 'id')
                         ->where('name', $permission)
-                )
+                );
         }
     }
 
@@ -49,7 +49,7 @@ class Role extends Model
                 ->whereExists(function ($query) {
                     $query->select(DB::raw(1))
                         ->from('permissions')
-                        ->where('name', $permission)
+                        ->where('name', $permission);
                 })
                 ->delete();
         }

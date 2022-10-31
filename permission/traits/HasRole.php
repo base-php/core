@@ -60,7 +60,7 @@ trait HasRole
 			->whereExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('roles')
-                    ->where('name', $permission)
+                    ->where('name', $permission);
             })
 			->delete();
 	}
