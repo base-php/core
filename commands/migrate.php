@@ -24,6 +24,7 @@ class Migrate extends Command
         foreach ($config['database'] as $item) {
             $name = $item['name'];
             $schema[$name] = $capsule->getConnection($name)->getSchemaBuilder();
+            $schema[$name]->disableForeignKeyConstraints();
         }
 
         $file = $input->getArgument('file');
