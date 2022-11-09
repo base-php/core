@@ -74,6 +74,7 @@ class AuthInstall extends Command
         copy('vendor/base-php/core/commands/auth/views/auth/recover.blade.php', 'resources/views/auth/recover.blade.php');
         copy('vendor/base-php/core/commands/auth/views/auth/register.blade.php', 'resources/views/auth/register.blade.php');
         copy('vendor/base-php/core/commands/auth/views/components/alert.blade.php', 'resources/views/components/alert.blade.php');
+        copy('vendor/base-php/core/commands/auth/views/components/button.blade.php', 'resources/views/components/button.blade.php');
         copy('vendor/base-php/core/commands/auth/views/components/button-link.blade.php', 'resources/views/components/button-link.blade.php');
         copy('vendor/base-php/core/commands/auth/views/components/file-button.blade.php', 'resources/views/components/file-button.blade.php');
         copy('vendor/base-php/core/commands/auth/views/components/input.blade.php', 'resources/views/components/input.blade.php');
