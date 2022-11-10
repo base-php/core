@@ -1,6 +1,6 @@
 <?php
 
-$schema['default']->dropIfExists();
+$schema['default']->dropIfExists('roles');
 
 $schema['default']->create('roles', function ($table) {
 	$table->id();

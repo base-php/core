@@ -1,12 +1,12 @@
 <?php
 
-$schema['default']->dropIfExists();
+$schema['default']->dropIfExists('user_has_role');
 
 $schema['default']->create('user_has_role', function ($table) {
 	$table->id();
 
-	$table->int('id_user');
-	$table->int('id_role');
+	$table->unsignedBigInteger('id_user');
+	$table->unsignedBigInteger('id_role');
 
 	$table->datetime('date_create')
 		->useCurrent();

@@ -1,6 +1,6 @@
 <?php
 
-$schema['default']->dropIfExists();
+$schema['default']->dropIfExists('permissions');
 
 $schema['default']->create('permissions', function ($table) {
 	$table->id();
