@@ -12,12 +12,16 @@ trait HasRole
 			->where('id_user', $this->id)
 			->delete();
 
+		$id_role = DB::table('roles')
+			->where('name', $name)
+			->first()
+			->id;
+
 		DB::table('user_has_role')
-			->insertUsing(
-				['id_user', 'id_role'],
-				
-				[$this->id, DB::table('roles')->select('id')->where('name', $name)]
-			);
+			->insert([
+				'id_user' => $this->id,
+				'id_role' => $id_role
+			]);
 	}
 
 	public function can($permission)
@@ -44,12 +48,10 @@ trait HasRole
 
 	public function getRole()
 	{
-		$id_user = $this->id;
-
 		$role = DB::table('roles')
 			->leftJoin('user_has_role', 'roles.id', '=', 'user_has_role.id_role')
-			->where('user_has_role.id_role', $id_user)
-			->get();
+			->where('user_has_role.id_role', $this->id)
+			->first();
 
 		return $role->name;
 	}
