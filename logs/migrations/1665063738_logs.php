@@ -5,8 +5,8 @@ $schema['default']->dropIfExists('logs');
 $schema['default']->create('logs', function ($table) {
 	$table->id();
 
-	$table->int('id_user');
-	$table->int('id_model');
+	$table->unsignedBigInteger('id_user');
+	$table->unsignedBigInteger('id_model');
 
 	$table->string('model');
 	$table->string('action');
