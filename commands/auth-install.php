@@ -85,7 +85,7 @@ class AuthInstall extends Command
         copy('vendor/base-php/core/commands/auth/views/dashboard/index.blade.php', 'resources/views/dashboard/index.blade.php');
         copy('vendor/base-php/core/commands/auth/views/users/create.blade.php', 'resources/views/dashboard/create.blade.php');
         copy('vendor/base-php/core/commands/auth/views/users/edit.blade.php', 'resources/views/dashboard/edit.blade.php');
-        copy('vendor/base-php/core/commands/auth/views/users/index.blade.php', 'resources/views/dashboard/index.blade.php');
+        copy('vendor/base-php/core/commands/auth/views/users/index.blade.php', 'resources/views/users/index.blade.php');
 
         $content = file_get_contents('vendor/base-php/core/commands/auth/routes.php');
         $fopen = fopen('app/routes.php', 'a+');
