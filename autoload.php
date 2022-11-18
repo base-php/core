@@ -53,7 +53,7 @@ include 'date.php';
 include 'excel.php';
 include 'facebook.php';
 include 'google.php';
-include 'job.php';
+include 'jobs/class/job.php';
 include 'json.php';
 include 'lang.php';
 include 'logs/commands/logs-table.php';
