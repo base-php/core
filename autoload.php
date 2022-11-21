@@ -47,7 +47,7 @@ include 'third/LengthAwarePaginator.php';
 include 'third/Builder.php';
 include 'third/ViewServiceProvider.php';
 include 'config.php';
-include 'db.php';
+include 'database/class/db.php';
 include 'debug.php';
 include 'date.php';
 include 'excel.php';

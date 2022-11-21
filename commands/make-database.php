@@ -19,7 +19,7 @@ class MakeDatabase extends Command
     {
         $connection = ($input->getArgument('connection')) ? $input->getArgument('connection') : 'default';
 
-        include 'vendor/base-php/core/database.php';
+        include 'vendor/base-php/core/database/database.php';
 
         $config = include('app/config.php');
 
