@@ -181,7 +181,7 @@ function two_fa()
 
 function validation($data, $rules, $messages, $redirect)
 {
-    include 'database/database.php';
+    include __dir__ . '/../database/database.php';
 
     $files      = new Filesystem();
     $loader     = new FileLoader($files, '');
