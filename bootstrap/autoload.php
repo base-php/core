@@ -1,7 +1,7 @@
 <?php
 
-include __dir__ . '/../2fa.php';
 include __dir__ . '/app.php';
+include __dir__ . '/../auth/class/2fa.php';
 include __dir__ . '/../backup.php';
 include __dir__ . '/../command.php';
 include __dir__ . '/../commands/about.php';
@@ -48,7 +48,6 @@ include __dir__ . '/../third/LengthAwarePaginator.php';
 include __dir__ . '/../third/Builder.php';
 include __dir__ . '/../third/ViewServiceProvider.php';
 include __dir__ . '/../database/db.php';
-include __dir__ . '/../date.php';
 include __dir__ . '/../jobs/class/job.php';
 include __dir__ . '/../lang/lang.php';
 include __dir__ . '/../logs/commands/logs-table.php';
@@ -74,6 +73,7 @@ include __dir__ . '/../third/Provider/ViewServiceProvider.php';
 include __dir__ . '/../third/Provider/ServiceProvider.php';
 include __dir__ . '/../third/Componentes.php';
 include __dir__ . '/../util/config.php';
+include __dir__ . '/../util/date.php';
 include __dir__ . '/../util/debug.php';
 include __dir__ . '/../util/helpers.php';
 include __dir__ . '/../util/json.php';
