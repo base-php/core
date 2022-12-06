@@ -12,6 +12,13 @@ use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory as Validation;
 
+function abort($code = 404)
+{
+    http_response_code($code);
+    view($code);
+    return die();
+}
+
 function arr()
 {
     return new Arr;
