@@ -29,7 +29,7 @@ class Storage
     public function __construct($adapter = 'local')
     {
         if ($adapter == 'local') {
-            $adapter        = new LocalFilesystemAdapter('/');
+            $adapter        = new LocalFilesystemAdapter($_SERVER['DOCUMENT_ROOT']);
             $this->instance = new Filesystem($adapter);
             $this->adapter  = 'local';
         }
@@ -201,7 +201,7 @@ class Storage
     public function save($path, $filename = '')
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        $path = $root . '/' . $path;
+        $path = $path;
         
         if (is_string($this->content)) {
             if (isset($_FILES[$this->content])) {
