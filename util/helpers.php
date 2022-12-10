@@ -50,6 +50,13 @@ function auth($id = '')
     }
 }
 
+function authorize($condition)
+{
+    if (!$condition) {
+        return abort(401);
+    }
+}
+
 function backup($connection = '')
 {
     return new Backup($connection);
