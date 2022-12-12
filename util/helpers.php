@@ -151,6 +151,11 @@ function redirect($to)
     return $redirect->redirect($to);
 }
 
+function response()
+{
+    return new Response();
+}
+
 function pdf($object)
 {
     return $object;

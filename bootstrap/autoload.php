@@ -40,6 +40,7 @@ include __dir__ . '/../export/pdf.php';
 include __dir__ . '/../http/redirect.php';
 include __dir__ . '/../http/request.php';
 include __dir__ . '/../http/resources.php';
+include __dir__ . '/../http/response.php';
 include __dir__ . '/../third/Router.php';
 include __dir__ . '/../third/Route.php';
 include __dir__ . '/../third/Controller.php';
