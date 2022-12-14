@@ -2,6 +2,17 @@
 
 class Response
 {
+	public function cookies($cookies, $time = 0)
+	{
+		$time = ($time != 0) ? time() + $time : 0;
+
+		foreach ($cookies as $key => $value) {
+			setcookie($key, $value, $time);
+		}
+
+		return $this;
+	}
+
 	public function headers($headers)
 	{
 		foreach ($headers as $key => $value) {
