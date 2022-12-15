@@ -64,6 +64,8 @@ include __dir__ . '/../notifications/traits/notifiable.php';
 include __dir__ . '/../notifications/class/notification.php';
 include __dir__ . '/../social/facebook.php';
 include __dir__ . '/../social/google.php';
+include __dir__ . '/../tokens/models/Token.php';
+include __dir__ . '/../tokens/traits/HasTokens.php';
 include __dir__ . '/../validations/class/rule.php';
 include __dir__ . '/../validations/class/validation.php';
 include __dir__ . '/../validations/interfaces/rule.php';

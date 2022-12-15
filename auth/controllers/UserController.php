@@ -55,9 +55,7 @@ class UserController extends Controller
             'name'          => request('name'),
             'email'         => request('email'),
             'password'      => encrypt(request('password')),
-            'photo'         => $file->filename,
-            'date_create'   => now('Y-m-d H:i:s'),
-            'date_update'   => now('Y-m-d H:i:s')
+            'photo'         => $file->filename
         ]);
 
         $user->update(['hash' => encrypt($user->id)]);
@@ -90,8 +88,7 @@ class UserController extends Controller
         $user = User::find(request('id'));
         $user->update([
             'name'          => request('name'),
-            'email'         => request('email'),
-            'date_update'   => now('Y-m-d H:i:s')
+            'email'         => request('email')
         ]);
 
         if (request('password')) {
