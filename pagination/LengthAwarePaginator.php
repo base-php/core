@@ -91,7 +91,7 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
         $paginator['paginator'] = $this;
         $paginator['elements'] = $this->elements();
 
-        $uri = (isset($_SERVER['REDIRECT_URL'])) ? $_SERVER['REDIRECT_URL'] : $_SERVER['PATH_INFO'];
+        $uri = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'];
 
         $view = $view ?? 'tailwind';
 

@@ -23,8 +23,8 @@ class View
             $find = true;
         }
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/third/views/' . $view . '.blade.php')) {
-            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/third/views/' . $view . '.blade.php');
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/pagination/views/' . $view . '.blade.php')) {
+            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/pagination/views/' . $view . '.blade.php');
             $find = true;
         }
 
