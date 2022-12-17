@@ -11,9 +11,11 @@ class Session
     {
         if ($key != '') {
             unset($_SESSION[$key]);
+            return;
         }
 
         unset($_SESSION);
+        session_destroy();
     }
 
     public function flash($key, $value)
