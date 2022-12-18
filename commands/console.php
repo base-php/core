@@ -40,6 +40,7 @@ class Console
         $application->add(new Server());
         $application->add(new Shell());
         $application->add(new Test());
+        $application->add(new TokensTable());
         $application->add(new ViewClear());
 
         if (file_exists('app/Commands')) {

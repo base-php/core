@@ -34,6 +34,7 @@ include __dir__ . '/../commands/queue-table.php';
 include __dir__ . '/../commands/server.php';
 include __dir__ . '/../commands/shell.php';
 include __dir__ . '/../commands/test.php';
+include __dir__ . '/../commands/tokens-table.php';
 include __dir__ . '/../commands/view-clear.php';
 include __dir__ . '/../export/excel.php';
 include __dir__ . '/../export/pdf.php';
