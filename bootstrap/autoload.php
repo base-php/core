@@ -45,6 +45,7 @@ include __dir__ . '/../routing/Router.php';
 include __dir__ . '/../routing/Route.php';
 include __dir__ . '/../routing/Controller.php';
 include __dir__ . '/../routing/BaseController.php';
+include __dir__ . '/../database/soft-deletes.php';
 include __dir__ . '/../database/has-relationships.php';
 include __dir__ . '/../database/base-model.php';
 include __dir__ . '/../pagination/Paginator.php';
