@@ -20,7 +20,7 @@ class Session
 
     public function flash($key, $value)
     {
-        $_SESSION['flashmessages'][$key] = $value;
+        $_SESSION['basephp-flash'][$key] = $value;
     }
 
     public function get($key)

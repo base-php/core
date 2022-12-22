@@ -61,11 +61,7 @@ class Facebook
             ['name' => $me->getName()]
         );
 
-        $_SESSION['id']          = $user->id;
-        $_SESSION['name']        = $user->name;
-        $_SESSION['email']       = $user->email;
-        $_SESSION['role']        = $user->role;
-        $_SESSION['permissions'] = $user->permissions;
+        session('user', $user->id);
 
         redirect(config('facebook')->redirect);
 

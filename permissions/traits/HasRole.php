@@ -8,16 +8,12 @@ trait HasRole
 {
 	public function assignRole($name)
 	{
-		DB::table('user_has_role')
-			->where('id_user', $this->id)
-			->delete();
-
 		$id_role = DB::table('roles')
 			->where('name', $name)
 			->first()
 			->id;
 
-		DB::table('user_has_role')
+		DB::table('user_has_roles')
 			->insert([
 				'id_user' => $this->id,
 				'id_role' => $id_role
@@ -26,39 +22,45 @@ trait HasRole
 
 	public function can($permission)
 	{
-		$permission = DB::table('permissions')
-			->where('name', $permission)
-			->first();
+		if (!isset($_SESSION['basephp-permissions'])) {
+			$db = DB::select("
+				SELECT
+					p.*
+				FROM
+					permissions p
+						LEFT JOIN role_has_permissions rp ON p.id = rp.id_permission
+						LEFT JOIN roles r ON rp.id_role = r.id
+						LEFT JOIN user_has_roles ur ON ur.id_role = r.id
+						LEFT JOIN users u ON u.id = ur.id_user
+				WHERE
+					u.id = '{$this->id}'
+			");
 
-		$role = DB::table('user_has_role')
-			->where('id_user', $this->id)
-			->first();
+			$_SESSION['basephp-permissions'] = $db;
+		} else {
+			$db = $_SESSION['basephp-permissions'];
+		}
 
-		$permission = DB::table('role_has_permissions')
-			->where('id_role', $role->id)
-			->where('id_permission', $permission->id)
-			->get();
-
-		if ($permission->count()) {
+		if (in_array($permission, array_column($db, 'name'))) {
 			return true;
 		}
 
 		return false;
 	}
 
-	public function getRole()
+	public function getRoles()
 	{
-		$role = DB::table('roles')
-			->leftJoin('user_has_role', 'roles.id', '=', 'user_has_role.id_role')
-			->where('user_has_role.id_role', $this->id)
-			->first();
+		$roles = DB::table('roles')
+			->leftJoin('user_has_roles', 'roles.id', '=', 'user_has_roles.id_role')
+			->where('user_has_roles.id_role', $this->id)
+			->get();
 
-		return $role->name;
+		return $roles;
 	}
 
 	public function removeRole($role)
 	{
-		DB::table('user_has_role')
+		DB::table('user_has_roles')
 			->whereExists(function ($query) {
                 $query->select(DB::raw(1))
                     ->from('roles')
@@ -69,8 +71,8 @@ trait HasRole
 
 	public function role($role)
 	{
-		$db = DB::table('user_has_role')
-			->leftJoin('roles', 'roles.id', '=', 'user_has_role.id_role')
+		$db = DB::table('user_has_roles')
+			->leftJoin('roles', 'roles.id', '=', 'user_has_roles.id_role')
 			->where('roles.name', $role)
 			->get();
 

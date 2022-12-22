@@ -12,14 +12,14 @@ function ajax()
 function error($data)
 {
     echo $data;
-    $index = array_search($data, $_SESSION['flashmessages']['errors']);
-    unset($_SESSION['flashmessages']['errors'][$index]);
+    $index = array_search($data, $_SESSION['basephp-flash']['errors']);
+    unset($_SESSION['basephp-flash']['errors'][$index]);
 }
 
 function errors()
 {
-    if (isset($_SESSION['flashmessages']['errors'])) {
-        return $_SESSION['flashmessages']['errors'];
+    if (isset($_SESSION['basephp-flash']['errors'])) {
+        return $_SESSION['basephp-flash']['errors'];
     }
 }
 
@@ -41,14 +41,14 @@ function host()
 
 function message($data)
 {
-    if (isset($_SESSION['flashmessages'][$data])) {
-        return $_SESSION['flashmessages'][$data];
+    if (isset($_SESSION['basephp-flash'][$data])) {
+        return $_SESSION['basephp-flash'][$data];
     }
 }
 
 function messages($data)
 {
-    if (isset($_SESSION['flashmessages'][$data])) {
+    if (isset($_SESSION['basephp-flash'][$data])) {
         return true;
     } else {
         return false;
@@ -57,8 +57,8 @@ function messages($data)
 
 function old($input)
 {
-    if (isset($_SESSION['flashmessages']['inputs'][$input])) {
-        return $_SESSION['flashmessages']['inputs'][$input];
+    if (isset($_SESSION['basephp-flash']['inputs'][$input])) {
+        return $_SESSION['basephp-flash']['inputs'][$input];
     } else {
         return null;
     }

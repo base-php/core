@@ -1,8 +1,8 @@
 <?php
 
-$schema['default']->dropIfExists('user_has_role');
+$schema['default']->dropIfExists('user_has_roles');
 
-$schema['default']->create('user_has_role', function ($table) {
+$schema['default']->create('user_has_roles', function ($table) {
 	$table->id();
 
 	$table->unsignedBigInteger('id_user');

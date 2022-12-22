@@ -83,7 +83,8 @@ class App
         $response = $app['router']->dispatch($request);
         $response->send();
 
-        unset($_SESSION['user']);
-        unset($_SESSION['flashmessages']);
+        unset($_SESSION['basephp-user']);
+        unset($_SESSION['basephp-flash']);
+        unset($_SESSION['basephp-permissions']);
     }
 }

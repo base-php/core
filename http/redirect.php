@@ -17,7 +17,7 @@ class Redirect
 
     public function with($key, $value)
     {
-        $_SESSION['flashmessages'][$key] = $value;
+        $_SESSION['basephp-flash'][$key] = $value;
         return $this;
     }
 
