@@ -31,6 +31,7 @@ include __dir__ . '/../commands/commands/model-show.php';
 include __dir__ . '/../commands/commands/notifications-table.php';
 include __dir__ . '/../commands/commands/permissions-table.php';
 include __dir__ . '/../commands/commands/queue-table.php';
+include __dir__ . '/../commands/commands/queue-work.php';
 include __dir__ . '/../commands/commands/server.php';
 include __dir__ . '/../commands/commands/shell.php';
 include __dir__ . '/../commands/commands/test.php';

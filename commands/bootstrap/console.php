@@ -37,6 +37,7 @@ class Console
         $application->add(new NotificationsTable());
         $application->add(new PermissionsTable());
         $application->add(new QueueTable());
+        $application->add(new QueueWork());
         $application->add(new Server());
         $application->add(new Shell());
         $application->add(new Test());
