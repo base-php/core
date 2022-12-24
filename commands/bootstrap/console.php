@@ -12,8 +12,6 @@ class Console
 
         $application->add(new About());
         $application->add(new AuthInstall());
-        $application->add(new CreatePermission());
-        $application->add(new CreateRole());
         $application->add(new DBBackup());
         $application->add(new Docs());
         $application->add(new Env());
@@ -37,6 +35,8 @@ class Console
         $application->add(new Migrate());
         $application->add(new ModelShow());
         $application->add(new NotificationsTable());
+        $application->add(new PermissionsCreatePermission());
+        $application->add(new PermissionsCreateRole());
         $application->add(new PermissionsTable());
         $application->add(new QueueTable());
         $application->add(new QueueWork());

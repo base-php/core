@@ -4,9 +4,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CreatePermission extends Command
+class PermissionsCreatePermission extends Command
 {
-    protected static $defaultName = 'permission:create-permission';
+    protected static $defaultName = 'permissions:create-permission';
 
     protected static $defaultDescription = 'Crea un permiso';
 
@@ -17,8 +17,10 @@ class CreatePermission extends Command
 
     protected function execute($input, $output)
     {
+        include 'vendor/base-php/core/database/database.php';
+
         $name = $input->getArgument('name');
-        $description = $input->getArgument('description');
+        $description = $input->getArgument('name');
 
         DB::table('permissions')->insert([
             'name' => $name,
