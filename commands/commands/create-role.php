@@ -4,11 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CreatePermission extends Command
+class CreateRole extends Command
 {
-    protected static $defaultName = 'permission:create-permission';
+    protected static $defaultName = 'permission:create-role';
 
-    protected static $defaultDescription = 'Crea un permiso';
+    protected static $defaultDescription = 'Crea un rol';
 
     public function configure()
     {
@@ -20,13 +20,13 @@ class CreatePermission extends Command
         $name = $input->getArgument('name');
         $description = $input->getArgument('description');
 
-        DB::table('permissions')->insert([
+        DB::table('roles')->insert([
             'name' => $name,
             'description' => $description
         ]);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Permission '$name' created.");
+        $style->success("Role '$name' created.");
 
         return Command::SUCCESS;
     }
