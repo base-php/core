@@ -7,5 +7,5 @@ $schema['default']->create('failed_jobs', function ($table) {
     $table->string('queue');
     $table->text('payload');
     $table->text('exception');
-    $table->timestamp('fail_date')->useCurrent();
+    $table->timestamp('date_fail')->useCurrent();
 });
