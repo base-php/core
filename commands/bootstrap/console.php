@@ -38,6 +38,7 @@ class Console
         $application->add(new PermissionsCreatePermission());
         $application->add(new PermissionsCreateRole());
         $application->add(new PermissionsTable());
+        $application->add(new QueueClear());
         $application->add(new QueueTable());
         $application->add(new QueueWork());
         $application->add(new Server());

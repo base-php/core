@@ -23,9 +23,26 @@ class QueueWork extends Command
             $class = $payload->job;
             $params = $payload->params;
 
-            $class = new $class($params);
-            $class->handle();
+            try {
+                $class = new $class($params);
+                $class->handle();
+
+                $style->success($payload->job);
+
+            } catch (Error $exception) {
+                DB::table('failed_jobs')
+                    ->insert([
+                        'queue' => $job->queue,
+                        'payload' => $job->payload,
+                        'exception' => json_encode($exception)
+                    ]);
+
+                $style->error($payload->job);
+            }
         }
+
+        DB::table('jobs')
+            ->delete();
 
         return Command::SUCCESS;
     }
