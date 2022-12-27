@@ -34,6 +34,7 @@ include __dir__ . '/../commands/commands/permissions-create-role.php';
 include __dir__ . '/../commands/commands/permissions-table.php';
 include __dir__ . '/../commands/commands/queue-clear.php';
 include __dir__ . '/../commands/commands/queue-failed.php';
+include __dir__ . '/../commands/commands/queue-flush.php';
 include __dir__ . '/../commands/commands/queue-table.php';
 include __dir__ . '/../commands/commands/queue-work.php';
 include __dir__ . '/../commands/commands/server.php';
