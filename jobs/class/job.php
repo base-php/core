@@ -38,8 +38,7 @@ class Job
             'queue'        => $queue,
             'payload'      => $payload,
             'attempts'     => 1,
-            'date_reserve' => $date_reserve,
-            'date_create'  => time()
+            'date_reserve' => $date_reserve
         ];
 
         DB::table('jobs')->insert($data);

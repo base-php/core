@@ -8,5 +8,7 @@ $schema['default']->create('jobs', function ($table) {
     $table->text('payload');
     $table->integer('attempts');
     $table->integer('date_reserve');
-    $table->integer('date_create');
+
+    $table->integer('date_create')
+        ->useCurrent();
 });

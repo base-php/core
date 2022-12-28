@@ -41,6 +41,7 @@ class Console
         $application->add(new QueueClear());
         $application->add(new QueueFailed());
         $application->add(new QueueFlush());
+        $application->add(new QueueRetry());
         $application->add(new QueueTable());
         $application->add(new QueueWork());
         $application->add(new Server());
