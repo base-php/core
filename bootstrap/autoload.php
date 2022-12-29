@@ -65,7 +65,7 @@ include __dir__ . '/../database/model.php';
 include __dir__ . '/../jobs/class/job.php';
 include __dir__ . '/../lang/lang.php';
 include __dir__ . '/../logs/commands/logs-table.php';
-include __dir__ . '/../logs/models/Log.php';
+include __dir__ . '/../logs/traits/Logs.php';
 include __dir__ . '/../permissions/middleware/Can.php';
 include __dir__ . '/../permissions/models/Permission.php';
 include __dir__ . '/../permissions/models/Role.php';
