@@ -7,6 +7,23 @@ use Illuminate\Events\Dispatcher as EventsDispatcher;
 
 trait Logs
 {
+    public function action($action)
+    {
+        $id_user = $this->id_user ?? null;
+        $id_model = $this->id_model ?? null;
+        $model = $this->model ?? null;
+
+        $data = [
+            'id_user' => $id_user,
+            'id_model' => $id_model,
+            'model' => $model,
+            'action' => $action,
+        ]
+
+        DB::table('logs')
+            ->insert($data);
+    }
+
 	protected static function booted()
     {
         static::boot();
@@ -70,5 +87,18 @@ trait Logs
         	DB::table('logs')
         		->insert($data);
         });
+    }
+
+    public function by($user)
+    {
+        $this->id_user = $user->id ?? $user['id'] ?? $user ?? null;
+        return $this;
+    }
+
+    public function on($model)
+    {
+        $this->id_model = $model->id;
+        $this->model = get_class($model);
+        return $this;
     }
 }

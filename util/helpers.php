@@ -142,7 +142,9 @@ function lang($key)
 
 function logs()
 {
-    return DB::table('logs');
+    return new class {
+        use Logs;
+    };
 }
 
 function redirect($to)
