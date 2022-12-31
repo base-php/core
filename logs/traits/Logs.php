@@ -18,10 +18,16 @@ trait Logs
             'id_model' => $id_model,
             'model' => $model,
             'action' => $action,
-        ]
+        ];
 
         DB::table('logs')
             ->insert($data);
+    }
+
+    public function all()
+    {
+        $logs = DB::table('logs')->get();
+        return $logs;
     }
 
 	protected static function booted()
