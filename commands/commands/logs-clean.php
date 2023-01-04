@@ -36,18 +36,20 @@ class LogsClean extends Command
             $date->modify("-$days");
 
             $count = DB::table('logs')
-                ->where('date_create', '>=', $date)
+                ->where('date_create', '<=', $date)
                 ->count();
 
             DB::table('logs')
-                ->where('date_create', '>=', $date)
+                ->where('date_create', '<=', $date)
                 ->delete();
 
         } else {
             $count = DB::table('logs')
+                ->where('date_create', '<', now('Y-m-d'))
                 ->count();
 
             DB::table('logs')
+                ->where('date_create', '<', now('Y-m-d'))
                 ->delete();
         }
 

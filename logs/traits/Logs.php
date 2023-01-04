@@ -101,6 +101,19 @@ trait Logs
         return $this;
     }
 
+    public function changes()
+    {
+        $log = DB::table('logs')
+            ->where('id', $this->id)
+            ->first();
+
+        if (isset($log->action) && $log->action == 'update') {
+            return json_decode($log->parameters);
+        }
+
+        return null;
+    }
+
     public function on($model)
     {
         $this->id_model = $model->id;
