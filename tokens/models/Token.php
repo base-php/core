@@ -6,5 +6,5 @@ class Token extends Model
 {
 	protected $table = 'tokens';
 
-	protected $fillable = ['tokenable_type', 'tokenable_id', 'name', 'token', 'date_expire'];
+	protected $fillable = ['name', 'model', 'id_model', 'token', 'date_expire'];
 }

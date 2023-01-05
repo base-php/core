@@ -8,12 +8,12 @@ trait HasTokens
 {
 	public function createToken($name)
 	{
-		$tokenable_type = get_class($this);
-		$tokenable_id = $this->id;
+		$model = get_class($this);
+		$id_model = $this->id;
 
 		$time = time();
 
-		$string = "$time-$name-$tokenable_type-$tokenable_id";
+		$string = "$time-$name-$model-$id_model";
 		$hash = hash('sha256', $string);
 
 		$seconds = config('token_expire') ?? 86400;
@@ -24,8 +24,8 @@ trait HasTokens
 			->timestamp;
 
 		$token = Token::create([
-			'tokenable_type' => get_class($this),
-			'tokenable_id' => $this->id,
+			'model' => get_class($this),
+			'id_model' => $this->id,
 			'name' => $name,
 			'token' => $hash,
 			'date_expire' => $date_expire
@@ -36,11 +36,11 @@ trait HasTokens
 
 	public function tokens()
 	{
-		$tokenable_type = get_class($this);
-		$tokenable_id = $this->id;
+		$model = get_class($this);
+		$id_model = $this->id;
 
-		$tokens = Token::where('tokenable_type', $tokenable_type)
-			->where('tokenable_id')
+		$tokens = Token::where('model', $model)
+			->where('id_model', $id_model)
 			->get();
 
 		return $tokens;

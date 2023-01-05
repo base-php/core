@@ -19,8 +19,8 @@ class TokenBasedAuth
             return abort(401);
         }
 
-        if ($token->tokenable_type == 'App\Models\User') {
-            $user = User::find($token->tokenable_id);
+        if ($token->model == 'App\Models\User') {
+            $user = User::find($token->id_model);
             session('id', $user->id);
         }
 
