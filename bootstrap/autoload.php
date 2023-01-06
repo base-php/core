@@ -43,6 +43,7 @@ include __dir__ . '/../commands/commands/server.php';
 include __dir__ . '/../commands/commands/shell.php';
 include __dir__ . '/../commands/commands/test.php';
 include __dir__ . '/../commands/commands/tokens-table.php';
+include __dir__ . '/../commands/commands/up.php';
 include __dir__ . '/../commands/commands/view-clear.php';
 include __dir__ . '/../export/excel.php';
 include __dir__ . '/../export/pdf.php';

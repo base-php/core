@@ -13,6 +13,8 @@ class QueueWork extends Command
     {
         include 'vendor/base-php/core/database/database.php';
 
+        $style = new SymfonyStyle($input, $output);
+
         $jobs = DB::table('jobs')
             ->where('date_reserve', '<=', time())
             ->get();
