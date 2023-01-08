@@ -11,7 +11,7 @@ class LogsTable extends Command
 
     protected function execute($input, $output)
     {
-        copy('vendor/base-php/core/logs/migrations/1665063738_logs.php', 'database/1665063738_logs.php');
+        copy('vendor/base-php/core/logs/migrations/logs.php', 'database/'.date('Y_m_d_His').'_logs.php');
 
         $style = new SymfonyStyle($input, $output);
         $style->success("Migración creada satisfactoriamente.");

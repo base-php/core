@@ -1,7 +1,6 @@
 <?php
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class Migrate extends Command
@@ -10,46 +9,45 @@ class Migrate extends Command
 
     protected static $defaultDescription = 'Ejecuta las migraciones de base de datos';
 
-    public function configure()
-    {
-        $this->addArgument('file', InputArgument::OPTIONAL);
-    }
-
     protected function execute($input, $output)
     {
-        include 'vendor/base-php/core/database/database.php';
-
-        $config = include 'app/config.php';
-
-        foreach ($config['database'] as $item) {
-            $name = $item['name'];
-            $schema[$name] = $capsule->getConnection($name)->getSchemaBuilder();
-
-            if ($item['driver'] != 'sqlite') {
-                $schema[$name]->disableForeignKeyConstraints();
-            }
-        }
-
-        $file = $input->getArgument('file');
-
         $style = new SymfonyStyle($input, $output);
 
-        if ($file) {
-            if (file_exists('database/' . $file)) {
-                include 'database/' . $file;
-                $style->success("$file está ok.");
+        foreach (scandir('database') as $item) {
+            if (!is_dir($item)) {
+                $name = str_replace('.php', '', $item);
 
-            } else {
-                $style->error("El archivo '$file' no existe.");
-            }
+                $class = require("database/$item");
 
-        } else {
-            $scandir = scandir('database');
+                $exists = DB::connection($class->connection)
+                    ->table('migrations')
+                    ->where('name', $name)
+                    ->get();
 
-            foreach ($scandir as $item) {
-                if (!is_dir($item)) {
-                    include 'database/' . $item;
+                if ($exists->count()) {
+                    continue;
+                }
+
+                try {
+                    $class->up();
+
+                    $batch = DB::connection($class->connection)
+                        ->table('migrations')
+                        ->max('batch');
+
+                    $batch++;
+
+                    DB::connection($class->connection)
+                        ->table('migrations')
+                        ->insert([
+                            'name' => $name,
+                            'batch' => $batch
+                        ]);
+
                     $style->success("$item está ok.");
+                }
+                catch (Exception $exception) {
+                    $style->error($exception->getMessage());
                 }
             }
         }

@@ -11,10 +11,10 @@ class PermissionsTable extends Command
 
     protected function execute($input, $output)
     {
-        copy('vendor/base-php/core/permissions/migrations/1665158907_permissions.php', 'database/1665158907_permissions.php');
-        copy('vendor/base-php/core/permissions/migrations/1665159481_roles.php', 'database/1665159481_roles.php');
-        copy('vendor/base-php/core/permissions/migrations/1665159625_user_has_roles.php', 'database/1665159625_user_has_roles.php');
-        copy('vendor/base-php/core/permissions/migrations/1665159717_role_has_permissions.php', 'database/1665159717_role_has_permissions.php');
+        copy('vendor/base-php/core/permissions/migrations/permissions.php', 'database/'.date('Y_m_d_His').'_permissions.php');
+        copy('vendor/base-php/core/permissions/migrations/roles.php', 'database/'.date('Y_m_d_His').'_roles.php');
+        copy('vendor/base-php/core/permissions/migrations/user_has_roles.php', 'database/'.date('Y_m_d_His').'_user_has_roles.php');
+        copy('vendor/base-php/core/permissions/migrations/role_has_permissions.php', 'database/'.date('Y_m_d_His').'_role_has_permissions.php');
 
         $style = new SymfonyStyle($input, $output);
         $style->success("Migración creada satisfactoriamente.");

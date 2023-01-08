@@ -11,7 +11,7 @@ class TokensTable extends Command
 
     protected function execute($input, $output)
     {
-        copy('vendor/base-php/core/tokens/migrations/1671030761_tokens.php', 'database/1671030761_tokens.php');
+        copy('vendor/base-php/core/tokens/migrations/tokens.php', 'database/'.date('Y_m_d_His').'tokens.php');
 
         $style = new SymfonyStyle($input, $output);
         $style->success("Migración creada satisfactoriamente.");

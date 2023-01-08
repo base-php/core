@@ -59,6 +59,7 @@ include __dir__ . '/../routing/BaseController.php';
 include __dir__ . '/../database/soft-deletes.php';
 include __dir__ . '/../database/has-relationships.php';
 include __dir__ . '/../database/base-model.php';
+include __dir__ . '/../database/migration.php';
 include __dir__ . '/../pagination/Paginator.php';
 include __dir__ . '/../pagination/LengthAwarePaginator.php';
 include __dir__ . '/../database/builder.php';

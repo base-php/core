@@ -34,7 +34,7 @@ class MakeMigration extends Command
             mkdir('database');
         }
 
-        $name = time() . '_' . $name;
+        $name = time('Y_m_d_His') . '_' . $name;
 
         $fopen = fopen('database/' . $name . '.php', 'w+');
         fwrite($fopen, $content);

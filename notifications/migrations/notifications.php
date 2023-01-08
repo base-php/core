@@ -9,8 +9,11 @@ return new class extends Migration
      */
 	public function up(): void
 	{
-		$this->schema->create('MigrationName', function ($table) {
+		$this->schema->create('notifications', function ($table) {
 			$table->id();
+			$table->string('type');
+			$table->text('data');
+			$table->datetime('date_read')->nullable();
 			$table->datetime('date_create')->useCurrent();
 			$table->datetime('date_update')->useCurrent()->setCurrentOnUpdate();
 		});
@@ -22,6 +25,6 @@ return new class extends Migration
      */
 	public function down(): void
 	{
-		$this->schema->dropIfExists('MigrationName');
+		$this->schema->dropIfExists('notifications');
 	}
 };

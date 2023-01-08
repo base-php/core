@@ -9,8 +9,13 @@ return new class extends Migration
      */
 	public function up(): void
 	{
-		$this->schema->create('MigrationName', function ($table) {
+		$this->schema->create('tokens', function ($table) {
 			$table->id();
+			$table->string('name');
+			$table->string('model');
+			$table->int('id_model');
+			$table->string('token', 64)->unique();
+			$table->timestamp('date_expire')->nullable();
 			$table->datetime('date_create')->useCurrent();
 			$table->datetime('date_update')->useCurrent()->setCurrentOnUpdate();
 		});
@@ -22,6 +27,6 @@ return new class extends Migration
      */
 	public function down(): void
 	{
-		$this->schema->dropIfExists('MigrationName');
+		$this->schema->dropIfExists('tokens');
 	}
 };

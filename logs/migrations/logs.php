@@ -9,10 +9,21 @@ return new class extends Migration
      */
 	public function up(): void
 	{
-		$this->schema->create('MigrationName', function ($table) {
+		$this->schema->create('logs', function ($table) {
 			$table->id();
+
+			$table->unsignedBigInteger('id_user')->nullable();
+			$table->unsignedBigInteger('id_model')->nullable();
+
+			$table->string('model')->nullable();
+			$table->string('action');
+
+			$table->text('parameters')->nullable();
+
 			$table->datetime('date_create')->useCurrent();
 			$table->datetime('date_update')->useCurrent()->setCurrentOnUpdate();
+
+			$table->foreign('id_user')->references('id')->on('users');
 		});
 	}
 	/**
@@ -22,6 +33,6 @@ return new class extends Migration
      */
 	public function down(): void
 	{
-		$this->schema->dropIfExists('MigrationName');
+		$this->schema->dropIfExists('logs');
 	}
 };
