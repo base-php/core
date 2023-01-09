@@ -28,6 +28,7 @@ include __dir__ . '/../commands/commands/make-rule.php';
 include __dir__ . '/../commands/commands/make-test.php';
 include __dir__ . '/../commands/commands/make-validation.php';
 include __dir__ . '/../commands/commands/migrate.php';
+include __dir__ . '/../commands/commands/migrate-rollback.php';
 include __dir__ . '/../commands/commands/model-show.php';
 include __dir__ . '/../commands/commands/notifications-table.php';
 include __dir__ . '/../commands/commands/permissions-create-permission.php';

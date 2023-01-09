@@ -10,15 +10,16 @@ foreach ($config['database'] as $item) {
     $database = ($item['driver'] == 'sqlite') ? $item['database'] . '.sqlite' : $item['database'];
 
     $capsule->addConnection([
-        'driver'    => $item['driver'],
-        'host'      => $item['host'],
-        'database'  => $database,
-        'username'  => $item['username'],
-        'password'  => $item['password'],
-        'charset'   => 'utf8',
+        'driver' => $item['driver'],
+        'host' => $item['host'],
+        'database' => $database,
+        'username' => $item['username'],
+        'password' => $item['password'],
+        'port' => $item['port'],
+        'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-        'strict'    => false
+        'prefix' => '',
+        'strict' => false
     ], $item['name']);
 }
 
