@@ -20,6 +20,7 @@ return new class extends Migration
 			$table->datetime('date_update')->useCurrent()->setCurrentOnUpdate();
 		});
 	}
+	
 	/**
      * Reverse the migrations.
      *

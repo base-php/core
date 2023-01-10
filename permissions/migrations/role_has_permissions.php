@@ -31,6 +31,7 @@ return new class extends Migration
 				->on('permissions');
 		});
 	}
+	
 	/**
      * Reverse the migrations.
      *

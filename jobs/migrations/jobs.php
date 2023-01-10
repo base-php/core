@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('date_create')->useCurrent();
         });
     }
+    
     /**
      * Reverse the migrations.
      *

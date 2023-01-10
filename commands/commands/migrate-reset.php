@@ -4,15 +4,14 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class MigrateRollback extends Command
+class MigrateReset extends Command
 {
-    protected static $defaultName = 'migrate:rollback';
+    protected static $defaultName = 'migrate:reset';
 
-    protected static $defaultDescription = 'Revertir la última migración de la base de datos';
+    protected static $defaultDescription = 'Revertir todas las migraciones';
 
     public function configure()
     {
-        $this->addOption('step', null, InputOption::VALUE_OPTIONAL, 'Número de migraciones a revertir', 1);
         $this->addOption('database', null, InputOption::VALUE_OPTIONAL, 'Conexión de base de datos a utilizar', 'default');
     }
 
@@ -21,18 +20,10 @@ class MigrateRollback extends Command
         require 'vendor/base-php/core/database/database.php';
 
         $config = require 'app/config.php';
-
-        $step = $input->getOption('step');
         $connection = $input->getOption('database');
-
-        $batch = DB::connection($connection)
-            ->table('migrations')
-            ->max('batch');
 
         $migrations = DB::connection($connection)
             ->table('migrations')
-            ->orderByDesc('batch')
-            ->limit($step)
             ->get();
 
         $style = new SymfonyStyle($input, $output);
