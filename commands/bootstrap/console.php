@@ -34,6 +34,8 @@ class Console
         $application->add(new MakeTest());
         $application->add(new MakeValidation());
         $application->add(new Migrate());
+        $application->add(new MigrateRefresh());
+        $application->add(new MigrateReset());
         $application->add(new MigrateRollback());
         $application->add(new ModelShow());
         $application->add(new NotificationsTable());
