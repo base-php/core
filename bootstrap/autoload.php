@@ -8,6 +8,7 @@ include __dir__ . '/../commands/class/command.php';
 include __dir__ . '/../commands/commands/about.php';
 include __dir__ . '/../commands/commands/auth-install.php';
 include __dir__ . '/../commands/commands/db-backup.php';
+include __dir__ . '/../commands/commands/db-wipe.php';
 include __dir__ . '/../commands/commands/docs.php';
 include __dir__ . '/../commands/commands/env.php';
 include __dir__ . '/../commands/commands/inspire.php';
