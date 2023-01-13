@@ -13,6 +13,7 @@ class Console
         $application->add(new About());
         $application->add(new AuthInstall());
         $application->add(new DBBackup());
+        $application->add(new DBTable());
         $application->add(new DBWipe());
         $application->add(new Docs());
         $application->add(new Env());

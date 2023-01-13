@@ -27,11 +27,12 @@ class MakeDatabase extends Command
 
         foreach ($config['database'] as $item) {
             if ($item['name'] == $connection) {
-                $driver     = $item['driver'];
-                $host       = $item['host'];
-                $username   = $item['username'];
-                $password   = $item['password'];
-                $database   = $item['database'];
+                $driver = $item['driver'];
+                $host = $item['host'];
+                $username = $item['username'];
+                $password = $item['password'];
+                $database = $item['database'];
+                $port = $item['port'];
             }
         }
 
@@ -44,17 +45,17 @@ class MakeDatabase extends Command
             }
 
             if ($driver == 'mysql') {
-                $pdo = new PDO("$driver:host=$host;", $username, $password);
+                $pdo = new PDO("$driver:host=$host;port=$port", $username, $password);
                 $pdo->exec('CREATE DATABASE IF NOT EXISTS ' . $database);
             }
 
             if ($driver == 'pgsql') {
-                $pdo = new PDO("$driver:host=$host;", $username, $password);
+                $pdo = new PDO("$driver:host=$host;port=$port", $username, $password);
                 $pdo->exec('CREATE DATABASE ' . $database);
             }
 
             if ($driver == 'sqlsrv') {
-                $pdo = new PDO("$driver:server=$host;", $username, $password);
+                $pdo = new PDO("$driver:server=$host;port=$port", $username, $password);
                 $pdo->exec('CREATE DATABASE ' . $database);
             }
 
