@@ -29,40 +29,40 @@ class Storage
     public function __construct($adapter = 'local')
     {
         if ($adapter == 'local') {
-            $adapter        = new LocalFilesystemAdapter($_SERVER['DOCUMENT_ROOT']);
+            $adapter = new LocalFilesystemAdapter($_SERVER['DOCUMENT_ROOT']);
             $this->instance = new Filesystem($adapter);
             $this->adapter  = 'local';
         }
 
         // spatie/flysystem-dropbox
         if ($adapter == 'dropbox') {
-            $client                 = new Client(config('dropbox'));
-            $this->adapterInstance  = new DropboxAdapter($client);
-            $this->instance         = new Filesystem($this->adapterInstance, ['case_sensitive' => false]);
-            $this->adapter          = 'dropbox';
+            $client = new Client(config('dropbox'));
+            $this->adapterInstance = new DropboxAdapter($client);
+            $this->instance = new Filesystem($this->adapterInstance, ['case_sensitive' => false]);
+            $this->adapter = 'dropbox';
         }
 
         // league/flysystem-aws-s3-v3
         if ($adapter == 's3') {
             $client = new S3MultiRegionClient([
                 'credentials' => [
-                    'key'    => config('s3')->key,
+                    'key' => config('s3')->key,
                     'secret' => config('s3')->secret,
                 ],
-                'version'     => 'latest|version',
+                'version' => 'latest|version',
             ]);
 
-            $this->adapterInstance  = new AwsS3Adapter($client, config('s3')->bucket);
-            $this->instance         = new Filesystem($this->adapterInstance);
-            $this->adapter          = 's3';
+            $this->adapterInstance = new AwsS3Adapter($client, config('s3')->bucket);
+            $this->instance = new Filesystem($this->adapterInstance);
+            $this->adapter = 's3';
         }
 
         // league/flysystem-ftp
         if ($adapter == 'ftp') {
             $adapter = new FtpAdapter(
                 FtpConnectionOptions::fromArray([
-                    'host'     => config('ftp')->host,
-                    'root'     => config('ftp')->root,
+                    'host' => config('ftp')->host,
+                    'root' => config('ftp')->root,
                     'username' => config('ftp')->username,
                     'password' => config('ftp')->password,
                 ]),
@@ -72,7 +72,7 @@ class Storage
             );
 
             $this->instance = new Filesystem($adapter);
-            $this->adapter  = 'ftp';
+            $this->adapter = 'ftp';
         }
 
         // league/flysystem-sftp
@@ -94,11 +94,11 @@ class Storage
                 config('sftp')->root,
                 PortableVisibilityConverter::fromArray([
                     'file' => [
-                        'public'  => 0640,
+                        'public' => 0640,
                         'private' => 0604,
                     ],
-                    'dir'  => [
-                        'public'  => 0740,
+                    'dir' => [
+                        'public' => 0740,
                         'private' => 7604,
                     ],
                 ])

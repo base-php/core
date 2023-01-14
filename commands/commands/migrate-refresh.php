@@ -32,7 +32,7 @@ class MigrateRefresh extends Command
                     ->where('name', $name)
                     ->delete();
 
-                $style->warning($name . ' revertida.');
+                $style->warning($name);
 
                 $class->up();
 
@@ -43,7 +43,7 @@ class MigrateRefresh extends Command
                         'batch' => 1
                     ]);
 
-                $style->success($name . ' está ok.');
+                $style->success($name);
             }
             catch (Exception $exception) {
                 $style->error($exception->getMessage());

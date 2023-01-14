@@ -35,9 +35,9 @@ class Job
         $date_reserve = isset($this->date_reserve) ? $this->date_reserve : time();
 
         $data = [
-            'queue'        => $queue,
-            'payload'      => $payload,
-            'attempts'     => 1,
+            'queue' => $queue,
+            'payload' => $payload,
+            'attempts' => 1,
             'date_reserve' => $date_reserve
         ];
 

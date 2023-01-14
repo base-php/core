@@ -49,11 +49,11 @@ class AuthController extends Controller
             }
 
             $user = User::create([
-                'name'          => request('name'),
-                'email'         => request('email'),
-                'password'      => request('password'),
-                'date_create'   => now('Y-m-d H:i:s'),
-                'date_update'   => now('Y-m-d H:i:s')
+                'name' => request('name'),
+                'email' => request('email'),
+                'password' => request('password'),
+                'date_create' => now('Y-m-d H:i:s'),
+                'date_update' => now('Y-m-d H:i:s')
             ]);
 
             $user->update(['hash' => encrypt($user->id)]);

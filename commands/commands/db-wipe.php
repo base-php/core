@@ -1,14 +1,16 @@
 <?php
 
+use Doctrine\DBAL\DriverManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class DBWipe extends Command
 {
     protected static $defaultName = 'db:wipe';
 
-    protected static $defaultDescription = 'Eliminar todas las tablas, vistas y tipos';
+    protected static $defaultDescription = 'Eliminar todas las tablas';
 
     public function configure()
     {
@@ -19,16 +21,59 @@ class DBWipe extends Command
     {
         include 'vendor/base-php/core/database/database.php';
 
+        if (!class_exists('Doctrine\DBAL\DriverManager')) {
+            $helper = $this->getHelper('question');
+
+            $text = 'La inspección de información de la base de datos requiere el paquete doctrine/dbal ¿Te gustaría instalarlo? (si/no) [no]';
+            $question = new ConfirmationQuestion($text, false, '/^(s|y)/i');
+
+            if ($helper->ask($input, $output, $question)) {
+                system('composer require doctrine/dbal');
+                return Command::SUCCESS;
+            }
+
+            return Command::SUCCESS;
+        }
+
         $connection = $input->getOption('database');
 
-        $tables = DB::connection($connection)
-            ->select('SHOW FULL TABLES');
+        $config = require 'app/config.php';
 
-        foreach ($tables as $table) {
-            $item = $table->Table_type == 'VIEW' ? 'VIEW' : 'TABLE';
+        $names = array_column($config['database'], 'name');
+        $connection = $input->getOption('database');
 
-            DB::connection($connection)
-                ->statement("DROP $item $table->Tables_in_base");
+        $i = array_search($connection, $names);
+
+        if ($config['database'][$i]['driver'] == 'mysql') {
+            $driver = 'pdo_mysql';
+        }
+
+        if ($config['database'][$i]['driver'] == 'sqlite') {
+            $driver = 'pdo_sqlite';
+        }
+
+        if ($config['database'][$i]['driver'] == 'pgsql') {
+            $driver = 'pdo_pgsql';
+        }
+
+        if ($config['database'][$i]['driver'] == 'sqlsrv') {
+            $driver = 'pdo_sqlsrv';
+        }
+
+        $doctrine = DriverManager::getConnection([
+            'dbname' => $config['database'][$i]['database'],
+            'user' => $config['database'][$i]['username'],
+            'password' => $config['database'][$i]['password'],
+            'host' => $config['database'][$i]['host'],
+            'driver' => $driver
+        ]);
+
+        $schemaManager = $doctrine->createSchemaManager();
+
+        $schema = $capsule->getConnection($connection)->getSchemaBuilder();
+
+        foreach ($schemaManager->listTables() as $table) {
+            $schema->dropIfExists($table->getName());
         }
 
         $style = new SymfonyStyle($input, $output);

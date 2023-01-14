@@ -12,13 +12,13 @@ class UserUpdateValidation extends Validation
 	public function rules(): array
 	{
 		return [
-			'name' 				=> 'required',
-			'email' 			=> [
+			'name' => 'required',
+			'email' => [
 				'required',
 				'email',
 				Rule::unique('users')->ignore(request('id'))
 			],
-			'confirm_password' 	=> 'same:password'
+			'confirm_password' => 'same:password'
 		];
 	}
 
@@ -30,10 +30,10 @@ class UserUpdateValidation extends Validation
 	public function messages(): array
 	{
 		return [
-			'name.required' 		=> lang('validations.name_required'),
-			'email.required' 		=> lang('validations.email_required'),
-			'email.email' 			=> lang('validations.email_email'),
-			'email.unique' 			=> lang('validations.email_unique'),
+			'name.required' => lang('validations.name_required'),
+			'email.required' => lang('validations.email_required'),
+			'email.email' => lang('validations.email_email'),
+			'email.unique' => lang('validations.email_unique'),
 			'confirm_password.same' => lang('validations.password_same')
 		];
 	}

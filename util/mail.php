@@ -13,11 +13,11 @@ class Mail
 
         if ($_SERVER['REMOTE_ADDR'] == '::1') {
             $mail->isSMTP();
-            $mail->Host         = config('smtp')->host;
-            $mail->SMTPAuth     = true;
-            $mail->Username     = config('smtp')->username;
-            $mail->Password     = config('smtp')->password;
-            $mail->Port         = config('smtp')->port;    
+            $mail->Host = config('smtp')->host;
+            $mail->SMTPAuth = true;
+            $mail->Username = config('smtp')->username;
+            $mail->Password = config('smtp')->password;
+            $mail->Port = config('smtp')->port;    
         }
 
         $mail->setFrom($this->from);

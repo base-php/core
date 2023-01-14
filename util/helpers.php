@@ -204,10 +204,10 @@ function validation($data, $rules, $messages, $redirect)
 {
     include __dir__ . '/../database/database.php';
 
-    $files      = new Filesystem();
-    $loader     = new FileLoader($files, '');
+    $files = new Filesystem();
+    $loader = new FileLoader($files, '');
     $translator = new Translator($loader, $_ENV['language']);
-    $factory    = new Validation($translator);
+    $factory = new Validation($translator);
 
     $verifier = new DatabasePresenceVerifier($capsule->getDatabaseManager());
 
@@ -219,7 +219,7 @@ function validation($data, $rules, $messages, $redirect)
         $errors = $validation->errors()->all();
 
         $_SESSION['basephp-flash']['errors'] = $errors;
-        $_SESSION['basephp-flash']['inputs']  = $data;
+        $_SESSION['basephp-flash']['inputs'] = $data;
 
         $redirect = ($redirect) ? $redirect : $_SERVER['HTTP_REFERER'];
 

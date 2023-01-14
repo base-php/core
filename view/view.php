@@ -28,6 +28,11 @@ class View
             $find = true;
         }
 
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/http/views/' . $view . '.blade.php')) {
+            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/http/views/' . $view . '.blade.php');
+            $find = true;
+        }
+
         if ($find == false) {
             $view = str_replace('/', '.', $view);
             throw new Exception("View [$view] not found");

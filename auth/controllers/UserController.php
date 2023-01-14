@@ -52,10 +52,10 @@ class UserController extends Controller
         $file = request('photo')->save('resources/assets/img');
 
         $user = User::create([
-            'name'          => request('name'),
-            'email'         => request('email'),
-            'password'      => encrypt(request('password')),
-            'photo'         => $file->filename
+            'name' => request('name'),
+            'email' => request('email'),
+            'password' => encrypt(request('password')),
+            'photo' => $file->filename
         ]);
 
         $user->update(['hash' => encrypt($user->id)]);
@@ -87,8 +87,8 @@ class UserController extends Controller
 
         $user = User::find(request('id'));
         $user->update([
-            'name'          => request('name'),
-            'email'         => request('email')
+            'name' => request('name'),
+            'email' => request('email')
         ]);
 
         if (request('password')) {

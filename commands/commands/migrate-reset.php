@@ -38,7 +38,7 @@ class MigrateReset extends Command
                     ->where('id', $migration->id)
                     ->delete();
 
-                $style->warning($migration->name . ' revertida.');
+                $style->warning($migration->name);
             }
             catch (Exception $exception) {
                 $style->error($exception->getMessage());

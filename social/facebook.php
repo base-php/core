@@ -20,8 +20,8 @@ class Facebook
         $class = new static;
 
         $facebook = new FacebookSDK([
-        'app_id'                => config('facebook')->app_id,
-        'app_secret'            => config('facebook')->app_secret,
+        'app_id' => config('facebook')->app_id,
+        'app_secret' => config('facebook')->app_secret,
         'default_graph_version' => 'v2.10',
         ]);
 

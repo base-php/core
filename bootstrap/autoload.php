@@ -45,6 +45,7 @@ include __dir__ . '/../commands/commands/queue-flush.php';
 include __dir__ . '/../commands/commands/queue-retry.php';
 include __dir__ . '/../commands/commands/queue-table.php';
 include __dir__ . '/../commands/commands/queue-work.php';
+include __dir__ . '/../commands/commands/route-list.php';
 include __dir__ . '/../commands/commands/server.php';
 include __dir__ . '/../commands/commands/shell.php';
 include __dir__ . '/../commands/commands/test.php';

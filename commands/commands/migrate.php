@@ -44,7 +44,7 @@ class Migrate extends Command
                             'batch' => $batch
                         ]);
 
-                    $style->success("$item está ok.");
+                    $style->success($item);
                 }
                 catch (Exception $exception) {
                     $style->error($exception->getMessage());
