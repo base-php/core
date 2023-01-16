@@ -45,6 +45,11 @@ class App
         }
 
 
+        if ($_ENV['maintenance']) {
+            return abort(503);
+        }
+
+
         // Container
 
         $app = new Container;
