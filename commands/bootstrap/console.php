@@ -1,11 +1,14 @@
 <?php
 
+use NunoMaduro\Collision\Provider as Collision;
 use Symfony\Component\Console\Application;
 
 class Console
 {
     public static function run()
     {
+        (new Collision)->register();
+
         $config = require 'app/config.php';
 
         $application = new Application('Base PHP ' . $config['version'] . ' by Nisa Delgado');
