@@ -9,13 +9,21 @@ class QueueWork extends Command
 
     protected static $defaultDescription = 'Comienza a procesar trabajos en la cola';
 
+    public function configure()
+    {
+        $this->addArgument('queue', InputArgument::REQUIRED);
+    }
+
     protected function execute($input, $output)
     {
         include 'vendor/base-php/core/database/database.php';
 
         $style = new SymfonyStyle($input, $output);
 
+        $queue = $input->getArgument('name') ?? 'default';
+
         $jobs = DB::table('jobs')
+            ->where('queue', $queue)
             ->where('date_reserve', '<=', time())
             ->get();
 

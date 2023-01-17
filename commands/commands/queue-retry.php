@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class QueueRetry extends Command
@@ -9,11 +10,26 @@ class QueueRetry extends Command
 
     protected static $defaultDescription = 'Reintentar trabajos fallidos en cola';
 
+    public function configure()
+    {
+        $this->addOption(
+            'queue',
+            null,
+            InputOption::VALUE_OPTIONAL,
+            'Reintenta los trabajos fallidos de una cola en específico',
+            'default'
+        );
+    }
+
     protected function execute($input, $output)
     {
         include 'vendor/base-php/core/database/database.php';
 
-        $faileds = DB::table('failed_jobs')->get();
+        $queue = $input->getOption('queue');
+
+        $faileds = DB::table('failed_jobs') 
+            ->where('queue', $queue)
+            ->get();
 
         foreach ($faileds as $failed) {
             DB::table('jobs')->insert([
