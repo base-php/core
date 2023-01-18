@@ -72,7 +72,7 @@ function carbon()
     return new Carbon;
 }
 
-function queue($job)
+function dispatch($job)
 {
     return new Job($job);
 }
