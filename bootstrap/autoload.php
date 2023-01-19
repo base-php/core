@@ -11,6 +11,7 @@ include __dir__ . '/../commands/commands/db-backup.php';
 include __dir__ . '/../commands/commands/db-table.php';
 include __dir__ . '/../commands/commands/db-wipe.php';
 include __dir__ . '/../commands/commands/docs.php';
+include __dir__ . '/../commands/commands/down.php';
 include __dir__ . '/../commands/commands/env.php';
 include __dir__ . '/../commands/commands/inspire.php';
 include __dir__ . '/../commands/commands/logs-clean.php';

@@ -19,6 +19,7 @@ class Console
         $application->add(new DBTable());
         $application->add(new DBWipe());
         $application->add(new Docs());
+        $application->add(new Down());
         $application->add(new Env());
         $application->add(new Inspire());
         $application->add(new LogsClean());
