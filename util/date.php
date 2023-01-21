@@ -10,6 +10,7 @@ function age($date)
 function format_date($date, $format)
 {
     $date = date_create($date);
+
     return date_format($date, $format);
 }
 

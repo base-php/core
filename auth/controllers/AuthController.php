@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Mails\PasswordRecoveryEmail;
 use App\Models\User;
-use Auth;
 use Facebook;
 use Google;
 use Redirect;
@@ -18,7 +17,6 @@ class AuthController extends Controller
      * @var string
      */
     public $redirect_login = '/dashboard';
-
 
     /**
      * Show login form.
@@ -53,7 +51,7 @@ class AuthController extends Controller
                 'email' => request('email'),
                 'password' => request('password'),
                 'date_create' => now('Y-m-d H:i:s'),
-                'date_update' => now('Y-m-d H:i:s')
+                'date_update' => now('Y-m-d H:i:s'),
             ]);
 
             $user->update(['hash' => encrypt($user->id)]);
@@ -117,7 +115,7 @@ class AuthController extends Controller
         if (post()) {
             $user = User::where('email', request('email'))->first();
 
-            if (!$user) {
+            if (! $user) {
                 return redirect('/forgot-password')->with('error', lang('auth.email_not_match'));
             }
 
@@ -132,7 +130,7 @@ class AuthController extends Controller
     /**
      * Show and process recover password form.
      *
-     * @param string $id
+     * @param  string  $id
      * @return View|Redirect
      */
     public function recover(string $id): View|Redirect
@@ -140,12 +138,12 @@ class AuthController extends Controller
         if (post()) {
             $user = User::where('hash', request('id'))->first();
 
-            if (!$user) {
+            if (! $user) {
                 return redirect('/login')->with('error', lang('auth.link_invalid'));
             }
 
             if (request('password') != request('confirm_password')) {
-                return redirect('/recover/' . request('id'))->with('error', 'Las contraseñas no coinciden.');
+                return redirect('/recover/'.request('id'))->with('error', 'Las contraseñas no coinciden.');
             }
 
             $user->password = encrypt(request('password'));
@@ -160,13 +158,14 @@ class AuthController extends Controller
     /**
      * Show and process 2fa form.
      *
-     * @param string $id
+     * @param  string  $id
      * @return View|Redirect
      */
     public function two_fa(string $id): View|Redirect
     {
         if (post()) {
             $two_fa = new TwoFA;
+
             return $two_fa->verify();
         }
 
@@ -181,6 +180,7 @@ class AuthController extends Controller
     public function logout(): Redirect
     {
         session()->delete();
+
         return redirect('/login');
     }
 }

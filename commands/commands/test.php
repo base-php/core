@@ -19,7 +19,7 @@ class Test extends Command
         $test = $input->getArgument('test');
 
         if ($test) {
-            system('vendor\bin\phpunit ' . $test);
+            system('vendor\bin\phpunit '.$test);
         } else {
             system('vendor\bin\phpunit');
         }

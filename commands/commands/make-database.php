@@ -21,7 +21,7 @@ class MakeDatabase extends Command
 
         include 'vendor/base-php/core/database/database.php';
 
-        $config = include('app/config.php');
+        $config = include 'app/config.php';
 
         $style = new SymfonyStyle($input, $output);
 
@@ -36,7 +36,7 @@ class MakeDatabase extends Command
             }
         }
 
-        $database = ($driver == 'sqlite') ? $database . '.sqlite' : $database;
+        $database = ($driver == 'sqlite') ? $database.'.sqlite' : $database;
 
         if ($database != '') {
             if ($driver == 'sqlite') {
@@ -46,22 +46,22 @@ class MakeDatabase extends Command
 
             if ($driver == 'mysql') {
                 $pdo = new PDO("$driver:host=$host;port=$port", $username, $password);
-                $pdo->exec('CREATE DATABASE IF NOT EXISTS ' . $database);
+                $pdo->exec('CREATE DATABASE IF NOT EXISTS '.$database);
             }
 
             if ($driver == 'pgsql') {
                 $pdo = new PDO("$driver:host=$host;port=$port", $username, $password);
-                $pdo->exec('CREATE DATABASE ' . $database);
+                $pdo->exec('CREATE DATABASE '.$database);
             }
 
             if ($driver == 'sqlsrv') {
                 $pdo = new PDO("$driver:server=$host;port=$port", $username, $password);
-                $pdo->exec('CREATE DATABASE ' . $database);
+                $pdo->exec('CREATE DATABASE '.$database);
             }
 
             $style->success("Base de datos '$database' en '$driver' creada satisfactoriamente.");
         } else {
-            $style->error("Debe establecer un nombre para la base de datos en el archivo config.");
+            $style->error('Debe establecer un nombre para la base de datos en el archivo config.');
         }
 
         return Command::SUCCESS;

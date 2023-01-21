@@ -22,11 +22,11 @@ class MakeResource extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Resource.php');
         $content = str_replace('ResourceName', $name, $content);
 
-        if (!file_exists('app/Resources')) {
+        if (! file_exists('app/Resources')) {
             mkdir('app/Resources');
         }
 
-        $fopen = fopen('app/Resources/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Resources/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

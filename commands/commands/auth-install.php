@@ -15,20 +15,20 @@ class AuthInstall extends Command
         copy('vendor/base-php/core/auth/controllers/DashboardController.php', 'app/Controllers/DashboardController.php');
         copy('vendor/base-php/core/auth/controllers/UserController.php', 'app/Controllers/UserController.php');
 
-        if (!file_exists('app/Mails')) {
+        if (! file_exists('app/Mails')) {
             mkdir('app/Mails');
         }
 
         copy('vendor/base-php/core/auth/mails/PasswordRecoveryEmail.php', 'app/Mails/PasswordRecoveryEmail.php');
 
-        if (!file_exists('app/Middleware')) {
+        if (! file_exists('app/Middleware')) {
             mkdir('app/Middleware');
         }
 
         copy('vendor/base-php/core/auth/middleware/Auth.php', 'app/Middleware/Auth.php');
         copy('vendor/base-php/core/auth/middleware/Permission.php', 'app/Middleware/Permission.php');
 
-        if (!file_exists('app/Validations')) {
+        if (! file_exists('app/Validations')) {
             mkdir('app/Validations');
         }
 
@@ -40,7 +40,7 @@ class AuthInstall extends Command
 
         copy('vendor/base-php/core/auth/img/user.png', 'resources/assets/img/user.png');
 
-        if (!file_exists('resources/assets/js')) {
+        if (! file_exists('resources/assets/js')) {
             mkdir('resources/assets/js');
         }
 
@@ -52,19 +52,19 @@ class AuthInstall extends Command
         copy('vendor/base-php/core/auth/lang/users.php', 'resources/lang/es/users.php');
         copy('vendor/base-php/core/auth/lang/validations.php', 'resources/lang/es/validations.php');
 
-        if (!file_exists('resources/views/auth')) {
+        if (! file_exists('resources/views/auth')) {
             mkdir('resources/views/auth');
         }
 
-        if (!file_exists('resources/views/components')) {
+        if (! file_exists('resources/views/components')) {
             mkdir('resources/views/components');
         }
 
-        if (!file_exists('resources/views/dashboard')) {
+        if (! file_exists('resources/views/dashboard')) {
             mkdir('resources/views/dashboard');
         }
 
-        if (!file_exists('resources/views/users')) {
+        if (! file_exists('resources/views/users')) {
             mkdir('resources/views/users');
         }
 
@@ -94,7 +94,7 @@ class AuthInstall extends Command
         system('npm install alpinejs@3.10.5 flowbite@1.5.3 sweetalert2@11.6.5');
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Autenticación instalada satisfactoriamente.");
+        $style->success('Autenticación instalada satisfactoriamente.');
 
         return Command::SUCCESS;
     }

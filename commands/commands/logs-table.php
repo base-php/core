@@ -14,7 +14,7 @@ class LogsTable extends Command
         copy('vendor/base-php/core/logs/migrations/logs.php', 'database/'.date('Y_m_d_His').'_logs.php');
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Migración creada satisfactoriamente.");
+        $style->success('Migración creada satisfactoriamente.');
 
         return Command::SUCCESS;
     }

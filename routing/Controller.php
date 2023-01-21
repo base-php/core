@@ -31,7 +31,7 @@ abstract class Controller
     {
         foreach ((array) $middleware as $m) {
             $this->middleware[] = [
-                'middleware' => $this->namespace . $m,
+                'middleware' => $this->namespace.$m,
                 'options' => &$options,
             ];
         }

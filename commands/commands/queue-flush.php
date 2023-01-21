@@ -17,7 +17,7 @@ class QueueFlush extends Command
             ->delete();
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Todos los trabajos fallidos fueron borrados.");
+        $style->success('Todos los trabajos fallidos fueron borrados.');
 
         return Command::SUCCESS;
     }

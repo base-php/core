@@ -6,5 +6,5 @@ return [
     'menu' => 'Menú',
     'profile' => 'Perfil',
     'text' => 'Has iniciado sesión',
-    'users' => 'Usuarios'
+    'users' => 'Usuarios',
 ];

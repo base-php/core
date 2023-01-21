@@ -319,14 +319,14 @@ class Router implements BindingRegistrar, RegistrarContract
      */
     public function resource($name, $controller, array $options = [])
     {
-        $this->get('/' . $name, [$controller, 'index']);
-        $this->get('/' . $name . '/create', [$controller, 'create']);
-        $this->get('/' . $name . '/edit/{id}', [$controller, 'edit']);
-        $this->get('/' . $name . '/show/{id}', [$controller, 'show']);
-        $this->get('/' . $name . '/delete/{id}', [$controller, 'delete']);
+        $this->get('/'.$name, [$controller, 'index']);
+        $this->get('/'.$name.'/create', [$controller, 'create']);
+        $this->get('/'.$name.'/edit/{id}', [$controller, 'edit']);
+        $this->get('/'.$name.'/show/{id}', [$controller, 'show']);
+        $this->get('/'.$name.'/delete/{id}', [$controller, 'delete']);
 
-        $this->post('/' . $name . '/store', [$controller, 'store']);
-        $this->post('/' . $name . '/update', [$controller, 'update']);
+        $this->post('/'.$name.'/store', [$controller, 'store']);
+        $this->post('/'.$name.'/update', [$controller, 'update']);
     }
 
     /**

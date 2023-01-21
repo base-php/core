@@ -24,11 +24,11 @@ class MakeController extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Controller.php');
         $content = str_replace('ControllerName', $name, $content);
 
-        if (!file_exists('app/Controllers')) {
+        if (! file_exists('app/Controllers')) {
             mkdir('app/Controllers');
         }
 
-        $fopen = fopen('app/Controllers/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Controllers/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 
@@ -44,16 +44,15 @@ class MakeController extends Command
             $content = file_get_contents('vendor/base-php/core/commands/examples/Model.php');
             $content = str_replace('ModelName', $model, $content);
 
-            if (!file_exists('app/Models')) {
+            if (! file_exists('app/Models')) {
                 mkdir('app/Models');
             }
 
-            $fopen = fopen('app/Models/' . $model . '.php', 'w+');
+            $fopen = fopen('app/Models/'.$model.'.php', 'w+');
             fwrite($fopen, $content);
             fclose($fopen);
 
             $style->success("Clase de modelo '$model' creado satisfactoriamente.");
-
 
             $migration = strtolower(str()->snake($model));
             $migration = str()->plural($migration);
@@ -68,13 +67,13 @@ class MakeController extends Command
             $model = ucfirst(str()->singular($migration));
             $content = str_replace('ModelName', $model, $content);
 
-            if (!file_exists('database')) {
+            if (! file_exists('database')) {
                 mkdir('database');
             }
 
-            $migration = time() . '_' . $migration;
+            $migration = time().'_'.$migration;
 
-            $fopen = fopen('database/' . $migration . '.php', 'w+');
+            $fopen = fopen('database/'.$migration.'.php', 'w+');
             fwrite($fopen, $content);
             fclose($fopen);
 

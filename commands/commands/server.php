@@ -18,8 +18,8 @@ class Server extends Command
     {
         $port = ($input->getArgument('port')) ? $input->getArgument('port') : 8080;
 
-        system('php -S localhost:' . $port);
-        
+        system('php -S localhost:'.$port);
+
         return Command::SUCCESS;
     }
 }

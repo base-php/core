@@ -24,7 +24,7 @@ class PermissionsCreatePermission extends Command
 
         DB::table('permissions')->insert([
             'name' => $name,
-            'description' => $description
+            'description' => $description,
         ]);
 
         $style = new SymfonyStyle($input, $output);

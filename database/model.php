@@ -12,11 +12,11 @@ class Model extends BaseModel
 
     public function getFillable()
     {
-    	return $this->fillable;
+        return $this->fillable;
     }
 
     public function getTable()
     {
-    	return $this->table;
+        return $this->table;
     }
 }

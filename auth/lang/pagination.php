@@ -6,5 +6,5 @@ return [
     'previous' => '&laquo; Anterior',
     'results' => 'resultados',
     'showing' => 'Mostrando del',
-    'to' => 'al'
+    'to' => 'al',
 ];

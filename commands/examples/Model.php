@@ -11,7 +11,7 @@ class ModelName extends Model
      */
     protected $table = '';
 
-     /**
+    /**
      * The primary key associated with the table.
      *
      * @var string

@@ -154,6 +154,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         $resolver->register('blade', function () {
             $compiler = new CompilerEngine($this->app['blade.compiler'], $this->app['files']);
+
             return $compiler;
         });
     }

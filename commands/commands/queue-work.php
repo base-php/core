@@ -39,13 +39,12 @@ class QueueWork extends Command
                 $class->handle();
 
                 $style->success($payload->job);
-
             } catch (Error $exception) {
                 DB::table('failed_jobs')
                     ->insert([
                         'queue' => $job->queue,
                         'payload' => $job->payload,
-                        'exception' => json_encode($exception)
+                        'exception' => json_encode($exception),
                     ]);
 
                 $style->error($payload->job);

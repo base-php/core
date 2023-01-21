@@ -15,7 +15,7 @@ class TokenBasedAuth
             ->where('date_expire', '>=', $now)
             ->first();
 
-        if (!$token) {
+        if (! $token) {
             return abort(401);
         }
 

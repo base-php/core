@@ -10,12 +10,14 @@ class Job
     public function queue($queue)
     {
         $this->queue = $queue;
+
         return $this;
     }
 
     public function delay($date_reserve)
     {
         $this->date_reserve = strtotime($date_reserve);
+
         return $this;
     }
 
@@ -23,7 +25,7 @@ class Job
     {
         $queue = isset($this->queue) ? $this->queue : 'default';
 
-        $payload['job']    = get_class($this->job);
+        $payload['job'] = get_class($this->job);
         $payload['params'] = $this->job;
 
         if (method_exists($this->job, 'tries')) {
@@ -38,7 +40,7 @@ class Job
             'queue' => $queue,
             'payload' => $payload,
             'attempts' => 1,
-            'date_reserve' => $date_reserve
+            'date_reserve' => $date_reserve,
         ];
 
         DB::table('jobs')->insert($data);

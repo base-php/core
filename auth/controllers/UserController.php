@@ -28,6 +28,7 @@ class UserController extends Controller
     public function index(): View
     {
         $users = User::get();
+
         return view('users.index', compact('users'));
     }
 
@@ -44,7 +45,7 @@ class UserController extends Controller
     /**
      * Store user in database.
      *
-     * @param UserStoreValidation $validation
+     * @param  UserStoreValidation  $validation
      * @return Redirect
      */
     public function store(UserStoreValidation $validation): Redirect
@@ -55,7 +56,7 @@ class UserController extends Controller
             'name' => request('name'),
             'email' => request('email'),
             'password' => encrypt(request('password')),
-            'photo' => $file->filename
+            'photo' => $file->filename,
         ]);
 
         $user->update(['hash' => encrypt($user->id)]);
@@ -66,19 +67,20 @@ class UserController extends Controller
     /**
      * Show edit user page.
      *
-     * @param int $id
+     * @param  int  $id
      * @return View
      */
     public function edit(int $id): View
     {
         $user = User::find($id);
+
         return view('users.edit', compact('user'));
     }
 
     /**
      * Update user in database.
      *
-     * @param UserUpdateValidation $validation
+     * @param  UserUpdateValidation  $validation
      * @return Redirect
      */
     public function update(UserUpdateValidation $validation): Redirect
@@ -88,7 +90,7 @@ class UserController extends Controller
         $user = User::find(request('id'));
         $user->update([
             'name' => request('name'),
-            'email' => request('email')
+            'email' => request('email'),
         ]);
 
         if (request('password')) {
@@ -123,13 +125,13 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('/dashboard/users/edit/' . $id);
+        return redirect('/dashboard/users/edit/'.$id);
     }
 
     /**
      * Delete user in database.
      *
-     * @param int $id
+     * @param  int  $id
      * @return Redirect
      */
     public function delete(int $id): Redirect

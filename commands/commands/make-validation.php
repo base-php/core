@@ -22,11 +22,11 @@ class MakeValidation extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Validation.php');
         $content = str_replace('ValidationName', $name, $content);
 
-        if (!file_exists('app/Validations')) {
+        if (! file_exists('app/Validations')) {
             mkdir('app/Validations');
         }
 
-        $fopen = fopen('app/Validations/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Validations/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

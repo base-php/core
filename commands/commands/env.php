@@ -15,7 +15,7 @@ class Env extends Command
 
         $environment = $config['environment'];
 
-        $style = new SymfonyStyle($input, $output); 
+        $style = new SymfonyStyle($input, $output);
         $style->text("El entorno de la aplicación es [$environment].");
         $style->newLine();
 

@@ -37,5 +37,5 @@ return [
     'select_photo' => 'Seleccionar nueva foto',
     'store' => 'Usuario registrado satisfactoriamente.',
     'update' => 'Usuario actualizado satisfactoriamente.',
-    'users' => 'Usuarios'
+    'users' => 'Usuarios',
 ];

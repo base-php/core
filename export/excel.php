@@ -77,8 +77,9 @@ class Excel
 
     public function read($filename)
     {
-        $spreadsheet = IOFactory::load($_SERVER['DOCUMENT_ROOT'] . '/' . $filename);
+        $spreadsheet = IOFactory::load($_SERVER['DOCUMENT_ROOT'].'/'.$filename);
         $data = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+
         return $data;
     }
 
@@ -87,6 +88,6 @@ class Excel
         $this->build();
 
         $writer = new Xlsx($this->spreadsheet);
-        $writer->save($_SERVER['DOCUMENT_ROOT'] . '/' . $path);
+        $writer->save($_SERVER['DOCUMENT_ROOT'].'/'.$path);
     }
 }

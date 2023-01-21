@@ -30,13 +30,13 @@ class MakeMigration extends Command
         $model = ucfirst(Str::singular($name));
         $content = str_replace('ModelName', $model, $content);
 
-        if (!file_exists('database')) {
+        if (! file_exists('database')) {
             mkdir('database');
         }
 
-        $name = date('Y_m_d_His') . '_' . $name;
+        $name = date('Y_m_d_His').'_'.$name;
 
-        $fopen = fopen('database/' . $name . '.php', 'w+');
+        $fopen = fopen('database/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

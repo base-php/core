@@ -3,7 +3,6 @@
 namespace App\Mails;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 
 class Mail
 {
@@ -17,7 +16,7 @@ class Mail
             $mail->SMTPAuth = true;
             $mail->Username = config('smtp')->username;
             $mail->Password = config('smtp')->password;
-            $mail->Port = config('smtp')->port;    
+            $mail->Port = config('smtp')->port;
         }
 
         $mail->setFrom($this->from);

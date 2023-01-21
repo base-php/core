@@ -35,7 +35,7 @@ class Backup
         }
 
         if ($this->connection['driver'] == 'sqlite') {
-            $database = $this->connection['database'] . '.sqlite';
+            $database = $this->connection['database'].'.sqlite';
             $content = file_get_contents($database);
             $fopen = fopen($filename, 'w+');
             fwrite($fopen, $content);

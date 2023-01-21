@@ -16,7 +16,8 @@ function abort($code = 404)
 {
     http_response_code($code);
     view($code);
-    return die();
+
+    return exit();
 }
 
 function arr()
@@ -52,7 +53,7 @@ function auth($id = '')
 
 function authorize($condition)
 {
-    if (!$condition) {
+    if (! $condition) {
         return abort(401);
     }
 }
@@ -93,6 +94,7 @@ function excel($filename, $object = '')
         $object->save($filename);
     } else {
         $excel = new Excel();
+
         return $excel->read($filename);
     }
 }
@@ -104,8 +106,9 @@ function facebook()
 
 function faker()
 {
-    $config = require('app/config.php');
-    $locale = $config['language'] . '_' . strtoupper($config['language']);
+    $config = require 'app/config.php';
+    $locale = $config['language'].'_'.strtoupper($config['language']);
+
     return Faker::create($locale);
 }
 
@@ -142,7 +145,8 @@ function lang($key)
 
 function logs()
 {
-    return new class {
+    return new class
+    {
         use Logs;
     };
 }
@@ -150,6 +154,7 @@ function logs()
 function redirect($to)
 {
     $redirect = new Redirect;
+
     return $redirect->redirect($to);
 }
 
@@ -167,6 +172,7 @@ function qr($data)
 {
     $qr = new QR;
     $qr->data($data);
+
     return $qr->generate();
 }
 
@@ -194,6 +200,7 @@ function two_fa()
 {
     if (post()) {
         $two_fa = new TwoFA;
+
         return $two_fa->verify();
     }
 
@@ -202,7 +209,7 @@ function two_fa()
 
 function validation($data, $rules, $messages, $redirect)
 {
-    include __dir__ . '/../database/database.php';
+    include __DIR__.'/../database/database.php';
 
     $files = new Filesystem();
     $loader = new FileLoader($files, '');
@@ -224,6 +231,7 @@ function validation($data, $rules, $messages, $redirect)
         $redirect = ($redirect) ? $redirect : $_SERVER['HTTP_REFERER'];
 
         redirect($redirect);
+
         return exit;
     }
 }
@@ -231,5 +239,6 @@ function validation($data, $rules, $messages, $redirect)
 function view($view, $data = [])
 {
     $class = new View();
+
     return $class->render($view, $data);
 }

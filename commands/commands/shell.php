@@ -1,8 +1,7 @@
 <?php
 
-use Symfony\Component\Console\Command\Command;
-
 use Psy\Shell as Psysh;
+use Symfony\Component\Console\Command\Command;
 
 class Shell extends Command
 {
@@ -15,7 +14,7 @@ class Shell extends Command
         $shell = new Psysh();
         $shell->setIncludes(['vendor/base-php/core/database/database.php']);
         $shell->run();
-        
+
         return Command::SUCCESS;
     }
 }

@@ -22,11 +22,11 @@ class MakeMiddleware extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Middleware.php');
         $content = str_replace('MiddlewareName', $name, $content);
 
-        if (!file_exists('app/Middleware')) {
+        if (! file_exists('app/Middleware')) {
             mkdir('app/Middleware');
         }
 
-        $fopen = fopen('app/Middleware/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Middleware/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

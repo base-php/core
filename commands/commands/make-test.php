@@ -22,7 +22,7 @@ class MakeTest extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Test.php');
         $content = str_replace('TestName', $name, $content);
 
-        $fopen = fopen('tests/' . $name . '.php', 'w+');
+        $fopen = fopen('tests/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

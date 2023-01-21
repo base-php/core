@@ -42,7 +42,6 @@ class LogsClean extends Command
             DB::table('logs')
                 ->where('date_create', '<=', $date)
                 ->delete();
-
         } else {
             $count = DB::table('logs')
                 ->where('date_create', '<', now('Y-m-d'))

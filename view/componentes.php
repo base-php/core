@@ -16,7 +16,7 @@ class Componentes
 
     public function __construct(Filesystem $files, string $viewPath)
     {
-        $cachePath = $_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/cache';
+        $cachePath = $_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/cache';
 
         $this->app = Container::getInstance();
         $this->app->files = $files;
@@ -68,7 +68,7 @@ class Componentes
         $viewFactory = $this->app->make(ViewFactoryContract::class);
 
         $viewName = sha1($content);
-        $viewPath = $this->app->config['view.compiled'] . '/' . $viewName . '.blade.php';
+        $viewPath = $this->app->config['view.compiled'].'/'.$viewName.'.blade.php';
 
         $this->app->files->replace($viewPath, $content);
 

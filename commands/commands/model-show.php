@@ -29,7 +29,7 @@ class ModelShow extends Command
             $schema[$name] = $capsule->getConnection($name)->getSchemaBuilder();
         }
 
-        $class = 'App\Models\\' . $model;
+        $class = 'App\Models\\'.$model;
 
         $class = new $class();
 
@@ -70,7 +70,7 @@ class ModelShow extends Command
         if (count($fields)) {
             foreach ($fields as $field) {
                 $attributes[] = [$field->$field_column, $field->$type_column];
-            }            
+            }
         }
 
         $methods = get_class_methods($class);
@@ -85,14 +85,13 @@ class ModelShow extends Command
                     $relations[] = [$method, $type, $related];
                 }
             } catch (ArgumentCountError $exception) {
-
             }
         }
 
         $style = new SymfonyStyle($input, $output);
 
         $style->table(
-            ['App\Models\\' . $model, ''],
+            ['App\Models\\'.$model, ''],
 
             [
                 ['Base de datos', $database],

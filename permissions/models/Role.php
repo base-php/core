@@ -21,7 +21,7 @@ class Role extends Model
             DB::table('role_has_permissions')
                 ->insertUsing(
                     ['id_role', 'id_permission'],
-                    
+
                     DB::table('permissions')
                         ->selectRaw("$id_role, id")
                         ->where('name', $permission)

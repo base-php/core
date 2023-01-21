@@ -46,8 +46,8 @@ class PermissionsShow extends Command
                     $result,
                     [
                         'style' => new TableCellStyle([
-                            'align' => 'center'
-                        ])
+                            'align' => 'center',
+                        ]),
                     ]
                 );
             }

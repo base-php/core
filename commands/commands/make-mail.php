@@ -22,11 +22,11 @@ class MakeMail extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Mail.php');
         $content = str_replace('MailName', $name, $content);
 
-        if (!file_exists('app/Mails')) {
-        	mkdir('app/Mails');
+        if (! file_exists('app/Mails')) {
+            mkdir('app/Mails');
         }
 
-        $fopen = fopen('app/Mails/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Mails/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

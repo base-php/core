@@ -270,7 +270,7 @@ class Route
     public function getController()
     {
         if (! $this->controller) {
-            $class = 'App\Controllers\\' . $this->parseControllerCallback()[0];
+            $class = 'App\Controllers\\'.$this->parseControllerCallback()[0];
 
             $this->controller = $this->container->make(ltrim($class, '\\'));
         }

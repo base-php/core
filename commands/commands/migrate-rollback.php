@@ -39,7 +39,7 @@ class MigrateRollback extends Command
 
         foreach ($migrations as $migration) {
             try {
-                $class = require 'database/' . $migration->name . '.php';
+                $class = require 'database/'.$migration->name.'.php';
                 $class->down();
 
                 DB::connection($connection)
@@ -48,8 +48,7 @@ class MigrateRollback extends Command
                     ->delete();
 
                 $style->warning($migration->name);
-            }
-            catch (Exception $exception) {
+            } catch (Exception $exception) {
                 $style->error($exception->getMessage());
             }
         }

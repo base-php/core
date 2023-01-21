@@ -47,7 +47,7 @@ class Docs extends Command
             ['Autenticación de dos factores', 'https://packagist.org/packages/pragmarx/google2fa-qrcode'],
             ['Excel', 'https://phpspreadsheet.readthedocs.io/en/latest'],
             ['PDF', 'https://packagist.org/packages/dompdf/dompdf'],
-            ['QR', 'https://packagist.org/packages/endroid/qr-code']
+            ['QR', 'https://packagist.org/packages/endroid/qr-code'],
         ]);
 
         return Command::SUCCESS;

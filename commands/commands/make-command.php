@@ -22,11 +22,11 @@ class MakeCommand extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Command.php');
         $content = str_replace('CommandName', $name, $content);
 
-        if (!file_exists('app/Commands')) {
+        if (! file_exists('app/Commands')) {
             mkdir('app/Commands');
         }
 
-        $fopen = fopen('app/Commands/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Commands/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

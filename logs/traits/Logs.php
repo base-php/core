@@ -27,77 +27,79 @@ trait Logs
     public function all()
     {
         $logs = DB::table('logs')->get();
+
         return $logs;
     }
 
-	protected static function booted()
+    protected static function booted()
     {
         static::boot();
         static::setEventDispatcher(new EventsDispatcher());
 
         static::created(function ($item) {
-        	$id_user = auth()->id ?? null;
-        	$model = get_class($item);
+            $id_user = auth()->id ?? null;
+            $model = get_class($item);
 
-        	$data = [
-        		'id_user' => $id_user,
-        		'id_model' => $item->id,
-        		'model' => $model,
-        		'action' => 'create',
-        		'parameters' => $item
-        	];
+            $data = [
+                'id_user' => $id_user,
+                'id_model' => $item->id,
+                'model' => $model,
+                'action' => 'create',
+                'parameters' => $item,
+            ];
 
-        	DB::table('logs')
-        		->insert($data);
+            DB::table('logs')
+                ->insert($data);
         });
 
         static::updating(function ($item) {
-        	$class = get_class($item);
-        	$item = (new $class)->find($item->id);
-        	$_SESSION['basephp-old-updating'] = $item;
+            $class = get_class($item);
+            $item = (new $class)->find($item->id);
+            $_SESSION['basephp-old-updating'] = $item;
         });
 
         static::updated(function ($item) {
-        	$id_user = auth()->id ?? null;
-        	$model = get_class($item);
+            $id_user = auth()->id ?? null;
+            $model = get_class($item);
 
-        	$parameters['new'] = $item;
-        	$parameters['old'] = $_SESSION['basephp-old-updating'];
+            $parameters['new'] = $item;
+            $parameters['old'] = $_SESSION['basephp-old-updating'];
 
-        	$data = [
-        		'id_user' => $id_user,
-        		'id_model' => $item->id,
-        		'model' => $model,
-        		'action' => 'update',
-        		'parameters' => json_encode($parameters)
-        	];
+            $data = [
+                'id_user' => $id_user,
+                'id_model' => $item->id,
+                'model' => $model,
+                'action' => 'update',
+                'parameters' => json_encode($parameters),
+            ];
 
-        	DB::table('logs')
-        		->insert($data);
+            DB::table('logs')
+                ->insert($data);
 
-        	unset($_SESSION['basephp-old-updating']);
+            unset($_SESSION['basephp-old-updating']);
         });
 
         static::deleted(function ($item) {
-        	$id_user = auth()->id ?? null;
-        	$model = get_class($item);
+            $id_user = auth()->id ?? null;
+            $model = get_class($item);
 
-        	$data = [
-        		'id_user' => $id_user,
-        		'id_model' => $item->id,
-        		'model' => $model,
-        		'action' => 'delete',
-        		'parameters' => $item
-        	];
+            $data = [
+                'id_user' => $id_user,
+                'id_model' => $item->id,
+                'model' => $model,
+                'action' => 'delete',
+                'parameters' => $item,
+            ];
 
-        	DB::table('logs')
-        		->insert($data);
+            DB::table('logs')
+                ->insert($data);
         });
     }
 
     public function by($user)
     {
         $this->id_user = $user->id ?? $user['id'] ?? $user ?? null;
+
         return $this;
     }
 
@@ -118,6 +120,7 @@ trait Logs
     {
         $this->id_model = $model->id;
         $this->model = get_class($model);
+
         return $this;
     }
 }

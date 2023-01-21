@@ -5,11 +5,11 @@ use App\Models\User;
 class Google
 {
     public $instance;
-    
+
     public static function init()
     {
         // google/apiclient
-        
+
         $class = new static;
 
         $google_client = new Google_Client();
@@ -24,13 +24,13 @@ class Google
 
         return $class;
     }
-    
+
     public function url()
     {
         $this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
         echo $this->instance->createAuthUrl();
     }
-    
+
     public function login()
     {
         $client = $this->instance;
@@ -42,8 +42,8 @@ class Google
 
         $google_oauth = new Google_Service_Oauth2($client);
         $google_account_info = $google_oauth->userinfo->get();
-        $email =  $google_account_info->email;
-        $name =  $google_account_info->name;
+        $email = $google_account_info->email;
+        $name = $google_account_info->name;
 
         $user = User::firstOrCreate(
             [

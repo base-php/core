@@ -2,35 +2,35 @@
 
 return new class extends Migration
 {
-	/**
+    /**
      * Run the migrations.
      *
      * @return void
      */
-	public function up(): void
-	{
-		$this->schema->create('roles', function ($table) {
-			$table->id();
+    public function up(): void
+    {
+        $this->schema->create('roles', function ($table) {
+            $table->id();
 
-			$table->string('name');
-			$table->string('description');
+            $table->string('name');
+            $table->string('description');
 
-			$table->datetime('date_create')
-				->useCurrent();
+            $table->datetime('date_create')
+                ->useCurrent();
 
-			$table->datetime('date_update')
-				->useCurrent()
-				->setCurrentOnUpdate();
-		});
-	}
-	
-	/**
+            $table->datetime('date_update')
+                ->useCurrent()
+                ->setCurrentOnUpdate();
+        });
+    }
+
+    /**
      * Reverse the migrations.
      *
      * @return void
      */
-	public function down(): void
-	{
-		$this->schema->dropIfExists('roles');
-	}
+    public function down(): void
+    {
+        $this->schema->dropIfExists('roles');
+    }
 };

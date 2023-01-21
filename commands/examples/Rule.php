@@ -13,7 +13,6 @@ class RuleName implements Rule
      */
     public function passes(string $attribute, mixed $value): bool
     {
-        
     }
 
     /**

@@ -17,7 +17,7 @@ class PermissionsTable extends Command
         copy('vendor/base-php/core/permissions/migrations/role_has_permissions.php', 'database/'.date('Y_m_d_His').'_role_has_permissions.php');
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Migración creada satisfactoriamente.");
+        $style->success('Migración creada satisfactoriamente.');
 
         return Command::SUCCESS;
     }

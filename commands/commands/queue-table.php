@@ -15,7 +15,7 @@ class QueueTable extends Command
         copy('vendor/base-php/core/jobs/migrations/failed_jobs.php', 'database/'.date('Y_m_d_His').'_failed_jobs.php');
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Migraciones creadas satisfactoriamente.");
+        $style->success('Migraciones creadas satisfactoriamente.');
 
         return Command::SUCCESS;
     }

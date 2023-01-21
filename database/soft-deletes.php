@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\SoftDeletes as SoftDeletesBase;
 
 trait SoftDeletes
 {
-	use SoftDeletesBase;
+    use SoftDeletesBase;
 }

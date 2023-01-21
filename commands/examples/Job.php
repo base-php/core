@@ -4,13 +4,11 @@ namespace App\Jobs;
 
 class JobName
 {
-	public function __construct()
-	{
+    public function __construct()
+    {
+    }
 
-	}
-
-	public function handle()
-	{
-		
-	}
+    public function handle()
+    {
+    }
 }

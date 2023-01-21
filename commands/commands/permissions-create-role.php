@@ -24,7 +24,7 @@ class PermissionsCreateRole extends Command
 
         DB::table('roles')->insert([
             'name' => $name,
-            'description' => $description
+            'description' => $description,
         ]);
 
         $style = new SymfonyStyle($input, $output);

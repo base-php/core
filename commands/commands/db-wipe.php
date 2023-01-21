@@ -21,7 +21,7 @@ class DBWipe extends Command
     {
         include 'vendor/base-php/core/database/database.php';
 
-        if (!class_exists('Doctrine\DBAL\DriverManager')) {
+        if (! class_exists('Doctrine\DBAL\DriverManager')) {
             $helper = $this->getHelper('question');
 
             $text = 'La inspección de información de la base de datos requiere el paquete doctrine/dbal ¿Te gustaría instalarlo? (si/no) [no]';
@@ -29,6 +29,7 @@ class DBWipe extends Command
 
             if ($helper->ask($input, $output, $question)) {
                 system('composer require doctrine/dbal');
+
                 return Command::SUCCESS;
             }
 
@@ -65,7 +66,7 @@ class DBWipe extends Command
             'user' => $config['database'][$i]['username'],
             'password' => $config['database'][$i]['password'],
             'host' => $config['database'][$i]['host'],
-            'driver' => $driver
+            'driver' => $driver,
         ]);
 
         $schemaManager = $doctrine->createSchemaManager();

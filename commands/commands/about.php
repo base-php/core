@@ -13,7 +13,7 @@ class About extends Command
     {
         $style = new SymfonyStyle($input, $output);
 
-        $config = include('app/config.php');
+        $config = include 'app/config.php';
 
         $composer = exec('composer --version');
         $composer = explode(' ', $composer);
@@ -32,7 +32,7 @@ class About extends Command
                 ['Versión de Composer', $composer],
                 ['Entorno', $config['environment']],
                 ['Errores', $errors],
-                ['Bases de datos', $databases]
+                ['Bases de datos', $databases],
             ]
         );
 

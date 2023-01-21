@@ -8,21 +8,21 @@ use Facebook\Facebook as FacebookSDK;
 class Facebook
 {
     // facebook/graph-sdk
-    
+
     public $helper;
-    
+
     public $permissions;
-    
+
     public $instance;
-    
+
     public static function init()
-    {        
+    {
         $class = new static;
 
         $facebook = new FacebookSDK([
-        'app_id' => config('facebook')->app_id,
-        'app_secret' => config('facebook')->app_secret,
-        'default_graph_version' => 'v2.10',
+            'app_id' => config('facebook')->app_id,
+            'app_secret' => config('facebook')->app_secret,
+            'default_graph_version' => 'v2.10',
         ]);
 
         $class->instance = $facebook;
@@ -39,14 +39,14 @@ class Facebook
         try {
             $accessToken = $this->helper->getAccessToken();
             $response = $this->instance->get('/me?fields=name,first_name,last_name,email,link,gender,picture', $accessToken);
-
         } catch (FacebookResponseException $exception) {
-            echo 'Graph returned an error: ' . $exception->getMessage();
+            echo 'Graph returned an error: '.$exception->getMessage();
+
             return $this;
             exit;
-
         } catch (FacebookSDKException $exception) {
-            echo 'Facebook SDK returned an error: ' . $exception->getMessage();
+            echo 'Facebook SDK returned an error: '.$exception->getMessage();
+
             return $this;
             exit;
         }
@@ -67,10 +67,10 @@ class Facebook
 
         return $this;
     }
-    
+
     public function url()
     {
-        $callback = 'http://' . $_SERVER['HTTP_HOST'] . '/login/facebook';
+        $callback = 'http://'.$_SERVER['HTTP_HOST'].'/login/facebook';
         echo $this->helper->getLoginUrl($callback, $this->permissions);
     }
 }

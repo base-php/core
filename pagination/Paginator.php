@@ -111,7 +111,7 @@ class Paginator extends AbstractPaginator implements Arrayable, ArrayAccess, Cou
         $uri = (isset($_SERVER['REDIRECT_URL'])) ? $_SERVER['REDIRECT_URL'] : $_SERVER['PATH_INFO'];
 
         $view = $view ?? 'tailwind';
-        $view = 'simple-' . $view;
+        $view = 'simple-'.$view;
 
         return view($view, compact('paginator', 'uri'));
     }

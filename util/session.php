@@ -11,6 +11,7 @@ class Session
     {
         if ($key != '') {
             unset($_SESSION[$key]);
+
             return;
         }
 
@@ -31,6 +32,7 @@ class Session
     public function set($key, $value)
     {
         $_SESSION[$key] = $value;
+
         return $value;
     }
 }

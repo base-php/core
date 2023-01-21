@@ -18,7 +18,7 @@ class Inspire extends Command
         $author = $quotes->author;
 
         $style = new SymfonyStyle($input, $output);
-        $style->text(['"' . $quote . '"', '- ' . $author]);
+        $style->text(['"'.$quote.'"', '- '.$author]);
         $style->newLine();
 
         return Command::SUCCESS;

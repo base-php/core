@@ -6,36 +6,36 @@ use DB;
 
 trait Notifiable
 {
-	public function markAsRead()
-	{
-		$now = now('Y-m-d h:i:s');
+    public function markAsRead()
+    {
+        $now = now('Y-m-d h:i:s');
 
-		DB::table('notifications')
-			->whereNull('date_read')
-			->update(['date_read' => $now]);
-	}
+        DB::table('notifications')
+            ->whereNull('date_read')
+            ->update(['date_read' => $now]);
+    }
 
-	public function notifications()
-	{
-		$notifications = DB::table('notifications')
-			->where('data->id_user', $this->id)
-			->get();
+    public function notifications()
+    {
+        $notifications = DB::table('notifications')
+            ->where('data->id_user', $this->id)
+            ->get();
 
-		return $notifications;
-	}
+        return $notifications;
+    }
 
-	public function notify($class)
-	{
-		$class->send($this);
-	}
+    public function notify($class)
+    {
+        $class->send($this);
+    }
 
-	public function unreadNotifications()
-	{
-		$notifications = DB::table('notifications')
-			->where('data->id_user', $this->id)
-			->whereNull('date_read')
-			->get();
+    public function unreadNotifications()
+    {
+        $notifications = DB::table('notifications')
+            ->where('data->id_user', $this->id)
+            ->whereNull('date_read')
+            ->get();
 
-		return $notifications;
-	}
+        return $notifications;
+    }
 }

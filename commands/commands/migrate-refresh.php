@@ -16,13 +16,12 @@ class MigrateRefresh extends Command
         $style = new SymfonyStyle($input, $output);
 
         foreach (scandir('database') as $migration) {
-
             if (is_dir($migration)) {
                 continue;
             }
 
             try {
-                $class = require 'database/' . $migration;
+                $class = require 'database/'.$migration;
                 $class->down();
 
                 $name = str_replace('.php', '', $migration);
@@ -40,12 +39,11 @@ class MigrateRefresh extends Command
                     ->table('migrations')
                     ->insert([
                         'name' => $name,
-                        'batch' => 1
+                        'batch' => 1,
                     ]);
 
                 $style->success($name);
-            }
-            catch (Exception $exception) {
+            } catch (Exception $exception) {
                 $style->error($exception->getMessage());
             }
         }

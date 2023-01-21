@@ -19,19 +19,19 @@ class Storage
     public $instance;
 
     public $filename;
-    
+
     public $content;
-    
+
     public $success;
 
     public $adapter;
-    
+
     public function __construct($adapter = 'local')
     {
         if ($adapter == 'local') {
             $adapter = new LocalFilesystemAdapter($_SERVER['DOCUMENT_ROOT']);
             $this->instance = new Filesystem($adapter);
-            $this->adapter  = 'local';
+            $this->adapter = 'local';
         }
 
         // spatie/flysystem-dropbox
@@ -111,30 +111,34 @@ class Storage
     public function basename($file)
     {
         $pathinfo = pathinfo($file);
+
         return $pathinfo['filename'];
     }
 
     public function content($content)
     {
         $this->content = $content;
+
         return $this;
     }
 
     public function delete($path)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        $this->instance->delete($root . '/' . $path);
+        $this->instance->delete($root.'/'.$path);
     }
 
     public function dir($path)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        return $this->instance->listContents($root . '/' . $path)->toArray();
+
+        return $this->instance->listContents($root.'/'.$path)->toArray();
     }
-    
+
     public function disk($adapter)
     {
         $this->__construct($adapter);
+
         return $this;
     }
 
@@ -142,42 +146,46 @@ class Storage
     {
         $filename = ($name != '') ? $name : basename($file);
 
-        $file = $_SERVER['DOCUMENT_ROOT'] . '/' . $file;
+        $file = $_SERVER['DOCUMENT_ROOT'].'/'.$file;
 
         header('Content-Type: application/octet-stream');
         header('Content-Transfer-Encoding: Binary');
-        header('Content-disposition: attachment; filename="' . $filename . '"');
+        header('Content-disposition: attachment; filename="'.$filename.'"');
         readfile($file);
     }
 
     public function exists($file)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        return $this->instance->fileExists($root . '/' . $file);
+
+        return $this->instance->fileExists($root.'/'.$file);
     }
 
     public function extension($file)
     {
         $pathinfo = pathinfo($file);
+
         return $pathinfo['extension'];
     }
 
     public function file($file)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        $this->instance->write($root . '/' . $file, '');
+        $this->instance->write($root.'/'.$file, '');
     }
 
     public function get($get)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        return $this->instance->readStream($root . '/' . $get);
+
+        return $this->instance->readStream($root.'/'.$get);
     }
 
     public function mime($path)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        return $this->instance->mimeType($root . '/' . $path);
+
+        return $this->instance->mimeType($root.'/'.$path);
     }
 
     public function mkdir($dir)
@@ -189,20 +197,21 @@ class Storage
     public function modified($path)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        return date('Y-m-d h:i:s', $this->instance->lastModified($root . '/' . $path));
+
+        return date('Y-m-d h:i:s', $this->instance->lastModified($root.'/'.$path));
     }
 
     public function rename($old, $new)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        $this->instance->move($root . '/' . $old, $root . '/' . $new);
+        $this->instance->move($root.'/'.$old, $root.'/'.$new);
     }
-    
+
     public function save($path, $filename = '')
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
         $path = $path;
-        
+
         if (is_string($this->content)) {
             if (isset($_FILES[$this->content])) {
                 if (is_array($_FILES[$this->content]['name'])) {
@@ -212,7 +221,7 @@ class Storage
                         if ($_FILES[$this->content]['tmp_name'][$i] != '') {
                             $stream = fopen($_FILES[$this->content]['tmp_name'][$i], 'r');
 
-                            $this->instance->writeStream($path . '/' . $_FILES[$this->content]['name'][$i], $stream);
+                            $this->instance->writeStream($path.'/'.$_FILES[$this->content]['name'][$i], $stream);
 
                             $this->filename[] = $_FILES[$this->content]['name'][$i];
                             $this->success = true;
@@ -220,16 +229,15 @@ class Storage
                             $i = $i + 1;
                         }
                     }
-
                 } else {
                     if ($_FILES[$this->content]['name']) {
                         $filename = ($filename != '') ? $filename : $_FILES[$this->content]['name'];
-                        $stream   = fopen($_FILES[$this->content]['tmp_name'], 'r');
+                        $stream = fopen($_FILES[$this->content]['tmp_name'], 'r');
 
-                        $this->instance->writeStream($path . '/' . $filename, $stream);
+                        $this->instance->writeStream($path.'/'.$filename, $stream);
 
                         $this->filename = $filename;
-                        $this->success = true;                        
+                        $this->success = true;
                     }
                 }
             }
@@ -237,7 +245,7 @@ class Storage
 
         if (is_resource($this->content)) {
             $stream = $this->content;
-            $this->instance->writeStream($path . '/' . $filename, $stream);
+            $this->instance->writeStream($path.'/'.$filename, $stream);
 
             $this->filename = $filename;
             $this->success = true;
@@ -249,7 +257,8 @@ class Storage
     public function size($file)
     {
         $root = ($this->adapter == 'local') ? $_SERVER['DOCUMENT_ROOT'] : '';
-        return $this->instance->fileSize($root . '/' . $file);
+
+        return $this->instance->fileSize($root.'/'.$file);
     }
 
     public function url($file)

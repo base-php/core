@@ -8,5 +8,8 @@
             "name": "Nisa Delgado",
             "email": "nisadelgado@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "laravel/pint": "^1.4"
+    }
 }

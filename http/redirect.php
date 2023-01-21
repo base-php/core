@@ -12,12 +12,14 @@ class Redirect
     public function redirect($to)
     {
         $this->to = $to;
+
         return $this;
     }
 
     public function with($key, $value)
     {
         $_SESSION['basephp-flash'][$key] = $value;
+
         return $this;
     }
 

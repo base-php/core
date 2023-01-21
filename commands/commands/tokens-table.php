@@ -14,7 +14,7 @@ class TokensTable extends Command
         copy('vendor/base-php/core/tokens/migrations/tokens.php', 'database/'.date('Y_m_d_His').'tokens.php');
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Migración creada satisfactoriamente.");
+        $style->success('Migración creada satisfactoriamente.');
 
         return Command::SUCCESS;
     }

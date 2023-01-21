@@ -36,7 +36,7 @@ function get($var = '')
 
 function host()
 {
-    return '//' . $_SERVER['HTTP_HOST'];
+    return '//'.$_SERVER['HTTP_HOST'];
 }
 
 function message($data)
@@ -64,7 +64,7 @@ function old($input)
     }
 }
 
-function post( $var = '')
+function post($var = '')
 {
     if ($var == '') {
         return $_POST;
@@ -88,6 +88,7 @@ function request($var = '')
         if (isset($_FILES[$var]) && $_FILES[$var] != '') {
             $storage = new Storage();
             $storage->content = $var;
+
             return $storage;
         }
 

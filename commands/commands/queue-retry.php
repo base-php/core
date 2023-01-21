@@ -27,7 +27,7 @@ class QueueRetry extends Command
 
         $queue = $input->getOption('queue');
 
-        $faileds = DB::table('failed_jobs') 
+        $faileds = DB::table('failed_jobs')
             ->where('queue', $queue)
             ->get();
 
@@ -36,7 +36,7 @@ class QueueRetry extends Command
                 'queue' => $failed->queue,
                 'payload' => $failed->payload,
                 'attemps' => 1,
-                'date_reserve' => time()
+                'date_reserve' => time(),
             ]);
         }
 

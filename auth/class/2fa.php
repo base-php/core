@@ -25,6 +25,7 @@ class TwoFA
         if ($verify) {
             session('2fa', auth()->two_fa);
             $redirect = request('redirect') ? request('redirect') : $auth->redirect_login;
+
             return redirect($redirect);
         }
 

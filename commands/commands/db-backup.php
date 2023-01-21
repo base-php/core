@@ -24,12 +24,12 @@ class DBBackup extends Command
 
         $i = array_search('default', array_column($config['database'], 'name'));
 
-        $filename = $config['database'][$i]['database'] . '_' . time();
+        $filename = $config['database'][$i]['database'].'_'.time();
 
         if ($config['database'][$i]['driver'] != 'sqlite') {
-            $filename = $filename . '.sql';
+            $filename = $filename.'.sql';
         } else {
-            $filename = $filename . '.sqlite';
+            $filename = $filename.'.sqlite';
         }
 
         $filename = ($input->getArgument('filename')) ? $input->getArgument('filename') : $filename;

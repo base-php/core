@@ -22,11 +22,11 @@ class MakeJob extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Job.php');
         $content = str_replace('JobName', $name, $content);
 
-        if (!file_exists('app/Jobs')) {
-        	mkdir('app/Jobs');
+        if (! file_exists('app/Jobs')) {
+            mkdir('app/Jobs');
         }
 
-        $fopen = fopen('app/Jobs/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Jobs/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

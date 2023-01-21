@@ -31,11 +31,10 @@ class CommandName extends Command
     /**
      * Execute the console command.
      *
-     * @param  object $params
+     * @param  object  $params
      * @return mixed
      */
     public function handle($params)
     {
-
     }
 }

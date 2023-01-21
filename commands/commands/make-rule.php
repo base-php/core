@@ -22,11 +22,11 @@ class MakeRule extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Rule.php');
         $content = str_replace('RuleName', $name, $content);
 
-        if (!file_exists('app/Rules')) {
+        if (! file_exists('app/Rules')) {
             mkdir('app/Rules');
         }
 
-        $fopen = fopen('app/Rules/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Rules/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

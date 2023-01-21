@@ -11,6 +11,5 @@ class TestName extends Test
      */
     public function test_method()
     {
-        
     }
 }

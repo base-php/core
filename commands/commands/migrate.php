@@ -14,10 +14,10 @@ class Migrate extends Command
         $style = new SymfonyStyle($input, $output);
 
         foreach (scandir('database') as $item) {
-            if (!is_dir($item)) {
+            if (! is_dir($item)) {
                 $name = str_replace('.php', '', $item);
 
-                $class = require("database/$item");
+                $class = require "database/$item";
 
                 $exists = DB::connection($class->connection)
                     ->table('migrations')
@@ -41,12 +41,11 @@ class Migrate extends Command
                         ->table('migrations')
                         ->insert([
                             'name' => $name,
-                            'batch' => $batch
+                            'batch' => $batch,
                         ]);
 
                     $style->success($item);
-                }
-                catch (Exception $exception) {
+                } catch (Exception $exception) {
                     $style->error($exception->getMessage());
                 }
             }

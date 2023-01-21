@@ -22,11 +22,11 @@ class MakeExcel extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Excel.php');
         $content = str_replace('ExcelName', $name, $content);
 
-        if (!file_exists('app/Excel')) {
+        if (! file_exists('app/Excel')) {
             mkdir('app/Excel');
         }
 
-        $fopen = fopen('app/Excel/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Excel/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

@@ -85,7 +85,7 @@ trait HasRelationships
      */
     public function hasOne($related, $foreignKey = null, $localKey = null)
     {
-        $instance = $this->newRelatedInstance($this->namespace . $related);
+        $instance = $this->newRelatedInstance($this->namespace.$related);
 
         $foreignKey = $foreignKey ?: $this->getForeignKey();
 
@@ -207,7 +207,7 @@ trait HasRelationships
             $relation = $this->guessBelongsToRelation();
         }
 
-        $instance = $this->newRelatedInstance($this->namespace . $related);
+        $instance = $this->newRelatedInstance($this->namespace.$related);
 
         // If no foreign key was supplied, we can use a backtrace to guess the proper
         // foreign key name by using the name of the relationship function, which
@@ -355,7 +355,7 @@ trait HasRelationships
      */
     public function hasMany($related, $foreignKey = null, $localKey = null)
     {
-        $instance = $this->newRelatedInstance($this->namespace . $related);
+        $instance = $this->newRelatedInstance($this->namespace.$related);
 
         $foreignKey = $foreignKey ?: $this->getForeignKey();
 

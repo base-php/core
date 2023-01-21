@@ -2,9 +2,9 @@
 
 use Illuminate\Container\Container;
 use Illuminate\Events\EventServiceProvider;
-use Illuminate\Support\Facades\Facade;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RoutingServiceProvider;
+use Illuminate\Support\Facades\Facade;
 use Netflie\Componentes\Componentes;
 use Spatie\Ignition\Ignition;
 
@@ -17,7 +17,6 @@ class App
         session_start();
 
         header('Access-Control-Allow-Origin: *');
-
 
         // Config
 
@@ -33,8 +32,7 @@ class App
 
         date_default_timezone_set($_ENV['timezone']);
 
-        include __dir__ . '/../database/database.php';
-
+        include __DIR__.'/../database/database.php';
 
         // Errors
 
@@ -44,11 +42,9 @@ class App
             Ignition::make()->register();
         }
 
-
         if ($_ENV['maintenance']) {
             return abort(503);
         }
-
 
         // Container
 
@@ -59,20 +55,19 @@ class App
         with(new EventServiceProvider($app))->register();
         with(new RoutingServiceProvider($app))->register();
 
-
         // Router
 
         $route = $app['router'];
         include 'app/routes.php';
 
         $route->fallback(function () {
-            if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/resources/views/errors/404.blade.php')) {
+            if (file_exists($_SERVER['DOCUMENT_ROOT'].'/resources/views/errors/404.blade.php')) {
                 return view('errors/404');
             } else {
-                $viewPath = realpath($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/http/views');
+                $viewPath = realpath($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/http/views');
                 $componentes = Componentes::create($viewPath);
 
-                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/http/views/404.blade.php');
+                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/http/views/404.blade.php');
                 echo $componentes->render($view, []);
             }
         });
@@ -81,10 +76,9 @@ class App
             include 'app/helpers.php';
         }
 
-
         // Response
 
-        $request  = Request::createFromGlobals();
+        $request = Request::createFromGlobals();
         $response = $app['router']->dispatch($request);
         $response->send();
 

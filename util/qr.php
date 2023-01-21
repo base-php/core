@@ -3,15 +3,13 @@
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
-use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
-use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\Writer\PngWriter;
 
 class QR
 {
     // endroid/qr-code
-    
+
     public $data;
 
     public $result;
@@ -19,6 +17,7 @@ class QR
     public function data($data)
     {
         $this->data = $data;
+
         return $this;
     }
 
@@ -42,7 +41,7 @@ class QR
 
     public function save($path)
     {
-        return $this->result->saveToFile($_SERVER['DOCUMENT_ROOT'] . '/' . $path);
+        return $this->result->saveToFile($_SERVER['DOCUMENT_ROOT'].'/'.$path);
     }
 
     public function url()

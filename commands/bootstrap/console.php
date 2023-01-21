@@ -11,7 +11,7 @@ class Console
 
         $config = require 'app/config.php';
 
-        $application = new Application('Base PHP ' . $config['version'] . ' by Nisa Delgado');
+        $application = new Application('Base PHP '.$config['version'].' by Nisa Delgado');
 
         $application->add(new About());
         $application->add(new AuthInstall());
@@ -49,6 +49,7 @@ class Console
         $application->add(new PermissionsCreateRole());
         $application->add(new PermissionsShow());
         $application->add(new PermissionsTable());
+        $application->add(new Pint());
         $application->add(new QueueClear());
         $application->add(new QueueFailed());
         $application->add(new QueueFlush());
@@ -65,8 +66,8 @@ class Console
 
         if (file_exists('app/Commands')) {
             foreach (scandir('app/Commands') as $command) {
-                if (!is_dir($command)) {
-                    $class = 'App\Commands\\' . str_replace('.php', '', $command);
+                if (! is_dir($command)) {
+                    $class = 'App\Commands\\'.str_replace('.php', '', $command);
 
                     $application->add(new $class());
                 }

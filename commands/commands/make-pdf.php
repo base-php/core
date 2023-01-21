@@ -22,11 +22,11 @@ class MakePdf extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/PDF.php');
         $content = str_replace('PDFName', $name, $content);
 
-        if (!file_exists('app/PDF')) {
+        if (! file_exists('app/PDF')) {
             mkdir('app/PDF');
         }
 
-        $fopen = fopen('app/PDF/' . $name . '.php', 'w+');
+        $fopen = fopen('app/PDF/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

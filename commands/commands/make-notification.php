@@ -22,11 +22,11 @@ class MakeNotification extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/Notification.php');
         $content = str_replace('NotificationName', $name, $content);
 
-        if (!file_exists('app/Notifications')) {
+        if (! file_exists('app/Notifications')) {
             mkdir('app/Notifications');
         }
 
-        $fopen = fopen('app/Notifications/' . $name . '.php', 'w+');
+        $fopen = fopen('app/Notifications/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 
