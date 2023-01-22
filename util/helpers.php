@@ -158,6 +158,11 @@ function redirect($to)
     return $redirect->redirect($to);
 }
 
+function report($message)
+{
+    throw new Exception($message);
+}
+
 function response()
 {
     return new Response();
