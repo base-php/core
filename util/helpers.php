@@ -15,7 +15,7 @@ use Illuminate\Validation\Factory as Validation;
 function abort($code = 404)
 {
     http_response_code($code);
-    view($code);
+    view('http:'$code);
 
     return exit();
 }

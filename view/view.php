@@ -18,19 +18,22 @@ class View
 
         $find = false;
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/resources/views/'.$view.'.blade.php')) {
-            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/resources/views/'.$view.'.blade.php');
+        if (strpos($view, ':')) {
+            $array = explode(':', $view);
+
+            $path = $array[0];
+            $view = $array[1];
+
+            if (file_exists($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/' . $path . '/views/' . $view . '.blade.php')) {
+                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/http/views/' . $view . '.blade.php');
+                $find = true;
+            }
+
+        } else {
+            if (file_exists($_SERVER['DOCUMENT_ROOT'].'/resources/views/' . $view . '.blade.php')) {
+            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/resources/views/' . $view . '.blade.php');
             $find = true;
         }
-
-        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/pagination/views/'.$view.'.blade.php')) {
-            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/pagination/views/'.$view.'.blade.php');
-            $find = true;
-        }
-
-        if (file_exists($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/http/views/'.$view.'.blade.php')) {
-            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/http/views/'.$view.'.blade.php');
-            $find = true;
         }
 
         if ($find == false) {
