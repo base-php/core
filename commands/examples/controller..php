@@ -14,6 +14,7 @@ class ControllerName extends Controller
      */
     public function index(): View
     {
+
     }
 
     /**
@@ -23,6 +24,7 @@ class ControllerName extends Controller
      */
     public function create(): View
     {
+
     }
 
     /**
@@ -32,6 +34,7 @@ class ControllerName extends Controller
      */
     public function store(): Redirect
     {
+
     }
 
     /**
@@ -42,6 +45,7 @@ class ControllerName extends Controller
      */
     public function show(int $id): View
     {
+
     }
 
     /**
@@ -52,6 +56,7 @@ class ControllerName extends Controller
      */
     public function edit(int $id): View
     {
+
     }
 
     /**
@@ -61,6 +66,7 @@ class ControllerName extends Controller
      */
     public function update(): Redirect
     {
+
     }
 
     /**
@@ -71,5 +77,6 @@ class ControllerName extends Controller
      */
     public function destroy(int $id): Redirect
     {
+        
     }
 }

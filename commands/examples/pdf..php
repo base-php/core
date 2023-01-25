@@ -20,6 +20,7 @@ class PDFName extends PDF
      */
     public function __construct()
     {
+        
     }
 
     /**

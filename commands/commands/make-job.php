@@ -19,7 +19,7 @@ class MakeJob extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/base-php/core/commands/examples/Job.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/job.php');
         $content = str_replace('JobName', $name, $content);
 
         if (! file_exists('app/Jobs')) {

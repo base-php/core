@@ -19,7 +19,7 @@ class MakeMiddleware extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/base-php/core/commands/examples/Middleware.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/middleware.php');
         $content = str_replace('MiddlewareName', $name, $content);
 
         if (! file_exists('app/Middleware')) {

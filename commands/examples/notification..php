@@ -21,6 +21,7 @@ class NotificationName extends Notification
      */
     public function array(): array
     {
+
     }
 
     /**
@@ -30,5 +31,6 @@ class NotificationName extends Notification
      */
     public function email()
     {
+        
     }
 }

@@ -133,6 +133,18 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->events = $events;
         $this->routes = new RouteCollection;
         $this->container = $container ?: new Container;
+
+        $this->match(['get', 'post'], '/crud/{controller}/{method?}/{param?}', function ($class, $method = 'index', $param = '') {
+            $class = str('posts')
+                ->camel()
+                ->singular()
+                ->ucfirst()
+                ->prepend('App\Controllers\\')
+                ->append('Controller')
+                ->toString();
+
+            (new $class)->resolve($method, $param);
+        });
     }
 
     /**
@@ -319,14 +331,14 @@ class Router implements BindingRegistrar, RegistrarContract
      */
     public function resource($name, $controller, array $options = [])
     {
-        $this->get('/'.$name, [$controller, 'index']);
-        $this->get('/'.$name.'/create', [$controller, 'create']);
-        $this->get('/'.$name.'/edit/{id}', [$controller, 'edit']);
-        $this->get('/'.$name.'/show/{id}', [$controller, 'show']);
-        $this->get('/'.$name.'/delete/{id}', [$controller, 'delete']);
+        $this->get('/' . $name, [$controller, 'index']);
+        $this->get('/' . $name . '/create', [$controller, 'create']);
+        $this->get('/' . $name . '/edit/{id}', [$controller, 'edit']);
+        $this->get('/' . $name . '/show/{id}', [$controller, 'show']);
+        $this->get('/' . $name . '/delete/{id}', [$controller, 'delete']);
 
-        $this->post('/'.$name.'/store', [$controller, 'store']);
-        $this->post('/'.$name.'/update', [$controller, 'update']);
+        $this->post('/' . $name . '/store', [$controller, 'store']);
+        $this->post('/' . $name . '/update', [$controller, 'update']);
     }
 
     /**

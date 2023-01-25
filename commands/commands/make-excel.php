@@ -19,7 +19,7 @@ class MakeExcel extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/base-php/core/commands/examples/Excel.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/excel.php');
         $content = str_replace('ExcelName', $name, $content);
 
         if (! file_exists('app/Excel')) {

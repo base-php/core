@@ -36,5 +36,6 @@ class CommandName extends Command
      */
     public function handle($params)
     {
+        
     }
 }

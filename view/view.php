@@ -31,9 +31,9 @@ class View
 
         } else {
             if (file_exists($_SERVER['DOCUMENT_ROOT'].'/resources/views/' . $view . '.blade.php')) {
-            $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/resources/views/' . $view . '.blade.php');
-            $find = true;
-        }
+                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/resources/views/' . $view . '.blade.php');
+                $find = true;
+            }
         }
 
         if ($find == false) {

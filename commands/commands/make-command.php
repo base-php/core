@@ -19,7 +19,7 @@ class MakeCommand extends Command
     {
         $name = $input->getArgument('name');
 
-        $content = file_get_contents('vendor/base-php/core/commands/examples/Command.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/command.php');
         $content = str_replace('CommandName', $name, $content);
 
         if (! file_exists('app/Commands')) {
@@ -31,7 +31,7 @@ class MakeCommand extends Command
         fclose($fopen);
 
         $style = new SymfonyStyle($input, $output);
-        $style->success("Clase de comando '$name' created successfully.");
+        $style->success("Clase de comando '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }

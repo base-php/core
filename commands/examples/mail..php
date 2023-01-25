@@ -34,6 +34,7 @@ class MailName extends Mail
      */
     public function __construct()
     {
+        
     }
 
     /**
