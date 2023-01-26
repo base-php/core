@@ -14,7 +14,7 @@ class Docs extends Command
         $style = new SymfonyStyle($input, $output);
 
         $style->table([], [
-            ['Instalación', 'https://github.com/nisa6delgado/base'],
+            ['Instalación', 'https://github.com/base-php/base-php'],
 
             ['Contenedor de servicios', 'https://laravel.com/docs/9.x/container'],
 
