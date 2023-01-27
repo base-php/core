@@ -30,6 +30,8 @@ trait CRUD
 
 		$data['paginationView'] = $paginationView ?? 'default';
 
+		$data['footer'] = (object) $this->footer : (object) [];
+
 		return view('crud:' . $method, $data);
 	}
 }

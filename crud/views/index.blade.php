@@ -101,5 +101,9 @@
 		@if(method_exists($items, 'links'))
 			{{ $items->links($paginationView) }}
 		@endif
+
+		@if($footer)
+			@include($footer->view, $footer->data)
+		@endif
 	</div>
 @endif
