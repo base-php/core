@@ -8,7 +8,8 @@
 	$class->img = $class->img ?? '';
 	$class->widgetContainer = $class->widgetContainer ?? '';
 	$class->tableContainer = $class->tableContainer ?? '';
-
+	$class->filterContainer = $class->filterContainer ?? '';
+	$class->filter = $class->filter ?? '';
 
 	$style->table = $style->table ?? '';
 	$style->thead = $style->thead ?? '';
@@ -19,6 +20,8 @@
 	$style->img = $style->img ?? '';
 	$style->widgetContainer = $style->widgetContainer ?? '';
 	$style->tableContainer = $style->tableContainer ?? '';
+	$style->filterContainer = $style->filterContainer ?? '';
+	$style->filter = $style->filter ?? '';
 
 	$buttons->show['class'] = $buttons->show['class'] ?? '';
 	$buttons->show['text'] = $buttons->show['text'] ?? 'Ver';
@@ -51,6 +54,35 @@
 
 @if($items->count())
 	<div class="{{ $class->tableContainer }}" style="{{ $style->tableContainer }}">
+
+		@if($filters)
+			<div class="{{ $class->filterContainer }}" style="{{ $style->filterContainer }}">
+				@foreach($filters as $filter)
+					<div class="{{ $class->filter }}" style="{{ $style->filter }}">
+						@if($filter->type = 'text')
+							<label for="{{ $filter['name'] }}">{{ $filter['label'] }}</label>
+							<input type="text" name="{{ $filter['name'] }}" id="{{ $filter->id }}" class="{{ $class->filterInput }}" style="{{ $style->filterInput }}">
+						@endif
+
+						@if($filter->type = 'date')
+							<label for="{{ $filter['name'] }}">{{ $filter['label'] }}</label>
+							<input type="date" name="{{ $filter['name'] }}" id="{{ $filter->id }}" class="{{ $class->filterInput }}" style="{{ $style->filterInput }}">
+						@endif
+
+						@if($filter->type = 'select')
+							<label for="{{ $filter['name'] }}">{{ $filter['label'] }}</label>
+							<select name="{{ $filter['name'] }}" id="{{ $filter->id }}" class="{{ $class->filterInput }}" style="{{ $style->filterInput }}">
+								<option value=""></option>
+								@foreach($filter['options'] as $item)
+									<option value="{{ $item->value }}">{{ $item->label }}</option>
+								@endforeach
+							</select>
+						@endif
+					</div>
+				@endforeach
+			</div>
+		@endif
+
 		<table style="{{ $style->table }}" class="{{ $class->table }}">
 			<thead style="{{ $style->thead  }}" class="{{ $class->thead }}">
 				<tr style="{{ $style->tr }}" class="{{ $class->tr }}">
