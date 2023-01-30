@@ -113,17 +113,23 @@
 						@endforeach
 
 						<td style="{{ $style->td }}" class="{{ $class->td }}">
-							<a href="" class="{{ $buttons->show['class'] }}">
-								{!! $buttons->show['icon'] !!} {{ $buttons->show['text'] }}
-							</a>
+							@if($show)
+								<a href="/crud/show/{{ $item->$key }}" class="{{ $buttons->show['class'] }}">
+									{!! $buttons->show['icon'] !!} {{ $buttons->show['text'] }}
+								</a>
+							@endif
 
-							<a href="" class="{{ $buttons->edit['class'] }}">
-								{!! $buttons->edit['icon'] !!} {{ $buttons->edit['text'] }}
-							</a>
+							@if($edit)
+								<a href="/crud/edit/{{ $item->$key }}" class="{{ $buttons->edit['class'] }}">
+									{!! $buttons->edit['icon'] !!} {{ $buttons->edit['text'] }}
+								</a>
+							@endif
 
-							<a href="" class="{{ $buttons->delete['class'] }}">
-								{!! $buttons->delete['icon'] !!} {{ $buttons->delete['text'] }}
-							</a>
+							@if($delete)
+								<a href="/crud/delete/{{ $item->$key }}" class="{{ $buttons->delete['class'] }}">
+									{!! $buttons->delete['icon'] !!} {{ $buttons->delete['text'] }}
+								</a>
+							@endif
 						</td>
 					</tr>
 				@endforeach

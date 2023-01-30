@@ -28,11 +28,15 @@ trait CRUD
 
 		$data['widgets'] = isset($this->widgets) ? (object) $this->widgets : (object) [];
 
-		$data['paginationView'] = $paginationView ?? 'default';
+		$data['paginationView'] = $this->paginationView ?? 'default';
 
 		$data['widgets'] = isset($this->widgets) ? (object) $this->widgets : (object) [];
 
 		$data['filters'] = $this->filters ?? null;
+
+		$data['edit'] = $this->edit ?? true;
+		$data['show'] = $this->show ?? true;
+		$data['delete'] = $this->delete ?? true;
 
 		return view('crud:' . $method, $data);
 	}
