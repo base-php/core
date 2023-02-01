@@ -2,6 +2,8 @@
 
 include __DIR__.'/app.php';
 include __DIR__.'/../auth/class/2fa.php';
+include __DIR__.'/../bill/models/customer.php';
+include __DIR__.'/../bill/traits/billable.php';
 include __DIR__.'/../database/backup.php';
 include __DIR__.'/../commands/bootstrap/console.php';
 include __DIR__.'/../commands/class/command.php';
