@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Customer;
-
 trait Billable
 {
 	public $customer;
@@ -19,5 +17,16 @@ trait Billable
 		];
 
 		$$this->customer = Customer::firstOrCreate($data);
+	}
+
+	public function invoices()
+	{
+		$this->createOrGetCustomer();
+
+		$bills = Bill::where('id_customer', $customer->id)
+			->with('items')
+			->get();
+
+		return $bills;
 	}
 }
