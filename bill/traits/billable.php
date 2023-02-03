@@ -19,6 +19,18 @@ trait Billable
 		$$this->customer = Customer::firstOrCreate($data);
 	}
 
+	public function findInvoice($id)
+	{
+		$this->createOrGetCustomer();
+
+		$bill = Bill::where('id_customer', $customer->id)
+			->where('id', $id)
+			->with('items')
+			->first();
+
+		return $bill;
+	}
+
 	public function invoices()
 	{
 		$this->createOrGetCustomer();

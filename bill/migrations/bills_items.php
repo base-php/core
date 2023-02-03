@@ -16,6 +16,8 @@ return new class extends Migration
             $table->text('description');
             $table->float('quantity');
             $table->float('price');
+            $table->float('tax');
+            $table->float('discount');
 
             $table->datetime('date_create')
                 ->useCurrent();

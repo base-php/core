@@ -20,8 +20,6 @@ return new class extends Migration
                 ->nullable();
 
             $table->float('total');
-            $table->text('note')->nullable();
-            $table->tinyInteger('status');
 
             $table->datetime('date_create')
                 ->useCurrent();
