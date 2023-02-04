@@ -13,7 +13,6 @@ class Bill extends Model
 		'discount',
 		'tax',
 		'total',
-		'note',
 		'status'
 	];
 
