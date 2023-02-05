@@ -15,6 +15,7 @@ class Console
 
         $application->add(new About());
         $application->add(new AuthInstall());
+        $application->add(new BillsTable());
         $application->add(new DBBackup());
         $application->add(new DBTable());
         $application->add(new DBWipe());

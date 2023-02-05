@@ -11,7 +11,7 @@ class NotificationsTable extends Command
 
     protected function execute($input, $output)
     {
-        copy('vendor/base-php/core/notifications/migrations/notifications.php', 'database/'.date('Y_m_d_His').'.php');
+        copy('vendor/base-php/core/notifications/migrations/notifications.php', 'database/'.date('Y_m_d_His').'_notifications.php');
 
         $style = new SymfonyStyle($input, $output);
         $style->success('Migración creada satisfactoriamente.');

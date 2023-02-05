@@ -7,6 +7,7 @@ include __DIR__.'/../commands/bootstrap/console.php';
 include __DIR__.'/../commands/class/command.php';
 include __DIR__.'/../commands/commands/about.php';
 include __DIR__.'/../commands/commands/auth-install.php';
+include __DIR__.'/../commands/commands/bills-table.php';
 include __DIR__.'/../commands/commands/db-backup.php';
 include __DIR__.'/../commands/commands/db-table.php';
 include __DIR__.'/../commands/commands/db-wipe.php';
