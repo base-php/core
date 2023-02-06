@@ -19,7 +19,7 @@ trait Billable
 		$$this->customer = Customer::firstOrCreate($data);
 	}
 
-	public function findInvoice($id)
+	public function findBill($id)
 	{
 		$this->createOrGetCustomer();
 
@@ -31,7 +31,7 @@ trait Billable
 		return $bill;
 	}
 
-	public function invoices()
+	public function bills()
 	{
 		$this->createOrGetCustomer();
 

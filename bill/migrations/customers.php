@@ -14,6 +14,13 @@ return new class extends Migration
             $table->int('id_model');
             $table->string('model');
 
+            $table->text('address');
+            $table->text('city');
+            $table->text('state');
+            $table->text('postal_code');
+            $table->text('country');
+            $table->text('phone');
+
             $table->datetime('date_create')
                 ->useCurrent();
 

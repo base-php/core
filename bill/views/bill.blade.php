@@ -60,12 +60,16 @@
 			<td width="50%">
 				<strong>{{ config('name') }}</strong><br>
 
-				@isset($street)
-                    {{ $street }}<br>
+				@isset($address)
+                    {{ $address }}<br>
                 @endisset
 
-                @isset($location)
-                    {{ $location }}<br>
+                @isset($city)
+                    {{ $city }}<br>
+                @endisset
+
+                @isset($state)
+                    {{ $state }}<br>
                 @endisset
 
                 @isset($country)
@@ -88,7 +92,7 @@
 			<td width="50%">
 				<strong>Cliente</strong><br>
 
-				{{ $bill->customer->name }}<br>
+				{{ $bill->name }}<br>
 
 				@if ($bill->customer->address)
                     {{ $bill->customer->address }}<br>
@@ -110,8 +114,8 @@
                     {{ $bill->customer->phone }}<br>
                 @endif
 
-                @if ($bill->customer->email)
-                    {{ $bill->customer->email }}<br>
+                @if ($bill->email)
+                    {{ $bill->email }}<br>
                 @endif
 			</td>
 		</tr>
@@ -142,7 +146,7 @@
 
 		<tr>
 			<td></td>
-			<td colspan="3">Subtotal</td>
+			<td colspan="3" align="right">Subtotal</td>
 			<td align="right">{{ $bill->subtotal }}</td>
 		</tr>
 

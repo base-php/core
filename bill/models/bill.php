@@ -16,6 +16,11 @@ class Bill extends Model
 		'status'
 	];
 
+	public function customer()
+	{
+		return $this->belongsTo(Customer::class, 'id_customer');
+	}
+
 	public function items()
 	{
 		return $this->hasMany(BillItem::class, 'id_bill');
