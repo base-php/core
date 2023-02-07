@@ -25,4 +25,9 @@ class Bill extends Model
 	{
 		return $this->hasMany(BillItem::class, 'id_bill');
 	}
+
+	public function getSubtotalAttribute()
+	{
+		return $this->total - $this->tax;
+	}
 }
