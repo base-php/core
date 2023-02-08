@@ -41,4 +41,4 @@ return new class extends Migration
     {
         $this->schema->dropIfExists('bills_items');
     }
-}
+};

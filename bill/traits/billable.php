@@ -16,14 +16,48 @@ trait Billable
 			'model' => $model
 		];
 
-		$$this->customer = Customer::firstOrCreate($data);
+		$this->customer = Customer::firstOrCreate($data);
+	}
+
+	public function checkout($items)
+	{
+		$this->createOrGetCustomer();
+
+		$bill = Bill::create(['id_customer' => $this->customer->id]);
+
+		$total = $tax = $discount = 0;
+
+		foreach ($items as $item) {
+			$item = is_array($item) ? (object) $item : $item;
+
+			BillItem::create([
+				'id_bill' => $bill->id,
+				'description' => $item->description,
+				'quantity' => $item->quantity,
+				'price' => $item->price,
+				'tax' => $item->tax,
+				'discount' => $item->discount,
+			]);
+
+			$total += $item->price;
+			$tax += $item->tax;
+			$discount += $item->discount;
+		}
+
+		$bill->update([
+			'total' => $total,
+			'tax' => $tax,
+			'discount' => $discount,
+		]);
+
+		return $bill;
 	}
 
 	public function findBill($id)
 	{
 		$this->createOrGetCustomer();
 
-		$bill = Bill::where('id_customer', $customer->id)
+		$bill = Bill::where('id_customer', $this->customer->id)
 			->where('id', $id)
 			->with('items')
 			->first();
@@ -35,7 +69,7 @@ trait Billable
 	{
 		$this->createOrGetCustomer();
 
-		$bills = Bill::where('id_customer', $customer->id)
+		$bills = Bill::where('id_customer', $this->customer->id)
 			->with('items')
 			->get();
 

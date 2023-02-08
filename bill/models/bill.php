@@ -12,8 +12,7 @@ class Bill extends Model
 		'id_customer',
 		'discount',
 		'tax',
-		'total',
-		'status'
+		'total'
 	];
 
 	public function customer()

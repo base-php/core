@@ -11,7 +11,7 @@ return new class extends Migration
 	{
 		$this->schema->create('customers', function ($table) {
             $table->id();
-            $table->int('id_model');
+            $table->integer('id_model');
             $table->string('model');
 
             $table->text('address');
@@ -39,4 +39,4 @@ return new class extends Migration
     {
         $this->schema->dropIfExists('customers');
     }
-}
+};
