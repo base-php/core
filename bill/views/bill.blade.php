@@ -52,7 +52,7 @@
 			</td>
 
 			<td align="right">
-				<h1>{{ $header ?? config('name') }}</h1>
+				<h1>{{ $header }}</h1>
 			</td>
 		</tr>
 
