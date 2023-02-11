@@ -28,8 +28,10 @@ class Response
     {
         http_response_code($status_code);
         header('Content-Type: application/json; charset=utf-8');
+        
         $iterable = is_iterable($iterable) ? $iterable : (array) $iterrable;
         $this->response = json_encode($iterable);
+
         return $this;
     }
 
