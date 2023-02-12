@@ -73,7 +73,7 @@ trait Billable
 		$email = $config['email'] ?? config('email') ?? null;
 		$url = $config['url'] ?? config('url') ?? null;
 
-		view('bill::bill', compact('bill', 'header', 'address', 'city', 'state', 'country', 'phone', 'email', 'url'));
+		view('bill:bill', compact('bill', 'header', 'address', 'city', 'state', 'country', 'phone', 'email', 'url'));
 
 		$options = new Options();
         $options->setIsRemoteEnabled(true);
