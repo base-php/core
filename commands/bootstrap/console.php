@@ -64,6 +64,7 @@ class Console
         $application->add(new Test());
         $application->add(new TokensTable());
         $application->add(new Up());
+        $application->add(new VendorPublish());
         $application->add(new ViewClear());
 
         if (file_exists('app/Commands')) {

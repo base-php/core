@@ -56,6 +56,7 @@ include __DIR__.'/../commands/commands/shell.php';
 include __DIR__.'/../commands/commands/test.php';
 include __DIR__.'/../commands/commands/tokens-table.php';
 include __DIR__.'/../commands/commands/up.php';
+include __DIR__.'/../commands/commands/vendor-publish.php';
 include __DIR__.'/../commands/commands/view-clear.php';
 
 include __DIR__.'/../crud/traits/crud.php';
