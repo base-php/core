@@ -141,7 +141,7 @@
 		@endif
 
 		@if($footer)
-			@include($footer->view, $footer->data)
+			@include($footer['view'], $footer['data'])
 		@endif
 	</div>
 @endif

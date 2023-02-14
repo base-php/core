@@ -25,7 +25,7 @@ class View
             $view = $array[1];
 
             if (file_exists($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/' . $path . '/views/' . $view . '.blade.php')) {
-                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/http/views/' . $view . '.blade.php');
+                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/' . $view . '/views/' . $view . '.blade.php');
                 $find = true;
             }
 
