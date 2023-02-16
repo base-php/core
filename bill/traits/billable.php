@@ -35,6 +35,9 @@ trait Billable
 		foreach ($items as $item) {
 			$item = is_array($item) ? (object) $item : $item;
 
+			$item->tax = $item->tax ?? 0;
+			$item->discount = $item->discount ?? 0;
+
 			BillItem::create([
 				'id_bill' => $bill->id,
 				'description' => $item->description,
@@ -80,7 +83,7 @@ trait Billable
 
         $dompdf = new Dompdf($options);
         $dompdf->loadHtml(utf8_encode(ob_get_clean()));
-
+        $dompdf->render();
         $dompdf->stream($filename);
 	}
 

@@ -127,39 +127,63 @@
 						<th align="left">Descripción</th>
 						<th align="left">Cantidad</th>
 						<th align="left">Precio unitario</th>
-						<th align="right">Impuesto</th>
-						<th align="right">Monto</th>
+
+						@if($bill->tax)
+							<th align="left">Impuesto</th>
+						@endif
+
+						@if($bill->discount)
+							<th align="left">Descuento</th>
+						@endif
 					</tr>
 
-					@foreach($bill->items() as $item)
+					@foreach($bill->items as $item)
 						<tr class="row">
 							<td>{{ $item->description }}</td>
 							<td>{{ $item->quantity }}</td>
-							<td>{{ $item->price }}</td>
-							<td>{{ $item->tax }}</td>
-							<td>{{ $item->amount }}</td>
+							<td>{{ number_format($item->price, 2) }}</td>
+
+							@if($bill->tax)
+								<td>{{ number_format($item->tax, 2) }}</td>
+							@endif
+
+							@if($bill->discount)
+								<td>{{ number_format($item->discount, 2) }}</td>
+							@endif
 						</tr>
 					@endforeach
 				</table>
 			</td>
 		</tr>
 
-		<tr>
-			<td></td>
-			<td colspan="3" align="right">Subtotal</td>
-			<td align="right">{{ $bill->subtotal }}</td>
-		</tr>
+		@if($bill->tax || $bill->discount)
+			<tr>
+				<td></td>
+				<th colspan="3" align="left">Subtotal</th>
+				<td>{{ number_format($bill->subtotal, 2) }}</td>
+			</tr>
+		@endif
+
+		@if($bill->discount)
+			<tr>
+				<td></td>
+				<th colspan="3" align="left">Descuento</th>
+				<td>{{ number_format($bill->discount, 2) }}</td>
+			</tr>
+		@endif
+
+		@if($bill->discount)
+			<tr>
+				<td></td>
+				<th colspan="3" align="left">Impuesto</th>
+				<td>{{ number_format($bill->tax, 2) }}</td>
+			</tr>
+		@endif
 
 		<tr>
 			<td></td>
-			<td colspan="3" align="right">Descuento</td>
-			<td align="right">{{ $bill->discount }}</td>
-		</tr>
-
-		<tr>
-			<td></td>
-			<td colspan="3" align="right">Impuesto</td>
-			<td align="right">{{ $bill->tax }}</td>
+			<th colspan="3" align="left">Total</th>
+			<td>{{ number_format($bill->total, 2) }}</td>
 		</tr>
 	</table>
 </body>

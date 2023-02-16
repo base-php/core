@@ -14,7 +14,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_bill');
 
             $table->text('description');
-            $table->float('quantity');
+            $table->integer('quantity');
             $table->float('price');
             $table->float('tax');
             $table->float('discount');
