@@ -9,21 +9,9 @@ class Test extends Command
 
     protected static $defaultDescription = 'Ejecuta las pruebas de la aplicación';
 
-    public function configure()
-    {
-        $this->addArgument('test', InputArgument::OPTIONAL);
-    }
-
     protected function execute($input, $output)
     {
-        $test = $input->getArgument('test');
-
-        if ($test) {
-            system('vendor\bin\phpunit '.$test);
-        } else {
-            system('vendor\bin\phpunit');
-        }
-
+        system('vendor\bin\pest');
         return Command::SUCCESS;
     }
 }

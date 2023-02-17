@@ -9,7 +9,7 @@ class Test extends TestCase
 {
     public function assertDatabaseHas($table, $data)
     {
-        include 'database/database.php';
+        include 'vendor/base-php/core/database/database.php';
 
         $db = DB::table($table)
             ->where($data)
