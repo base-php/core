@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MakeExcel extends Command
@@ -12,12 +13,19 @@ class MakeExcel extends Command
 
     public function configure()
     {
-        $this->addArgument('name', InputArgument::REQUIRED);
+        $this->addArgument('name', InputArgument::OPTIONAL);
     }
 
     protected function execute($input, $output)
     {
         $name = $input->getArgument('name');
+
+        while (! $name) {
+            $question = new Question("\n- ¿Cuál es el nombre del Excel?\n> ");
+
+            $helper = $this->getHelper('question');
+            $name = $helper->ask($input, $output, $question);
+        }
 
         $content = file_get_contents('vendor/base-php/core/commands/examples/excel.php');
         $content = str_replace('ExcelName', $name, $content);
