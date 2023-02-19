@@ -173,6 +173,11 @@ function pdf($object)
     return $object;
 }
 
+function process()
+{
+    return new Process;
+}
+
 function qr($data)
 {
     $qr = new QR;

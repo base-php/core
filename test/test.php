@@ -33,8 +33,8 @@ class Test extends TestCase
 
     public function command($command)
     {
-        $this->output = exec($command);
-
+        exec($command, $this->output);
+        $this->output = implode("\n", $this->output);
         return $this;
     }
 
