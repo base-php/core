@@ -76,6 +76,7 @@ include __DIR__.'/../routing/controller.php';
 include __DIR__.'/../routing/base-controller.php';
 
 include __DIR__.'/../database/soft-deletes.php';
+include __DIR__.'/../database/has-relationships.php';
 include __DIR__.'/../database/base-model.php';
 include __DIR__.'/../database/migration.php';
 
