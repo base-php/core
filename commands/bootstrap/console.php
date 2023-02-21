@@ -23,6 +23,7 @@ class Console
         $application->add(new Docs());
         $application->add(new Down());
         $application->add(new Env());
+        $application->add(new FeatureTable());
         $application->add(new Inspire());
         $application->add(new LogsClean());
         $application->add(new LogsTable());
