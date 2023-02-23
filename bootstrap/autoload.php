@@ -67,6 +67,8 @@ include __DIR__.'/../crud/traits/crud.php';
 include __DIR__.'/../export/excel.php';
 include __DIR__.'/../export/pdf.php';
 
+include __DIR__.'/../feature/class/feature.php';
+
 include __DIR__.'/../http/redirect.php';
 include __DIR__.'/../http/request.php';
 include __DIR__.'/../http/resources.php';

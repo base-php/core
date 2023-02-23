@@ -112,6 +112,11 @@ function faker()
     return Faker::create($locale);
 }
 
+function feature()
+{
+    return new Feature;
+}
+
 function google()
 {
     return Google::init();
