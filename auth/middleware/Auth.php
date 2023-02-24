@@ -9,9 +9,9 @@ class Auth
      *
      * @param    $request
      * @param    $next
-     * @return mixed
+     * @return   mixed
      */
-    public function handle($request, $next)
+    public function handle($request, $next): mixed
     {
         if (! auth()) {
             $url = server('uri');

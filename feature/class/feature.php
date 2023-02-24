@@ -1,17 +1,30 @@
 <?php
 
 use App\Models\User;
-use DB;
 
 class Feature
 {
 	public $user;
 
+	public function active($name)
+	{
+		$scope = $this->getScope();
+
+		$feature = DB::table('features')
+			->where('name', $name)
+			->where('scope', $scope)
+			->first();
+
+		if ($feature->value) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public function define($name, $condition)
 	{
-		$user = $this->getUser();
-
-		$scope = get_class($this->getUser()) . '|' . $this->getUser()->id;
+		$scope = $this->getScope();
 
 		$value = is_object($condition) ? $condition->resolve() : $condition;
 
@@ -21,15 +34,18 @@ class Feature
 			'value' => $value
 		];
 
-		DB::table('features')->insert($data);
+		DB::table('features')
+			->insert($data);
 	}
 
-	public function getUser()
+	public function getScope()
 	{
 		if (! $this->user) {
 			$this->user = User::find(auth()->id);
 		}
 
-		return $this->user;
+		$scope = get_class($this->user) . '|' . $this->user->id;
+
+		return $scope;
 	}
 }

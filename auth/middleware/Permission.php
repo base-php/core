@@ -9,9 +9,9 @@ class Permission
      *
      * @param    $request
      * @param    $next
-     * @return mixed
+     * @return   mixed
      */
-    public function handle($request, $next)
+    public function handle($request, $next): mixed
     {
         if (permission()) {
             return view('401');

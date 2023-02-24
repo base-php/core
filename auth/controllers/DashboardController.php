@@ -9,9 +9,9 @@ class DashboardController extends Controller
     /**
      * Verify if user is logged.
      *
-     * @return auth
+     * @return void
      */
-    public function __construct()
+    public function __construct(): void
     {
         $this->middleware('Auth');
     }
