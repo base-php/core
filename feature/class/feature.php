@@ -6,6 +6,16 @@ class Feature
 {
 	public $user;
 
+	public function activate($name)
+	{
+		$scope = $this->getScope();
+
+		DB::table('features')
+			->where('name', $name)
+			->where('scope', $scope)
+			->update(['value' => true]);
+	}
+
 	public function active($name)
 	{
 		$scope = $this->getScope();
