@@ -48,6 +48,12 @@ class Feature
 			->insert($data);
 	}
 
+	public function for($user)
+	{
+		$this->user = $user;
+		return $this;
+	}
+
 	public function getScope()
 	{
 		if (! $this->user) {
