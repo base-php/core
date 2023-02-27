@@ -15,7 +15,11 @@ class MakeController extends Command
     public function configure()
     {
         $this->addArgument('name', InputArgument::OPTIONAL);
-        $this->addOption('all', 'a', InputOption::VALUE_NONE, 'Genera las clases de migración, modelo y controlador.');
+
+        $this->addOption('api', null, InputOption::VALUE_NONE, 'Excluye del controlador los métodos create y edit.');
+        $this->addOption('invokable', 'i', InputOption::VALUE_NONE, 'Genera sólo un método, clase de controlador invokable.');
+        $this->addOption('model', 'm', InputOption::VALUE_REQUIRED, 'Genera el modelo dado.');
+        $this->addOption('resource', 'i', InputOption::VALUE_NONE, 'Genera una clase de controlador de recurso.');
     }
 
     protected function execute($input, $output)
@@ -29,12 +33,27 @@ class MakeController extends Command
             $name = $helper->ask($input, $output, $question);
         }
 
-        $content = file_get_contents('vendor/base-php/core/commands/examples/controller.php');
-        $content = str_replace('ControllerName', $name, $content);
+        $api = $input->getOption('api');
+        $invokable = $input->getOption('invokable');
+        $model = $input->getOption('model');
+        $resource = $input->getOption('resource');
 
-        if (! file_exists('app/Controllers')) {
-            mkdir('app/Controllers');
+        $file = 'controller';
+
+        if ($api) {
+            $file = 'controller.api';
         }
+
+        if ($invokable) {
+            $file = 'controller.invokable';
+        }
+
+        if ($resource) {
+            $file = 'controller.resource';
+        }
+
+        $content = file_get_contents('vendor/base-php/core/commands/examples/'.$file.'.php');
+        $content = str_replace('ControllerName', $name, $content);
 
         $fopen = fopen('app/Controllers/'.$name.'.php', 'w+');
         fwrite($fopen, $content);
@@ -43,12 +62,7 @@ class MakeController extends Command
         $style = new SymfonyStyle($input, $output);
         $style->success("Clase de controlador '$name' creado satisfactoriamente.");
 
-        $all = $input->getOption('all');
-
-        if ($all) {
-            $model = str()->singular($name);
-            $model = str_replace('Controller', '', $model);
-
+        if ($model) {
             $content = file_get_contents('vendor/base-php/core/commands/examples/model.php');
             $content = str_replace('ModelName', $model, $content);
 
@@ -61,31 +75,6 @@ class MakeController extends Command
             fclose($fopen);
 
             $style->success("Clase de modelo '$model' creado satisfactoriamente.");
-
-            $migration = strtolower(str()->snake($model));
-            $migration = str()->plural($migration);
-
-            $content = file_get_contents('vendor/base-php/core/commands/examples/migration.php');
-            $content = str_replace('MigrationName', $migration, $content);
-
-            $var = str()->singular($migration);
-            $var = strtolower($var);
-            $content = str_replace('VarName', $var, $content);
-
-            $model = ucfirst(str()->singular($migration));
-            $content = str_replace('ModelName', $model, $content);
-
-            if (! file_exists('database')) {
-                mkdir('database');
-            }
-
-            $migration = time().'_'.$migration;
-
-            $fopen = fopen('database/'.$migration.'.php', 'w+');
-            fwrite($fopen, $content);
-            fclose($fopen);
-
-            $style->success("Archivo de migración '$migration' creado satisfactoriamente.");
         }
 
         return Command::SUCCESS;
