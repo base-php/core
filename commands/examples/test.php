@@ -1,16 +1,7 @@
 <?php
 
-namespace Tests;
+uses(Tests\Test::class);
 
-class TestName extends Test
-{
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_method()
-    {
-        
-    }
-}
+test('TestName', function () {
+    $this->assertTrue(true);
+});

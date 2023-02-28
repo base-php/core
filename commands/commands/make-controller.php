@@ -16,10 +16,12 @@ class MakeController extends Command
     {
         $this->addArgument('name', InputArgument::OPTIONAL);
 
-        $this->addOption('api', null, InputOption::VALUE_NONE, 'Excluye del controlador los métodos create y edit.');
-        $this->addOption('invokable', 'i', InputOption::VALUE_NONE, 'Genera sólo un método, clase de controlador invokable.');
-        $this->addOption('model', 'm', InputOption::VALUE_REQUIRED, 'Genera el modelo dado.');
-        $this->addOption('resource', 'i', InputOption::VALUE_NONE, 'Genera una clase de controlador de recurso.');
+        $this->addOption('api', null, InputOption::VALUE_NONE, 'Excluye del controlador los métodos create y edit');
+        $this->addOption('invokable', 'i', InputOption::VALUE_NONE, 'Genera sólo un método, clase de controlador invokable');
+        $this->addOption('model', 'm', InputOption::VALUE_REQUIRED, 'Genera el modelo dado');
+        $this->addOption('resource', 'r', InputOption::VALUE_NONE, 'Genera una clase de controlador de recurso');
+        $this->addOption('requests', 'R', InputOption::VALUE_NONE, 'Genera clase de validación para store y update');
+        $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta al controlador');
     }
 
     protected function execute($input, $output)
@@ -37,6 +39,8 @@ class MakeController extends Command
         $invokable = $input->getOption('invokable');
         $model = $input->getOption('model');
         $resource = $input->getOption('resource');
+        $requests = $input->getOption('requests');
+        $test = $input->getOption('test');
 
         $file = 'controller';
 
@@ -66,15 +70,44 @@ class MakeController extends Command
             $content = file_get_contents('vendor/base-php/core/commands/examples/model.php');
             $content = str_replace('ModelName', $model, $content);
 
-            if (! file_exists('app/Models')) {
-                mkdir('app/Models');
-            }
-
             $fopen = fopen('app/Models/'.$model.'.php', 'w+');
             fwrite($fopen, $content);
             fclose($fopen);
 
             $style->success("Clase de modelo '$model' creado satisfactoriamente.");
+        }
+
+        if ($requests) {
+            $name = str_replace('Controller', '', $name);
+
+            $items = [$name . 'StoreValidation', $name . 'UpdateValidation'];
+
+            foreach ($items as $item) {
+                $content = file_get_contents('vendor/base-php/core/commands/examples/validation.php');
+                $content = str_replace('ValidationName', $item, $content);
+
+                if (! file_exists('app/Validations')) {
+                    mkdir('app/Validations');
+                }
+
+                $fopen = fopen('app/Validations/'.$item.'.php', 'w+');
+                fwrite($fopen, $content);
+                fclose($fopen);
+
+                $style->success("Clase de validación '$item' creada satisfactoriamente.");                
+            }
+        }
+
+        if ($test) {
+            $content = file_get_contents('vendor/base-php/core/commands/examples/test.php');
+            $content = str_replace('TestName', $name, $content);
+
+            $fopen = fopen('tests/'.$name.'.php', 'w+');
+            fwrite($fopen, $content);
+            fclose($fopen);
+
+            $style = new SymfonyStyle($input, $output);
+            $style->success("Clase de prueba '$name' creada satisfactoriamente.");
         }
 
         return Command::SUCCESS;
