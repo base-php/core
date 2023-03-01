@@ -14,6 +14,7 @@ class MakeJob extends Command
     public function configure()
     {
         $this->addArgument('name', InputArgument::OPTIONAL);
+        $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta al job');
     }
 
     protected function execute($input, $output)
@@ -40,6 +41,20 @@ class MakeJob extends Command
 
         $style = new SymfonyStyle($input, $output);
         $style->success("Clase de trabajo '$name' creada satisfactoriamente.");
+
+        $test = $input->getOption('test');
+
+        if ($test) {
+            $content = file_get_contents('vendor/base-php/core/commands/examples/test.php');
+            $content = str_replace('TestName', $name, $content);
+
+            $fopen = fopen('tests/'.$name.'.php', 'w+');
+            fwrite($fopen, $content);
+            fclose($fopen);
+
+            $style = new SymfonyStyle($input, $output);
+            $style->success("Clase de prueba '$name' creada satisfactoriamente.");
+        }
 
         return Command::SUCCESS;
     }

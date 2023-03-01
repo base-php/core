@@ -8,10 +8,8 @@ class DashboardController extends Controller
 {
     /**
      * Verify if user is logged.
-     *
-     * @return void
      */
-    public function __construct(): void
+    public function __construct()
     {
         $this->middleware('Auth');
     }

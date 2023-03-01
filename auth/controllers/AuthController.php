@@ -75,7 +75,7 @@ class AuthController extends Controller
             ->first();
 
         if ($user) {
-            session('user', $user->id);
+            session('id', $user->id);
 
             $redirect = request('redirect') ? request('redirect') : $this->redirect_login;
 
