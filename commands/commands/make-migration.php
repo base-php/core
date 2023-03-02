@@ -15,6 +15,7 @@ class MakeMigration extends Command
     public function configure()
     {
         $this->addArgument('name', InputArgument::OPTIONAL);
+        $this->addOption('path', null, InputOption::VALUE_REQUIRED, 'Ubicación donde el archivo de migración será creado');
     }
 
     protected function execute($input, $output)
@@ -44,7 +45,9 @@ class MakeMigration extends Command
 
         $name = date('Y_m_d_His').'_'.$name;
 
-        $fopen = fopen('database/'.$name.'.php', 'w+');
+        $path = $input->getOption('path') ?? 'database';
+
+        $fopen = fopen($path . '/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 
