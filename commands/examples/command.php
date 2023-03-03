@@ -9,21 +9,21 @@ class CommandName extends Command
      *
      * @var string
      */
-    public $name = '';
+    public string $name = '';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    public $description = '';
+    public string $description = '';
 
     /**
      * Set console arguments.
      *
      * @return array
      */
-    public function params()
+    public function params(): array
     {
         return [];
     }
@@ -34,7 +34,7 @@ class CommandName extends Command
      * @param  object  $params
      * @return mixed
      */
-    public function handle($params)
+    public function handle(object $params): mixed
     {
         
     }

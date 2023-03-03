@@ -17,9 +17,9 @@ class ExcelName extends Excel
     /**
      * Build the Excel.
      *
-     * @return $this
+     * @return void
      */
-    public function build()
+    public function build(): void
     {
         
     }
