@@ -20,7 +20,7 @@ class MakeController extends Command
         $this->addOption('invokable', 'i', InputOption::VALUE_NONE, 'Genera sólo un método, clase de controlador invokable');
         $this->addOption('model', 'm', InputOption::VALUE_REQUIRED, 'Genera el modelo dado');
         $this->addOption('resource', 'r', InputOption::VALUE_NONE, 'Genera una clase de controlador de recurso');
-        $this->addOption('requests', 'R', InputOption::VALUE_NONE, 'Genera clase de validación para store y update');
+        $this->addOption('validations', null, InputOption::VALUE_NONE, 'Genera clase de validación para store y update');
         $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta al controlador');
     }
 
@@ -39,7 +39,7 @@ class MakeController extends Command
         $invokable = $input->getOption('invokable');
         $model = $input->getOption('model');
         $resource = $input->getOption('resource');
-        $requests = $input->getOption('requests');
+        $validations = $input->getOption('validations');
         $test = $input->getOption('test');
 
         $file = 'controller';
@@ -74,27 +74,27 @@ class MakeController extends Command
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $style->success("Clase de modelo '$model' creado satisfactoriamente.");
+            $style->success("Clase de modelo '$model' creada satisfactoriamente.");
         }
 
-        if ($requests) {
+        if ($validations) {
             $name = str_replace('Controller', '', $name);
 
-            $items = [$name . 'StoreValidation', $name . 'UpdateValidation'];
+            $validations = [$name . 'StoreValidation', $name . 'UpdateValidation'];
 
-            foreach ($items as $item) {
+            foreach ($validations as $validation) {
                 $content = file_get_contents('vendor/base-php/core/commands/examples/validation.php');
-                $content = str_replace('ValidationName', $item, $content);
+                $content = str_replace('ValidationName', $validation, $content);
 
                 if (! file_exists('app/Validations')) {
                     mkdir('app/Validations');
                 }
 
-                $fopen = fopen('app/Validations/'.$item.'.php', 'w+');
+                $fopen = fopen('app/Validations/'.$validation.'.php', 'w+');
                 fwrite($fopen, $content);
                 fclose($fopen);
 
-                $style->success("Clase de validación '$item' creada satisfactoriamente.");                
+                $style->success("Clase de validación '$validation' creada satisfactoriamente.");                
             }
         }
 

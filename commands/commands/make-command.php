@@ -36,7 +36,7 @@ class MakeCommand extends Command
         $command = $input->getOption('command');
 
         if ($command) {
-            $content = str_replace('public string $name = '';', 'public string $name = \'' . $name . '\';', $content);
+            $content = str_replace('public string $name = \'\';', 'public string $name = \'' . $name . '\';', $content);
         }
 
         if (! file_exists('app/Commands')) {

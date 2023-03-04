@@ -1,13 +1,21 @@
 <?php
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputOption;
 
+use Symfony\Component\Console\Style\SymfonyStyle;
 class MigrateRefresh extends Command
 {
     protected static $defaultName = 'migrate:refresh';
 
     protected static $defaultDescription = 'Restablece y vuelve a ejecutar todas las migraciones';
+
+    public function configure()
+    {
+        $this->addOption('database', 'default', InputOption::VALUE_NONE, 'Conexión de base de datos a utilizar');
+        $this->addOption('path', null, InputOption::VALUE_REQUIRED, 'Ruta al archivo de migración que se ejecutará');
+        $this->addOption('step', null, InputOption::VALUE_REQUIRED, 'El número de migraciones que se revertirán y volverán a ejecutar');
+    }
 
     protected function execute($input, $output)
     {
@@ -15,14 +23,35 @@ class MigrateRefresh extends Command
 
         $style = new SymfonyStyle($input, $output);
 
-        foreach (scandir('database') as $migration) {
+        $database = $input->getOption('database');
+        $migrations = $input->getOption('path') ?? scandir('database');
+
+        if ($input->getOption('step')) {
+            $migrations = DB::connection($database)
+                ->table('migrations')
+                ->orderByDesc('batch')
+                ->limit($step)
+                ->get();
+        }
+
+        foreach ($migrations as $migration) {
             if (is_dir($migration)) {
                 continue;
             }
 
+            if ($input->getOption('step')) {
+                $migration = $migration->name . '.php';
+            }
+
             try {
-                $class = require 'database/'.$migration;
+                $require = $input->getOption('path') ? $migration : 'database/' . $migration;
+                
+                $class = require $require;
                 $class->down();
+
+                if ($database && $database != $class->connection) {
+                    continue;
+                }
 
                 $name = str_replace('.php', '', $migration);
 

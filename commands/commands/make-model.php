@@ -16,6 +16,11 @@ class MakeModel extends Command
     {
         $this->addArgument('name', InputArgument::OPTIONAL);
         $this->addOption('all', 'a', InputOption::VALUE_NONE, 'Genera las clases de migración, modelo y controlador.');
+
+        $this->addOption('resource', 'r', InputOption::VALUE_NONE, 'Indica si el controlador generado debe ser un controlador de recursos');
+        $this->addOption('api', null, InputOption::VALUE_NONE, 'Indica si el controlador generado debe ser un controlador de recursos API');
+        $this->addOption('validations', null, InputOption::VALUE_NONE, 'Crea nueva clase de validación y las utiliza en el controlador');
+        $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta al modelo');
     }
 
     protected function execute($input, $output)
@@ -45,45 +50,74 @@ class MakeModel extends Command
 
         $all = $input->getOption('all');
 
-        if ($all) {
-            $controller = $name.'Controller';
+        $resource = $input->getOption('resource');
 
-            $content = file_get_contents('vendor/base-php/core/commands/examples/controller.php');
-            $content = str_replace('ControllerName', $controller, $content);
+        if ($resource || $all) {
+            $file = 'controller.resource';
+            $controllerName = $name . 'Controller';
 
-            if (! file_exists('app/Controllers')) {
-                mkdir('app/Controllers');
-            }
+            $content = file_get_contents('vendor/base-php/core/commands/examples/' . $file . '.php');
+            $content = str_replace('ControllerName', $controllerName, $content);
 
-            $fopen = fopen('app/Controllers/'.$controller.'.php', 'w+');
+            $fopen = fopen('app/Controllers/' . $controllerName . '.php', 'w+');
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $style->success("Clase de controlador '$controller' creado satisfactoriamente.");
+            $style = new SymfonyStyle($input, $output);
+            $style->success("Clase de controlador '$controllerName' creada satisfactoriamente.");
+        }
 
-            $migration = str()->plural($name);
+        $api = $input->getOption('api');
 
-            $content = file_get_contents('vendor/base-php/core/commands/examples/migration.php');
-            $content = str_replace('MigrationName', strtolower($migration), $content);
+        if ($api) {
+            $file = 'controller.api';
+            $controllerName = $name . 'Controller';
 
-            $var = str()->singular($migration);
-            $var = strtolower($var);
-            $content = str_replace('VarName', $var, $content);
+            $content = file_get_contents('vendor/base-php/core/commands/examples/' . $file . '.php');
+            $content = str_replace('ControllerName', $controllerName, $content);
 
-            $model = ucfirst(str()->singular($migration));
-            $content = str_replace('ModelName', $model, $content);
-
-            if (! file_exists('database')) {
-                mkdir('database');
-            }
-
-            $name = time().'_'.str()->snake($migration);
-
-            $fopen = fopen('database/'.$name.'.php', 'w+');
+            $fopen = fopen('app/Controllers/' . $controllerName . '.php', 'w+');
             fwrite($fopen, $content);
             fclose($fopen);
 
-            $style->success("Archivo de migración '$name' creado satisfactoriamente.");
+            $style = new SymfonyStyle($input, $output);
+            $style->success("Clase de controlador '$controllerName' creada satisfactoriamente.");
+        }
+
+        $validations = $input->getOption('validations');
+
+        if ($validations || $all) {
+            $validations = [$name . 'StoreValidation', $name . 'UpdateValidation'];
+
+            foreach ($validations as $validation) {
+                $content = file_get_contents('vendor/base-php/core/commands/examples/validation.php');
+                $content = str_replace('ValidationName', $validation, $content);
+
+                if (! file_exists('app/Validations')) {
+                    mkdir('app/Validations');
+                }
+
+                $fopen = fopen('app/Validations/'.$validation.'.php', 'w+');
+                fwrite($fopen, $content);
+                fclose($fopen);
+
+                $style = new SymfonyStyle($input, $output);
+                $style->success("Clase de validación '$validation' creada satisfactoriamente.");
+            }
+        }
+
+        $test = $input->getOption('test');
+
+        if ($test) {
+            $content = file_get_contents('vendor/base-php/core/commands/examples/test.php');
+            $content = str_replace('TestName', $name, $content);
+
+            $fopen = fopen('tests/'.$name.'.php', 'w+');
+            fwrite($fopen, $content);
+            fclose($fopen);
+
+            $style = new SymfonyStyle($input, $output);
+            $style->success("Clase de prueba '$name' creada satisfactoriamente.");
         }
 
         return Command::SUCCESS;
