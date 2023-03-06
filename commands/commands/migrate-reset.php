@@ -12,7 +12,8 @@ class MigrateReset extends Command
 
     public function configure()
     {
-        $this->addOption('database', null, InputOption::VALUE_OPTIONAL, 'Conexión de base de datos a utilizar', 'default');
+        $this->addOption('database', 'default', InputOption::VALUE_NONE, 'Conexión de base de datos a utilizar');
+        $this->addOption('path', null, InputOption::VALUE_REQUIRED, 'Ruta al archivo de migración que se ejecutará');
     }
 
     protected function execute($input, $output)
@@ -20,17 +21,21 @@ class MigrateReset extends Command
         require 'vendor/base-php/core/database/database.php';
 
         $config = require 'app/config.php';
-        $connection = $input->getOption('database');
+        $connection = $input->getOption('database') ?? 'default';
 
         $migrations = DB::connection($connection)
             ->table('migrations')
             ->get();
 
+        $migrations = $input->getOption('path') ?? $migrations;
+
         $style = new SymfonyStyle($input, $output);
 
         foreach ($migrations as $migration) {
             try {
-                $class = require 'database/'.$migration->name.'.php';
+                $require = $input->getOption('path') ? $migration : 'database/' . $migration . '.php';
+                
+                $class = require $require;
                 $class->down();
 
                 DB::connection($connection)
