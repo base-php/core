@@ -15,8 +15,9 @@ class MakeModel extends Command
     public function configure()
     {
         $this->addArgument('name', InputArgument::OPTIONAL);
-        $this->addOption('all', 'a', InputOption::VALUE_NONE, 'Genera las clases de migración, modelo y controlador.');
-
+        $this->addOption('all', 'a', InputOption::VALUE_NONE, 'Genera las clases de migración, modelo y controlador');
+        $this->addOption('controller', 'c', InputOption::VALUE_NONE, 'Crea un nuevo controlador para el modelo');
+        $this->addOption('migration', 'm', InputOption::VALUE_NONE, 'Crea una nueva migración para el modelo');
         $this->addOption('resource', 'r', InputOption::VALUE_NONE, 'Indica si el controlador generado debe ser un controlador de recursos');
         $this->addOption('api', null, InputOption::VALUE_NONE, 'Indica si el controlador generado debe ser un controlador de recursos API');
         $this->addOption('validations', null, InputOption::VALUE_NONE, 'Crea nueva clase de validación y las utiliza en el controlador');
@@ -49,6 +50,40 @@ class MakeModel extends Command
         $style->success("Clase de modelo '$name' creado satisfactoriamente.");
 
         $all = $input->getOption('all');
+
+        $controller = $input->getOption('controller');
+
+        if ($controller || $all) {
+            $controllerName = $name . 'Controller';
+
+            $content = file_get_contents('vendor/base-php/core/commands/examples/controller.php');
+            $content = str_replace('ControllerName', $controllerName, $content);
+
+            $fopen = fopen('app/Controllers/' . $controllerName . '.php', 'w+');
+            fwrite($fopen, $content);
+            fclose($fopen);
+
+            $style = new SymfonyStyle($input, $output);
+            $style->success("Clase de controlador '$controllerName' creado satisfactoriamente.");
+        }
+
+        $migration = $input->getOption('migration');
+
+        if ($migration || $all) {
+            $migrationName = str($name)->plural()->slug();
+
+            $content = file_get_contents('vendor/base-php/core/commands/examples/Migration.php');
+            $content = str_replace('MigrationName', $migrationName, $content);
+
+            $migrationName = date('Y_m_d_His') . '_' . $migrationName;
+
+            $fopen = fopen($path . '/' . $migrationName . '.php', 'w+');
+            fwrite($fopen, $content);
+            fclose($fopen);
+
+            $style = new SymfonyStyle($input, $output);
+            $style->success("Archivo de migración '$migrationName' creado satisfactoriamente.");
+        }
 
         $resource = $input->getOption('resource');
 
