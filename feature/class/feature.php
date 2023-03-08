@@ -32,6 +32,16 @@ class Feature
 		return false;
 	}
 
+	public function deactivate($name)
+	{
+		$scope = $this->getScope();
+
+		DB::table('features')
+			->where('name', $name)
+			->where('scope', $scope)
+			->update(['value' => false]);
+	}
+
 	public function define($name, $condition)
 	{
 		$scope = $this->getScope();
@@ -46,6 +56,16 @@ class Feature
 
 		DB::table('features')
 			->insert($data);
+	}
+
+	public function forget($name)
+	{
+		$scope = $this->getScope();
+
+		DB::table('features')
+			->where('name', $name)
+			->where('scope', $scope)
+			->delete();
 	}
 
 	public function for($user)
