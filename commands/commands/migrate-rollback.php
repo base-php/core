@@ -14,6 +14,7 @@ class MigrateRollback extends Command
     {
         $this->addOption('step', null, InputOption::VALUE_OPTIONAL, 'Número de migraciones a revertir', 1);
         $this->addOption('database', null, InputOption::VALUE_OPTIONAL, 'Conexión de base de datos a utilizar', 'default');
+        $this->addOption('path', null, InputOption::VALUE_REQUIRED, 'Ruta al archivo de migración que se ejecutará');
     }
 
     protected function execute($input, $output)
@@ -35,11 +36,15 @@ class MigrateRollback extends Command
             ->limit($step)
             ->get();
 
+        $migrations = $input->getOption('path') ?? $migrations;
+
         $style = new SymfonyStyle($input, $output);
 
         foreach ($migrations as $migration) {
             try {
-                $class = require 'database/'.$migration->name.'.php';
+                $require = $input->getOption('path') ? $migration : 'database/' . $migration . '.php';
+
+                $class = require $require;
                 $class->down();
 
                 DB::connection($connection)
