@@ -13,66 +13,21 @@ class Console
 
         $application = new Application('Base PHP '.$config['version'].' by Nisa Delgado');
 
-        $application->add(new About());
-        $application->add(new ApiInstall());
-        $application->add(new AuthInstall());
-        $application->add(new BillsTable());
-        $application->add(new DBBackup());
-        $application->add(new DBTable());
-        $application->add(new DBWipe());
-        $application->add(new Docs());
-        $application->add(new Down());
-        $application->add(new Env());
-        $application->add(new FeatureTable());
-        $application->add(new Inspire());
-        $application->add(new LogsClean());
-        $application->add(new LogsTable());
-        $application->add(new MakeCommand());
-        $application->add(new MakeController());
-        $application->add(new MakeDatabase());
-        $application->add(new MakeExcel());
-        $application->add(new MakeFeature());
-        $application->add(new MakeJob());
-        $application->add(new MakeMail());
-        $application->add(new MakeMiddleware());
-        $application->add(new MakeMigration());
-        $application->add(new MakeModel());
-        $application->add(new MakeNotification());
-        $application->add(new MakePdf());
-        $application->add(new MakeResource());
-        $application->add(new MakeRule());
-        $application->add(new MakeTest());
-        $application->add(new MakeValidation());
-        $application->add(new Migrate());
-        $application->add(new MigrateRefresh());
-        $application->add(new MigrateReset());
-        $application->add(new MigrateRollback());
-        $application->add(new ModelShow());
-        $application->add(new NotificationsTable());
-        $application->add(new PermissionsCreatePermission());
-        $application->add(new PermissionsCreateRole());
-        $application->add(new PermissionsShow());
-        $application->add(new PermissionsTable());
-        $application->add(new Pint());
-        $application->add(new QueueClear());
-        $application->add(new QueueFailed());
-        $application->add(new QueueFlush());
-        $application->add(new QueueRetry());
-        $application->add(new QueueTable());
-        $application->add(new QueueWork());
-        $application->add(new RouteList());
-        $application->add(new Server());
-        $application->add(new Shell());
-        $application->add(new Test());
-        $application->add(new TokensTable());
-        $application->add(new Up());
-        $application->add(new VendorPublish());
-        $application->add(new ViewClear());
+        foreach (scandir('vendor/base-php/core/commands/commands') as $class) {
+            if (! is_dir($class)) {
+                $class = str($class)
+                    ->studly()
+                    ->replace('.php', '')
+                    ->toString();
+
+                $application->add(new $class());
+            }
+        }
 
         if (file_exists('app/Commands')) {
             foreach (scandir('app/Commands') as $command) {
                 if (! is_dir($command)) {
-                    $class = 'App\Commands\\'.str_replace('.php', '', $command);
+                    $class = 'App\Commands\\' . str_replace('.php', '', $command);
 
                     $application->add(new $class());
                 }
