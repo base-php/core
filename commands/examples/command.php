@@ -23,7 +23,17 @@ class CommandName extends Command
      *
      * @return array
      */
-    public function params(): array
+    public function args(): array
+    {
+        return [];
+    }
+
+    /**
+     * Set console options.
+     *
+     * @return array
+     */
+    public function optionsar(): array
     {
         return [];
     }
@@ -32,9 +42,10 @@ class CommandName extends Command
      * Execute the console command.
      *
      * @param  object  $params
+     * @param  object  $options
      * @return mixed
      */
-    public function handle(object $params): mixed
+    public function handle(object $args, object $options): mixed
     {
         
     }

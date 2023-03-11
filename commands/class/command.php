@@ -4,6 +4,7 @@ namespace App\Commands;
 
 use Symfony\Component\Console\Command\Command as CommandAPI;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class Command extends CommandAPI
 {
@@ -21,6 +22,28 @@ class Command extends CommandAPI
             $value = ($value == 'required') ? InputArgument::REQUIRED : InputArgument::OPTIONAL;
             $this->addArgument($key, $value);
         }
+
+        foreach ($this->options() as $item) {
+            if ($item['type'] == 'required') {
+                $type = InputOption::VALUE_REQUIRED;
+            }
+
+            if ($item['type'] == 'optional') {
+                $type = InputOption::VALUE_OPTIONAL;
+            }
+
+            if ($item['type'] == 'none') {
+                $type = InputOption::VALUE_NONE;
+            }
+
+            $this->addArgument(
+                $item['name'], 
+                $item['shortname'], 
+                $item['type'], 
+                $item['description'], 
+                $item['default']
+            );
+        }
     }
 
     public function execute($input, $output)
@@ -29,9 +52,14 @@ class Command extends CommandAPI
             $params[$key] = $input->getArgument($key);
         }
 
-        $params = (object) $params;
+        foreach ($this->options() as $item) {
+            $options[$item['name']] = $input->getOption($item['name']);
+        }
 
-        $this->handle($params);
+        $params = (object) $params;
+        $options = (object) $options;
+
+        $this->handle($params, $options);
 
         return 1;
     }
