@@ -16,6 +16,7 @@ include __DIR__.'/../commands/commands/db-wipe.php';
 include __DIR__.'/../commands/commands/docs.php';
 include __DIR__.'/../commands/commands/down.php';
 include __DIR__.'/../commands/commands/env.php';
+include __DIR__.'/../commands/commands/feature-purge.php';
 include __DIR__.'/../commands/commands/feature-table.php';
 include __DIR__.'/../commands/commands/inspire.php';
 include __DIR__.'/../commands/commands/logs-clean.php';

@@ -15,9 +15,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('scope');
             $table->text('value');
-            
-            $table->datetime('date_read')
-                ->nullable();
 
             $table->datetime('date_create')
                 ->useCurrent();
