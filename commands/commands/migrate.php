@@ -9,15 +9,25 @@ class Migrate extends Command
 
     protected static $defaultDescription = 'Ejecuta las migraciones de base de datos';
 
+    public function configure()
+    {
+        $this->addOption('database', null, InputOption::VALUE_OPTIONAL, 'Conexión de base de datos a utilizar', 'default');
+        $this->addOption('path', null, InputOption::VALUE_REQUIRED, 'Ruta al archivo de migración que se ejecutará');
+    }
+
     protected function execute($input, $output)
     {
         $style = new SymfonyStyle($input, $output);
 
+        $connection = $input->getOption('database');
+
         foreach (scandir('database') as $item) {
             if (! is_dir($item)) {
+                $require = $input->getOption('path') ? $item : 'database/' . $item . '.php';
+
                 $name = str_replace('.php', '', $item);
 
-                $class = require "database/$item";
+                $class = require $require;
 
                 $exists = DB::connection($class->connection)
                     ->table('migrations')
