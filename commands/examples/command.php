@@ -33,7 +33,7 @@ class CommandName extends Command
      *
      * @return array
      */
-    public function optionsar(): array
+    public function options(): array
     {
         return [];
     }

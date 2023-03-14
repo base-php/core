@@ -11,7 +11,7 @@ class Console
 
         $config = require 'app/config.php';
 
-        $application = new Application('Base PHP '.$config['version'].' by Nisa Delgado');
+        $application = new Application('Base PHP ' . $config['version'] . ' por Nisa Delgado');
 
         foreach (scandir('vendor/base-php/core/commands/commands') as $class) {
             if (! is_dir($class)) {

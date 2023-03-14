@@ -3,11 +3,16 @@
 namespace App\Commands;
 
 use Symfony\Component\Console\Command\Command as CommandAPI;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Question\Question;
 
 class Command extends CommandAPI
 {
+    public $input;
+    public $output;
+
     public function __construct()
     {
         $this->setName($this->name);
@@ -16,9 +21,16 @@ class Command extends CommandAPI
         parent::__construct();
     }
 
+    public function ask($question, $default)
+    {
+        $question = new Question($question, $default);
+        $helper = $this->getHelper('question');
+        return $helper->ask($this->input, $this->output, $question);
+    }
+
     public function configure()
     {
-        foreach ($this->params() as $key => $value) {
+        foreach ($this->args() as $key => $value) {
             $value = ($value == 'required') ? InputArgument::REQUIRED : InputArgument::OPTIONAL;
             $this->addArgument($key, $value);
         }
@@ -48,19 +60,41 @@ class Command extends CommandAPI
 
     public function execute($input, $output)
     {
-        foreach ($this->params() as $key => $value) {
-            $params[$key] = $input->getArgument($key);
+        foreach ($this->args() as $key => $value) {
+            $args[$key] = $input->getArgument($key);
         }
 
         foreach ($this->options() as $item) {
             $options[$item['name']] = $input->getOption($item['name']);
         }
 
-        $params = (object) $params;
-        $options = (object) $options;
+        $args = $this->args() ? (object) $args : (object) [];
+        $options = $this->args() ? (object) $options : (object) [];
 
-        $this->handle($params, $options);
+        $this->input = $input;
+        $this->output = $output;
+
+        $this->handle($args, $options);
 
         return 1;
+    }
+
+    public function secret($question)
+    {
+        $helper = $this->getHelper('question');
+
+        $question = new Question($question, $default);
+        $question->setHidden(true);
+        $question->setHiddenFallback(false);
+
+        return $helper->ask($this->input, $this->output, $question);
+    }
+
+    public function table($headers, $rows)
+    {
+        $table = new Table($this->output);
+        $table->setHeaders($headers);
+        $table->setBody($rows);
+        $table->render();
     }
 }
