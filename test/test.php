@@ -7,6 +7,14 @@ use PHPUnit\Framework\TestCase;
 
 class Test extends TestCase
 {
+    public $queryString;
+
+    public function actingAs($user)
+    {
+        $this->queryString['actingAs'] = $user->id;
+        return $this;
+    }
+
     public function assertDatabaseHas($table, $data)
     {
         include 'vendor/base-php/core/database/database.php';
@@ -50,6 +58,12 @@ class Test extends TestCase
     public function get($route)
     {
         $url = "localhost:8080/$route";
+
+        if (! empty($this->queryString)) {
+            $queryString = http_build_query($this->queryString);
+            $url = $url . '?' . $queryString;
+        }
+
         $request = http()->get($url);
 
         return $request;
@@ -58,8 +72,26 @@ class Test extends TestCase
     public function post($route, $data)
     {
         $url = "localhost:8080/$route";
+
+        if (! empty($this->queryString)) {
+            $queryString = http_build_query($this->queryString);
+            $url = $url . '?' . $queryString;
+        }
+
         $request = http()->post($url, $data);
 
         return $request;
+    }
+
+    public function withHeaders($array)
+    {
+        $this->queryString['withHeaders'] = $array;
+        return $this;
+    }
+
+    public function withSession($array)
+    {
+        $this->queryString['withSession'] = $array;
+        return $this;
     }
 }

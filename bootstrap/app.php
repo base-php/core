@@ -46,6 +46,22 @@ class App
             return abort(503);
         }
 
+        if (isset($_GET['actingAs'])) {
+            session('id', $_GET['actingAs']);
+        }
+
+        if (isset($_GET['withSession'])) {
+            foreach ($_GET['withSession'] as $key => $value) {
+                session($key, $value);
+            }
+        }
+
+        if (isset($_GET['withHeaders'])) {
+            foreach ($_GET['withHeaders'] as $key => $value) {
+                header($key . ': ' . $value);
+            }
+        }
+
         // Container
 
         $app = new Container;
