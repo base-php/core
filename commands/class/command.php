@@ -7,6 +7,7 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class Command extends CommandAPI
 {
@@ -23,7 +24,7 @@ class Command extends CommandAPI
 
     public function ask($question, $default)
     {
-        $question = new Question($question, $default);
+        $question = new Question("\n" . $question . "\n>", $default);
         $helper = $this->getHelper('question');
         return $helper->ask($this->input, $this->output, $question);
     }
@@ -58,6 +59,12 @@ class Command extends CommandAPI
         }
     }
 
+    public function error($text)
+    {
+        $symfonyStyle = new SymfonyStyle($this->input, $this->output);
+        return $symfonyStyle->error($text);
+    }
+
     public function execute($input, $output)
     {
         foreach ($this->args() as $key => $value) {
@@ -79,11 +86,29 @@ class Command extends CommandAPI
         return 1;
     }
 
+    public function info($text)
+    {
+        $symfonyStyle = new SymfonyStyle($this->input, $this->output);
+        return $symfonyStyle->info($text);
+    }
+
+    public function line($text)
+    {
+        $symfonyStyle = new SymfonyStyle($this->input, $this->output);
+        return $symfonyStyle->text($text);
+    }
+
+    public function newLine($number = 1)
+    {
+        $symfonyStyle = new SymfonyStyle($this->input, $this->output);
+        return $symfonyStyle->newLine($number);
+    }
+
     public function secret($question)
     {
         $helper = $this->getHelper('question');
 
-        $question = new Question($question, $default);
+        $question = new Question("\n" . $question . "\n>", $default);
         $question->setHidden(true);
         $question->setHiddenFallback(false);
 
