@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 class Test extends TestCase
 {
     public $queryString;
+    public $request;
 
     public function actingAs($user)
     {
@@ -30,6 +31,29 @@ class Test extends TestCase
         return $this->fail('Valor no existe en base de datos');
     }
 
+    public function assertExactJson($array)
+    {
+        $json = json_decode($this->request->body(), true);
+
+        if ($array == $json) {
+            return $this->assertTrue(true);
+        }
+
+        return $this->fail('El valor del JSON no es el esperado');
+    }
+
+    public function assertJsonPath($key, $value)
+    {
+        $array = json_decode($this->request->body(), true);
+        $array = arr()->dot($array);
+
+        if ($array[$key] == $value) {
+            return $this->assertTrue(true);
+        }
+
+        return $this->fail('El valor del JSON es distinto al esperado');
+    }
+
     public function assertSee($text1, $text2)
     {
         if (strpos($text1, $text2) !== false) {
@@ -37,6 +61,17 @@ class Test extends TestCase
         }
 
         return $this->fail('No se encontró el texto');
+    }
+
+    public function assertStatus($status)
+    {
+        if ($this->request->status() == $status) {
+            $this->assertTrue(true);
+        }
+
+        $this->fail('El estado es distinto al esperado');
+
+        return $this;
     }
 
     public function command($command)
@@ -64,9 +99,9 @@ class Test extends TestCase
             $url = $url . '?' . $queryString;
         }
 
-        $request = http()->get($url);
+        $this->request = http()->get($url);
 
-        return $request;
+        return $this;
     }
 
     public function post($route, $data)
@@ -78,9 +113,9 @@ class Test extends TestCase
             $url = $url . '?' . $queryString;
         }
 
-        $request = http()->post($url, $data);
+        $this->request = http()->post($url, $data);
 
-        return $request;
+        return $this;
     }
 
     public function withHeaders($array)
