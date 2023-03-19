@@ -128,16 +128,17 @@ include __DIR__.'/../view/provider-view-service-provider.php';
 include __DIR__.'/../view/provider-service-provider.php';
 include __DIR__.'/../view/componentes.php';
 
-include __DIR__.'/../support/config.php';
-include __DIR__.'/../support/date.php';
-include __DIR__.'/../support/debug.php';
-include __DIR__.'/../support/helpers.php';
-include __DIR__.'/../support/json.php';
-include __DIR__.'/../support/mail.php';
-include __DIR__.'/../support/qr.php';
-include __DIR__.'/../support/storage.php';
-include __DIR__.'/../support/session.php';
-include __DIR__.'/../support/var.php';
+include __DIR__.'/../support/class/mail.php';
+include __DIR__.'/../support/class/qr.php';
+include __DIR__.'/../support/class/session.php';
+include __DIR__.'/../support/class/storage.php';
+
+include __DIR__.'/../support/functions/config.php';
+include __DIR__.'/../support/functions/date.php';
+include __DIR__.'/../support/functions/debug.php';
+include __DIR__.'/../support/functions/helpers.php';
+include __DIR__.'/../support/functions/json.php';
+include __DIR__.'/../support/functions/var.php';
 
 include __DIR__.'/../view/view.php';
 include __DIR__.'/../view/assets.php';

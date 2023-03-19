@@ -16,6 +16,8 @@ class MigrateStatus extends Command
 
         foreach (scandir('database') as $item) {
             if (! is_dir($item)) {
+                $class = require 'database/' . $item;
+
                 $name = str_replace('.php', '', $item);
 
                 $exists = DB::connection($class->connection)
