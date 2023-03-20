@@ -156,6 +156,11 @@ function logs()
     };
 }
 
+function openai()
+{
+    return OpenAIBasePHP;
+}
+
 function redirect($to)
 {
     $redirect = new Redirect;
