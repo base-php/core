@@ -24,7 +24,7 @@ class Migrate extends Command
 
         foreach (scandir('database') as $item) {
             if (! is_dir($item)) {
-                $require = $input->getOption('path') ? $item : 'database/' . $item . '.php';
+                $require = $input->getOption('path') ? $item : 'database/' . $item;
 
                 $name = str_replace('.php', '', $item);
 

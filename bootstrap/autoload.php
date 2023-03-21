@@ -133,13 +133,13 @@ include __DIR__.'/../support/class/openai.php';
 include __DIR__.'/../support/class/qr.php';
 include __DIR__.'/../support/class/session.php';
 include __DIR__.'/../support/class/storage.php';
-
 include __DIR__.'/../support/functions/config.php';
 include __DIR__.'/../support/functions/date.php';
 include __DIR__.'/../support/functions/debug.php';
 include __DIR__.'/../support/functions/helpers.php';
 include __DIR__.'/../support/functions/json.php';
 include __DIR__.'/../support/functions/var.php';
+include __DIR__.'/../support/migrations/sessions.php';
 
 include __DIR__.'/../view/view.php';
 include __DIR__.'/../view/assets.php';

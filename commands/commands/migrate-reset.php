@@ -33,7 +33,7 @@ class MigrateReset extends Command
 
         foreach ($migrations as $migration) {
             try {
-                $require = $input->getOption('path') ? $migration : 'database/' . $migration . '.php';
+                $require = $input->getOption('path') ? $migration : 'database/' . $migration;
                 
                 $class = require $require;
                 $class->down();
