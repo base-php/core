@@ -7,13 +7,18 @@ use Facebook\Facebook as FacebookSDK;
 
 class Facebook
 {
-    // facebook/graph-sdk
-
     public $helper;
 
     public $permissions;
 
     public $instance;
+
+    public function __construct()
+    {
+        if (! class_exists('Facebook\Facebook')) {
+            throw new Exception("Please execute 'composer require facebook/graph-sdk' in console.")
+        }
+    }
 
     public static function init()
     {

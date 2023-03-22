@@ -8,11 +8,16 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class QR
 {
-    // endroid/qr-code
-
     public $data;
 
     public $result;
+
+    public function __construct()
+    {
+        if (! class_exists('Endroid\QrCode\Builder\Builder')) {
+            throw new Exception("Please execute 'composer require endroid/qr-code' in console.")
+        }
+    }
 
     public function data($data)
     {

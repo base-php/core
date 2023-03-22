@@ -9,14 +9,16 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Excel
 {
-    // phpoffice/phpspreadsheet
-
     public $spreadsheet;
 
     public $sheet;
 
     public function __construct()
     {
+        if (! class_exists('PhpOffice\PhpSpreadsheet\Spreadsheet')) {
+            throw new Exception("Please execute 'composer require phpoffice/phpspreadsheet' in console.")
+        }
+
         $this->spreadsheet = new Spreadsheet();
         $this->sheet = $this->spreadsheet->getActiveSheet();
     }

@@ -6,10 +6,15 @@ class Google
 {
     public $instance;
 
+    public function __construct()
+    {
+        if (! class_exists('Google_Client')) {
+            throw new Exception("Please execute 'composer require google/apiclient' in console.")
+        }
+    }
+
     public static function init()
     {
-        // google/apiclient
-
         $class = new static;
 
         $google_client = new Google_Client();
