@@ -7,7 +7,7 @@ class OpenAIBasePHP
 	public function __construct()
 	{
 		if (! class_exists('OpenAI')) {
-            throw new Exception("Please execute 'composer require openai-php/client' in console.")
+            throw new Exception("Please execute 'composer require openai-php/client' in console.");
         }
 
 		$this->client = OpenAI::client(config('openai-api-key'));
@@ -26,7 +26,7 @@ class OpenAIBasePHP
 		return str()->markdown($response['choices'][0]['message']['content']);
 	}
 
-	public function completions($prompt)
+	public function completion($prompt)
 	{
 		$result = $this->client->completions()->create([
 			'model' => 'text-davinci-003',
@@ -45,5 +45,28 @@ class OpenAIBasePHP
 		]);
 
 		return $response['choices'][0]['text'];
+	}
+
+	public function image($data)
+	{
+		$response = $this->client->images()->create([
+			'prompt' => $data['name'],
+			'size' => $data['size']
+		]);
+
+		return $response->data[0]['url'];
+	}
+
+	public function moderation($text)
+	{
+		$response = $this->client->moderations()->create([
+			'model' => 'text-moderation-latest',
+			'input' => $text
+		]);
+
+		$result['flagged'] = $response->results[0]->flagged;
+		$result['categories'] = array_keys($response->results[0]->categories);
+
+		return $result;
 	}
 }

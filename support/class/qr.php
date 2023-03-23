@@ -15,7 +15,7 @@ class QR
     public function __construct()
     {
         if (! class_exists('Endroid\QrCode\Builder\Builder')) {
-            throw new Exception("Please execute 'composer require endroid/qr-code' in console.")
+            throw new Exception("Please execute 'composer require endroid/qr-code' in console.");
         }
     }
 
