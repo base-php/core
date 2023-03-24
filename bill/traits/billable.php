@@ -63,6 +63,10 @@ trait Billable
 
 	public function downloadBill($id, $config = [], $filename = 'bill.pdf')
 	{
+		if (! class_exists('Dompdf\Dompdf')) {
+            throw new Exception("Please execute 'composer require dompdf/dompdf' in console.");
+        }
+        
 		ob_start();
 
 		$bill = Bill::find($id);

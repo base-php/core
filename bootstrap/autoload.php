@@ -138,6 +138,7 @@ include __DIR__.'/../support/functions/date.php';
 include __DIR__.'/../support/functions/debug.php';
 include __DIR__.'/../support/functions/helpers.php';
 include __DIR__.'/../support/functions/json.php';
+include __DIR__.'/../support/functions/selected.php';
 include __DIR__.'/../support/functions/var.php';
 include __DIR__.'/../support/migrations/sessions.php';
 
