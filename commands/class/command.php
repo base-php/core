@@ -6,6 +6,8 @@ use Symfony\Component\Console\Command\Command as CommandAPI;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -24,8 +26,36 @@ class Command extends CommandAPI
 
     public function ask($question, $default)
     {
-        $question = new Question("\n" . $question . "\n>", $default);
+        $question = new Question("\n" . $question . "\n> ", $default);
         $helper = $this->getHelper('question');
+        return $helper->ask($this->input, $this->output, $question);
+    }
+
+    public function choice($question, $options, $default)
+    {
+        $helper = $this->getHelper('question');
+
+        $question = new ChoiceQuestion(
+            $question,
+            $options,
+            $default
+        );
+
+        $question->setErrorMessage('Valor inválido.');
+        $question = $helper->ask($this->input, $this->output, $question);
+        return $question;
+    }
+
+    public function confirm($question, $default = false)
+    {
+        $question = new ConfirmationQuestion(
+            "\n" . $question . "\n> ",
+            $default,
+            '/^(y|s)/i'
+        );
+
+        $helper = $this->getHelper('question');
+
         return $helper->ask($this->input, $this->output, $question);
     }
 
@@ -108,7 +138,7 @@ class Command extends CommandAPI
     {
         $helper = $this->getHelper('question');
 
-        $question = new Question("\n" . $question . "\n>", $default);
+        $question = new Question("\n" . $question . "\n> ", $default);
         $question->setHidden(true);
         $question->setHiddenFallback(false);
 

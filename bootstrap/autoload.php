@@ -57,6 +57,7 @@ include __DIR__.'/../commands/commands/queue-table.php';
 include __DIR__.'/../commands/commands/queue-work.php';
 include __DIR__.'/../commands/commands/route-list.php';
 include __DIR__.'/../commands/commands/server.php';
+include __DIR__.'/../commands/commands/session-table.php';
 include __DIR__.'/../commands/commands/shell.php';
 include __DIR__.'/../commands/commands/test.php';
 include __DIR__.'/../commands/commands/tokens-table.php';
