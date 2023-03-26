@@ -62,6 +62,14 @@ class App
             }
         }
 
+        if (isset($_GET['ddSessions'])) {
+            dd($_SESSION);
+        }
+
+        if (isset($_GET['ddHeaders'])) {
+            dd(get_headers($_SERVER['REQUEST_URI']));
+        }
+
         // Container
 
         $app = new Container;

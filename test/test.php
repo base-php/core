@@ -81,6 +81,32 @@ class Test extends TestCase
         return $this;
     }
 
+    public function ddHeaders()
+    {
+        $url = "localhost:8080/$route";
+
+        if (! empty($this->queryString)) {
+            $url = $url . '?ddHeaders=1';
+        }
+
+        $this->request = http()->get($url);
+
+        return $this;
+    }
+
+    public function ddSession()
+    {
+        $url = "localhost:8080/$route";
+
+        if (! empty($this->queryString)) {
+            $url = $url . '?ddSession=1';
+        }
+
+        $this->request = http()->get($url);
+
+        return $this;
+    }
+
     public function expectsOutput($expect)
     {
         if ($expect == $this->output) {
