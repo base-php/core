@@ -14,6 +14,13 @@ class App
     {
         // General settings
 
+        $session_save_path = config('session_save_path') ?? $_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/support/storage/session';
+        $session_lifetime = config('session_lifetime') ?? 1440;
+
+        ini_set('session_save_path', $session_save_path);
+
+        session_set_cookie_params($session_lifetime, '/');
+
         session_start();
 
         header('Access-Control-Allow-Origin: *');
