@@ -69,4 +69,33 @@ class OpenAIBasePHP
 
 		return $result;
 	}
+
+	public function transcribe($audio)
+	{
+		$response = $this->client->audio()->transcribe([
+			'model' => 'whisper-1',
+		    'file' => fopen($audio, 'r'),
+		    'response_format' => 'verbose_json',
+		]);
+
+		$result['language'] = $response->language;
+		$result['duration'] = $response->duration;
+		$result['text'] = $response->text;
+
+		return $result;
+	}
+
+	public function translate($audio)
+	{
+		$response = $this->client->audio()->translate([
+			'model' => 'whisper-1',
+			'file' => fopen($audio, 'r'),
+			'response_format' => 'verbose_json'
+		]);
+
+		$result['duration'] = $response->duration;
+		$result['text'] = $response->text;
+
+		return $result;
+	}
 }
