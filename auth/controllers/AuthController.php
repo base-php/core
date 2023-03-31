@@ -56,6 +56,10 @@ class AuthController extends Controller
 
             $user->update(['hash' => encrypt($user->id)]);
 
+            if (config('verified_email')) {
+                email($user->email, new VerifiedEmail($user));
+            }
+
             return redirect('/login')->with('info', lang('auth.register_success'));
         }
 
@@ -75,14 +79,25 @@ class AuthController extends Controller
             ->first();
 
         if ($user) {
+            if (config('verified_email') && $user->date_verified_email) {
+                return redirect('/verified-email');
+            }
+
             session('id', $user->id);
-
             $redirect = request('redirect') ? request('redirect') : $this->redirect_login;
-
             return redirect($redirect);
         }
 
         return redirect('/login')->with('error', lang('auth.incorrect_data'));
+    }
+
+    public function verifiedEmail($hash = ''): View|Redirect
+    {
+        if (post()) {
+            User::where('hash', request('hash'))->update(['date_verified_email', now('Y-m-d H:i:s')])
+        }
+
+        return view('auth.verified-email', compact('hash'));
     }
 
     /**
@@ -110,7 +125,7 @@ class AuthController extends Controller
      *
      * @return View|Redirect
      */
-    public function forgot_password(): View|Redirect
+    public function forgotPassword(): View|Redirect
     {
         if (post()) {
             $user = User::where('email', request('email'))->first();
@@ -161,7 +176,7 @@ class AuthController extends Controller
      * @param  string  $id
      * @return View|Redirect
      */
-    public function two_fa(string $id): View|Redirect
+    public function twoFa(string $id): View|Redirect
     {
         if (post()) {
             $two_fa = new TwoFA;

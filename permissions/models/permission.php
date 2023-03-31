@@ -8,5 +8,10 @@ class Permission extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name', 'description', 'date_create', 'date_update'];
+    protected $fillable = [
+        'name',
+        'description',
+        'date_create',
+        'date_update'
+    ];
 }
