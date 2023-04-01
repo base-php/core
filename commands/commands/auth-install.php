@@ -20,6 +20,7 @@ class AuthInstall extends Command
         }
 
         copy('vendor/base-php/core/auth/mails/PasswordRecoveryEmail.php', 'app/Mails/PasswordRecoveryEmail.php');
+        copy('vendor/base-php/core/auth/mails/VerifiedEmail.php', 'app/Mails/VerifiedEmail.php');
 
         if (! file_exists('app/Middleware')) {
             mkdir('app/Middleware');
@@ -68,11 +69,15 @@ class AuthInstall extends Command
             mkdir('resources/views/users');
         }
 
+        copy('vendor/base-php/core/auth/views/emails/recover.blade.php', 'resources/views/emails/recover.blade.php');
+        copy('vendor/base-php/core/auth/views/emails/verified-email.blade.php', 'resources/views/emails/verified-email.blade.php');
+
         copy('vendor/base-php/core/auth/views/auth/2fa.blade.php', 'resources/views/auth/2fa.blade.php');
         copy('vendor/base-php/core/auth/views/auth/forgot-password.blade.php', 'resources/views/auth/forgot-password.blade.php');
         copy('vendor/base-php/core/auth/views/auth/login.blade.php', 'resources/views/auth/login.blade.php');
         copy('vendor/base-php/core/auth/views/auth/recover.blade.php', 'resources/views/auth/recover.blade.php');
         copy('vendor/base-php/core/auth/views/auth/register.blade.php', 'resources/views/auth/register.blade.php');
+
         copy('vendor/base-php/core/auth/views/components/alert.blade.php', 'resources/views/components/alert.blade.php');
         copy('vendor/base-php/core/auth/views/components/button.blade.php', 'resources/views/components/button.blade.php');
         copy('vendor/base-php/core/auth/views/components/button-link.blade.php', 'resources/views/components/button-link.blade.php');
@@ -82,7 +87,9 @@ class AuthInstall extends Command
         copy('vendor/base-php/core/auth/views/components/social-button.blade.php', 'resources/views/components/social-button.blade.php');
         copy('vendor/base-php/core/auth/views/components/template-auth.blade.php', 'resources/views/components/template-auth.blade.php');
         copy('vendor/base-php/core/auth/views/components/template-dashboard.blade.php', 'resources/views/components/template-dashboard.blade.php');
+
         copy('vendor/base-php/core/auth/views/dashboard/index.blade.php', 'resources/views/dashboard/index.blade.php');
+
         copy('vendor/base-php/core/auth/views/users/create.blade.php', 'resources/views/users/create.blade.php');
         copy('vendor/base-php/core/auth/views/users/edit.blade.php', 'resources/views/users/edit.blade.php');
         copy('vendor/base-php/core/auth/views/users/index.blade.php', 'resources/views/users/index.blade.php');
@@ -91,7 +98,7 @@ class AuthInstall extends Command
         $fopen = fopen('app/routes.php', 'a+');
         fwrite($fopen, $content);
 
-        system('npm install alpinejs@3.11.1 flowbite@1.6.3 sweetalert2@11.7.1');
+        system('npm install alpinejs@3.12.0 flowbite@1.6.4 sweetalert2@11.7.3');
 
         $style = new SymfonyStyle($input, $output);
         $style->success('Autenticación instalada satisfactoriamente.');

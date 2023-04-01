@@ -4,9 +4,9 @@ namespace App\Mails;
 
 use View;
 
-class PasswordRecoveryEmail extends Mail
+class VerifiedEmail extends Mail
 {
-    /**
+	/**
      * Set from for email.
      *
      * @var string
@@ -18,7 +18,7 @@ class PasswordRecoveryEmail extends Mail
      *
      * @var string
      */
-    public string $subject = 'Recuperación de contraseña de Base PHP';
+    public string $subject = 'Verificar correo electrónico de Base PHP';
 
     /**
      * Set attach for email.
@@ -51,6 +51,6 @@ class PasswordRecoveryEmail extends Mail
      */
     public function build(): View
     {
-        return view('mails.recover', ['user' => $this->user]);
+        return view('mails.verified-email', ['user' => $this->user]);
     }
 }

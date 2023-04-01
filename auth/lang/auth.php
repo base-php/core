@@ -14,8 +14,11 @@ return [
     'email_not_match' => 'No podemos encontrar un usuario con esa dirección de correo electrónico.',
     'email_recover_password' => 'Recuperar contraseña',
     'email_text' => 'Estas recibiendo este correo electrónico porque hiciste una solicitud de recuperación de contraseña para tu cuenta.',
+    'email_verified' => 'Haz click aquí para verificar tu correo electrónico.',
     'email_verified_error' => 'Correo electrónico ya se encuentra registrado.',
+    'email_verified_success' => 'Correo electrónico verificado correctamente, ahora puede iniciar sesión.'
     'email_warning' => 'Si no realizaste esta solicitud, no se requiere realizar ninguna acción.',
+    'error_hash' => 'Error al verificar el correo electrónico',
     'incorrect_data' => 'Datos incorrectos.',
     'name' => 'Nombre',
     'password' => 'Contraseña',
@@ -26,5 +29,6 @@ return [
     'reset' => 'Reestablecer contraseña',
     'send_link' => 'Enviar enlace',
     'text' => '¿Olvidaste tu contraseña? No hay problema. Haz click en el siguiente link para reestablecer tu contraseña.',
+    'verified_email' => 'Para poder iniciar sesión debe verificar su correo electrónico antes.',
     'verify' => 'Validar',
 ];

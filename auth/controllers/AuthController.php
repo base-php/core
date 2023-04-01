@@ -79,8 +79,8 @@ class AuthController extends Controller
             ->first();
 
         if ($user) {
-            if (config('verified_email') && $user->date_verified_email) {
-                return redirect('/verified-email');
+            if (config('verified_email') && !$user->date_verified_email) {
+                return redirect('/login')->with('error', lang('auth.verified_email'));
             }
 
             session('id', $user->id);
@@ -91,13 +91,17 @@ class AuthController extends Controller
         return redirect('/login')->with('error', lang('auth.incorrect_data'));
     }
 
-    public function verifiedEmail($hash = ''): View|Redirect
+    public function verifiedEmail($hash = ''): View
     {
-        if (post()) {
-            User::where('hash', request('hash'))->update(['date_verified_email', now('Y-m-d H:i:s')])
+        $user = User::where('hash', request('hash'))->first();
+
+        if (! $user) {
+            return redirect('/login')->with('error', lang('auth.error_hash'));            
         }
 
-        return view('auth.verified-email', compact('hash'));
+        $user->update(['date_verified_email', now('Y-m-d H:i:s')]);
+
+        return redirect('/login')->with('info', lang('auth.email_verified_success'));
     }
 
     /**
