@@ -55,7 +55,7 @@ trait Logs
         static::updating(function ($item) {
             $class = get_class($item);
             $item = (new $class)->find($item->id);
-            $_SESSION['basephp-old-updating'] = $item;
+            session('basephp-old-updating', $item);
         });
 
         static::updated(function ($item) {
@@ -63,7 +63,7 @@ trait Logs
             $model = get_class($item);
 
             $parameters['new'] = $item;
-            $parameters['old'] = $_SESSION['basephp-old-updating'];
+            $parameters['old'] = session('basephp-old-updating');
 
             $data = [
                 'id_user' => $id_user,
@@ -76,7 +76,7 @@ trait Logs
             DB::table('logs')
                 ->insert($data);
 
-            unset($_SESSION['basephp-old-updating']);
+            session()->delete('basephp-old-updating');
         });
 
         static::deleted(function ($item) {

@@ -70,7 +70,7 @@ class App
         }
 
         if (isset($_GET['ddSessions'])) {
-            dd($_SESSION);
+            dd(session()->all());
         }
 
         if (isset($_GET['ddHeaders'])) {
@@ -113,8 +113,8 @@ class App
         $response = $app['router']->dispatch($request);
         $response->send();
 
-        unset($_SESSION['basephp-user']);
-        unset($_SESSION['basephp-flash']);
-        unset($_SESSION['basephp-permissions']);
+        session()->delete('basephp-user');
+        session()->delete('basephp-flash');
+        session()->delete('basephp-permissions');
     }
 }

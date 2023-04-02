@@ -129,6 +129,7 @@ include __DIR__.'/../view/provider-view-service-provider.php';
 include __DIR__.'/../view/provider-service-provider.php';
 include __DIR__.'/../view/componentes.php';
 
+include __DIR__.'/../support/class/database-based-session.php';
 include __DIR__.'/../support/class/mail.php';
 include __DIR__.'/../support/class/openai.php';
 include __DIR__.'/../support/class/qr.php';

@@ -31,17 +31,17 @@ function auth($id = '')
         $user = User::find($id);
 
         if ($user) {
-            $_SESSION['user'] = $user->id;
+            session('user', $user->id);
         }
     }
 
     if ($id == '') {
-        if (isset($_SESSION['id'])) {
-            if (isset($_SESSION['basephp-user'])) {
-                $user = $_SESSION['basephp-user'];
+        if (session('id')) {
+            if (session('basephp-user')) {
+                $user = session('basephp-user');
             } else {
-                $user = User::find($_SESSION['id']);
-                $_SESSION['basephp-user'] = $user;
+                $user = User::find(session('id'));
+                session('basephp-user', $user);
             }
 
             return $user;
@@ -203,6 +203,10 @@ function session($key = '', $value = '')
 {
     $session = new Session;
 
+    if (config('session_driver') == 'database') {
+        $session = new DatabaseBasedSession;
+    }
+
     if ($key && $value) {
         return $session->set($key, $value);
     }
@@ -248,8 +252,8 @@ function validation($data, $rules, $messages, $redirect)
     if ($validation->errors()->all()) {
         $errors = $validation->errors()->all();
 
-        $_SESSION['basephp-flash']['errors'] = $errors;
-        $_SESSION['basephp-flash']['inputs'] = $data;
+        session('basephp-flash.errors', $errors);
+        session('basephp-flash.inputs', $data);
 
         $redirect = ($redirect) ? $redirect : $_SERVER['HTTP_REFERER'];
 

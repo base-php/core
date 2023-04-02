@@ -22,7 +22,7 @@ trait HasRole
 
     public function can($permission)
     {
-        if (! isset($_SESSION['basephp-permissions'])) {
+        if (! session('basephp-permissions')) {
             $db = DB::select("
 				SELECT
 					p.*
@@ -36,9 +36,9 @@ trait HasRole
 					u.id = '{$this->id}'
 			");
 
-            $_SESSION['basephp-permissions'] = $db;
+            session('basephp-permissions', $db);
         } else {
-            $db = $_SESSION['basephp-permissions'];
+            $db = session('basephp-permissions');
         }
 
         if (in_array($permission, array_column($db, 'name'))) {
