@@ -151,3 +151,5 @@ include __DIR__.'/../bill/models/bill-item.php';
 include __DIR__.'/../bill/models/bill.php';
 include __DIR__.'/../bill/models/customer.php';
 include __DIR__.'/../bill/traits/billable.php';
+
+include __DIR__.'/chart/chart.php';
