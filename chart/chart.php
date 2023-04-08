@@ -18,6 +18,12 @@ class Chart
 		return $this;
 	}
 
+	public function height($height)
+	{
+		$this->height = $height;
+		return $this;
+	}
+
 	public function labels($labels)
 	{
 		$this->labels = $labels;
@@ -63,6 +69,18 @@ class Chart
 		$scriptAttribute = $keys[0] . '="' . $values[0] . '"';
 
 		$this->scriptAttribute = $scriptAttribute;
+		return $this;
+	}
+
+	public function type($type)
+	{
+		$this->type = $type;
+		return $this;
+	}
+
+	public function weight($weight)
+	{
+		$this->weight = $weight;
 		return $this;
 	}
 }
