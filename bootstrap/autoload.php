@@ -21,6 +21,7 @@ include __DIR__.'/../commands/commands/feature-table.php';
 include __DIR__.'/../commands/commands/inspire.php';
 include __DIR__.'/../commands/commands/logs-clean.php';
 include __DIR__.'/../commands/commands/logs-table.php';
+include __DIR__.'/../commands/commands/make-chart.php';
 include __DIR__.'/../commands/commands/make-command.php';
 include __DIR__.'/../commands/commands/make-controller.php';
 include __DIR__.'/../commands/commands/make-database.php';
@@ -152,4 +153,4 @@ include __DIR__.'/../bill/models/bill.php';
 include __DIR__.'/../bill/models/customer.php';
 include __DIR__.'/../bill/traits/billable.php';
 
-include __DIR__.'/chart/chart.php';
+include __DIR__.'/../chart/chart.php';

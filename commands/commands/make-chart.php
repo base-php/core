@@ -32,8 +32,6 @@ class MakeChart extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/chart.php');
         $content = str_replace('ChartName', $name, $content);
 
-        $chart = $input->getOption('chart');
-
         if (! file_exists('app/Charts')) {
             mkdir('app/Charts');
         }
