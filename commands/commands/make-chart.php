@@ -21,6 +21,7 @@ class MakeChart extends Command
     protected function execute($input, $output)
     {
         $name = $input->getArgument('name');
+        $library = $input->getArgument('library') ?? 'chartjs';
 
         while (! $name) {
             $question = new Question("\n- ¿Cuál es el nombre del gráfico?\n> ");
@@ -31,6 +32,7 @@ class MakeChart extends Command
 
         $content = file_get_contents('vendor/base-php/core/commands/examples/chart.php');
         $content = str_replace('ChartName', $name, $content);
+        $content = str_replace('// Code...', '$this->type(\'' . $library . '\')', $content);
 
         if (! file_exists('app/Charts')) {
             mkdir('app/Charts');

@@ -2,7 +2,7 @@
 
 namespace App\Charts;
 
-class ChartName extends PDF
+class ChartName extends Chart
 {
     /**
      * Create a new message instance.
@@ -21,6 +21,6 @@ class ChartName extends PDF
      */
     public function build(): ChartName
     {
-        
+        // Code...
     }
 }

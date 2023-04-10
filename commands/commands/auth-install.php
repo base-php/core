@@ -69,8 +69,12 @@ class AuthInstall extends Command
             mkdir('resources/views/users');
         }
 
-        copy('vendor/base-php/core/auth/views/emails/recover.blade.php', 'resources/views/emails/recover.blade.php');
-        copy('vendor/base-php/core/auth/views/emails/verified-email.blade.php', 'resources/views/emails/verified-email.blade.php');
+        if (! file_exists('resources/views/mails')) {
+            mkdir('resources/views/mails');
+        }
+
+        copy('vendor/base-php/core/auth/views/mails/recover.blade.php', 'resources/views/mails/recover.blade.php');
+        copy('vendor/base-php/core/auth/views/mails/verified-email.blade.php', 'resources/views/mails/verified-email.blade.php');
 
         copy('vendor/base-php/core/auth/views/auth/2fa.blade.php', 'resources/views/auth/2fa.blade.php');
         copy('vendor/base-php/core/auth/views/auth/forgot-password.blade.php', 'resources/views/auth/forgot-password.blade.php');
