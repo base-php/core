@@ -1386,7 +1386,7 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->match(['get', 'post'], '/forgot-password', [\AuthController::class, 'forgotPassword']);
         $this->match(['get', 'post'], '/recover/{id}', [\AuthController::class, 'recover']);
 
-        $this->match(['get', 'post'], '/verified-email/{hash?}', [\AuthController::class, 'verifiedEmail']);
+        $this->get('/verified-email/{hash}', [\AuthController::class, 'verifiedEmail']);
 
         $this->match(['get', 'post'], '/2fa/{id}', [\AuthController::class, 'twoFa']);
     }

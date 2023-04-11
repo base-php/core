@@ -6,12 +6,12 @@ use View;
 
 class VerifiedEmail extends Mail
 {
-	/**
+    /**
      * Set from for email.
      *
      * @var string
      */
-    public string $from = 'info@base.com';
+    public string $from = 'notreply@base-php.com';
 
     /**
      * Set subject for email.

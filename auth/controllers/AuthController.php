@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Mails\PasswordRecoveryEmail;
+use App\Mails\VerifiedEmail;
 use App\Models\User;
 use Facebook;
 use Google;
@@ -17,6 +18,13 @@ class AuthController extends Controller
      * @var string
      */
     public $redirect_login = '/dashboard';
+
+    /**
+     * Turn email verification on or off.
+     *
+     * @var string
+     */
+    public $verified_email = true;
 
     /**
      * Show login form.
@@ -49,14 +57,14 @@ class AuthController extends Controller
             $user = User::create([
                 'name' => request('name'),
                 'email' => request('email'),
-                'password' => request('password'),
+                'password' => encrypt(request('password')),
                 'date_create' => now('Y-m-d H:i:s'),
                 'date_update' => now('Y-m-d H:i:s'),
             ]);
 
             $user->update(['hash' => encrypt($user->id)]);
 
-            if (config('verified_email')) {
+            if ($this->verified_email) {
                 email($user->email, new VerifiedEmail($user));
             }
 
@@ -79,7 +87,7 @@ class AuthController extends Controller
             ->first();
 
         if ($user) {
-            if (config('verified_email') && !$user->date_verified_email) {
+            if ($this->verified_email && ! $user->date_verified_email) {
                 return redirect('/login')->with('error', lang('auth.verified_email'));
             }
 
@@ -91,15 +99,15 @@ class AuthController extends Controller
         return redirect('/login')->with('error', lang('auth.incorrect_data'));
     }
 
-    public function verifiedEmail($hash = ''): View
+    public function verifiedEmail($hash): Redirect
     {
-        $user = User::where('hash', request('hash'))->first();
+        $user = User::where('hash', $hash)->first();
 
         if (! $user) {
             return redirect('/login')->with('error', lang('auth.error_hash'));            
         }
 
-        $user->update(['date_verified_email', now('Y-m-d H:i:s')]);
+        User::where('hash', $hash)->update(['date_verified_email' => now('Y-m-d H:i:s')]);
 
         return redirect('/login')->with('info', lang('auth.email_verified_success'));
     }

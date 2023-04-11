@@ -21,12 +21,12 @@
     <p>{{ lang('auth.email_greeting') }}, {{ $user->name }}.</p>
 
     <p>
-        <a class="btn btn-primary" href="{{ host() }}/email-verified/{{ encrypt($user->id) }}">{{ lang('auth.email_verified') }}</a>
+        <a class="btn btn-primary" href="{{ host() }}/verified-email/{{ encrypt($user->id) }}">{{ lang('auth.email_verified') }}</a>
     </p>
 
     <hr class="mb-5">
 
-    <p>{{ lang('auth.email_footer') }}: <a href="http:{{ host() }}/recover/{{ encrypt($user->id) }}">http:{{ host() }}/recover/{{ encrypt($user->id) }}</a></p>
+    <p>{{ lang('auth.verified_email_footer') }}: <a href="{{ host() }}/verified-email/{{ encrypt($user->id) }}">{{ host() }}/verified-email/{{ encrypt($user->id) }}</a></p>
 
     <script src="{{ node('jquery/dist/jquery.js') }}"></script>
     <script src="{{ node('bootstrap/dist/js/bootstrap.js') }}"></script>

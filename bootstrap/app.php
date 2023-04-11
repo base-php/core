@@ -113,8 +113,18 @@ class App
         $response = $app['router']->dispatch($request);
         $response->send();
 
-        session()->delete('basephp-user');
-        session()->delete('basephp-flash');
-        session()->delete('basephp-permissions');
+        foreach (session()->all() as $key => $value) {
+            if (strpos($key, 'basephp-user') !== false) {
+                session()->delete($key);
+            }
+
+            if (strpos($key, 'basephp-flash') !== false) {
+                session()->delete($key);
+            }
+
+            if (strpos($key, 'basephp-permissions') !== false) {
+                session()->delete($key);
+            }
+        }
     }
 }
