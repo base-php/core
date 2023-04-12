@@ -24,7 +24,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    public $verified_email = true;
+    public $verified_email = false;
 
     /**
      * Show login form.

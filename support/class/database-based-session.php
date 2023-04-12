@@ -7,13 +7,33 @@ class DatabaseBasedSession
 
 	public function __construct()
 	{
-		$this->id = $_SESSION['PHPSESSID'];
+		$this->clear();
+		$this->id = $_COOKIE['PHPSESSID'];
 		$this->query = DB::table('sessions')->where('id_session', $this->id);
 	}
 
 	public function all()
 	{
 		return $this->query->get();
+	}
+
+	public function clear()
+	{
+		$session_lifetime = config('session_lifetime') ?? 1440;
+		$sessions = DB::table('sessions')->get();
+
+		foreach ($sessions as $session) {
+			$strtotime = strtotime($session->date_update);
+			
+			$date_update = $strtotime + $session_lifetime;
+			$date_update = date('Y-m-d H:i:s', $date_update);
+
+			if ($date_update <= date('Y-m-d H:i:s')) {
+				DB::table('sessions')
+					->where('id', $session->id)
+					->delete();
+			}
+		}
 	}
 
 	public function delete($key = '')
@@ -35,7 +55,7 @@ class DatabaseBasedSession
 	public function get($key)
 	{
 		$row = $this->query->where('key', $key)->first();
-		return $row->$key ?? null;
+		return $row->value ?? null;
 	}
 
 	public function set($key, $value)
@@ -47,6 +67,6 @@ class DatabaseBasedSession
 				'value' => $value
 			]);
 
-		return $key;
+		return $value;
 	}
 }
