@@ -83,8 +83,6 @@ class UserController extends Controller
      */
     public function update(UserUpdateValidation $validation): Redirect
     {
-        $file = request('photo')->save('resources/assets/img');
-
         $user = User::find(request('id'));
         $user->update([
             'name' => request('name'),
@@ -97,7 +95,9 @@ class UserController extends Controller
             ]);
         }
 
-        if ($file->filename != '') {
+        if (request('photo')) {
+            $file = request('photo')->save('resources/assets/img');
+            
             $user->update([
                 'photo' => $file->filename,
             ]);

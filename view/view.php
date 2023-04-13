@@ -24,14 +24,14 @@ class View
             $path = $array[0];
             $view = $array[1];
 
-            if (file_exists($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/' . $path . '/views/' . $view . '.blade.php')) {
-                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/vendor/base-php/core/' . $view . '/views/' . $view . '.blade.php');
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/' . $path . '/views/' . $view . '.blade.php')) {
+                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/' . $path . '/views/' . $view . '.blade.php');
                 $find = true;
             }
 
         } else {
-            if (file_exists($_SERVER['DOCUMENT_ROOT'].'/resources/views/' . $view . '.blade.php')) {
-                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/resources/views/' . $view . '.blade.php');
+            if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $view . '.blade.php')) {
+                $view = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $view . '.blade.php');
                 $find = true;
             }
         }

@@ -102,8 +102,8 @@ class AuthInstall extends Command
         $fopen = fopen('app/routes.php', 'a+');
         fwrite($fopen, $content);
 
-        system('npm install alpinejs@3.12.0 flowbite@1.6.4 sweetalert2@11.7.3');
-        system('composer require phpmailer/phpmailer:6.8.0');
+        system('npm install alpinejs flowbite sweetalert2');
+        system('composer require phpmailer/phpmailer');
 
         $style = new SymfonyStyle($input, $output);
         $style->success('Autenticación instalada satisfactoriamente.');

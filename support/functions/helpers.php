@@ -236,7 +236,7 @@ function two_fa()
 
 function validation($data, $rules, $messages, $redirect)
 {
-    include __DIR__.'/../database/database.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/database/database.php';
 
     $files = new Filesystem();
     $loader = new FileLoader($files, '');
