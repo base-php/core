@@ -2,6 +2,7 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputOption;
 
 class AuthInstall extends Command
 {
@@ -9,8 +10,15 @@ class AuthInstall extends Command
 
     protected static $defaultDescription = 'Instala los controladores y recursos de autenticación';
 
+    public function configure()
+    {
+        $this->addOption('frontend', null, InputOption::VALUE_NONE, 'Frontend para autenticación');
+    }
+
     protected function execute($input, $output)
     {
+        $frontend = $input->getOption('frontend') ?? 'tailwind';
+
         copy('vendor/base-php/core/auth/controllers/AuthController.php', 'app/Controllers/AuthController.php');
         copy('vendor/base-php/core/auth/controllers/DashboardController.php', 'app/Controllers/DashboardController.php');
         copy('vendor/base-php/core/auth/controllers/UserController.php', 'app/Controllers/UserController.php');
@@ -73,30 +81,30 @@ class AuthInstall extends Command
             mkdir('resources/views/mails');
         }
 
-        copy('vendor/base-php/core/auth/views/mails/recover.blade.php', 'resources/views/mails/recover.blade.php');
-        copy('vendor/base-php/core/auth/views/mails/verified-email.blade.php', 'resources/views/mails/verified-email.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/mails/recover.blade.php', 'resources/views/mails/recover.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/mails/verified-email.blade.php', 'resources/views/mails/verified-email.blade.php');
 
-        copy('vendor/base-php/core/auth/views/auth/2fa.blade.php', 'resources/views/auth/2fa.blade.php');
-        copy('vendor/base-php/core/auth/views/auth/forgot-password.blade.php', 'resources/views/auth/forgot-password.blade.php');
-        copy('vendor/base-php/core/auth/views/auth/login.blade.php', 'resources/views/auth/login.blade.php');
-        copy('vendor/base-php/core/auth/views/auth/recover.blade.php', 'resources/views/auth/recover.blade.php');
-        copy('vendor/base-php/core/auth/views/auth/register.blade.php', 'resources/views/auth/register.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/auth/2fa.blade.php', 'resources/views/auth/2fa.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/auth/forgot-password.blade.php', 'resources/views/auth/forgot-password.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/auth/login.blade.php', 'resources/views/auth/login.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/auth/recover.blade.php', 'resources/views/auth/recover.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/auth/register.blade.php', 'resources/views/auth/register.blade.php');
 
-        copy('vendor/base-php/core/auth/views/components/alert.blade.php', 'resources/views/components/alert.blade.php');
-        copy('vendor/base-php/core/auth/views/components/button.blade.php', 'resources/views/components/button.blade.php');
-        copy('vendor/base-php/core/auth/views/components/button-link.blade.php', 'resources/views/components/button-link.blade.php');
-        copy('vendor/base-php/core/auth/views/components/file-button.blade.php', 'resources/views/components/file-button.blade.php');
-        copy('vendor/base-php/core/auth/views/components/input.blade.php', 'resources/views/components/input.blade.php');
-        copy('vendor/base-php/core/auth/views/components/label.blade.php', 'resources/views/components/label.blade.php');
-        copy('vendor/base-php/core/auth/views/components/social-button.blade.php', 'resources/views/components/social-button.blade.php');
-        copy('vendor/base-php/core/auth/views/components/template-auth.blade.php', 'resources/views/components/template-auth.blade.php');
-        copy('vendor/base-php/core/auth/views/components/template-dashboard.blade.php', 'resources/views/components/template-dashboard.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/components/alert.blade.php', 'resources/views/components/alert.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/components/button.blade.php', 'resources/views/components/button.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/components/button-link.blade.php', 'resources/views/components/button-link.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/components/file-button.blade.php', 'resources/views/components/file-button.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/components/input.blade.php', 'resources/views/components/input.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/components/label.blade.php', 'resources/views/components/label.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/components/social-button.blade.php', 'resources/views/components/social-button.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/components/template-auth.blade.php', 'resources/views/components/template-auth.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/components/template-dashboard.blade.php', 'resources/views/components/template-dashboard.blade.php');
 
-        copy('vendor/base-php/core/auth/views/dashboard/index.blade.php', 'resources/views/dashboard/index.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/dashboard/index.blade.php', 'resources/views/dashboard/index.blade.php');
 
-        copy('vendor/base-php/core/auth/views/users/create.blade.php', 'resources/views/users/create.blade.php');
-        copy('vendor/base-php/core/auth/views/users/edit.blade.php', 'resources/views/users/edit.blade.php');
-        copy('vendor/base-php/core/auth/views/users/index.blade.php', 'resources/views/users/index.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/users/create.blade.php', 'resources/views/users/create.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/users/edit.blade.php', 'resources/views/users/edit.blade.php');
+        copy('vendor/base-php/core/auth/views/' . $frontend . '/users/index.blade.php', 'resources/views/users/index.blade.php');
 
         $content = file_get_contents('vendor/base-php/core/auth/routes.php');
         $fopen = fopen('app/routes.php', 'a+');
