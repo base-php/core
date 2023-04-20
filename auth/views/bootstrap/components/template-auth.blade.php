@@ -12,23 +12,27 @@
 
 <link rel="icon" href="{{ asset('img/favicon.svg') }}">
 
-<link rel="stylesheet" href="{{ node('flowbite/dist/flowbite.css') }}">
+<link rel="stylesheet" href="{{ node('bootstrap/dist/css/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ node('@fortawesome/fontawesome-free/css/all.css') }}">
 
-<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    body {
+        background-color: silver;
+    }
+</style>
 
 </head>
 
-<body class="body-bg min-h-screen pt-12 md:pt-20 pb-2 px-2 md:px-0 bg-gray-100">
-    <header class="max-w-lg mx-auto">
-        <a href="/login">
-            <h1 class="text-4xl font-bold text-center">
+<body>
+    <header class="mt-5 mb-5">
+        <a href="/login" class="text-decoration-none">
+            <h1 class="text-center text-dark">
                 <i class="fa fa-shapes"></i> Base PHP
             </h1>
         </a>
     </header>
 
-    <main class="bg-white max-w-lg mx-auto p-1 md:p-5 my-5 rounded-lg shadow-2xl">
+    <main>
         <section>
             {{ $slot }}
         </section>

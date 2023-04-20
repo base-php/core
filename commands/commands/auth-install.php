@@ -12,12 +12,12 @@ class AuthInstall extends Command
 
     public function configure()
     {
-        $this->addOption('frontend', null, InputOption::VALUE_NONE, 'Frontend para autenticación');
+        $this->addOption('bootstrap', null, InputOption::VALUE_NONE, 'Autenticación con Bootstrap');
     }
 
     protected function execute($input, $output)
     {
-        $frontend = $input->getOption('frontend') ?? 'tailwind';
+        $frontend = $input->getOption('bootstrap') ? 'bootstrap' : 'tailwind';
 
         copy('vendor/base-php/core/auth/controllers/AuthController.php', 'app/Controllers/AuthController.php');
         copy('vendor/base-php/core/auth/controllers/DashboardController.php', 'app/Controllers/DashboardController.php');
@@ -110,8 +110,13 @@ class AuthInstall extends Command
         $fopen = fopen('app/routes.php', 'a+');
         fwrite($fopen, $content);
 
-        system('npm install alpinejs flowbite sweetalert2');
         system('composer require phpmailer/phpmailer');
+
+        if ($frontend == 'bootstrap') {
+            system('npm install jquery bootstrap sweetalert2');
+        } else {
+            system('npm install alpinejs flowbite sweetalert2');
+        }
 
         $style = new SymfonyStyle($input, $output);
         $style->success('Autenticación instalada satisfactoriamente.');
