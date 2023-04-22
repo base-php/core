@@ -15,7 +15,7 @@
 
 <style>
     body {
-        background-color: silver;
+        background-color: #F3F4F6;
     }
 
     .img-navbar {
@@ -27,12 +27,17 @@
         color: black;
         text-decoration: none;
     }
+
+    .img-photo {
+        width: 170px;
+        border-radius: 170px;
+    }
 </style>
 
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+    <nav class="navbar bg-white navbar-expand-lg navbar-light bg-light px-3">
         <a class="navbar-brand" href="/dashboard"><i class="fa fa-shapes"></i> {{ config('application_name') }}</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
