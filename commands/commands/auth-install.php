@@ -13,6 +13,7 @@ class AuthInstall extends Command
     public function configure()
     {
         $this->addOption('bootstrap', null, InputOption::VALUE_NONE, 'Autenticación con Bootstrap');
+        $this->addOption('tailwind', null, InputOption::VALUE_NONE, 'Autenticación con Tailwind');
     }
 
     protected function execute($input, $output)
@@ -114,6 +115,7 @@ class AuthInstall extends Command
 
         if ($frontend == 'bootstrap') {
             system('npm install jquery bootstrap sweetalert2');
+            copy('vendor/base-php/core/auth/views/bootstrap/home/index.blade.php', 'resources/views/home/index.blade.php');
         } else {
             system('npm install alpinejs flowbite sweetalert2');
         }

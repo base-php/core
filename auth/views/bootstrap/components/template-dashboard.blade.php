@@ -72,9 +72,9 @@
     <input type="hidden" id="confirm_delete_accept" value="{{ lang('users.confirm_delete_accept') }}">
     <input type="hidden" id="confirm_delete_cancel" value="{{ lang('users.confirm_delete_cancel') }}">
 
-    <script src="{{ node('flowbite/dist/flowbite.js') }}" defer></script>
-    <script src="{{ node('alpinejs/dist/cdn.js') }}" defer></script>
+    <script src="{{ node('jquery/dist/jquery.js') }}"></script>
     <script src="{{ node('sweetalert2/dist/sweetalert2.js') }}"></script>
+
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>
