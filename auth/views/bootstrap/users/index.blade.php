@@ -1,56 +1,56 @@
 <x-template-dashboard active="users">
-	<div class="w-full p-3">
-        <h1 class="text-3xl mb-4">{{ lang('users.users') }}</h1>
+    <div>
+        <h1>{{ lang('users.users') }}</h1>
 
-        <div class="grid grid-cols-2 mb-5">
-            <div>
-                <input x-on:keyup="search($el)" autofocus type="text" placeholder="{{ lang('users.search') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <div class="row">
+            <div class="col-9">
+                <input type="text" type="text" autofocus class="form-control" placeholder="{{ lang('users.search') }}">
             </div>
 
-            <div class="text-right">
-                <a href="/dashboard/users/create" class="inline-flex items-center p-3 appearance-none bg-black border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-black active:bg-black focus:outline-none focus:border-black focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
-                    <i class="fa fa-plus mr-2"></i> 
+            <div class="col-3">
+                <a href="/dashboard/users/create" class="btn btn-dark btn-block">
                     {{ lang('users.create') }}
                 </a>
             </div>
-        </div>
 
-        <x-alert></x-alert>
+            <x-alert></x-alert>
 
-        <div class="bg-white border rounded shadow p-5 text-lg">
-            <table id="table" class="w-full">
-                <thead class="border-b-2">
-                    <tr class="hover:bg-gray-100">
-                        <th class="text-left p-2 hidden sm:table-cell">{{ lang('users.id') }}</th>
-                        <th class="text-left p-2">{{ lang('users.photo') }}</th>
-                        <th class="text-left p-2">{{ lang('users.name') }}</th>
-                        <th class="text-left p-2 hidden sm:table-cell">{{ lang('users.email') }}</th>
-                        <th class="text-left p-2"></th>
-                    </tr>
-                </thead>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ lang('users.id') }}</th>
+                                <th>{{ lang('users.photo') }}</th>
+                                <th>{{ lang('users.name') }}</th>
+                                <th>{{ lang('users.email') }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
 
-                <tbody>
-                	@foreach($users as $user)
-                    <tr class="hover:bg-gray-100">
-                        <td class="p-2 hidden sm:table-cell">{{ $user->id }}</td>
-                        <td class="p-2">
-                            <img class="w-8 h-8 rounded-full mr-4" src="{{ $user->photo }}" alt="{{ $user->name }}"> 
-                        </td>
-                        <td class="p-2">{{ $user->name }}</td>
-                        <td class="p-2 hidden sm:table-cell">{{ $user->email }}</td>
-                        <td class="p-2 text-right">
-                            <a class="hover:text-blue-600 p-1" href="{{ '/dashboard/users/edit/' . $user->id }}" title="{{ lang('users.edit') }}">
-                                <fa class="fa fa-edit"></fa>
-                            </a>
+                        <tbody>
+                            @foreach($users as $user)
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+                                    <td><img class="img-profile-list" src="{{ $user->photo }}" alt="{{ $user->name }}"></td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
 
-                            <a x-on:click="confirmDelete(event, $el)" class="hover:text-red-600 p-1" href="{{ '/dashboard/users/delete/' . $user->id }}" title="{{ lang('users.delete') }}">
-                                <fa class="fa fa-trash"></fa>
-                            </a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                    <td>
+                                        <a class="text-decoration-none text-dark" href="{{ '/dashboard/users/edit/' . $user->id }}" title="{{ lang('users.edit') }}">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a class="text-decoration-none text-danger" href="{{ '/dashboard/users/delete/' . $user->id }}" title="{{ lang('users.delete') }}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>       
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </x-template-dashboard>

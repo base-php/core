@@ -32,6 +32,11 @@
         width: 170px;
         border-radius: 170px;
     }
+
+    .img-profile-list {
+        width: 30px;
+        border-radius: 30px;
+    }
 </style>
 
 </head>
