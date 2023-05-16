@@ -218,6 +218,11 @@ function session($key = '', $value = '')
     return $session;
 }
 
+public function ssh()
+{
+    return new SSH();
+}
+
 function storage($adapter = 'local')
 {
     return new Storage($adapter);
