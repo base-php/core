@@ -20,6 +20,20 @@ function abort($code = 404)
     return exit();
 }
 
+function abort_if($condition, $code)
+{
+    if ($condition) {
+        abort($code);
+    }
+}
+
+function abort_unless($condition, $code)
+{
+    if (! $condition) {
+        abort($code);
+    }
+}
+
 function arr()
 {
     return new Arr;
@@ -218,7 +232,7 @@ function session($key = '', $value = '')
     return $session;
 }
 
-public function ssh()
+function ssh()
 {
     return new SSH();
 }
