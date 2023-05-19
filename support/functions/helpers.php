@@ -190,6 +190,20 @@ function report($message)
     throw new Exception($message);
 }
 
+function report_if($condition, $message)
+{
+    if ($condition) {
+        report($message);
+    }
+}
+
+function report_unless($condition, $message)
+{
+    if (! $condition) {
+        report($message);
+    }
+}
+
 function response()
 {
     return new Response();
