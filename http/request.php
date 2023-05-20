@@ -82,18 +82,26 @@ function request($var = '')
 {
     if ($var == '') {
         return $_REQUEST;
-    } else {
-        if (isset($_FILES[$var]) && $_FILES[$var] != '') {
-            $storage = new Storage();
-            $storage->content = $var;
+    }
 
-            return $storage;
-        }
+    if (isset($_FILES[$var]) && $_FILES[$var] != '') {
+        $storage = new Storage();
+        $storage->content = $var;
 
-        if (isset($_REQUEST[$var]) && $_REQUEST[$var] != '') {
+        return $storage;
+    }
+
+    if (isset($_REQUEST[$var]) && $_REQUEST[$var] != '') {
+        if (is_string($_REQUEST[$var])) {
             return $_REQUEST[$var];
         }
+
+        if (is_array($_REQUEST[$var])) {
+            return json_encode($_REQUEST[$var]);
+        }
     }
+
+    return null;
 }
 
 function server($var = '')
