@@ -13,6 +13,10 @@ class Permission
      */
     public function handle($request, $next): mixed
     {
+        if (header('Accept') == 'application/json') {
+            return response()->json(['message' => 'Unauthorized'], 401)
+        }
+
         if (permission()) {
             return view('401');
         }

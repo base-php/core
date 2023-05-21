@@ -13,6 +13,10 @@ class Auth
      */
     public function handle($request, $next): mixed
     {
+        if (header('Accept') == 'application/json') {
+            return response()->json(['message' => 'Unauthenticated'], 401)
+        }
+
         if (! auth()) {
             $url = server('uri');
 

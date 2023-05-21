@@ -32,6 +32,11 @@ function get($var = '')
     }
 }
 
+function header($header)
+{
+    return getallheaders()[$header] ?? null;
+}
+
 function host()
 {
     return '//'.$_SERVER['HTTP_HOST'];
