@@ -32,7 +32,7 @@ function get($var = '')
     }
 }
 
-function header($header)
+function headers($header)
 {
     return getallheaders()[$header] ?? null;
 }

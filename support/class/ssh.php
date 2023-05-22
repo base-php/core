@@ -13,6 +13,11 @@ class SSH
         }
     }
 
+    public function download($file)
+    {
+        $this->instance->download($file, $path);
+    }
+
     public function exec($command)
     {
         $this->instance->execute($command);
@@ -30,6 +35,12 @@ class SSH
         return $this->instance->getOutput();
     }
 
+    public function privateKey($privateKey)
+    {
+        $this->instance->usePrivateKey($privateKey);
+        return $this;
+    }
+
     public function success()
     {
         return $this->instance->isSuccessful();
@@ -39,5 +50,10 @@ class SSH
     {
         $this->instance->setTimeout($timeout);
         return $this;
+    }
+
+    public function upload($file)
+    {
+        $this->instance->upload($file, $path);
     }
 }
