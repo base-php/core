@@ -1390,4 +1390,20 @@ class Router implements BindingRegistrar, RegistrarContract
 
         $this->match(['get', 'post'], '/2fa/{id}', [\AuthController::class, 'twoFa']);
     }
+
+    public function discover($path)
+    {
+        $dir = $_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $path;
+        
+        foreach (scandir($dir) as $item) {
+            if (! is_dir($item)) {
+                $route = $path . '/' . $item;
+                $route = str_replace('.blade.php', '', $route);
+
+                $this->view($route, $route);
+            }
+        }
+
+        exit;
+    }
 }
