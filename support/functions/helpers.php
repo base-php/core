@@ -87,6 +87,11 @@ function carbon()
     return new Carbon;
 }
 
+function currentRoute()
+{
+    return $_SERVER['REQUEST_URI'];
+}
+
 function dispatch($job)
 {
     return new Job($job);
