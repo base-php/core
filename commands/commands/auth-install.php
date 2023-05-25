@@ -54,7 +54,13 @@ class AuthInstall extends Command
             mkdir('resources/assets/js');
         }
 
-        copy('vendor/base-php/core/auth/js/main.js', 'resources/assets/js/main.js');
+        if ($frontend == 'tailwind') {
+            copy('vendor/base-php/core/auth/js/alpine.js', 'resources/assets/js/main.js');
+        }
+
+        if ($frontend == 'bootstrap') {
+            copy('vendor/base-php/core/auth/js/jquery.js', 'resources/assets/js/main.js');
+        }
 
         copy('vendor/base-php/core/auth/lang/auth.php', 'resources/lang/es/auth.php');
         copy('vendor/base-php/core/auth/lang/dashboard.php', 'resources/lang/es/dashboard.php');

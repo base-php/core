@@ -13,6 +13,13 @@ use View;
 class AuthController extends Controller
 {
     /**
+     * Model to use for auth.
+     * 
+     * @var class
+     */
+    public $model = User::class;
+
+    /**
      * Where the user will be redirected when they log in.
      *
      * @var string
@@ -44,7 +51,7 @@ class AuthController extends Controller
     public function register(): View|Redirect
     {
         if (post()) {
-            $email = User::where('email', request('email'))->get();
+            $email = (new $this->model)->where('email', request('email'))->get();
 
             if ($email->count() > 0) {
                 return redirect('/register')->with('error', lang('auth.email_verified_error'));
@@ -54,7 +61,7 @@ class AuthController extends Controller
                 return redirect('/register')->with('error', lang('auth.password_not_match'));
             }
 
-            $user = User::create([
+            $user = (new $this->model)->create([
                 'name' => request('name'),
                 'email' => request('email'),
                 'password' => encrypt(request('password')),
@@ -81,7 +88,7 @@ class AuthController extends Controller
      */
     public function login(): Redirect
     {
-        $user = User::where('email', request('email'))
+        $user = (new $this->model)->where('email', request('email'))
             ->where('password', encrypt(request('password')))
             ->whereNull('oauth')
             ->first();
@@ -101,13 +108,13 @@ class AuthController extends Controller
 
     public function verifiedEmail($hash): Redirect
     {
-        $user = User::where('hash', $hash)->first();
+        $user = (new $this->model)->where('hash', $hash)->first();
 
         if (! $user) {
             return redirect('/login')->with('error', lang('auth.error_hash'));            
         }
 
-        User::where('hash', $hash)->update(['date_verified_email' => now('Y-m-d H:i:s')]);
+        (new $this->model)->where('hash', $hash)->update(['date_verified_email' => now('Y-m-d H:i:s')]);
 
         return redirect('/login')->with('info', lang('auth.email_verified_success'));
     }
@@ -140,7 +147,7 @@ class AuthController extends Controller
     public function forgotPassword(): View|Redirect
     {
         if (post()) {
-            $user = User::where('email', request('email'))->first();
+            $user = (new $this->model)->where('email', request('email'))->first();
 
             if (! $user) {
                 return redirect('/forgot-password')->with('error', lang('auth.email_not_match'));
@@ -163,7 +170,7 @@ class AuthController extends Controller
     public function recover(string $id): View|Redirect
     {
         if (post()) {
-            $user = User::where('hash', request('id'))->first();
+            $user = (new $this->model)->where('hash', request('id'))->first();
 
             if (! $user) {
                 return redirect('/login')->with('error', lang('auth.link_invalid'));

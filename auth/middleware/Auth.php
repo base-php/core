@@ -13,11 +13,11 @@ class Auth
      */
     public function handle($request, $next): mixed
     {
-        if (headers('Accept') == 'application/json') {
-            return response()->json(['message' => 'Unauthenticated'], 401)
-        }
-
         if (! auth()) {
+            if (headers('Accept') == 'application/json') {
+                return response()->json(['message' => 'Unauthenticated'], 401);
+            }
+
             $url = server('uri');
 
             return redirect("/login?redirect=$url");
