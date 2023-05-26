@@ -1391,19 +1391,59 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->match(['get', 'post'], '/2fa/{id}', [\AuthController::class, 'twoFa']);
     }
 
-    public function discover($path)
+    public function folio($path)
     {
-        $dir = $_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $path;
-        
-        foreach (scandir($dir) as $item) {
-            if (! is_dir($item)) {
-                $route = $path . '/' . $item;
-                $route = str_replace('.blade.php', '', $route);
+        $files = $this->scanAllDir($_SERVER['DOCUMENT_ROOT'] . '/resources/views/' . $path);
 
-                $this->view($route, $route);
+        foreach ($files as $file) {
+            $route = str_replace(
+                ['.blade.php', '[', ']'],
+                ['', '{', '}'],
+                $file
+            );
+
+            $view = str_replace(
+                ['.blade.php', '/'],
+                ['', '.'],
+                $file
+            );
+
+            $view = 'pages.' . $view;
+
+            $start = strpos($view, '[') + 1;
+            $end = strpos($view, ']');
+            $variable = substr($view, $start, $end - $start);
+
+            if (strpos($view, '[')) {
+                $this->get($route, function ($param) use ($view, $variable) {
+                    $$variable = $param;
+                    return view($view, compact("$variable"));
+                });                
+            } else {
+                $this->get($route, function () use ($view) {
+                    return view($view);
+                });
+            }
+        }
+    }
+
+    public function scanAllDir($dir) {
+        $result = [];
+
+        foreach(scandir($dir) as $filename) {
+            if ($filename[0] === '.') continue;
+
+            $filePath = $dir . '/' . $filename;
+
+            if (is_dir($filePath)) {
+                foreach ($this->scanAllDir($filePath) as $childFilename) {
+                    $result[] = $filename . '/' . $childFilename;
+                }
+            } else {
+                $result[] = $filename;
             }
         }
 
-        exit;
+        return $result;
     }
 }
