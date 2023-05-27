@@ -20,9 +20,9 @@ class AuthInstall extends Command
     {
         $frontend = $input->getOption('bootstrap') ? 'bootstrap' : 'tailwind';
 
-        copy('vendor/base-php/core/auth/controllers/AuthController.php', 'app/Controllers/AuthController.php');
-        copy('vendor/base-php/core/auth/controllers/DashboardController.php', 'app/Controllers/DashboardController.php');
-        copy('vendor/base-php/core/auth/controllers/UserController.php', 'app/Controllers/UserController.php');
+        copy('vendor/base-php/core/auth/controllers/frontend/AuthController.php', 'app/Controllers/AuthController.php');
+        copy('vendor/base-php/core/auth/controllers/frontend/DashboardController.php', 'app/Controllers/DashboardController.php');
+        copy('vendor/base-php/core/auth/controllers/frontend/UserController.php', 'app/Controllers/UserController.php');
 
         if (! file_exists('app/Mails')) {
             mkdir('app/Mails');

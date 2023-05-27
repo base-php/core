@@ -106,7 +106,13 @@ class AuthController extends Controller
         return redirect('/login')->with('error', lang('auth.incorrect_data'));
     }
 
-    public function verifiedEmail($hash): Redirect
+    /**
+     * Verified email
+     *
+     * @param string $hash
+     * @return Redirect
+     */
+    public function verifiedEmail(string $hash): Redirect
     {
         $user = (new $this->model)->where('hash', $hash)->first();
 
@@ -177,7 +183,7 @@ class AuthController extends Controller
             }
 
             if (request('password') != request('confirm_password')) {
-                return redirect('/recover/'.request('id'))->with('error', 'Las contraseñas no coinciden.');
+                return redirect('/recover/' . request('id'))->with('error', 'Las contraseñas no coinciden.');
             }
 
             $user->password = encrypt(request('password'));
