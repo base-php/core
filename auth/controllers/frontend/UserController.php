@@ -111,7 +111,13 @@ class UserController extends Controller
         return redirect('/dashboard/users')->with('info', lang('users.update'));
     }
 
-    public function two_fa($id)
+    /**
+     * Set 2FA key if this is null
+     * 
+     * @param int $id
+     * @return Redirect
+     */
+    public function two_fa(int $id): Redirect
     {
         $user = User::find($id);
 

@@ -5,8 +5,6 @@ namespace App\Controllers;
 use App\Models\User;
 use App\Validations\UserStoreValidation;
 use App\Validations\UserUpdateValidation;
-use Redirect;
-use View;
 
 class UserController extends Controller
 {
@@ -19,34 +17,23 @@ class UserController extends Controller
     }
 
     /**
-     * Show home page.
+     * Show all users.
      *
-     * @return View
+     * @return Response
      */
-    public function index(): View
+    public function index(): Response
     {
         $users = User::get();
-
-        return view('users.index', compact('users'));
-    }
-
-    /**
-     * Show create user page.
-     *
-     * @return View
-     */
-    public function create(): View
-    {
-        return view('users.create');
+        return response()->json(['users' => $users]);
     }
 
     /**
      * Store user in database.
      *
      * @param  UserStoreValidation  $validation
-     * @return Redirect
+     * @return Response
      */
-    public function store(UserStoreValidation $validation): Redirect
+    public function store(UserStoreValidation $validation): Response
     {
         $file = request('photo')->save('resources/assets/img');
 
@@ -59,29 +46,21 @@ class UserController extends Controller
 
         $user->update(['hash' => encrypt($user->id)]);
 
-        return redirect('/dashboard/users')->with('info', lang('users.store'));
-    }
+        $response = [
+            'info' => lang('users.store'),
+            'user' => $user
+        ];
 
-    /**
-     * Show edit user page.
-     *
-     * @param  int  $id
-     * @return View
-     */
-    public function edit(int $id): View
-    {
-        $user = User::find($id);
-
-        return view('users.edit', compact('user'));
+        return response()->json($response);
     }
 
     /**
      * Update user in database.
      *
      * @param  UserUpdateValidation  $validation
-     * @return Redirect
+     * @return Response
      */
-    public function update(UserUpdateValidation $validation): Redirect
+    public function update(UserUpdateValidation $validation): Response
     {
         $user = User::find(request('id'));
         $user->update([
@@ -108,10 +87,21 @@ class UserController extends Controller
             session('photo', $user->photo);
         }
 
-        return redirect('/dashboard/users')->with('info', lang('users.update'));
+        $response = [
+            'info' => lang('users.update'),
+            'user' => $user
+        ];
+
+        return response()->json($response);
     }
 
-    public function two_fa($id)
+    /**
+     * Set 2FA key if this is null
+     * 
+     * @param int $id
+     * @return Response
+     */
+    public function two_fa(int $id): Response
     {
         $user = User::find($id);
 
@@ -123,16 +113,16 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('/dashboard/users/edit/'.$id);
+        return response()->json(['user' => $user]);
     }
 
     /**
      * Delete user in database.
      *
      * @param  int  $id
-     * @return Redirect
+     * @return Response
      */
-    public function delete(int $id): Redirect
+    public function delete(int $id): Response
     {
         if ($id == session('id')) {
             return redirect('/dashboard/users')->with('error', lang('users.in_use'));
@@ -140,6 +130,6 @@ class UserController extends Controller
 
         User::find($id)->delete();
 
-        return redirect('/dashboard/users')->with('info', lang('users.delete'));
+        return response()->json(['info' => lang('users.delete')]);
     }
 }

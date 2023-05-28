@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use View;
+use Response;
 
 class DashboardController extends Controller
 {
@@ -17,10 +17,10 @@ class DashboardController extends Controller
     /**
      * Show home page.
      *
-     * @return View
+     * @return Response
      */
-    public function index(): View
+    public function index(): Response
     {
-        return view('dashboard.index');
+        return response()->json(['message' => lang('dashboard.text') ]);
     }
 }

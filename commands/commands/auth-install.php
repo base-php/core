@@ -14,15 +14,25 @@ class AuthInstall extends Command
     {
         $this->addOption('bootstrap', null, InputOption::VALUE_NONE, 'Autenticación con Bootstrap');
         $this->addOption('tailwind', null, InputOption::VALUE_NONE, 'Autenticación con Tailwind');
+        $this->addOption('api', null, InputOption::VALUE_NONE, 'Instala API para autenticación');
     }
 
     protected function execute($input, $output)
     {
         $frontend = $input->getOption('bootstrap') ? 'bootstrap' : 'tailwind';
+        $api = $input->get('api') ?? null;
 
-        copy('vendor/base-php/core/auth/controllers/frontend/AuthController.php', 'app/Controllers/AuthController.php');
-        copy('vendor/base-php/core/auth/controllers/frontend/DashboardController.php', 'app/Controllers/DashboardController.php');
-        copy('vendor/base-php/core/auth/controllers/frontend/UserController.php', 'app/Controllers/UserController.php');
+        if ($api) {
+            copy('vendor/base-php/core/auth/controllers/api/AuthController.php', 'app/Controllers/AuthController.php');
+            copy('vendor/base-php/core/auth/controllers/api/DashboardController.php', 'app/Controllers/DashboardController.php');
+            copy('vendor/base-php/core/auth/controllers/api/UserController.php', 'app/Controllers/UserController.php');
+
+        } else {
+            copy('vendor/base-php/core/auth/controllers/frontend/AuthController.php', 'app/Controllers/AuthController.php');
+            copy('vendor/base-php/core/auth/controllers/frontend/DashboardController.php', 'app/Controllers/DashboardController.php');
+            copy('vendor/base-php/core/auth/controllers/frontend/UserController.php', 'app/Controllers/UserController.php');            
+        }
+
 
         if (! file_exists('app/Mails')) {
             mkdir('app/Mails');
