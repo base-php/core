@@ -1,7 +1,7 @@
 <?php
 
 include __DIR__.'/app.php';
-include __DIR__.'/../auth/class/2fa.php';
+include __DIR__.'/../packages/auth/class/2fa.php';
 include __DIR__.'/../database/backup.php';
 include __DIR__.'/../commands/bootstrap/console.php';
 include __DIR__.'/../commands/class/command.php';
@@ -66,12 +66,12 @@ include __DIR__.'/../commands/commands/up.php';
 include __DIR__.'/../commands/commands/vendor-publish.php';
 include __DIR__.'/../commands/commands/view-clear.php';
 
-include __DIR__.'/../crud/traits/crud.php';
+include __DIR__.'/../packages/crud/traits/crud.php';
 
-include __DIR__.'/../export/excel.php';
-include __DIR__.'/../export/pdf.php';
+include __DIR__.'/../packages/export/excel.php';
+include __DIR__.'/../packages/export/pdf.php';
 
-include __DIR__.'/../feature/class/feature.php';
+include __DIR__.'/../packages/feature/class/feature.php';
 
 include __DIR__.'/../http/redirect.php';
 include __DIR__.'/../http/request.php';
@@ -100,22 +100,22 @@ include __DIR__.'/../database/model.php';
 include __DIR__.'/../jobs/class/job.php';
 
 include __DIR__.'/../lang/lang.php';
-include __DIR__.'/../logs/traits/logs.php';
+include __DIR__.'/../packages/logs/traits/logs.php';
 
-include __DIR__.'/../permissions/middleware/can.php';
-include __DIR__.'/../permissions/models/permission.php';
-include __DIR__.'/../permissions/models/role.php';
-include __DIR__.'/../permissions/traits/has-role.php';
+include __DIR__.'/../packages/permissions/middleware/can.php';
+include __DIR__.'/../packages/permissions/models/permission.php';
+include __DIR__.'/../packages/permissions/models/role.php';
+include __DIR__.'/../packages/permissions/traits/has-role.php';
 
 include __DIR__.'/../notifications/traits/notifiable.php';
 include __DIR__.'/../notifications/class/notification.php';
 
-include __DIR__.'/../social/facebook.php';
-include __DIR__.'/../social/google.php';
+include __DIR__.'/../packages/social/facebook.php';
+include __DIR__.'/../packages/social/google.php';
 
-include __DIR__.'/../tokens/middleware/token-based-auth.php';
-include __DIR__.'/../tokens/models/token.php';
-include __DIR__.'/../tokens/traits/has-tokens.php';
+include __DIR__.'/../packages/tokens/middleware/token-based-auth.php';
+include __DIR__.'/../packages/tokens/models/token.php';
+include __DIR__.'/../packages/tokens/traits/has-tokens.php';
 
 include __DIR__.'/../validations/class/rule.php';
 include __DIR__.'/../validations/class/validation.php';
@@ -149,9 +149,9 @@ include __DIR__.'/../support/migrations/sessions.php';
 include __DIR__.'/../view/view.php';
 include __DIR__.'/../view/assets.php';
 
-include __DIR__.'/../bill/models/bill-item.php';
-include __DIR__.'/../bill/models/bill.php';
-include __DIR__.'/../bill/models/customer.php';
-include __DIR__.'/../bill/traits/billable.php';
+include __DIR__.'/../packages/bill/models/bill-item.php';
+include __DIR__.'/../packages/bill/models/bill.php';
+include __DIR__.'/../packages/bill/models/customer.php';
+include __DIR__.'/../packages/bill/traits/billable.php';
 
-include __DIR__.'/../chart/chart.php';
+include __DIR__.'/../packages/chart/chart.php';
