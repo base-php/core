@@ -11,6 +11,7 @@ use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory as Validation;
+use Spatie\Dns\Dns;
 
 function abort($code = 404)
 {
@@ -95,6 +96,12 @@ function currentRoute()
 function dispatch($job)
 {
     return new Job($job);
+}
+
+function dns($url)
+{
+    $dns = new Dns();
+    return $dns->getRecords($url);
 }
 
 function email($to, $object)
