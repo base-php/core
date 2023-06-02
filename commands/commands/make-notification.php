@@ -36,7 +36,7 @@ class MakeNotification extends Command
             mkdir('app/Notifications');
         }
 
-        $fopen = fopen('app/Notifications/'.$name.'.php', 'w+');
+        $fopen = fopen('app/Notifications/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 
@@ -49,7 +49,7 @@ class MakeNotification extends Command
             $content = file_get_contents('vendor/base-php/core/commands/examples/test.php');
             $content = str_replace('TestName', $name, $content);
 
-            $fopen = fopen('tests/'.$name.'.php', 'w+');
+            $fopen = fopen('tests/' . $name . '.php', 'w+');
             fwrite($fopen, $content);
             fclose($fopen);
 

@@ -34,7 +34,7 @@ class MakeFeature extends Command
             mkdir('app/Features');
         }
 
-        $fopen = fopen('app/Features/'.$name.'.php', 'w+');
+        $fopen = fopen('app/Features/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

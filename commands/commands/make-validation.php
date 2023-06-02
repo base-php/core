@@ -34,7 +34,7 @@ class MakeValidation extends Command
             mkdir('app/Validations');
         }
 
-        $fopen = fopen('app/Validations/'.$name.'.php', 'w+');
+        $fopen = fopen('app/Validations/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

@@ -42,7 +42,7 @@ class MakeModel extends Command
             mkdir('app/Models');
         }
 
-        $fopen = fopen('app/Models/'.$name.'.php', 'w+');
+        $fopen = fopen('app/Models/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 
@@ -132,7 +132,7 @@ class MakeModel extends Command
                     mkdir('app/Validations');
                 }
 
-                $fopen = fopen('app/Validations/'.$validation.'.php', 'w+');
+                $fopen = fopen('app/Validations/' . $validation . '.php', 'w+');
                 fwrite($fopen, $content);
                 fclose($fopen);
 
@@ -147,7 +147,7 @@ class MakeModel extends Command
             $content = file_get_contents('vendor/base-php/core/commands/examples/test.php');
             $content = str_replace('TestName', $name, $content);
 
-            $fopen = fopen('tests/'.$name.'.php', 'w+');
+            $fopen = fopen('tests/' . $name . '.php', 'w+');
             fwrite($fopen, $content);
             fclose($fopen);
 

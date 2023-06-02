@@ -34,7 +34,7 @@ class MakeExcel extends Command
             mkdir('app/Excel');
         }
 
-        $fopen = fopen('app/Excel/'.$name.'.php', 'w+');
+        $fopen = fopen('app/Excel/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

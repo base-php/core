@@ -11,8 +11,8 @@ class QueueTable extends Command
 
     protected function execute($input, $output)
     {
-        copy('vendor/base-php/core/jobs/migrations/jobs.php', 'database/'.date('Y_m_d_His').'_jobs.php');
-        copy('vendor/base-php/core/jobs/migrations/failed_jobs.php', 'database/'.date('Y_m_d_His').'_failed_jobs.php');
+        copy('vendor/base-php/core/jobs/migrations/jobs.php', 'database/' . date('Y_m_d_His').'_jobs.php');
+        copy('vendor/base-php/core/jobs/migrations/failed_jobs.php', 'database/' . date('Y_m_d_His').'_failed_jobs.php');
 
         $style = new SymfonyStyle($input, $output);
         $style->success('Migraciones creadas satisfactoriamente.');

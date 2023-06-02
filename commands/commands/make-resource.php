@@ -34,7 +34,7 @@ class MakeResource extends Command
             mkdir('app/Resources');
         }
 
-        $fopen = fopen('app/Resources/'.$name.'.php', 'w+');
+        $fopen = fopen('app/Resources/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

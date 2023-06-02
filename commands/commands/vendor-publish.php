@@ -24,13 +24,13 @@ class VendorPublish extends Command
         if ($tag) {
             switch ($tag) {
                 case 'bill':
-                    copy('vendor/base-php/core/bill/views/bill.blade.php', 'resources/views/bills/bill.blade.php');
+                    copy('vendor/base-php/core/packages/bill/views/bill.blade.php', 'resources/views/bills/bill.blade.php');
                     break;
 
                 case 'crud':
-                    copy('vendor/base-php/core/crud/views/index.blade.php', 'resources/views/crud/index.blade.php');
-                    copy('vendor/base-php/core/crud/views/create.blade.php', 'resources/views/crud/create.blade.php');
-                    copy('vendor/base-php/core/crud/views/edit.blade.php', 'resources/views/crud/edit.blade.php');
+                    copy('vendor/base-php/core/packages/crud/views/index.blade.php', 'resources/views/crud/index.blade.php');
+                    copy('vendor/base-php/core/packages/crud/views/create.blade.php', 'resources/views/crud/create.blade.php');
+                    copy('vendor/base-php/core/packages/crud/views/edit.blade.php', 'resources/views/crud/edit.blade.php');
                     break;
 
                 case 'http':

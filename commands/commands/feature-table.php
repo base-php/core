@@ -11,7 +11,7 @@ class FeatureTable extends Command
 
     protected function execute($input, $output)
     {
-        copy('vendor/base-php/core/feature/migrations/features.php', 'database/'.date('Y_m_d_His').'_features.php');
+        copy('vendor/base-php/core/packages/feature/migrations/features.php', 'database/' . date('Y_m_d_His') . '_features.php');
 
         $style = new SymfonyStyle($input, $output);
         $style->success('Migración creada satisfactoriamente.');

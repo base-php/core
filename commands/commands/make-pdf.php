@@ -34,7 +34,7 @@ class MakePdf extends Command
             mkdir('app/PDF');
         }
 
-        $fopen = fopen('app/PDF/'.$name.'.php', 'w+');
+        $fopen = fopen('app/PDF/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

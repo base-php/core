@@ -34,7 +34,7 @@ class MakeRule extends Command
             mkdir('app/Rules');
         }
 
-        $fopen = fopen('app/Rules/'.$name.'.php', 'w+');
+        $fopen = fopen('app/Rules/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
 

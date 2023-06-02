@@ -56,7 +56,7 @@ class MakeController extends Command
             $file = 'controller.resource';
         }
 
-        $content = file_get_contents('vendor/base-php/core/commands/examples/'.$file.'.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/' . $file . '.php');
         $content = str_replace('ControllerName', $name, $content);
 
         $fopen = fopen('app/Controllers/'.$name.'.php', 'w+');
