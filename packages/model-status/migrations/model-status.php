@@ -25,7 +25,7 @@ return new class extends Migration
                 ->useCurrent()
                 ->setCurrentOnUpdate();
 
-            $table->unique(['name', 'scope']);
+            $table->unique(['name']);
         });
 	}
 
