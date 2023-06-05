@@ -32,7 +32,7 @@ class Google
 
     public function url()
     {
-        $this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
+        $this->instance->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login?google=1");
         echo $this->instance->createAuthUrl();
     }
 
@@ -40,7 +40,7 @@ class Google
     {
         $client = $this->instance;
 
-        $client->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login/google");
+        $client->setRedirectUri("http://{$_SERVER['HTTP_HOST']}/login?google=1");
 
         $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
         $client->setAccessToken($token['access_token']);
@@ -58,7 +58,7 @@ class Google
             ['name' => $name]
         );
 
-        session('user', $user->id);
+        session('id', $user->id);
 
         redirect(config('google')->redirect);
 

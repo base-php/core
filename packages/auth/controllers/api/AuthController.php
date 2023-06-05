@@ -66,6 +66,14 @@ class AuthController extends Controller
      */
     public function login(): Response
     {
+        if (request('google')) {
+            return google()->login();
+        }
+
+        if (request('facebook')) {
+            return facebook()->login();
+        }
+
         $user = (new $this->model)->where('email', request('email'))
             ->where('password', encrypt(request('password')))
             ->whereNull('oauth')
@@ -101,26 +109,6 @@ class AuthController extends Controller
         (new $this->model)->where('hash', $hash)->update(['date_verified_email' => now('Y-m-d H:i:s')]);
 
         return response()->json(['info' => lang('auth.email_verified_success')]);
-    }
-
-    /**
-     * Login user with Facebook account.
-     *
-     * @return Facebook
-     */
-    public function facebook(): ?Facebook
-    {
-        return facebook()->login();
-    }
-
-    /**
-     * Login user with Google account.
-     *
-     * @return Google
-     */
-    public function google(): ?Google
-    {
-        return google()->login();
     }
 
     /**

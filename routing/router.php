@@ -1378,8 +1378,6 @@ class Router implements BindingRegistrar, RegistrarContract
 
         $this->get('/login', [\AuthController::class, 'index']);
         $this->post('/login', [\AuthController::class, 'login']);
-        $this->get('/login/facebook', [\AuthController::class, 'facebook']);
-        $this->get('/login/google', [\AuthController::class, 'google']);
 
         $this->get('/logout', [\AuthController::class, 'logout']);
 

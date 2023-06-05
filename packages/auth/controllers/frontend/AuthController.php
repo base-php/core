@@ -88,6 +88,14 @@ class AuthController extends Controller
      */
     public function login(): Redirect
     {
+        if (request('google')) {
+            return google()->login();
+        }
+
+        if (request('facebook')) {
+            return facebook()->login();
+        }
+        
         $user = (new $this->model)->where('email', request('email'))
             ->where('password', encrypt(request('password')))
             ->whereNull('oauth')

@@ -45,12 +45,12 @@ class Facebook
             $accessToken = $this->helper->getAccessToken();
             $response = $this->instance->get('/me?fields=name,first_name,last_name,email,link,gender,picture', $accessToken);
         } catch (FacebookResponseException $exception) {
-            echo 'Graph returned an error: '.$exception->getMessage();
+            echo 'Graph returned an error: ' . $exception->getMessage();
 
             return $this;
             exit;
         } catch (FacebookSDKException $exception) {
-            echo 'Facebook SDK returned an error: '.$exception->getMessage();
+            echo 'Facebook SDK returned an error: ' . $exception->getMessage();
 
             return $this;
             exit;
@@ -66,7 +66,7 @@ class Facebook
             ['name' => $me->getName()]
         );
 
-        session('user', $user->id);
+        session('id', $user->id);
 
         redirect(config('facebook')->redirect);
 
@@ -75,7 +75,7 @@ class Facebook
 
     public function url()
     {
-        $callback = 'http://'.$_SERVER['HTTP_HOST'].'/login/facebook';
+        $callback = 'http://' . $_SERVER['HTTP_HOST'] . '/login?facebook=1';
         echo $this->helper->getLoginUrl($callback, $this->permissions);
     }
 }
