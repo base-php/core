@@ -82,6 +82,16 @@ class UserController extends Controller
             ]);
         }
 
+        if (request('2fa')) {
+            if ($user->two_fa) {
+                $user->two_fa = null;
+            } else {
+                $user->two_fa = two_fa()->key();
+            }
+
+            $user->save();
+        }
+
         if ($user->id == session('id')) {
             session('name', $user->name);
             session('photo', $user->photo);
@@ -93,27 +103,6 @@ class UserController extends Controller
         ];
 
         return response()->json($response);
-    }
-
-    /**
-     * Set 2FA key if this is null
-     * 
-     * @param int $id
-     * @return Response
-     */
-    public function two_fa(int $id): Response
-    {
-        $user = User::find($id);
-
-        if ($user->two_fa) {
-            $user->two_fa = null;
-        } else {
-            $user->two_fa = two_fa()->key();
-        }
-
-        $user->save();
-
-        return response()->json(['user' => $user]);
     }
 
     /**

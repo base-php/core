@@ -103,33 +103,22 @@ class UserController extends Controller
             ]);
         }
 
+        if (request('2fa')) {
+            if ($user->two_fa) {
+                $user->two_fa = null;
+            } else {
+                $user->two_fa = two_fa()->key();
+            }
+
+            $user->save();
+        }
+
         if ($user->id == session('id')) {
             session('name', $user->name);
             session('photo', $user->photo);
         }
 
         return redirect('/dashboard/users')->with('info', lang('users.update'));
-    }
-
-    /**
-     * Set 2FA key if this is null
-     * 
-     * @param int $id
-     * @return Redirect
-     */
-    public function two_fa(int $id): Redirect
-    {
-        $user = User::find($id);
-
-        if ($user->two_fa) {
-            $user->two_fa = null;
-        } else {
-            $user->two_fa = two_fa()->key();
-        }
-
-        $user->save();
-
-        return redirect('/dashboard/users/edit/'.$id);
     }
 
     /**

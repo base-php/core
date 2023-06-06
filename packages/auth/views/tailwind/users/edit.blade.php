@@ -104,6 +104,8 @@
                         <h2>{{ lang('users.2fa_subtitle') }}</h2>
                     </div>
 
+                    <input type="hidden" name="2fa" value="1">
+
                     @if($user->two_fa)
                         <div class="w-7/12 rounded bg-white p-7">
                             <div>
