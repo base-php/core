@@ -26,4 +26,13 @@ trait HasModelStatus
 			'id_model' => $this->model()->id
 		]);
 	}
+
+	public function status()
+	{
+		$modelStatus = ModelStatus::where('model', $this->model()->model)
+			->where('id_model', $this->model()->id)
+			->first();
+
+		return $modelStatus;
+	}
 }
