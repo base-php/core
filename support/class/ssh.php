@@ -9,7 +9,7 @@ class SSH
 	public function __construct()
     {
         if (! class_exists('Spatie\Ssh\Ssh')) {
-            throw new Exception("Please execute 'composer require spatie/ssh' in console.");
+            exec('composer require spatie/ssh');
         }
     }
 

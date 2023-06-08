@@ -16,7 +16,7 @@ class Facebook
     public function __construct()
     {
         if (! class_exists('Facebook\Facebook')) {
-            throw new Exception("Please execute 'composer require facebook/graph-sdk' in console.");
+            exec('composer require facebook/graph-sdk');
         }
     }
 

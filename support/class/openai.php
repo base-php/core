@@ -7,7 +7,7 @@ class OpenAIBasePHP
 	public function __construct()
 	{
 		if (! class_exists('OpenAI')) {
-            throw new Exception("Please execute 'composer require openai-php/client' in console.");
+            exec('composer require openai-php/client');
         }
 
 		$this->client = OpenAI::client(config('openai-api-key'));

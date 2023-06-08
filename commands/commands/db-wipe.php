@@ -28,7 +28,7 @@ class DBWipe extends Command
             $question = new ConfirmationQuestion($text, false, '/^(s|y)/i');
 
             if ($helper->ask($input, $output, $question)) {
-                system('composer require doctrine/dbal');
+                exec('composer require doctrine/dbal');
 
                 return Command::SUCCESS;
             }

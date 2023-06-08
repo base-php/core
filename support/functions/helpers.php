@@ -157,7 +157,7 @@ function info($text)
 function http()
 {
     if (! class_exists('Illuminate\Http\Client\Factory')) {
-        throw new Exception("Please execute 'composer require guzzlehttp/guzzle' in console.");
+        exec('composer require guzzlehttp/guzzle');
     }
 
     return new HttpClient;
