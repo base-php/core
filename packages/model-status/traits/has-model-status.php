@@ -4,6 +4,15 @@ namespace App\Models;
 
 trait HasModelStatus
 {
+	public function history()
+	{
+		$modelStatus = ModelStatus::where('model', $this->model()->model)
+			->where('id_model', $this->model()->id)
+			->get();
+
+		return $modelStatus;
+	}
+
 	public function model()
 	{
 		$model = get_class($this);
@@ -31,6 +40,7 @@ trait HasModelStatus
 	{
 		$modelStatus = ModelStatus::where('model', $this->model()->model)
 			->where('id_model', $this->model()->id)
+			->orderByDesc('id')
 			->first();
 
 		return $modelStatus;
