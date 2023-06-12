@@ -146,7 +146,9 @@ class Router implements BindingRegistrar, RegistrarContract
             (new $class)->resolve($method, $param);
         });
 
-        $this->get('health', HealthController::class);
+        $this->get('health', function () {
+            return (new Health())->view();
+        });
     }
 
     /**

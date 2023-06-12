@@ -74,6 +74,8 @@ include __DIR__.'/../packages/export/pdf.php';
 
 include __DIR__.'/../packages/feature/class/feature.php';
 
+include __DIR__.'/../packages/health/class/health.php';
+
 include __DIR__.'/../http/redirect.php';
 include __DIR__.'/../http/request.php';
 include __DIR__.'/../http/resources.php';
