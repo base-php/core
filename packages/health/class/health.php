@@ -2,6 +2,11 @@
 
 class Health
 {
+	public function debug()
+	{
+		return config('errors');
+	}
+
 	public function ping($url)
 	{
 		exec("ping $url", $output);
