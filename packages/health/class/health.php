@@ -7,6 +7,11 @@ class Health
 		return config('errors');
 	}
 
+	public function environment()
+	{
+		return config('environment');
+	}
+
 	public function ping($url)
 	{
 		exec("ping $url", $output);
