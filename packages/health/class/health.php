@@ -2,6 +2,24 @@
 
 class Health
 {
+	public function cpuUsage($min)
+	{
+		if ($min == 1) {
+			$index = 0;
+		}
+
+		if ($min == 5) {
+			$index = 1;
+		}
+
+		if ($min == 15) {
+			$index = 2;
+		}
+
+		$cpuUsage = sys_getloadavg()[$index] * 100;
+		return $cpuUsage;
+	}
+
 	public function debug()
 	{
 		return config('errors');
