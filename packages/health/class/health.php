@@ -41,6 +41,17 @@ class Health
 		return 'error';
 	}
 
+	public function securityAdvisoriesPackages()
+	{
+		exec('composer audit --format=plain', $output);
+
+		if trim($output[1]) == 'No security vulnerability advisories found') {
+			return 'Ok';
+		}
+
+		return trim($output[1]);
+	}
+
 	public function usedDiskSpace()
 	{
 		$diskTotalSpace = disk_total_space('/');
