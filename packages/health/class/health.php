@@ -20,6 +20,18 @@ class Health
 		return $cpuUsage;
 	}
 
+	public function databaseConnection($connection = 'default')
+	{
+		try {
+			DB::connection($connection)->getPDO();
+			return 'Ok';
+		}
+
+		catch (Exception $exception) {
+			return 'error';
+		}
+	}
+
 	public function debug()
 	{
 		return config('errors');
@@ -45,7 +57,7 @@ class Health
 	{
 		exec('composer audit --format=plain', $output);
 
-		if trim($output[1]) == 'No security vulnerability advisories found') {
+		if (trim($output[1]) == 'No security vulnerability advisories found') {
 			return 'Ok';
 		}
 
