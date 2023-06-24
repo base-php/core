@@ -128,6 +128,26 @@ class Health
 
 	public function view()
 	{
+		if (in_array('environment', config('health'))) {
+			$items['title'] = 'Entorno';
+			$items['content'] = $this->environment();
+		}
+
+		if (in_array('debug', config('health'))) {
+			$items['title'] = 'Entorno';
+			$items['content'] = $this->debug();
+		}
+
+		if (in_array('cpuUsage', config('health'))) {
+			$items['title'] = 'Uso de CPU';
+			$items['content'] = $this->cpuUsage();
+		}
+
+		if (in_array('usedDiskSpace', config('health'))) {
+			$items['title'] = 'Uso de disco';
+			$items['content'] = $this->usedDiskSpace();
+		}
+
 		return view('health:index', compact('items'));
 	}
 }
