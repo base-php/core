@@ -268,6 +268,21 @@ function storage($adapter = 'local')
     return new Storage($adapter);
 }
 
+function strposToArray($needle, $haystack)
+{
+    $i = 0;
+
+    foreach ($haystack as $item) {
+        if (strpos($item, $needle) !== false) {
+            return $i;
+        }
+
+        $i++;
+    }
+
+    return false;
+}
+
 function two_fa()
 {
     if (post()) {

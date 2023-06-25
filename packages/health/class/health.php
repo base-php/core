@@ -128,25 +128,50 @@ class Health
 
 	public function view()
 	{
+		$i = 0;
+
+		if (strposToArray('cpuUsage', config('health'))) {
+			$i = strposToArray('cpuUsage', config('health'));
+			$item = config('health')[$i];
+
+			$explode = explode(':', $item);
+			$param = $explode[1];
+
+			$items[$i]['title'] = 'Uso de CPU';
+			$items[$i]['content'] = $this->cpuUsage($param);
+
+			$percent = str_replace('%', '', $this->cpuUsage($param));
+
+			if ($percent > 70) {
+				$items[$i]['danger'] = true;
+			}
+
+			$i++;
+		}
+
 		if (in_array('environment', config('health'))) {
-			$items['title'] = 'Entorno';
-			$items['content'] = $this->environment();
+			$items[$i]['title'] = 'Entorno';
+			$items[$i]['content'] = $this->environment();
+
+			if ($this->environment() != 'production') {
+				$items[$i]['danger'] = true;
+			}
+
+			$i++;
 		}
 
 		if (in_array('debug', config('health'))) {
-			$items['title'] = 'Entorno';
-			$items['content'] = $this->debug();
+			$items[$i]['title'] = 'Debug';
+			$items[$i]['content'] = $this->debug();
+
+			if ($this->debug()) {
+				$items[$i]['danger'] = true;
+			}
+
+			$i++;
 		}
 
-		if (in_array('cpuUsage', config('health'))) {
-			$items['title'] = 'Uso de CPU';
-			$items['content'] = $this->cpuUsage();
-		}
-
-		if (in_array('usedDiskSpace', config('health'))) {
-			$items['title'] = 'Uso de disco';
-			$items['content'] = $this->usedDiskSpace();
-		}
+		$items = (object) $items;
 
 		return view('health:index', compact('items'));
 	}
