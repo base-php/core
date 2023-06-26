@@ -149,6 +149,49 @@ class Health
 			$i++;
 		}
 
+		if (strposToArray('databaseConnection', config('health'))) {
+			$i = strposToArray('databaseConnection', config('health'));
+			$item = config('health')[$i];
+
+			$explode = explode(':', $item);
+			$param = $explode[1];
+
+			$items[$i]['title'] = 'Conexión a base de datos: ' . $param;
+			$items[$i]['content'] = $this->databaseConnection($param);
+
+			if ($this->databaseConnection($param) == 'error') {
+				$items[$i]['danger'] = true;
+			}
+
+			$i++;
+		}
+
+		if (strposToArray('databaseSize', config('health'))) {
+			$i = strposToArray('databaseSize', config('health'));
+			$item = config('health')[$i];
+
+			$explode = explode(':', $item);
+			$param = $explode[1];
+
+			$items[$i]['title'] = 'Tamaño de la base de datos: ' . $param;
+			$items[$i]['content'] = $this->databaseSize($param);
+
+			$i++;
+		}
+
+		if (strposToArray('databaseTableSize'), config('health')) {
+			$i = strposToArray('databaseTableSize', config('health'));
+			$item = config('health')[$i];
+
+			$explode = explode(':', $item);
+			$params = explode(',', $explode[1]);
+
+			$items[$i]['title'] = 'Tamaño de la tabla de la base de datos: ' . $params[0];
+			$items[$i]['content'] = $this->databaseTableSize($params[1], $params[0]);
+
+			$i++;
+		}
+
 		if (in_array('environment', config('health'))) {
 			$items[$i]['title'] = 'Entorno';
 			$items[$i]['content'] = $this->environment();
