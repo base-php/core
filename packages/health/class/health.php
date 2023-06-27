@@ -192,6 +192,17 @@ class Health
 			$i++;
 		}
 
+		if (in_array('debug', config('health'))) {
+			$items[$i]['title'] = 'Debug';
+			$items[$i]['content'] = $this->debug();
+
+			if ($this->debug()) {
+				$items[$i]['danger'] = true;
+			}
+
+			$i++;
+		}
+
 		if (in_array('environment', config('health'))) {
 			$items[$i]['title'] = 'Entorno';
 			$items[$i]['content'] = $this->environment();
@@ -203,11 +214,47 @@ class Health
 			$i++;
 		}
 
-		if (in_array('debug', config('health'))) {
-			$items[$i]['title'] = 'Debug';
-			$items[$i]['content'] = $this->debug();
+		if (strposToArray('ping'), config('health')) {
+			$i = strposToArray('ping', config('health'));
+			$item = config('health')[$i];
 
-			if ($this->debug()) {
+			$explode = explode(':', $item);
+
+			$url = $explode[1];
+
+			$items[$i]['title'] = 'Ping a: ' . $url;
+			$items[$i]['content'] = $this->ping($url);
+
+			if ($this->ping($url) == 'error') {
+				$items[$i]['danger'] = true;
+			}
+
+			$i++;
+		}
+
+		if (in_array('securityAdvisoriesPackages'), config('health')) {
+			$items[$i]['title'] = 'Avisos de seguridad en paquetes';
+			$items[$i]['content'] = $this->securityAdvisoriesPackages();
+
+			if ($this->securityAdvisoriesPackages() != 'Ok') {
+				$items[$i]['danger'] = true;
+			}
+
+			$i++;
+		}
+
+		if (strposToArray('usedDiskSpace'), config('health')) {
+			$i = strposToArray('usedDiskSpace', config('health'));
+			$item = config('health')[$i];
+
+			$explode = explode(':', $item);
+
+			$percent = $explode[1];
+
+			$items[$i]['title'] = 'Uso de espacio en disco';
+			$items[$i]['content'] = $this->usedDiskSpace();
+
+			if (str_replace('%', '', $this->usedDiskSpace()) >= $percent) {
 				$items[$i]['danger'] = true;
 			}
 
