@@ -92,6 +92,11 @@ class Health
 		return config('environment');
 	}
 
+	public function json()
+	{
+		return response()->json($this->items);
+	}
+
 	public function ping($url)
 	{
 		exec("ping $url", $output);
@@ -137,13 +142,13 @@ class Health
 			$explode = explode(':', $item);
 			$param = $explode[1];
 
-			$items[$i]['title'] = 'Uso de CPU';
-			$items[$i]['content'] = $this->cpuUsage($param);
+			$this->items[$i]['title'] = 'Uso de CPU';
+			$this->items[$i]['content'] = $this->cpuUsage($param);
 
 			$percent = str_replace('%', '', $this->cpuUsage($param));
 
 			if ($percent > 70) {
-				$items[$i]['danger'] = true;
+				$this->items[$i]['danger'] = true;
 			}
 
 			$i++;
@@ -156,11 +161,11 @@ class Health
 			$explode = explode(':', $item);
 			$param = $explode[1];
 
-			$items[$i]['title'] = 'Conexión a base de datos: ' . $param;
-			$items[$i]['content'] = $this->databaseConnection($param);
+			$this->items[$i]['title'] = 'Conexión a base de datos: ' . $param;
+			$this->items[$i]['content'] = $this->databaseConnection($param);
 
 			if ($this->databaseConnection($param) == 'error') {
-				$items[$i]['danger'] = true;
+				$this->items[$i]['danger'] = true;
 			}
 
 			$i++;
@@ -173,8 +178,8 @@ class Health
 			$explode = explode(':', $item);
 			$param = $explode[1];
 
-			$items[$i]['title'] = 'Tamaño de la base de datos: ' . $param;
-			$items[$i]['content'] = $this->databaseSize($param);
+			$this->items[$i]['title'] = 'Tamaño de la base de datos: ' . $param;
+			$this->items[$i]['content'] = $this->databaseSize($param);
 
 			$i++;
 		}
@@ -186,29 +191,29 @@ class Health
 			$explode = explode(':', $item);
 			$params = explode(',', $explode[1]);
 
-			$items[$i]['title'] = 'Tamaño de la tabla de la base de datos: ' . $params[0];
-			$items[$i]['content'] = $this->databaseTableSize($params[1], $params[0]);
+			$this->items[$i]['title'] = 'Tamaño de la tabla de la base de datos: ' . $params[0];
+			$this->items[$i]['content'] = $this->databaseTableSize($params[1], $params[0]);
 
 			$i++;
 		}
 
 		if (in_array('debug', config('health'))) {
-			$items[$i]['title'] = 'Debug';
-			$items[$i]['content'] = $this->debug();
+			$this->items[$i]['title'] = 'Debug';
+			$this->items[$i]['content'] = $this->debug();
 
 			if ($this->debug()) {
-				$items[$i]['danger'] = true;
+				$this->items[$i]['danger'] = true;
 			}
 
 			$i++;
 		}
 
 		if (in_array('environment', config('health'))) {
-			$items[$i]['title'] = 'Entorno';
-			$items[$i]['content'] = $this->environment();
+			$this->items[$i]['title'] = 'Entorno';
+			$this->items[$i]['content'] = $this->environment();
 
 			if ($this->environment() != 'production') {
-				$items[$i]['danger'] = true;
+				$this->items[$i]['danger'] = true;
 			}
 
 			$i++;
@@ -222,22 +227,22 @@ class Health
 
 			$url = $explode[1];
 
-			$items[$i]['title'] = 'Ping a: ' . $url;
-			$items[$i]['content'] = $this->ping($url);
+			$this->items[$i]['title'] = 'Ping a: ' . $url;
+			$this->items[$i]['content'] = $this->ping($url);
 
 			if ($this->ping($url) == 'error') {
-				$items[$i]['danger'] = true;
+				$this->items[$i]['danger'] = true;
 			}
 
 			$i++;
 		}
 
 		if (in_array('securityAdvisoriesPackages'), config('health')) {
-			$items[$i]['title'] = 'Avisos de seguridad en paquetes';
-			$items[$i]['content'] = $this->securityAdvisoriesPackages();
+			$this->items[$i]['title'] = 'Avisos de seguridad en paquetes';
+			$this->items[$i]['content'] = $this->securityAdvisoriesPackages();
 
 			if ($this->securityAdvisoriesPackages() != 'Ok') {
-				$items[$i]['danger'] = true;
+				$this->items[$i]['danger'] = true;
 			}
 
 			$i++;
@@ -251,17 +256,17 @@ class Health
 
 			$percent = $explode[1];
 
-			$items[$i]['title'] = 'Uso de espacio en disco';
-			$items[$i]['content'] = $this->usedDiskSpace();
+			$this->items[$i]['title'] = 'Uso de espacio en disco';
+			$this->items[$i]['content'] = $this->usedDiskSpace();
 
 			if (str_replace('%', '', $this->usedDiskSpace()) >= $percent) {
-				$items[$i]['danger'] = true;
+				$this->items[$i]['danger'] = true;
 			}
 
 			$i++;
 		}
 
-		$items = (object) $items;
+		$items = (object) $this->items;
 
 		return view('health:index', compact('items'));
 	}
