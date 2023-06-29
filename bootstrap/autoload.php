@@ -18,6 +18,7 @@ include __DIR__.'/../commands/commands/down.php';
 include __DIR__.'/../commands/commands/env.php';
 include __DIR__.'/../commands/commands/feature-purge.php';
 include __DIR__.'/../commands/commands/feature-table.php';
+include __DIR__.'/../commands/commands/health.php';
 include __DIR__.'/../commands/commands/inspire.php';
 include __DIR__.'/../commands/commands/logs-clean.php';
 include __DIR__.'/../commands/commands/logs-table.php';
