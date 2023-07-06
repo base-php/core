@@ -12,6 +12,7 @@ use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory as Validation;
 use Spatie\Dns\Dns;
+use Spatie\Image\Image;
 
 function abort($code = 404)
 {
@@ -100,6 +101,10 @@ function dispatch($job)
 
 function dns($url)
 {
+    if (! class_exists('Spatie\Dns\Dns')) {
+        exec('composer require spatie/dns');
+    }
+
     $dns = new Dns();
     return $dns->getRecords($url);
 }
@@ -146,6 +151,15 @@ function feature()
 function google()
 {
     return Google::init();
+}
+
+function image()
+{
+    if (! class_exists('Spatie\Image\Image')) {
+        exec('composer require spatie/image');
+    }
+
+    return new Image();
 }
 
 function info($text)
