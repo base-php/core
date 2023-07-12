@@ -179,15 +179,28 @@ function http()
 
 function lang($key)
 {
-    try {
-        $array = explode('.', $key);
+    if (config('translate') == 'database') {
+        $db = Language::where('language', $_ENV['language'])
+            ->where('key', $key)
+            ->first();
 
-        $file = $array[0];
-        $key = $array[1];
+        if ($db) {
+            return $db->value;
+        }
 
-        return $_ENV['translate'][$file][$key];
-    } catch (Exception $exception) {
         return $key;
+
+    } else {
+        try {
+            $array = explode('.', $key);
+
+            $file = $array[0];
+            $key = $array[1];
+
+            return $_ENV['translate'][$file][$key];
+        } catch (Exception $exception) {
+            return $key;
+        }
     }
 }
 
