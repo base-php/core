@@ -103,7 +103,7 @@ include __DIR__.'/../database/model.php';
 
 include __DIR__.'/../jobs/class/job.php';
 
-include __DIR__.'/../lang/lang.php';
+include __DIR__.'/../lang/class/lang.php';
 include __DIR__.'/../packages/logs/traits/logs.php';
 
 include __DIR__.'/../packages/model-status/models/model-status.php';

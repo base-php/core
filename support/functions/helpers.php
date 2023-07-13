@@ -1,6 +1,7 @@
 <?php
 
 use App\Excel\Excel;
+use App\Models\Language;
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
