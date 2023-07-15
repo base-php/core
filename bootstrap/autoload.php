@@ -104,7 +104,7 @@ include __DIR__.'/../database/model.php';
 include __DIR__.'/../jobs/class/job.php';
 
 include __DIR__.'/../lang/class/lang.php';
-include __DIR__.'/../lang/migrations/language.php';
+include __DIR__.'/../lang/models/language.php';
 
 include __DIR__.'/../packages/logs/traits/logs.php';
 
@@ -153,7 +153,6 @@ include __DIR__.'/../support/functions/helpers.php';
 include __DIR__.'/../support/functions/json.php';
 include __DIR__.'/../support/functions/selected.php';
 include __DIR__.'/../support/functions/var.php';
-include __DIR__.'/../support/migrations/sessions.php';
 
 include __DIR__.'/../view/view.php';
 include __DIR__.'/../view/assets.php';
