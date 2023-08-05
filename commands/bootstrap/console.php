@@ -20,6 +20,10 @@ class Console
                     ->replace('.php', '')
                     ->toString();
 
+                if ($class == 'Health') {
+                    $class = 'HealthCmd';
+                }
+
                 $application->add(new $class());
             }
         }

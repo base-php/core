@@ -184,7 +184,7 @@ class Health
 			$i++;
 		}
 
-		if (strposToArray('databaseTableSize'), config('health')) {
+		/*if (strposToArray('databaseTableSize', config('health')) {
 			$i = strposToArray('databaseTableSize', config('health'));
 			$item = config('health')[$i];
 
@@ -195,7 +195,7 @@ class Health
 			$this->items[$i]['content'] = $this->databaseTableSize($params[1], $params[0]);
 
 			$i++;
-		}
+		}*/
 
 		if (in_array('debug', config('health'))) {
 			$this->items[$i]['title'] = 'Debug';
@@ -219,7 +219,7 @@ class Health
 			$i++;
 		}
 
-		if (strposToArray('ping'), config('health')) {
+		if (strposToArray('ping', config('health'))) {
 			$i = strposToArray('ping', config('health'));
 			$item = config('health')[$i];
 
@@ -237,7 +237,7 @@ class Health
 			$i++;
 		}
 
-		if (in_array('securityAdvisoriesPackages'), config('health')) {
+		if (in_array('securityAdvisoriesPackages', config('health'))) {
 			$this->items[$i]['title'] = 'Avisos de seguridad en paquetes';
 			$this->items[$i]['content'] = $this->securityAdvisoriesPackages();
 
@@ -248,7 +248,7 @@ class Health
 			$i++;
 		}
 
-		if (strposToArray('usedDiskSpace'), config('health')) {
+		if (strposToArray('usedDiskSpace', config('health'))) {
 			$i = strposToArray('usedDiskSpace', config('health'));
 			$item = config('health')[$i];
 

@@ -3,11 +3,11 @@
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class About extends Command
+class HealthCmd extends Command
 {
-    protected static $defaultName = 'about';
+    protected static $defaultName = 'health';
 
-    protected static $defaultDescription = 'Muestra información básica sobre tu aplicación';
+    protected static $defaultDescription = 'Muestra información de salud de su aplicación';
 
     protected function execute($input, $output)
     {
@@ -58,7 +58,7 @@ class About extends Command
             $i++;
         }
 
-        if (strposToArray('databaseTableSize'), $config['health']) {
+        if (strposToArray('databaseTableSize', $config['health'])) {
             $i = strposToArray('databaseTableSize', $config['health']);
             $item = $config['health'][$i];
 
@@ -85,7 +85,7 @@ class About extends Command
             $i++;
         }
 
-        if (strposToArray('ping'), $config['health']) {
+        if (strposToArray('ping', $config['health'])) {
             $i = strposToArray('ping', $config['health']);
             $item = $config['health'][$i];
 
@@ -99,14 +99,14 @@ class About extends Command
             $i++;
         }
 
-        if (in_array('securityAdvisoriesPackages'), $config['health']) {
+        if (in_array('securityAdvisoriesPackages', $config['health'])) {
             $this->items[$i][] = 'Avisos de seguridad en paquetes';
             $this->items[$i][] = $this->securityAdvisoriesPackages();
 
             $i++;
         }
 
-        if (strposToArray('usedDiskSpace'), $config['health']) {
+        if (strposToArray('usedDiskSpace', $config['health'])) {
             $i = strposToArray('usedDiskSpace', $config['health']);
             $item = $config['health'][$i];
 
