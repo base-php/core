@@ -12,6 +12,7 @@ include __DIR__.'/../commands/commands/auth-install.php';
 include __DIR__.'/../commands/commands/bills-table.php';
 include __DIR__.'/../commands/commands/config-show.php';
 include __DIR__.'/../commands/commands/db-backup.php';
+include __DIR__.'/../commands/commands/db-show.php';
 include __DIR__.'/../commands/commands/db-table.php';
 include __DIR__.'/../commands/commands/db-wipe.php';
 include __DIR__.'/../commands/commands/docs.php';
