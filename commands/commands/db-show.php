@@ -38,6 +38,23 @@ class DBTable extends Command
             return Command::SUCCESS;
         }
 
+        $style = new SymfonyStyle($input, $output);
+
+        $config = include 'app/config.php';
+
+        foreach ($config['database'] as $database) {
+            $style->table(
+                [$database['name']],
+                [
+                    ['Base de datos', $database['database']],
+                    ['Servidor', $database['host']],
+                    ['Usuario', $database['usuario']],
+                    ['Contraseña', $database['password']],
+                    ['Puerto', $database['port']],
+                ]
+            );
+        }
+
         return Command::SUCCESS;
     }
 }
