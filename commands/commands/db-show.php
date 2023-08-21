@@ -43,6 +43,13 @@ class DBTable extends Command
         $config = include 'app/config.php';
 
         foreach ($config['database'] as $database) {
+            $tables = DB::connection($database['name'])
+                ->select('SHOW TABLES');
+
+            $tables = count($tables);
+
+            $size = $this->databaseSize($database['name']);;
+
             $style->table(
                 [$database['name']],
                 [
@@ -51,10 +58,37 @@ class DBTable extends Command
                     ['Usuario', $database['usuario']],
                     ['Contraseña', $database['password']],
                     ['Puerto', $database['port']],
+                    ['Tablas', $tables]
+                    ['Tamaño total', $size]
                 ]
             );
         }
 
         return Command::SUCCESS;
+    }
+
+    public function databaseSize($connection = 'default')
+    {
+        $database = DB::connection($connection)->getDatabaseName();
+
+        $sql = "
+            SELECT
+                table_name AS 'table',
+                ((data_length + index_length) / 1024 / 1024) AS 'size'
+            FROM
+                information_schema.TABLES
+            WHERE
+                table_schema = '$database'
+            ORDER BY
+                (data_length + index_length) DESC
+        ";
+
+        $result = DB::select(
+            DB::raw($sql)
+        );
+
+        $size = array_sum(array_column($result, 'size'));
+        $size = number_format((float) $size, 2, '.', '');
+        return $size;
     }
 }
