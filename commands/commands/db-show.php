@@ -46,7 +46,7 @@ class DBTable extends Command
             $tables = DB::connection($database['name'])
                 ->select('SHOW TABLES');
 
-            $tables = count($tables);
+            $tablesSize = count($tables);
 
             $size = $this->databaseSize($database['name']);;
 
@@ -58,9 +58,20 @@ class DBTable extends Command
                     ['Usuario', $database['usuario']],
                     ['Contraseña', $database['password']],
                     ['Puerto', $database['port']],
-                    ['Tablas', $tables]
+                    ['Tablas', $tablesSize]
                     ['Tamaño total', $size]
                 ]
+            );
+
+            $tablesBody = [];
+
+            foreach ($tables as $table) {
+                $tablesBody[] = [$table, $this->databaseTableSize($table, $database['name'])];
+            }
+
+            $style->table(
+                ['Tablas'],
+                [$tablesBody]
             );
         }
 
@@ -89,6 +100,31 @@ class DBTable extends Command
 
         $size = array_sum(array_column($result, 'size'));
         $size = number_format((float) $size, 2, '.', '');
+        return $size;
+    }
+
+    public function databaseTableSize($table, $connection = 'default')
+    {
+        $database = DB::connection($connection)->getDatabaseName();
+
+        $sql = "
+            SELECT
+                table_name AS 'table',
+                ((data_length + index_length) / 1024 / 1024) AS 'size'
+            FROM
+                information_schema.TABLES
+            WHERE
+                table_schema = '$database' AND
+                table_name = '$table'
+            ORDER BY
+                (data_length + index_length) DESC
+        ";
+
+        $result = DB::select(
+            DB::raw($sql)
+        );
+
+        $size = number_format((float) $result[0]->size, 2, '.', '');
         return $size;
     }
 }
