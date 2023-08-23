@@ -58,7 +58,7 @@ class DBTable extends Command
                     ['Usuario', $database['usuario']],
                     ['Contraseña', $database['password']],
                     ['Puerto', $database['port']],
-                    ['Tablas', $tablesSize]
+                    ['Tablas', $tablesSize],
                     ['Tamaño total', $size]
                 ]
             );
