@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class DBTable extends Command
+class DBShow extends Command
 {
     protected static $defaultName = 'db:table';
 
