@@ -10,7 +10,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class DBShow extends Command
 {
-    protected static $defaultName = 'db:table';
+    protected static $defaultName = 'db:show';
 
     protected static $defaultDescription = 'Muestra información base de datos dada';
 
