@@ -14,6 +14,7 @@ use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory as Validation;
 use Spatie\Dns\Dns;
 use Spatie\Image\Image;
+use Spatie\Mjml\Mjml;
 
 function abort($code = 404)
 {
@@ -210,6 +211,21 @@ function logs()
     return new class
     {
         use Logs;
+    };
+}
+
+function mjml($mjml)
+{
+    if (! class_exists('Spatie\Mjml\Mjml')) {
+        exec('composer require spatie/mjml-php');
+    }
+
+    return new class
+    {
+        public function toHtml()
+        {
+            return Mjml::new()->toHtml($mjml);
+        }
     };
 }
 
