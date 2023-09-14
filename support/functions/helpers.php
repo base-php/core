@@ -270,6 +270,11 @@ function pdf($object)
     return $object;
 }
 
+function phpsessid()
+{
+    return $_COOKIE['PHPSESSID'];
+}
+
 function process()
 {
     return new Process;
