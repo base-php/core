@@ -124,6 +124,7 @@ function server($var = '')
     $array['root'] = $_SERVER['DOCUMENT_ROOT'] ?? null;
     $array['software'] = $_SERVER['SERVER_SOFTWARE'] ?? null;
     $array['uri'] = $_SERVER['REQUEST_URI'] ?? null;
+    $array['user_agent'] = $_SERVER['HTTP_USER_AGENT']
 
     if ($var) {
         return $array[$var];

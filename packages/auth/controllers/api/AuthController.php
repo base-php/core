@@ -84,6 +84,16 @@ class AuthController extends Controller
                 return response()->json(['error' => lang('auth.verified_email')], 401);
             }
 
+            $sessions = json($user->sessions);
+
+            $i = count($sessions);
+
+            $sessions[$i]['id'] = phpsessid();
+            $sessions[$i]['device'] = server('user_agent');
+            $sessions[$i]['datetime'] = now('Y-m-d H:i:s');
+
+            $user->update(['sessions' => json($sessions)]);
+
             session('id', $user->id);
             $redirect = request('redirect') ? request('redirect') : $this->redirect_login;
             return response()->json(['redirect' => $redirect]);
