@@ -107,7 +107,7 @@ class Test extends TestCase
         return $this;
     }
 
-    public function expectsOutput($expect)
+    public function expectsCommandOutput($expect)
     {
         if ($expect == $this->output) {
             return $this->assertTrue(true);

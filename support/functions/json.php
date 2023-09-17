@@ -6,5 +6,5 @@ function json($structure)
         return json_encode($structure);
     }
 
-    return json_decode($structure);
+    return json_decode($structure, true);
 }

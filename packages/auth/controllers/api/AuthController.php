@@ -181,6 +181,18 @@ class AuthController extends Controller
      */
     public function logout(): void
     {
+        $user = (new $this->model)->find(auth()->id);
+
+        $sessions = json($user->sessions);
+
+        $i = array_search(phpsessid, array_column($sessions, 'id'));
+
+        unset($sessions[$i]);
+
+        $user->update([
+            'sessions' => $sessions
+        ]);
+
         session()->delete();
     }
 }
