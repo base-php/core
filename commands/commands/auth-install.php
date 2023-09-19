@@ -20,7 +20,7 @@ class AuthInstall extends Command
     protected function execute($input, $output)
     {
         $frontend = $input->getOption('bootstrap') ? 'bootstrap' : 'tailwind';
-        $api = $input->get('api') ?? null;
+        $api = $input->getOption('api') ?? null;
 
         if ($api) {
             copy('vendor/base-php/core/packages/auth/controllers/api/AuthController.php', 'app/Controllers/AuthController.php');

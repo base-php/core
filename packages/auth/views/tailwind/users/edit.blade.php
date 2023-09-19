@@ -25,12 +25,12 @@
                             <img id="photo-preview" class="rounded-full mb-2 block w-1/4" src="{{ $user->photo }}" alt="{{ $user->name }}">
 
                             <div>
-                                <x-file-button show="photo == ''" click="document.getElementById('photo').click()" id="open-file-selector" background="white" text="black">
+                                <x-file-button show="photo == ''" click="document.getElementById('photo').click()" id="open-file-selector" border="black" background="white" text="black">
                                     <i class="fa fa-upload mr-2"></i>
                                     {{ lang('users.select_photo') }}
                                 </x-file-button>
 
-                                <x-file-button show="photo != ''" click="removePhoto()" background="red-500" text="white">
+                                <x-file-button show="photo != ''" click="removePhoto()" background="red-500" text="white" border="red-500">
                                     <i class="fa fa-trash mr-2"></i>
                                     {{ lang('users.delete_photo') }}
                                 </x-file-button>
@@ -143,6 +143,37 @@
                     @endif
                 </div>
             @endif
+
+            <hr class="my-5">
+
+            <div class="flex">
+                <div class="w-5/12 p-3">
+                    <h1 class="font-semibold text-2xl mb-3">{{ lang('users.sessions') }}</h1>
+                    <h2>{{ lang('users.sessions_text') }}</h2>
+                </div>
+
+                <div class="w-7/12 rounded bg-white p-7">
+                    <div>
+                        <p>{{ lang('users.sessions_description') }}</p>
+                    </div>
+
+                    <div class="mt-5">
+                        @foreach(json($user->sessions ?? '[]') as $session)
+                            <div>
+                                <i class="fa-solid fa-desktop"></i>
+                                <small>{{ $session['device'] }}</small>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="mt-5">
+                        <x-button-link href="{{ '/dashboard/users/logout/' . $user->id }}" color="black">
+                            <i class="fa-solid fa-right-from-bracket mr-2"></i>
+                            {{ lang('users.logout_other_browsers') }}
+                        </x-button-link>
+                    </div>
+                </div>
+            </div>
 
             <hr class="my-5">
 

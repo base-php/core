@@ -104,6 +104,37 @@
 
             <hr>
 
+            <div class="row">
+                <div class="col-5 p-3">
+                    <h5 class="mb-3">{{ lang('users.sessions') }}</h5>
+                    <h6>{{ lang('users.sessions_text') }}</h6>
+                </div>
+
+                <div class="col-7 p-4 rounded bg-white">
+                    <div>
+                        <p>{{ lang('users.sessions_description') }}</p>
+                    </div>
+
+                    <div class="mt-5">
+                        @foreach(json($user->sessions ?? '[]') as $session)
+                            <div>
+                                <i class="fa-solid fa-desktop"></i>
+                                <small>{{ $session['device'] }}</small>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="mt-5">
+                        <x-button-link href="{{ '/dashboard/users/logout/' . $user->id }}" color="black">
+                            <i class="fa-solid fa-right-from-bracket mr-2"></i>
+                            {{ lang('users.logout_other_browsers') }}
+                        </x-button-link>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
             <div class="row mt-4 mb-4">
                 <div class="col-5 p-3">
                     <h5 class="mb-3">{{ lang('users.delete_account') }}</h5>

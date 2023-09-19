@@ -106,7 +106,7 @@ class AuthController extends Controller
                 return redirect('/login')->with('error', lang('auth.verified_email'));
             }
 
-            $sessions = json($user->sessions);
+            $sessions = json($user->sessions ?? '[]');
 
             $i = count($sessions);
 
