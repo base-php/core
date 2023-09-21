@@ -119,7 +119,7 @@
                         @foreach(json($user->sessions ?? '[]') as $session)
                             <div>
                                 <i class="fa-solid fa-desktop"></i>
-                                <small>{{ $session['device'] }}</small>
+                                <small>{{ $session['device'] }} - {{ $session['ip'] }} - {{ $session['datetime'] }}</small>
                             </div>
                         @endforeach
                     </div>

@@ -307,6 +307,29 @@ function session($key = '', $value = '')
     return $session;
 }
 
+function so()
+{
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {
+        return 'Android';
+    }
+
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'iOS')) {
+        return 'iOS';
+    }
+
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'Linux')) {
+        return 'Linux';
+    }
+
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'Mac OS')) {
+        return 'Mac OS';
+    }
+
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'Windows')) {
+        return 'Windows';
+    }
+}
+
 function ssh()
 {
     return new SSH();

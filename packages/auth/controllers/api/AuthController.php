@@ -89,7 +89,8 @@ class AuthController extends Controller
             $i = count($sessions);
 
             $sessions[$i]['id'] = phpsessid();
-            $sessions[$i]['device'] = server('user_agent');
+            $sessions[$i]['device'] = os();
+            $sessions[$i]['ip'] = server('ip_visitor');
             $sessions[$i]['datetime'] = now('Y-m-d H:i:s');
 
             $user->update(['sessions' => json($sessions)]);
