@@ -121,4 +121,16 @@ class UserController extends Controller
 
         return response()->json(['info' => lang('users.delete')]);
     }
+
+    /**
+     * Logout in others devices.
+     * 
+     * @param int $id
+     * @return void
+     */
+    public function logoutInOthersDevices(int $id): void
+    {
+        $user = User::find($id);
+        $user->update(['sessions' => '[]']);
+    }
 }

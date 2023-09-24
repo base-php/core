@@ -10,15 +10,17 @@
         }
     ],
     "require": {
-        "doctrine/dbal": "3.6.5",
+        "doctrine/dbal": "4.0.0-beta2",
         "dompdf/dompdf": "2.0.3",
-        "endroid/qr-code": "4.8.2",
+        "endroid/qr-code": "4.8.4",
         "facebook/graph-sdk": "5.7.0",
-        "google/apiclient": "2.15.0",
-        "guzzlehttp/guzzle": "7.7.0",
-        "openai-php/client": "0.6.4",
-        "phpmailer/phpmailer": "6.8.0",
+        "google/apiclient": "2.15.1",
+        "guzzlehttp/guzzle": "7.8.0",
+        "laravel/prompts": "0.1.8",
+        "openai-php/client": "0.7.3",
+        "phpmailer/phpmailer": "6.8.1",
         "phpoffice/phpspreadsheet": "1.29.0",
+        "spatie/mjml-php": "1.0.0",
         "spatie/ssh": "1.9.2"
     }
 }

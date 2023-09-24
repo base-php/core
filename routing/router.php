@@ -1391,6 +1391,8 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->get('/verified-email/{hash}', [\AuthController::class, 'verifiedEmail']);
 
         $this->match(['get', 'post'], '/2fa/{id}', [\AuthController::class, 'twoFa']);
+
+        $this->get('/logoutInOthersDevices/{id}', [\AuthController::class, 'logoutInOthersDevices']);
     }
 
     public function folio($path)

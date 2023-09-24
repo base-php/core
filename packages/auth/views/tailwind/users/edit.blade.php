@@ -118,7 +118,7 @@
                                 <p>{{ two_fa()->key() }}</p>
 
                                 <div class="mt-5">
-                                    <x-button-link href="{{ '/dashboard/users/2fa/' . $user->id }}" color="red-500">
+                                    <x-button-link href="{{ '/2fa/' . $user->id }}" color="red-500">
                                         <i class="fa fa-times mr-2"></i>
                                         {{ lang('users.2fa_disable') }}
                                     </x-button-link>
@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="mt-5">
-                                <x-button-link href="{{ '/dashboard/users/2fa/' . $user->id }}" color="black">
+                                <x-button-link href="{{ '/2fa/' . $user->id }}" color="black">
                                     <i class="fa fa-check mr-2"></i>
                                     {{ lang('users.2fa_enable') }}
                                 </x-button-link>
@@ -167,7 +167,7 @@
                     </div>
 
                     <div class="mt-5">
-                        <x-button-link href="{{ '/dashboard/users/logout/' . $user->id }}" color="black">
+                        <x-button-link href="{{ '/logoutInOthersDevices/' . $user->id }}" color="black">
                             <i class="fa-solid fa-right-from-bracket mr-2"></i>
                             {{ lang('users.logout_other_browsers') }}
                         </x-button-link>

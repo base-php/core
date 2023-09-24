@@ -137,4 +137,18 @@ class UserController extends Controller
 
         return redirect('/dashboard/users')->with('info', lang('users.delete'));
     }
+
+    /**
+     * Logout in others devices.
+     * 
+     * @param int $id
+     * @return void
+     */
+    public function logoutInOthersDevices(int $id): void
+    {
+        $user = User::find($id);
+        $user->update(['sessions' => '[]']);
+
+        return redirect('/dashboard/users/edit/' . $id);
+    }
 }

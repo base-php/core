@@ -125,7 +125,7 @@
                     </div>
 
                     <div class="mt-5">
-                        <x-button-link href="{{ '/dashboard/users/logout/' . $user->id }}" color="black">
+                        <x-button-link href="{{ '/logoutInOthersDevices/' . $user->id }}" color="black">
                             <i class="fa-solid fa-right-from-bracket mr-2"></i>
                             {{ lang('users.logout_other_browsers') }}
                         </x-button-link>
