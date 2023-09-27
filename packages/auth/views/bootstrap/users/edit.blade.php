@@ -102,6 +102,55 @@
                 </div>
             </div>
 
+            @if(class_exists('PragmaRX\Google2FA\Google2FA') && class_exists('Endroid\QrCode\QrCode'))
+                <hr>
+
+                <div class="row">
+                    <div class="col-5 p-3">
+                        <h1 class="mb-3">{{ lang('users.2fa_title') }}</h1>
+                        <h2>{{ lang('users.2fa_subtitle') }}</h2>
+                    </div>
+
+                    <input type="hidden" name="2fa" value="1">
+
+                    @if($user->two_fa)
+                        <div class="col-7 p-4 rounded bg-white">
+                            <div>
+                                <h1 class="mb-3">{{ lang('users.2fa_enable_warning') }}</h1>
+
+                                <p>{{ lang('users.2fa_enable_text') }}</p>
+
+                                <div>{!! two_fa()->qr($user->two_fa) !!}</div>
+
+                                <p>{{ two_fa()->key() }}</p>
+
+                                <div class="mt-5">
+                                    <x-button-link href="{{ '/2fa/' . $user->id }}" color="red-500">
+                                        <i class="fa fa-times mr-2"></i>
+                                        {{ lang('users.2fa_disable') }}
+                                    </x-button-link>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="col-7 rounded bg-white p-4">
+                            <div>
+                                <h1 class="mb-3">{{ lang('users.2fa_disable_warning') }}</h1>
+
+                                <p>{{ lang('users.2fa_disable_text') }}</p>
+                            </div>
+
+                            <div class="mt-5">
+                                <x-button-link href="{{ '/2fa/' . $user->id }}" color="black">
+                                    <i class="fa fa-check mr-2"></i>
+                                    {{ lang('users.2fa_enable') }}
+                                </x-button-link>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            @endif
+
             <hr>
 
             <div class="row">
