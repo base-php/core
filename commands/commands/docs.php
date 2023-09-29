@@ -13,11 +13,11 @@ class Docs extends Command
     {
         $style = new SymfonyStyle($input, $output);
 
-        $table->table(['Inicio'], [
+        $style->table(['Inicio'], [
             ['Instalación', 'https://github.com/base-php/base-php'],
         ]);
 
-        $table->table(['Lo básico'], [
+        $style->table(['Lo básico'], [
             ['Contenedor de servicios', 'https://laravel.com/docs/9.x/container'],
             ['Rutas', 'https://laravel.com/docs/9.x/routing'],
             ['Middleware', 'https://laravel.com/docs/9.x/middleware'],
@@ -27,7 +27,7 @@ class Docs extends Command
             ['Validaciones', 'https://laravel.com/docs/9.x/validation'],
         ]);
 
-        $table->table(['Más a fondo'], [
+        $style->table(['Más a fondo'], [
             ['Consola', 'https://github.com/bobthecow/psysh/wiki'],
             ['Colecciones', 'https://laravel.com/docs/9.x/collections'],
             ['Almacenamiento de archivos', 'https://flysystem.thephpleague.com/docs'],
@@ -35,21 +35,21 @@ class Docs extends Command
             ['Correos electrónicos', 'https://github.com/PHPMailer/PHPMailer'],
         ]);
 
-        $table->table(['Frontend'], [
+        $style->table(['Frontend'], [
             ['Bootstrap', 'https://getbootstrap.com'],
             ['Tailwind', 'https://tailwindcss.com'],
             ['jQuery', 'https://jquery.com'],
             ['Alpine', 'https://alpinejs.dev'],
         ]);
 
-        $table->table(['Base de datos'], [
+        $style->table(['Base de datos'], [
             ['Inicio', 'https://laravel.com/docs/9.x/database'],
             ['Queries', 'https://laravel.com/docs/9.x/queries'],
             ['Paginación', 'https://laravel.com/docs/9.x/pagination'],
             ['Migraciones', 'https://laravel.com/docs/9.x/migrations'],
         ]);
 
-        $table->table(['Eloquent ORM'], [
+        $style->table(['Eloquent ORM'], [
             ['Inicio', 'https://laravel.com/docs/9.x/eloquent'],
             ['Relaciones', 'https://laravel.com/docs/9.x/eloquent-relationships'],
             ['Colecciones Eloquent', 'https://laravel.com/docs/9.x/eloquent-collections'],
@@ -57,7 +57,7 @@ class Docs extends Command
             ['Serialización', 'https://laravel.com/docs/9.x/eloquent-serialization'],
         ]);
 
-        $table->table(['Pruebas'], [
+        $style->table(['Pruebas'], [
             ['PHP Unit', 'https://phpunit.de'],
             ['Pest', 'https://pestphp.com'],
         ]);
