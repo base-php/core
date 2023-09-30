@@ -217,16 +217,10 @@ function logs()
 function mjml($mjml)
 {
     if (! class_exists('Spatie\Mjml\Mjml')) {
-        exec('composer require spatie/mjml-php');
+        exec('composer require spatie/mjml-php && npm mjml');
     }
 
-    return new class
-    {
-        public function toHtml()
-        {
-            return Mjml::new()->toHtml($mjml);
-        }
-    };
+    return Mjml::new();
 }
 
 function openai()
