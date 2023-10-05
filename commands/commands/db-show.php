@@ -48,14 +48,14 @@ class DBShow extends Command
 
             $tablesSize = count($tables);
 
-            $size = $this->databaseSize($database['name']);;
+            $size = $this->databaseSize($database['name']);
 
             $style->table(
                 [$database['name']],
                 [
                     ['Base de datos', $database['database']],
                     ['Servidor', $database['host']],
-                    ['Usuario', $database['usuario']],
+                    ['Usuario', $database['username']],
                     ['Contraseña', $database['password']],
                     ['Puerto', $database['port']],
                     ['Tablas', $tablesSize],
@@ -66,12 +66,13 @@ class DBShow extends Command
             $tablesBody = [];
 
             foreach ($tables as $table) {
-                $tablesBody[] = [$table, $this->databaseTableSize($table, $database['name'])];
+                $key = 'Tables_in_' . $database['database'];
+                $tablesBody[] = [$table->$key, $this->databaseTableSize($table->$key, $database['name'])];
             }
 
             $style->table(
                 ['Tablas'],
-                [$tablesBody]
+                $tablesBody
             );
         }
 
@@ -94,9 +95,7 @@ class DBShow extends Command
                 (data_length + index_length) DESC
         ";
 
-        $result = DB::select(
-            DB::raw($sql)
-        );
+        $result = DB::select($sql);
 
         $size = array_sum(array_column($result, 'size'));
         $size = number_format((float) $size, 2, '.', '');
@@ -120,9 +119,7 @@ class DBShow extends Command
                 (data_length + index_length) DESC
         ";
 
-        $result = DB::select(
-            DB::raw($sql)
-        );
+        $result = DB::select($sql);
 
         $size = number_format((float) $result[0]->size, 2, '.', '');
         return $size;
