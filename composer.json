@@ -21,6 +21,7 @@
         "phpmailer/phpmailer": "6.8.1",
         "phpoffice/phpspreadsheet": "1.29.0",
         "spatie/mjml-php": "1.0.0",
-        "spatie/ssh": "1.9.2"
+        "spatie/opening-hours": "2.41.0",
+        "spatie/ssh": "1.9.2",
     }
 }

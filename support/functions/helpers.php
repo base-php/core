@@ -15,6 +15,7 @@ use Illuminate\Validation\Factory as Validation;
 use Spatie\Dns\Dns;
 use Spatie\Image\Image;
 use Spatie\Mjml\Mjml;
+use Spatie\OpeningHours\OpeningHours;
 
 function abort($code = 404)
 {
@@ -225,7 +226,12 @@ function mjml($mjml)
 
 function openai()
 {
-    return new OpenAIBasePHP;
+    return new OpenAIBasePHP();
+}
+
+function openingHours()
+{
+    return new OpeningHours();
 }
 
 function redirect($to)
