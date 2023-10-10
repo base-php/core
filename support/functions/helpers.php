@@ -82,6 +82,11 @@ function backup($connection = '')
     return new Backup($connection);
 }
 
+function bing()
+{
+    return new BingAI();
+}
+
 function can($permission)
 {
     return auth()->can($permission);
