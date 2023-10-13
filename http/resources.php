@@ -31,6 +31,12 @@ class Resource
 
                 $i = $i + 1;
             }
+
+            if (isset($this->wrap)) {
+                $this->result = [
+                    $this->wrap => $this->result
+                ];
+            }
         }
 
         // For one record.
