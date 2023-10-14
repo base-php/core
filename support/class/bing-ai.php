@@ -19,40 +19,14 @@ class BingAI
 	public function ask($text)
 	{
 		$conversation = $this->ai->createChatConversation();
-
-		if ($this->image) {
-			$conversation->withImage($this->image);
-		}
-
-		if ($this->language && $this->country) {
-			$combined = strtolower($this->language) . '-' . strtoupper($this->country);
-			$conversation->withPreferences($combined);
-		}
-
-		if ($this->tone) {
-			$conversation->withTone($this->tone);
-		}
-
+		$this->params($conversation);
 		return $conversation->ask(new Prompt($text));
 	}
 
 	public function createImages($text)
 	{
 		$creator = $this->ai->createImages($text);
-
-		if ($this->image) {
-			$creator->withImage($this->image);
-		}
-
-		if ($this->language && $this->country) {
-			$combined = strtolower($this->language) . '-' . strtoupper($this->country);
-			$creator->withPreferences($combined);
-		}
-
-		if ($this->tone) {
-			$creator->withTone($this->tone);
-		}
-
+		$this->params($creator);
 		$creator->wait();
 
 		if (! $creator->hasFailed()) {
@@ -62,11 +36,33 @@ class BingAI
 		return false;
 	}
 
+	public function image($path)
+	{
+		$this->image = $path;
+		return $this;
+	}
+
 	public function locale($language, $country)
 	{
 		$this->language = $language;
 		$this->country = $country;
 		return $this;
+	}
+
+	public function params($instance)
+	{
+		if ($this->image) {
+			$instance->withImage($this->image);
+		}
+
+		if ($this->language && $this->country) {
+			$combined = strtolower($this->language) . '-' . strtoupper($this->country);
+			$instance->withPreferences($combined);
+		}
+
+		if ($this->tone) {
+			$instance->withTone($this->tone);
+		}
 	}
 
 	public function tone($tone)
@@ -83,12 +79,6 @@ class BingAI
 			$this->tone = Tone::Precise;
 		}
 
-		return $this;
-	}
-
-	public function image($path)
-	{
-		$this->image = $path;
 		return $this;
 	}
 }
