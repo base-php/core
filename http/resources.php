@@ -6,8 +6,14 @@ class Resource
 {
     public function __construct($data)
     {
+        $paginate = 0;
+
         if (gettype($data) == 'object') {
-            if (strpos(get_class($data), 'Models') || get_class($data) == 'Illuminate\Database\Eloquent\Collection') {
+            if (strpos(get_class($data), 'Models') || get_class($data) == 'Illuminate\Database\Eloquent\Collection' || get_class($data) == 'Illuminate\Pagination\LengthAwarePaginator') {
+                if (get_class($data) == 'Illuminate\Pagination\LengthAwarePaginator') {
+                    $paginate = 1;
+                }
+
                 $data = $data->toArray();
             }
         }
@@ -17,19 +23,49 @@ class Resource
         if (isset($data[0])) {
             $i = 0;
 
-            foreach ($data as $item) {
-                foreach ($item as $key => $value) {
-                    $this->$key = $value;
+            if ($paginate) {
+                foreach ($data['data'] as $item) {
+                    foreach ($item as $key => $value) {
+                        $this->$key = $value;
+                    }
+
+                    foreach ($this->array() as $key => $value) {
+                        $this->result[$i][$key] = $value;
+                        unset($this->$key);
+                    }
+
+                    $this->result['data'][$i] = (object) $this->result[$i];
+
+                    $i = $i + 1;
                 }
 
-                foreach ($this->array() as $key => $value) {
-                    $this->result[$i][$key] = $value;
-                    unset($this->$key);
+                $this->result['links'] = $data['links'];
+
+                $this->result['meta'] => [
+                    'current_page' => $data['current_page'],
+                    'from' => $data['from'],
+                    'last_page' => $data['last_page'],
+                    'path' => $data['path'],
+                    'per_page' => $data['per_page'],
+                    'to' => $data['to'],
+                    'total' => $data['total'],
+                ];
+
+            } else {
+                foreach ($data as $item) {
+                    foreach ($item as $key => $value) {
+                        $this->$key = $value;
+                    }
+
+                    foreach ($this->array() as $key => $value) {
+                        $this->result[$i][$key] = $value;
+                        unset($this->$key);
+                    }
+
+                    $this->result[$i] = (object) $this->result[$i];
+
+                    $i = $i + 1;
                 }
-
-                $this->result[$i] = (object) $this->result[$i];
-
-                $i = $i + 1;
             }
 
             if (isset($this->wrap)) {
