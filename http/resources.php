@@ -88,4 +88,11 @@ class Resource
             }
         }
     }
+
+    public function when($condition, $variable)
+    {
+        if ($condition) {
+            return $variable;
+        }
+    }
 }
