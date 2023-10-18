@@ -20,7 +20,7 @@ class Resource
 
         // For various records.
 
-        if (isset($data[0])) {
+        if (isset($data[0]) || isset($data['data'])) {
             $i = 0;
 
             if ($paginate) {
@@ -41,7 +41,7 @@ class Resource
 
                 $this->result['links'] = $data['links'];
 
-                $this->result['meta'] => [
+                $this->result['meta'] = [
                     'current_page' => $data['current_page'],
                     'from' => $data['from'],
                     'last_page' => $data['last_page'],
@@ -87,6 +87,11 @@ class Resource
                 unset($this->$key);
             }
         }
+    }
+
+    public function __toString()
+    {
+        return json($this->result);
     }
 
     public function when($condition, $variable)
