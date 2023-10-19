@@ -11,11 +11,15 @@ class HealthCmd extends Command
 
     protected function execute($input, $output)
     {
+        require 'vendor/base-php/core/database/database.php';
+
         $style = new SymfonyStyle($input, $output);
 
         $config = include 'app/config.php';
 
         $i = 0;
+
+        $health = new Health();
 
         if (strposToArray('cpuUsage', $config['health'])) {
             $i = strposToArray('cpuUsage', $config['health']);
@@ -25,9 +29,9 @@ class HealthCmd extends Command
             $param = $explode[1];
 
             $this->items[$i][] = 'Uso de CPU';
-            $this->items[$i][] = $this->cpuUsage($param);
+            $this->items[$i][] = $health->cpuUsage($param);
 
-            $percent = str_replace('%', '', $this->cpuUsage($param));
+            $percent = str_replace('%', '', $health->cpuUsage($param));
 
             $i++;
         }
@@ -40,7 +44,7 @@ class HealthCmd extends Command
             $param = $explode[1];
 
             $this->items[$i][] = 'Conexión a base de datos: ' . $param;
-            $this->items[$i][] = $this->databaseConnection($param);
+            $this->items[$i][] = $health->databaseConnection($param);
 
             $i++;
         }
@@ -53,7 +57,7 @@ class HealthCmd extends Command
             $param = $explode[1];
 
             $this->items[$i][] = 'Tamaño de la base de datos: ' . $param;
-            $this->items[$i][] = $this->databaseSize($param);
+            $this->items[$i][] = $health->databaseSize($param);
 
             $i++;
         }
@@ -66,21 +70,21 @@ class HealthCmd extends Command
             $params = explode(',', $explode[1]);
 
             $this->items[$i][] = 'Tamaño de la tabla de la base de datos: ' . $params[0];
-            $this->items[$i][] = $this->databaseTableSize($params[1], $params[0]);
+            $this->items[$i][] = $health->databaseTableSize($params[1], $params[0]);
 
             $i++;
         }
 
         if (in_array('debug', $config['health'])) {
             $this->items[$i][] = 'Debug';
-            $this->items[$i][] = $this->debug();
+            $this->items[$i][] = $health->debug();
 
             $i++;
         }
 
         if (in_array('environment', $config['health'])) {
             $this->items[$i][] = 'Entorno';
-            $this->items[$i][] = $this->environment();
+            $this->items[$i][] = $health->environment();
 
             $i++;
         }
@@ -94,14 +98,14 @@ class HealthCmd extends Command
             $url = $explode[1];
 
             $this->items[$i][] = 'Ping a: ' . $url;
-            $this->items[$i][] = $this->ping($url);
+            $this->items[$i][] = $health->ping($url);
 
             $i++;
         }
 
         if (in_array('securityAdvisoriesPackages', $config['health'])) {
             $this->items[$i][] = 'Avisos de seguridad en paquetes';
-            $this->items[$i][] = $this->securityAdvisoriesPackages();
+            $this->items[$i][] = $health->securityAdvisoriesPackages();
 
             $i++;
         }
@@ -115,14 +119,14 @@ class HealthCmd extends Command
             $percent = $explode[1];
 
             $this->items[$i][] = 'Uso de espacio en disco';
-            $this->items[$i][] = $this->usedDiskSpace();
+            $this->items[$i][] = $health->usedDiskSpace();
 
             $i++;
         }
 
         $style->table(
             ['Nombre', 'Resultado'],
-            $items
+            $this->items
         );
 
         return Command::SUCCESS;
