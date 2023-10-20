@@ -24,7 +24,7 @@ class Health
 	{
 		try {
 			DB::connection($connection)->getPDO();
-			return 'Ok';
+			return 'ok';
 		}
 
 		catch (Exception $exception) {
@@ -84,12 +84,14 @@ class Health
 
 	public function debug()
 	{
-		return config('errors');
+		$config = include 'app/config.php';
+		return $config['errors'] ? 'true' : 'false';
 	}
 
 	public function environment()
 	{
-		return config('environment');
+		$config = include 'app/config.php';
+		return $config['environment'];
 	}
 
 	public function json()
@@ -102,7 +104,7 @@ class Health
 		exec("ping $url", $output);
 
 		if (trim($output[8]) == 'Paquetes: enviados = 4, recibidos = 4, perdidos = 0') {
-			return 'success';
+			return 'ok';
 		}
 
 		return 'error';
