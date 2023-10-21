@@ -21,21 +21,6 @@ class HealthCmd extends Command
 
         $health = new Health();
 
-        if (strposToArray('cpuUsage', $config['health'])) {
-            $i = strposToArray('cpuUsage', $config['health']);
-            $item = $config['health'][$i];
-
-            $explode = explode(':', $item);
-            $param = $explode[1];
-
-            $this->items[$i][] = 'Uso de CPU';
-            $this->items[$i][] = $health->cpuUsage($param);
-
-            $percent = str_replace('%', '', $health->cpuUsage($param));
-
-            $i++;
-        }
-
         if (strposToArray('databaseConnection', $config['health'])) {
             $i = strposToArray('databaseConnection', $config['health']);
             $item = $config['health'][$i];
@@ -69,8 +54,11 @@ class HealthCmd extends Command
             $explode = explode(':', $item);
             $params = explode(',', $explode[1]);
 
-            $this->items[$i][] = 'Tamaño de la tabla de la base de datos: ' . $params[0];
-            $this->items[$i][] = $health->databaseTableSize($params[1], $params[0]);
+            $table = $params[0];
+            $database = $params[1] ?? 'default';
+
+            $this->items[$i][] = "Tamaño de la tabla '$table' en la conexión '$database'";
+            $this->items[$i][] = $health->databaseTableSize($table, $database);
 
             $i++;
         }
@@ -103,20 +91,9 @@ class HealthCmd extends Command
             $i++;
         }
 
-        if (in_array('securityAdvisoriesPackages', $config['health'])) {
-            $this->items[$i][] = 'Avisos de seguridad en paquetes';
-            $this->items[$i][] = $health->securityAdvisoriesPackages();
-
-            $i++;
-        }
-
         if (strposToArray('usedDiskSpace', $config['health'])) {
             $i = strposToArray('usedDiskSpace', $config['health']);
             $item = $config['health'][$i];
-
-            $explode = explode(':', $item);
-
-            $percent = $explode[1];
 
             $this->items[$i][] = 'Uso de espacio en disco';
             $this->items[$i][] = $health->usedDiskSpace();

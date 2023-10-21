@@ -2,24 +2,6 @@
 
 class Health
 {
-	public function cpuUsage($min)
-	{
-		if ($min == 1) {
-			$index = 0;
-		}
-
-		if ($min == 5) {
-			$index = 1;
-		}
-
-		if ($min == 15) {
-			$index = 2;
-		}
-
-		$cpuUsage = sys_getloadavg()[$index] * 100;
-		return $cpuUsage;
-	}
-
 	public function databaseConnection($connection = 'default')
 	{
 		try {
@@ -48,16 +30,14 @@ class Health
 			    (data_length + index_length) DESC
 		";
 
-		$result = DB::select(
-			DB::raw($sql)
-		);
+		$result = DB::select($sql);
 
 		$size = array_sum(array_column($result, 'size'));
         $size = number_format((float) $size, 2, '.', '');
         return $size;
 	}
 
-	public function databaseTableSize($table, $connection = 'default')
+	public function databaseTableSize($table, $connection)
 	{
 		$database = DB::connection($connection)->getDatabaseName();
 
@@ -74,9 +54,7 @@ class Health
 			    (data_length + index_length) DESC
 		";
 
-		$result = DB::select(
-			DB::raw($sql)
-		);
+		$result = DB::select($sql);
 
         $size = number_format((float) $result[0]->size, 2, '.', '');
         return $size;
@@ -110,17 +88,6 @@ class Health
 		return 'error';
 	}
 
-	public function securityAdvisoriesPackages()
-	{
-		exec('composer audit --format=plain', $output);
-
-		if (trim($output[1]) == 'No security vulnerability advisories found') {
-			return 'Ok';
-		}
-
-		return trim($output[1]);
-	}
-
 	public function usedDiskSpace()
 	{
 		$diskTotalSpace = disk_total_space('/');
@@ -136,25 +103,6 @@ class Health
 	public function view()
 	{
 		$i = 0;
-
-		if (strposToArray('cpuUsage', config('health'))) {
-			$i = strposToArray('cpuUsage', config('health'));
-			$item = config('health')[$i];
-
-			$explode = explode(':', $item);
-			$param = $explode[1];
-
-			$this->items[$i]['title'] = 'Uso de CPU';
-			$this->items[$i]['content'] = $this->cpuUsage($param);
-
-			$percent = str_replace('%', '', $this->cpuUsage($param));
-
-			if ($percent > 70) {
-				$this->items[$i]['danger'] = true;
-			}
-
-			$i++;
-		}
 
 		if (strposToArray('databaseConnection', config('health'))) {
 			$i = strposToArray('databaseConnection', config('health'));
@@ -233,17 +181,6 @@ class Health
 			$this->items[$i]['content'] = $this->ping($url);
 
 			if ($this->ping($url) == 'error') {
-				$this->items[$i]['danger'] = true;
-			}
-
-			$i++;
-		}
-
-		if (in_array('securityAdvisoriesPackages', config('health'))) {
-			$this->items[$i]['title'] = 'Avisos de seguridad en paquetes';
-			$this->items[$i]['content'] = $this->securityAdvisoriesPackages();
-
-			if ($this->securityAdvisoriesPackages() != 'Ok') {
 				$this->items[$i]['danger'] = true;
 			}
 
