@@ -72,9 +72,100 @@ class Health
 		return $config['environment'];
 	}
 
+	public function items()
+	{
+		$config = include 'app/config.php';
+
+        $i = 0;
+
+        $health = new Health();
+
+        if (strposToArray('databaseConnection', $config['health'])) {
+            $i = strposToArray('databaseConnection', $config['health']);
+            $item = $config['health'][$i];
+
+            $explode = explode(':', $item);
+            $param = $explode[1];
+
+            $this->items[$i][] = 'Conexión a base de datos: ' . $param;
+            $this->items[$i][] = $health->databaseConnection($param);
+
+            $i++;
+        }
+
+        if (strposToArray('databaseSize', $config['health'])) {
+            $i = strposToArray('databaseSize', $config['health']);
+            $item = $config['health'][$i];
+
+            $explode = explode(':', $item);
+            $param = $explode[1];
+
+            $this->items[$i][] = 'Tamaño de la base de datos: ' . $param;
+            $this->items[$i][] = $health->databaseSize($param);
+
+            $i++;
+        }
+
+        if (strposToArray('databaseTableSize', $config['health'])) {
+            $i = strposToArray('databaseTableSize', $config['health']);
+            $item = $config['health'][$i];
+
+            $explode = explode(':', $item);
+            $params = explode(',', $explode[1]);
+
+            $table = $params[0];
+            $database = $params[1] ?? 'default';
+
+            $this->items[$i][] = "Tamaño de la tabla '$table' en la conexión '$database'";
+            $this->items[$i][] = $health->databaseTableSize($table, $database);
+
+            $i++;
+        }
+
+        if (in_array('debug', $config['health'])) {
+            $this->items[$i][] = 'Debug';
+            $this->items[$i][] = $health->debug();
+
+            $i++;
+        }
+
+        if (in_array('environment', $config['health'])) {
+            $this->items[$i][] = 'Entorno';
+            $this->items[$i][] = $health->environment();
+
+            $i++;
+        }
+
+        if (strposToArray('ping', $config['health'])) {
+            $i = strposToArray('ping', $config['health']);
+            $item = $config['health'][$i];
+
+            $explode = explode(':', $item);
+
+            $url = $explode[1];
+
+            $this->items[$i][] = 'Ping a: ' . $url;
+            $this->items[$i][] = $health->ping($url);
+
+            $i++;
+        }
+
+        if (strposToArray('usedDiskSpace', $config['health'])) {
+            $i = strposToArray('usedDiskSpace', $config['health']);
+            $item = $config['health'][$i];
+
+            $this->items[$i][] = 'Uso de espacio en disco';
+            $this->items[$i][] = $health->usedDiskSpace();
+
+            $i++;
+        }
+
+        return $this->items;
+	}
+
 	public function json()
 	{
-		return response()->json($this->items);
+		return json($this->items());
 	}
 
 	public function ping($url)

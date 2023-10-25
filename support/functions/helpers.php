@@ -176,6 +176,11 @@ function info($text)
     echo "\n";
 }
 
+function health()
+{
+    return new Health();
+}
+
 function http()
 {
     if (! class_exists('Illuminate\Http\Client\Factory')) {
