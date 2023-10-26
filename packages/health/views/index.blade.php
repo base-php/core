@@ -12,8 +12,9 @@
 
 <link rel="icon" href="{{ asset('img/favicon.svg') }}">
 
-<link rel="stylesheet" href="{{ node('bootstrap/dist/css/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ node('@fortawesome/fontawesome-free/css/all.css') }}">
+
+<script src="https://cdn.tailwindcss.com"></script>
 
 <style>
     body {
@@ -24,32 +25,30 @@
 </head>
 
 <body class="bg-[#f3f4f6]">
-    <div class="mx-auto">
-    	<header>
-    		<h1>
-    			Health 
-    			<i class="fa-regular fa-wave-pulse"></i>
-    		</h1>
-    	</header>
+    <div class="text-center mx-32">
+        <header class="mt-5">
+            <h1>
+                <div>
+                    Health    
+                </div>
 
-    	<div class="flex">
-    		@foreach($items as $item)
-    			<div class="w-1/4 m-1 bg-white text-center">
+                <i class="fa-solid fa-wave-square"></i>
+            </h1>
+        </header>
+
+        <div class="flex mt-5">
+            @foreach($items as $item)
+                <div class="w-1/3 m-1 bg-white text-center p-3 rounded-md m-5">
                     <div>
-                        @if($item->danger)
-                            <i class="fa fa-check bg-green-700"></i>
-                        @else
-                            <i class="fa fa-times bg-red-700"></i>
-                        @endif
+                        <i class="fa fa-check bg-green-700 p-2 rounded-full text-white"></i>
 
-
-                        {{ $item->title }}
+                        {{ $item[0] }}
                     </div>
 
-                    <div>{{ $item->content }}</div>
+                    <div>{{ $item[1] }}</div>
                 </div>
-    		@endforeach
-    	</div>
+            @endforeach
+        </div>
     </div>
 </body>
 
