@@ -75,6 +75,7 @@ class Health
 	public function items()
 	{
 		$config = include 'app/config.php';
+		array_unshift($config['health'], '');
 
         $i = 0;
 

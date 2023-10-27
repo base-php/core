@@ -16,6 +16,7 @@ class HealthCmd extends Command
         $style = new SymfonyStyle($input, $output);
 
         $config = include 'app/config.php';
+        array_unshift($config['health'], '');
 
         $i = 0;
 
