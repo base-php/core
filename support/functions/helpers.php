@@ -97,6 +97,11 @@ function carbon()
     return new Carbon;
 }
 
+function cashConverter()
+{
+    return new CashConverter();
+}
+
 function currentRoute()
 {
     return $_SERVER['REQUEST_URI'];

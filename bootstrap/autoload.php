@@ -167,4 +167,6 @@ include __DIR__.'/../packages/bill/models/bill.php';
 include __DIR__.'/../packages/bill/models/customer.php';
 include __DIR__.'/../packages/bill/traits/billable.php';
 
+include __DIR__.'/../packages/cash-converter/cash-converter.php';
+
 include __DIR__.'/../packages/chart/chart.php';
