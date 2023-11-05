@@ -49,6 +49,7 @@ include __DIR__.'/../commands/commands/migrate-rollback.php';
 include __DIR__.'/../commands/commands/migrate-status.php';
 include __DIR__.'/../commands/commands/model-show.php';
 include __DIR__.'/../commands/commands/model-status-table.php';
+include __DIR__.'/../commands/commands/monitor-table.php';
 include __DIR__.'/../commands/commands/notifications-table.php';
 include __DIR__.'/../commands/commands/pail.php';
 include __DIR__.'/../commands/commands/permissions-create-permission.php';
