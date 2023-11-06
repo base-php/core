@@ -2,9 +2,9 @@
 
 $capsule = new Illuminate\Database\Capsule\Manager;
 
-$root = (php_sapi_name() == 'cli') ? '' : $_SERVER['DOCUMENT_ROOT'].'/';
+$root = (php_sapi_name() == 'cli') ? '' : $_SERVER['DOCUMENT_ROOT'] . '/';
 
-$config = require $root.'app/config.php';
+$config = require $root . 'app/config.php';
 
 foreach ($config['database'] as $item) {
     $database = ($item['driver'] == 'sqlite') ? $item['database'].'.sqlite' : $item['database'];

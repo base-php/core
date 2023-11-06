@@ -12,6 +12,8 @@ class App
 {
     public static function run()
     {
+        $time = time();
+
         // General settings
 
         $session_save_path = config('session_save_path') ?? $_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/support/storage/session';
@@ -112,6 +114,13 @@ class App
         $request = Request::createFromGlobals();
         $response = $app['router']->dispatch($request);
         $response->send();
+
+        $monitor = new Monitor();
+
+        if (Schema::connection('default')->exists('monitor')) {
+            $duration = time() - $time;
+            $monitor->request($duration);
+        }
 
         foreach (session()->all() as $key => $value) {
             if (strpos($key, 'basephp-user') !== false) {

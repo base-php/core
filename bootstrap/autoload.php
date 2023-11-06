@@ -116,6 +116,8 @@ include __DIR__.'/../packages/logs/traits/logs.php';
 include __DIR__.'/../packages/model-status/models/model-status.php';
 include __DIR__.'/../packages/model-status/traits/has-model-status.php';
 
+include __DIR__.'/../packages/monitor/class/monitor.php';
+
 include __DIR__.'/../packages/permissions/middleware/can.php';
 include __DIR__.'/../packages/permissions/models/permission.php';
 include __DIR__.'/../packages/permissions/models/role.php';
