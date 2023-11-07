@@ -57,6 +57,12 @@ class Mail
 
         $mail->send();
 
+        $schema = $capsule->getConnection('default')->getSchemaBuilder();
+
+        if ($schema->exists('monitor')) {
+            $monitor->email($this, $to);
+        }
+
         return $this;
     }
 }

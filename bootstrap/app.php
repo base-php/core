@@ -115,9 +115,13 @@ class App
         $response = $app['router']->dispatch($request);
         $response->send();
 
+        // Monitor
+
         $monitor = new Monitor();
 
-        if (Schema::connection('default')->exists('monitor')) {
+        $schema = $capsule->getConnection('default')->getSchemaBuilder();
+
+        if ($schema->exists('monitor')) {
             $duration = time() - $time;
             $monitor->request($duration);
         }
