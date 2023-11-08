@@ -2,6 +2,8 @@
 
 use NunoMaduro\Collision\Provider as Collision;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\ConsoleEvents;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class Console
 {
@@ -37,6 +39,18 @@ class Console
                 }
             }
         }
+
+        $dispatcher = new EventDispatcher();
+        $dispatcher->addListener(ConsoleEvents::COMMAND, function ($event) {
+            $schema = $capsule->getConnection('default')->getSchemaBuilder();
+
+            if ($schema->exists('monitor')) {
+                $monitor = new Monitor();
+                $monitor->command($event->getInput());
+            }
+        });
+
+        $application->setDispatcher($dispatcher);
 
         $application->run();
     }

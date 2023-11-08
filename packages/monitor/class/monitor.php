@@ -2,6 +2,44 @@
 
 class Monitor
 {
+	public function email($class, $to)
+	{
+		$content['time'] = date('Y-m-d H:i:s');
+		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+		$content['class'] = get_class($class);
+		$content['from'] = $class->from;
+		$content['to'] = $to;
+		$content['subject'] = $class->subject;
+
+		$this->register('email', $content);
+	}
+
+	public function command($command)
+	{
+		$arguments = $command->getArguments();
+		unset($arguments['command']);
+
+		$content['time'] = date('Y-m-d H:i:s');
+		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+		$content['command'] = $command->getFirstArgument();
+		$content['arguments'] = $arguments;
+		$content['options'] = array_filter($command->getOptions());
+
+		$this->register('command', $content);
+	}
+
+	public function register($type, $content)
+	{
+		$content = json($content);
+
+		$data = [
+			'type' => $type,
+			'content' => $content
+		];
+
+		DB::table('monitor')->insert($data);
+	}
+
 	public function request($duration)
 	{
 		$content['time'] = date('Y-m-d H:i:s');
@@ -14,30 +52,6 @@ class Monitor
 		$content['headers'] = getallheaders();
 		$content['session'] = $_SESSION;
 
-		$content = json($content);
-
-		$data = [
-			'type' => 'request',
-			'content' => $content
-		];
-
-		DB::table('monitor')->insert($data);
-	}
-
-	public function email($class, $to)
-	{
-		$content['time'] = date('Y-m-d H:i:s');
-		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-		$content['class'] = get_class($class);
-		$content['from'] = $class->from;
-		$content['to'] = $to;
-		$content['subject'] = $class->subject;
-
-		$data = [
-			'type' => 'email',
-			'content' => $content
-		];
-
-		$data = json($data);
+		$this->register('request', $content);
 	}
 }
