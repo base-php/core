@@ -10,25 +10,27 @@ class CashConverter
 
 	public function convert($from, $to, $amount)
 	{
-		$http = http()->get('https://v6.exchangerate-api.com/v6/' . $this->key . '/latest/' . $from);
-		$body = $http->body();
-		$json = json($body);
+		$json = $this->request($from);
 		return $amount * $json['conversion_rates'][$to];
 	}
 
 	public function rate($from, $to)
 	{
-		$http = http()->get('https://v6.exchangerate-api.com/v6/' . $this->key . '/latest/' . $from);
-		$body = $http->body();
-		$json = json($body);
+		$json = $this->request($from);
 		return $json['conversion_rates'][$to];
 	}
 
 	public function rates($currency)
 	{
+		$json = $this->request($currency);
+		return $json['conversion_rates'];
+	}
+
+	public function request($currency)
+	{
 		$http = http()->get('https://v6.exchangerate-api.com/v6/' . $this->key . '/latest/' . $currency);
 		$body = $http->body();
 		$json = json($body);
-		return $json['conversion_rates'];
+		return $json;
 	}
 }
