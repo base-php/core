@@ -48,7 +48,7 @@
 
 		<pre>
 			<code>
-				{{ $request->content['payload'] }}
+				{!! $request->content['payload'] !!}
 			</code>
 		</pre>
 	</div>
@@ -58,7 +58,7 @@
 
 		<pre>
 			<code>
-				{{ $request->content['headers'] }}
+				{!! $request->content['headers'] !!}
 			</code>
 		</pre>
 	</div>
@@ -68,7 +68,7 @@
 
 		<pre>
 			<code>
-				{{ $request->content['session'] }}
+				{!! $request->content['session'] !!}
 			</code>
 		</pre>
 	</div>
