@@ -46,7 +46,7 @@
 	<div>
 		<h4>Cuerpo de la solicitud</h4>
 
-		<pre>
+		<pre class="bg-slate-800 text-white">
 			<code>
 				{!! $request->content['payload'] !!}
 			</code>
@@ -56,7 +56,7 @@
 	<div>
 		<h4>Encabezados</h4>
 
-		<pre>
+		<pre class="bg-slate-800 text-white">
 			<code>
 				{!! $request->content['headers'] !!}
 			</code>
@@ -66,7 +66,7 @@
 	<div>
 		<h4>Variables en sesión</h4>
 
-		<pre>
+		<pre class="bg-slate-800 text-white">
 			<code>
 				{!! $request->content['session'] !!}
 			</code>

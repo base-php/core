@@ -12,16 +12,16 @@
 		</thead>
 
 		<tbody>
-			@foreach($requests as $request)
+			@foreach($commands as $command)
 				<tr>
 					<td>{{ $loop->iteration }}</td>
 
-					<td>{{ $request->content['command'] }}</td>
+					<td class="text-red-500">{{ $command->content['command'] }}</td>
 
-					<td>{{ carbon()->create($request->content['time'])->diffForHumans() }}</td>
+					<td>{{ carbon()->create($command->content['time'])->diffForHumans() }}</td>
 
 					<td>
-						<a href="{{ '/request/' . $request->id }}">
+						<a href="{{ '/command/' . $command->id }}">
 							<i class="fa fa-eye"></i>
 						</a>
 					</td>
