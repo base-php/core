@@ -45,9 +45,7 @@ class AuthController extends Controller
         $user = (new $this->model)->create([
             'name' => request('name'),
             'email' => request('email'),
-            'password' => encrypt(request('password')),
-            'date_create' => now('Y-m-d H:i:s'),
-            'date_update' => now('Y-m-d H:i:s'),
+            'password' => encrypt(request('password'))
         ]);
 
         $user->update(['hash' => encrypt($user->id)]);

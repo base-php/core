@@ -41,9 +41,7 @@ class Notification
 
         DB::table('notifications')->insert([
             'type' => $type,
-            'data' => $data,
-            'date_create' => now('Y-m-d H:i:s'),
-            'date_update' => now('Y-m-d H:i:s'),
+            'data' => $data
         ]);
     }
 }

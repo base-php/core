@@ -4,17 +4,17 @@
 	<div>
 		<div>
 			<div class="w-1/4">Fecha y hora</div>
-			<div class="w-3/4">{{ $command->content['datetime'] }}</div>
+			<div class="w-3/4">{{ $command->content->datetime }}</div>
 		</div>
 
 		<div>
 			<div class="w-1/4">Servidor</div>
-			<div class="w-3/4">{{ $command->content['hostname'] }}</div>
+			<div class="w-3/4">{{ $command->content->hostname }}</div>
 		</div>
 
 		<div>
 			<div class="w-1/4">Comando</div>
-			<div class="w-3/4">{{ $command->content['command'] }}</div>
+			<div class="w-3/4">{{ $command->content->command }}</div>
 		</div>
 	</div>
 
@@ -25,7 +25,7 @@
 
 		<pre class="bg-slate-800 text-white">
 			<code>
-				{!! $command->content['arguments'] !!}
+				{!! $command->content->arguments !!}
 			</code>
 		</pre>
 	</div>
@@ -35,7 +35,7 @@
 
 		<pre class="bg-slate-800 text-white">
 			<code>
-				{!! $command->content['options'] !!}
+				{!! $command->content->options !!}
 			</code>
 		</pre>
 	</div>

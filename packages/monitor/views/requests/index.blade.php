@@ -20,19 +20,19 @@
 
 					<td>
 						<span class="bg-neutral-300 p-3 rounded">
-							{{ $request->content['method'] }}
+							{{ $request->content->method }}
 						</span>
 					</td>
 
-					<td>{{ $request->content['path'] }}</td>
+					<td>{{ $request->content->path }}</td>
 
 					<td>
 						<span class="bg-neutral-300 p-3 rounded">
-							{{ $request->content['status'] }}
+							{{ $request->content->status }}
 						</span>
 					</td>
 
-					<td>{{ carbon()->create($request->content['time'])->diffForHumans() }}</td>
+					<td>{{ carbon()->create($request->content->time)->diffForHumans() }}</td>
 
 					<td>
 						<a href="{{ '/request/' . $request->id }}">

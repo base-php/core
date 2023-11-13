@@ -12,9 +12,7 @@ class Role extends Model
 
     protected $fillable = [
         'name',
-        'description',
-        'date_create',
-        'date_update'
+        'description'
     ];
 
     public function givePermissionTo($permissions)

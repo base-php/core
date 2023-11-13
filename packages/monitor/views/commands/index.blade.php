@@ -16,9 +16,9 @@
 				<tr>
 					<td>{{ $loop->iteration }}</td>
 
-					<td class="text-red-500">{{ $command->content['command'] }}</td>
+					<td class="text-red-500">{{ $command->content->command }}</td>
 
-					<td>{{ carbon()->create($command->content['time'])->diffForHumans() }}</td>
+					<td>{{ carbon()->create($command->content->time)->diffForHumans() }}</td>
 
 					<td>
 						<a href="{{ '/command/' . $command->id }}">

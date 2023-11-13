@@ -10,8 +10,6 @@ class Permission extends Model
 
     protected $fillable = [
         'name',
-        'description',
-        'date_create',
-        'date_update'
+        'description'
     ];
 }

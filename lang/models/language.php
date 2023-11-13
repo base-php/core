@@ -11,8 +11,6 @@ class Language extends Model
     protected $fillable = [
         'language',
         'key',
-        'value',
-        'date_create',
-        'date_update'
+        'value'
     ];
 }

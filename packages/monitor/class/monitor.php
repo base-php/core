@@ -48,7 +48,7 @@ class Monitor
 		$content['path'] = $_SERVER['SCRIPT_NAME'];
 		$content['status'] = http_response_code();
 		$content['duration'] = $duration;
-		$content['payload'] = $_REQUEST;
+		$content['body'] = $_REQUEST;
 		$content['headers'] = getallheaders();
 		$content['session'] = $_SESSION;
 
