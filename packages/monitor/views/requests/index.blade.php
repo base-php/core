@@ -14,28 +14,28 @@
 		</thead>
 
 		<tbody>
-			@foreach($requests as $request)
+			@foreach($items as $item)
 				<tr>
 					<td>{{ $loop->iteration }}</td>
 
 					<td>
 						<span class="bg-neutral-300 p-3 rounded">
-							{{ $request->content->method }}
+							{{ $item->content->method }}
 						</span>
 					</td>
 
-					<td>{{ $request->content->path }}</td>
+					<td>{{ $item->content->path }}</td>
 
 					<td>
 						<span class="bg-neutral-300 p-3 rounded">
-							{{ $request->content->status }}
+							{{ $item->content->status }}
 						</span>
 					</td>
 
-					<td>{{ carbon()->create($request->content->time)->diffForHumans() }}</td>
+					<td>{{ carbon()->create($item->content->time)->diffForHumans() }}</td>
 
 					<td>
-						<a href="{{ '/request/' . $request->id }}">
+						<a href="{{ '/request/' . $item->id }}">
 							<i class="fa fa-eye"></i>
 						</a>
 					</td>

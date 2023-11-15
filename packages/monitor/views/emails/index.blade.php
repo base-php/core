@@ -12,19 +12,19 @@
 		</thead>
 
 		<tbody>
-			@foreach($emails as $email)
+			@foreach($items as $item)
 				<tr>
 					<td>{{ $loop->iteration }}</td>
 
 					<td>
-						{{ $email->content->class }} <br>
-						<small class="text-neutral-300">{{ $email->content->subject }}</small>
+						{{ $item->content->class }} <br>
+						<small class="text-neutral-300">{{ $item->content->subject }}</small>
 					</td>
 
-					<td>{{ carbon()->create($email->content->time)->diffForHumans() }}</td>
+					<td>{{ carbon()->create($item->content->time)->diffForHumans() }}</td>
 
 					<td>
-						<a href="{{ '/email/' . $email->id }}">
+						<a href="{{ '/email/' . $item->id }}">
 							<i class="fa fa-eye"></i>
 						</a>
 					</td>

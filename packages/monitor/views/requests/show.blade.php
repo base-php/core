@@ -4,40 +4,40 @@
 	<div>
 		<div>
 			<div class="w-1/4">Fecha y hora</div>
-			<div class="w-3/4">{{ $request->content->datetime }}</div>
+			<div class="w-3/4">{{ $item->content->datetime }}</div>
 		</div>
 
 		<div>
 			<div class="w-1/4">Servidor</div>
-			<div class="w-3/4">{{ $request->content->hostname }}</div>
+			<div class="w-3/4">{{ $item->content->hostname }}</div>
 		</div>
 
 		<div>
 			<div class="w-1/4">Método</div>
 			<div class="w-3/4">
 				<span class="bg-neutral-300 rounded p-3">
-					{{ $request->content->method }}
+					{{ $item->content->method }}
 				</span>
 			</div>
 		</div>
 
 		<div>
 			<div class="w-1/4">Ruta</div>
-			<div class="w-3/4">{{ $request->content->path }}</div>
+			<div class="w-3/4">{{ $item->content->path }}</div>
 		</div>
 
 		<div>
 			<div class="w-1/4">Estado</div>
 			<div class="w-3/4">
-				<span class="bg-{{ $request->content->status == 200 ? 'green' : 'red' }}-300 p-3 rounded">
-					{{ $request->content->status }}
+				<span class="bg-{{ $item->content->status == 200 ? 'green' : 'red' }}-300 p-3 rounded">
+					{{ $item->content->status }}
 				</span>
 			</div>
 		</div>
 
 		<div>
 			<div class="w-1/4">Duracíón</div>
-			<div class="w-3/4">{{ $request->content->duration }}</div>
+			<div class="w-3/4">{{ $item->content->duration }}</div>
 		</div>
 	</div>
 
@@ -48,7 +48,7 @@
 
 		<pre class="bg-slate-800 text-white">
 			<code>
-				{!! $request->content->body !!}
+				{!! $item->content->body !!}
 			</code>
 		</pre>
 	</div>
@@ -58,7 +58,7 @@
 
 		<pre class="bg-slate-800 text-white">
 			<code>
-				{!! $request->content->headers !!}
+				{!! $item->content->headers !!}
 			</code>
 		</pre>
 	</div>
@@ -68,7 +68,7 @@
 
 		<pre class="bg-slate-800 text-white">
 			<code>
-				{!! $request->content->session !!}
+				{!! $item->content->session !!}
 			</code>
 		</pre>
 	</div>
