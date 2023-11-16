@@ -25,3 +25,5 @@ foreach ($config['database'] as $item) {
 
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
+
+DB::enableQueryLog();

@@ -2,18 +2,6 @@
 
 class Monitor
 {
-	public function email($class, $to)
-	{
-		$content['time'] = date('Y-m-d H:i:s');
-		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-		$content['class'] = get_class($class);
-		$content['from'] = $class->from;
-		$content['to'] = $to;
-		$content['subject'] = $class->subject;
-
-		$this->register('email', $content);
-	}
-
 	public function command($command)
 	{
 		$arguments = $command->getArguments();
@@ -26,6 +14,32 @@ class Monitor
 		$content['options'] = array_filter($command->getOptions());
 
 		$this->register('command', $content);
+	}
+
+	public function database($logs)
+	{
+		array_pop($logs);
+
+		foreach ($logs as $log) {
+			$content['time'] = date('Y-m-d H:i:s');
+			$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+			$content['duration'] = $log['time'];
+			$content['query'] = $log['query'];
+
+			$this->register('database', $content);
+		}
+	}
+
+	public function email($class, $to)
+	{
+		$content['time'] = date('Y-m-d H:i:s');
+		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+		$content['class'] = get_class($class);
+		$content['from'] = $class->from;
+		$content['to'] = $to;
+		$content['subject'] = $class->subject;
+
+		$this->register('email', $content);
 	}
 
 	public function register($type, $content)

@@ -121,9 +121,12 @@ class App
 
         $schema = $capsule->getConnection('default')->getSchemaBuilder();
 
-        if ($schema->exists('monitor')) {
+        if ($schema->hasTable('monitor')) {
             $duration = time() - $time;
             $monitor->request($duration);
+
+            $logs = DB::getQueryLog();
+            $monitor->database($logs);
         }
 
         foreach (session()->all() as $key => $value) {

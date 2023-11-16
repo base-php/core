@@ -42,11 +42,16 @@ class Console
 
         $dispatcher = new EventDispatcher();
         $dispatcher->addListener(ConsoleEvents::COMMAND, function ($event) {
+            include 'vendor/base-php/core/database/database.php';
+            
             $schema = $capsule->getConnection('default')->getSchemaBuilder();
 
-            if ($schema->exists('monitor')) {
+            if ($schema->hasTable('monitor')) {
                 $monitor = new Monitor();
                 $monitor->command($event->getInput());
+
+                $logs = DB::getQueryLog();
+                $monitor->database($logs);
             }
         });
 

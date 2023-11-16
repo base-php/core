@@ -59,7 +59,7 @@ class Mail
 
         $schema = $capsule->getConnection('default')->getSchemaBuilder();
 
-        if ($schema->exists('monitor')) {
+        if ($schema->hasTable('monitor')) {
             $monitor->email($this, $to);
         }
 
