@@ -16,7 +16,7 @@ class Excel
     public function __construct()
     {
         if (! class_exists('PhpOffice\PhpSpreadsheet\Spreadsheet')) {
-            exec('composer require phpoffice/phpspreadsheet');
+            throw new Exception('Please execute `composer require phpoffice/phpspreadsheet`');
         }
 
         $this->spreadsheet = new Spreadsheet();

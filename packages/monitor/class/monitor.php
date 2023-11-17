@@ -42,6 +42,23 @@ class Monitor
 		$this->register('email', $content);
 	}
 
+	public function notification($channel, $class, $recipient)
+	{
+		$content['time'] = date('Y-m-d H:i:s');
+		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+		$content['channel'] = $channel;
+		$content['class'] = get_class($class);
+
+		if (is_class($recipient)) {
+			$content['recipient_class'] = get_class($recipient);
+			$content['recipient_id'] = $recipient->id;			
+		} else {
+			$content['recipient_email'] = $recipient;
+		}
+
+		$this->register('notification', $content);
+	}
+
 	public function register($type, $content)
 	{
 		$content = json($content);

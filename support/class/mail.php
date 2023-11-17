@@ -9,7 +9,7 @@ class Mail
     public function __construct()
     {
         if (! class_exists('PHPMailer\PHPMailer\PHPMailer')) {
-            exec('composer require phpmailer/phpmailer');
+            throw new Exception('Please execute `phpmailer/phpmailer`');
         }
     }
 

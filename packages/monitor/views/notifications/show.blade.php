@@ -1,5 +1,5 @@
 <div class="shadow bg-white rounded">
-	<h1>Detalles del correo electrónico</h1>
+	<h1>Detalles de notificación</h1>
 
 	<div>
 		<div>
@@ -13,23 +13,25 @@
 		</div>
 
 		<div>
+			<div class="w-1/4">Canal</div>
+			<div class="w-3/4">{{ $item->content->channel }}</div>
+		</div>
+
+		<div>
 			<div class="w-1/4">Clase</div>
 			<div class="w-3/4">{{ $item->content->class }}</div>
 		</div>
 
 		<div>
-			<div class="w-1/4">Origen</div>
-			<div class="w-3/4">{{ $item->content->from }}</div>
-		</div>
-
-		<div>
 			<div class="w-1/4">Destinatario</div>
-			<div class="w-3/4">{{ $item->content->to }}</div>
-		</div>
 
-		<div>
-			<div class="w-1/4">Asunto</div>
-			<div class="w-3/4">{{ $item->content->subject }}</div>
+			<div class="w-3/4">
+				@if($item->content->recipient_email)
+					{{ $item->content->recipient_email }}
+				@else
+					{{ $item->content->recipient_class . ':' . $item->content->recipient_id }}
+				@endif
+			</div>
 		</div>
 	</div>
 </div>

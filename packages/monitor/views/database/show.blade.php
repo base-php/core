@@ -4,7 +4,7 @@
 	<div>
 		<div>
 			<div class="w-1/4">Fecha y hora</div>
-			<div class="w-3/4">{{ $item->content->datetime }}</div>
+			<div class="w-3/4">{{ $item->content->datetime }} ({{ carbon()->create($item->content->time)->diffForHumans() }})</div>
 		</div>
 
 		<div>

@@ -14,14 +14,17 @@ class Notification
             foreach ($this->via() as $via) {
                 if ($via == 'database') {
                     $this->database($user, $this->array());
+                    $monitor->notification($via, $this, $user);
                 }
 
                 if ($via == 'email') {
                     email($user->email, $this->email());
+                    $monitor->notification($via, $this, $user->email);
                 }
 
                 if ($via != 'database' && $via != 'email') {
                     $this->$via();
+                    $monitor->notification($via, $this, $user);
                 }
             }
         }

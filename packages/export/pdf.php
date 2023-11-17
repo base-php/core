@@ -12,7 +12,7 @@ class PDF
     public function __construct()
     {
         if (! class_exists('Dompdf\Dompdf')) {
-            exec('composer require dompdf/dompdf');
+            throw new Exception('Please execute `composer require dompdf/dompdf`');
         }
     }
 

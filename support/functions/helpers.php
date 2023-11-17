@@ -115,7 +115,7 @@ function dispatch($job)
 function dns($url)
 {
     if (! class_exists('Spatie\Dns\Dns')) {
-        exec('composer require spatie/dns');
+        throw new Exception('Please execute `composer require spatie/dns`');
     }
 
     $dns = new Dns();
@@ -169,7 +169,7 @@ function google()
 function image()
 {
     if (! class_exists('Spatie\Image\Image')) {
-        exec('composer require spatie/image');
+        throw new Exception('Please execute `spatie/image`');
     }
 
     return new Image();
@@ -189,7 +189,7 @@ function health()
 function http()
 {
     if (! class_exists('Illuminate\Http\Client\Factory')) {
-        exec('composer require guzzlehttp/guzzle');
+        throw new Exception('Please execute `guzzlehttp/guzzle`');
     }
 
     return new HttpClient;
@@ -233,7 +233,7 @@ function logs()
 function mjml($mjml)
 {
     if (! class_exists('Spatie\Mjml\Mjml')) {
-        exec('composer require spatie/mjml-php && npm mjml');
+        throw new Exception('Please execute `composer require spatie/mjml-php && npm mjml`');
     }
 
     return Mjml::new();

@@ -127,8 +127,6 @@ class AuthInstall extends Command
         $fopen = fopen('app/routes.php', 'a+');
         fwrite($fopen, $content);
 
-        exec('composer require phpmailer/phpmailer');
-
         if ($frontend == 'bootstrap') {
             system('npm install jquery bootstrap sweetalert2');
             copy('vendor/base-php/core/packages/auth/views/bootstrap/home/index.blade.php', 'resources/views/home/index.blade.php');

@@ -9,7 +9,7 @@ class Google
     public function __construct()
     {
         if (! class_exists('Google_Client')) {
-            exec('composer require google/apiclient');
+            throw new Exception('Please execute `composer require google/apiclient`');
         }
     }
 
