@@ -22,4 +22,10 @@ class MonitorController extends Controller
 		$item = Monitor::find($id);
 		return view("monitor:$type.index", compact('item'));
 	}
+
+	public function delete($type)
+	{
+		Monitor::where('type', $type)->delete();
+		return redirect("/$type");
+	}
 }
