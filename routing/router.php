@@ -149,6 +149,10 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->get('health', function () {
             return (new Health())->view();
         });
+
+        $this->get('/monitor/{type}', 'MonitorController@index');
+        $this->get('/monitor/{type}/{id}', 'MonitorController@show');
+        $this->post('/monitor/{type}', 'MonitorController@delete');
     }
 
     /**
