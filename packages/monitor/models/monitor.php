@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Monitor
+class Monitor extends Model
 {
 	protected $table = 'monitor';
 
