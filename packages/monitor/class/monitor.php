@@ -76,7 +76,7 @@ class Monitor
 		$content['time'] = date('Y-m-d H:i:s');
 		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 		$content['method'] = $_SERVER['REQUEST_METHOD'];
-		$content['path'] = $_SERVER['SCRIPT_NAME'];
+		$content['path'] = $_SERVER['REQUEST_URI'];
 		$content['status'] = http_response_code();
 		$content['duration'] = $duration;
 		$content['body'] = $_REQUEST;

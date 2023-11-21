@@ -121,7 +121,7 @@ class App
 
         $schema = $capsule->getConnection('default')->getSchemaBuilder();
 
-        if ($schema->hasTable('monitor')) {
+        if ($schema->hasTable('monitor') && !strpos(currentRoute(), 'monitor/')) {
             $duration = time() - $time;
             $monitor->request($duration);
 
