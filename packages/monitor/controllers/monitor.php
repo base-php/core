@@ -11,7 +11,7 @@ class MonitorController extends Controller
 		return $this->middleware('monitor');
 	}
 
-	public function index($type)
+	public function index($type = 'request')
 	{
 		$items = Monitor::where('type', $type)->get();
 		return view("monitor:$type.index", compact('items'));

@@ -8,7 +8,7 @@ class Monitor
 		unset($arguments['command']);
 
 		$content['time'] = date('Y-m-d H:i:s');
-		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+		$content['hostname'] = $this->hostname();
 		$content['command'] = $command->getFirstArgument();
 		$content['arguments'] = $arguments;
 		$content['options'] = array_filter($command->getOptions());
@@ -22,7 +22,7 @@ class Monitor
 
 		foreach ($logs as $log) {
 			$content['time'] = date('Y-m-d H:i:s');
-			$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+			$content['hostname'] = $this->hostname();
 			$content['duration'] = $log['time'];
 			$content['query'] = $log['query'];
 
@@ -33,7 +33,7 @@ class Monitor
 	public function email($class, $to)
 	{
 		$content['time'] = date('Y-m-d H:i:s');
-		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+		$content['hostname'] = $this->hostname();
 		$content['class'] = get_class($class);
 		$content['from'] = $class->from;
 		$content['to'] = $to;
@@ -42,10 +42,15 @@ class Monitor
 		$this->register('email', $content);
 	}
 
+	public function hostname()
+	{
+		return isset($_SERVER['REMOTE_ADDR']) ? gethostbyaddr($_SERVER['REMOTE_ADDR']) : '';
+	}
+
 	public function notification($channel, $class, $recipient)
 	{
 		$content['time'] = date('Y-m-d H:i:s');
-		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+		$content['hostname'] = $this->hostname();
 		$content['channel'] = $channel;
 		$content['class'] = get_class($class);
 
@@ -74,7 +79,7 @@ class Monitor
 	public function request($duration)
 	{
 		$content['time'] = date('Y-m-d H:i:s');
-		$content['hostname'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+		$content['hostname'] = $this->hostname();
 		$content['method'] = $_SERVER['REQUEST_METHOD'];
 		$content['path'] = $_SERVER['REQUEST_URI'];
 		$content['status'] = http_response_code();
