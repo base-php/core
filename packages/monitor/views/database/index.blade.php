@@ -6,34 +6,38 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Monitor</title>
 
+	<link rel="icon" href="{{ asset('img/favicon.svg') }}">
+
+	<link rel="stylesheet" href="{{ node('@fortawesome/fontawesome-free/css/all.css') }}">
+
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-	<div class="shadow bg-white rounded">
-		<h1>Consultas a base de datos</h1>
+<body class="bg-nuetral-100">
+	<h1 class="mx-6 py-4 text-4xl font-semibold">Consultas a base de datos</h1>
 
-		<table class="auto">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Consulta</th>
-					<th>Duración</th>
-					<th>Tiempo</th>
-					<th></th>
+	<div class="bg-white m-5 rounded">
+		<table class="min-w-full text-left">
+			<thead class="border-b">
+				<tr class="border-b">
+					<th class="px-6 py-4">#</th>
+					<th class="px-6 py-4">Consulta</th>
+					<th class="px-6 py-4">Duración</th>
+					<th class="px-6 py-4">Tiempo</th>
+					<th class="px-6 py-4"></th>
 				</tr>
 			</thead>
 
 			<tbody>
 				@foreach($items as $item)
-					<tr>
-						<td>{{ $loop->iteration }}</td>
+					<tr class="border-b">
+						<td class="px-6 py-4">{{ $loop->iteration }}</td>
 
-						<td class="text-red-500">{{ $item->content->query }}</td>
-						<td>{{ $item->content->duration }}</td>
+						<td class="px-6 py-4 text-red-500">{{ $item->content->query }}</td>
+						<td class="px-6 py-4">{{ $item->content->duration }}</td>
 
-						<td>{{ carbon()->create($item->content->time)->diffForHumans() }}</td>
+						<td class="px-6 py-4">{{ carbon()->create($item->content->time)->diffForHumans() }}</td>
 
-						<td>
+						<td class="px-6 py-4">
 							<a href="{{ '/command/' . $item->id }}">
 								<i class="fa fa-eye"></i>
 							</a>

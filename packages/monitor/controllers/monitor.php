@@ -20,7 +20,7 @@ class MonitorController extends Controller
 	public function show($type, $id)
 	{
 		$item = Monitor::find($id);
-		return view("monitor:$type.index", compact('item'));
+		return view("monitor:$type.show", compact('item'));
 	}
 
 	public function delete($type)
