@@ -13,7 +13,10 @@ class MonitorController extends Controller
 
 	public function index($type = 'request')
 	{
-		$items = Monitor::where('type', $type)->get();
+		$items = Monitor::where('type', $type)
+			->orderByDesc('id')
+			->get();
+
 		return view("monitor:$type.index", compact('items'));
 	}
 

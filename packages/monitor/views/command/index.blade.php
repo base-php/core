@@ -35,7 +35,7 @@
 						<td class="px-6 py-4">{{ carbon()->create($item->content->time)->diffForHumans() }}</td>
 
 						<td class="px-6 py-4">
-							<a href="{{ '/command/' . $item->id }}">
+							<a href="{{ '/monitor/command/' . $item->id }}">
 								<i class="fa fa-eye"></i>
 							</a>
 						</td>
