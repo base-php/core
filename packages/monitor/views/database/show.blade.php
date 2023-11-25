@@ -13,7 +13,20 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-neutral-100">
-	<h1 class="mx-6 py-4 text-4xl font-semibold">Detalles de la consulta a base de datos</h1>
+	<h1 class="mx-6 py-4 text-4xl font-semibold">
+		<div class="flex justify-between">
+			<div>
+				<i class="fa fa-shapes"></i> 
+				Detalles de la consulta a base de datos
+			</div>
+
+			<div>
+				<a href="/monitor/database">
+					<i class="fa fa-arrow-left"></i>
+				</a>
+			</div>
+		</div>
+	</h1>
 
 	<div class="bg-white m-5 rounded pb-5">
 		<div class="w-full p-5">

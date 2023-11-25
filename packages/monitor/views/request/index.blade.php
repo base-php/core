@@ -12,7 +12,9 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-neutral-100">
-	<h1 class="mx-6 py-4 text-4xl font-semibold">Solicitudes</h1>
+	<h1 class="mx-6 py-4 text-4xl font-semibold">
+		<i class="fa fa-shapes"></i> Solicitudes
+	</h1>
 
 	<div class="bg-white m-5 rounded">
 		<table class="min-w-full text-left">

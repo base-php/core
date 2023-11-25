@@ -32,7 +32,7 @@
                     Health    
                 </div>
 
-                <i class="fa-solid fa-wave-square"></i>
+                <i class="fa fa-shapes"></i>
             </h1>
         </header>
 
