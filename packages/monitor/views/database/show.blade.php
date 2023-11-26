@@ -17,11 +17,11 @@
 		<div class="flex justify-between">
 			<div>
 				<i class="fa fa-shapes"></i> 
-				Detalles de la consulta a base de datos
+				Detalles de base de datos
 			</div>
 
 			<div>
-				<a href="/monitor/database">
+				<a title="Ir a atrás" href="/monitor/database">
 					<i class="fa fa-arrow-left"></i>
 				</a>
 			</div>

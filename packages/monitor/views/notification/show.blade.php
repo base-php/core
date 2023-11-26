@@ -20,7 +20,7 @@
 			</div>
 
 			<div>
-				<a href="/monitor/notification">
+				<a title="Ir a atrás" href="/monitor/notification">
 					<i class="fa fa-arrow-left"></i>
 				</a>
 			</div>

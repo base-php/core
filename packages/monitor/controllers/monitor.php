@@ -9,6 +9,14 @@ class MonitorController extends Controller
 	public function __construct()
 	{
 		return $this->middleware('monitor');
+
+		include 'vendor/base-php/core/database/database.php';
+
+		$schema = $capsule->getConnection('default')->getSchemaBuilder();
+
+		if (! $schema->hasTable('monitor')) {
+			throw new Exception('Please execute `php base monitor:table && php base migrate`');
+		}
 	}
 
 	public function index($type = 'request')

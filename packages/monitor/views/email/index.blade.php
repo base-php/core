@@ -13,10 +13,27 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-neutral-100">
-	<h1 class="mx-6 py-4 text-4xl font-semibold">
-		<i class="fa fa-shapes"></i> 
-		Correos electrónicos
-	</h1>
+	<div class="flex justify-between">
+			<div>
+				<i class="fa fa-shapes"></i> 
+				Correo electrónico	
+			</div>
+
+			<div>
+				<select id="type" class="mr-5">
+					<option value=""></option>
+					<option value="command">Comandos</option>
+					<option value="database">Base de datos</option>
+					<option value="email">Correo electrónico</option>
+					<option value="notification">Notificaciones</option>
+					<option value="request">Solicitudes</option>
+				</select>
+
+				<a href="/monitor/delete/email" title="Eliminar datos">
+					<i class="fa fa-trash"></i>
+				</a>
+			</div>
+		</div>
 
 	<div class="bg-white m-5 rounded">
 		<table class="min-w-full text-left">
@@ -42,7 +59,7 @@
 						<td class="px-6 py-4">{{ carbon()->create($item->content->time)->diffForHumans() }}</td>
 
 						<td class="px-6 py-4">
-							<a href="{{ '/monitor/email/' . $item->id }}">
+							<a title="Ver detalles" href="{{ '/monitor/email/' . $item->id }}">
 								<i class="fa fa-eye"></i>
 							</a>
 						</td>
