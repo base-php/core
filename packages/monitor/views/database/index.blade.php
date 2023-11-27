@@ -12,15 +12,15 @@
 
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-nuetral-100">
-	<div class="flex justify-between">
+<body x-data="app()" class="bg-neutral-100">
+	<div class="flex justify-between text-4xl py-6 mx-4">
 		<div>
 			<i class="fa fa-shapes"></i> 
 			Base de datos	
 		</div>
 
 		<div>
-			<select id="type" class="mr-5">
+			<select id="type" x-on:change="reloadWithType()" class="mr-5">
 				<option value=""></option>
 				<option value="command">Comandos</option>
 				<option value="database">Base de datos</option>
@@ -58,7 +58,7 @@
 						<td class="px-6 py-4">{{ carbon()->create($item->content->time)->diffForHumans() }}</td>
 
 						<td class="px-6 py-4">
-							<a title="Ver detalles" href="{{ '/monitor/command/' . $item->id }}">
+							<a title="Ver detalles" href="{{ '/monitor/database/' . $item->id }}">
 								<i class="fa fa-eye"></i>
 							</a>
 						</td>
@@ -67,5 +67,8 @@
 			</tbody>
 		</table>
 	</div>	
+
+	<script src="//unpkg.com/alpinejs" defer></script>
+	<script src="/vendor/base-php/core/packages/monitor/js/main.js"></script>
 </body>
 </html>

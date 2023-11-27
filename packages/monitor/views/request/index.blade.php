@@ -11,28 +11,28 @@
 
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-neutral-100">
-	<div class="flex justify-between">
-			<div>
-				<i class="fa fa-shapes"></i> 
-				Solicitudes	
-			</div>
-
-			<div>
-				<select id="type" class="mr-5">
-					<option value=""></option>
-					<option value="command">Comandos</option>
-					<option value="database">Base de datos</option>
-					<option value="email">Correo electrónico</option>
-					<option value="notification">Notificaciones</option>
-					<option value="request">Solicitudes</option>
-				</select>
-
-				<a href="/monitor/delete/request" title="Eliminar datos">
-					<i class="fa fa-trash"></i>
-				</a>
-			</div>
+<body x-data="app()" class="bg-neutral-100">
+	<div class="flex justify-between text-4xl py-6 mx-4">
+		<div>
+			<i class="fa fa-shapes"></i> 
+			Solicitudes	
 		</div>
+
+		<div>
+			<select id="type" x-on:change="reloadWithType()" class="mr-5">
+				<option value=""></option>
+				<option value="command">Comandos</option>
+				<option value="database">Base de datos</option>
+				<option value="email">Correo electrónico</option>
+				<option value="notification">Notificaciones</option>
+				<option value="request">Solicitudes</option>
+			</select>
+
+			<a href="/monitor/delete/request" title="Eliminar datos">
+				<i class="fa fa-trash"></i>
+			</a>
+		</div>
+	</div>
 
 	<div class="bg-white m-5 rounded">
 		<table class="min-w-full text-left">
@@ -77,6 +77,9 @@
 				@endforeach
 			</tbody>
 		</table>
-	</div>	
+	</div>
+
+	<script src="//unpkg.com/alpinejs" defer></script>
+	<script src="/vendor/base-php/core/packages/monitor/js/main.js"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@
 			</div>
 
 			<div>
-				<a title="Ir a atrás" href="/email/command">
+				<a title="Ir a atrás" href="/monitor/email">
 					<i class="fa fa-arrow-left"></i>
 				</a>
 			</div>
