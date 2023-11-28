@@ -2,21 +2,20 @@
 
 return new class extends Migration
 {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up(): void
-	{
-		$this->schema->create('model_status', function ($table) {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up(): void
+    {
+        $this->schema->create('visits', function ($table) {
             $table->id();
-
-            $table->string('name');
-            $table->text('reason')->nullable();
 
             $table->string('model');
             $table->integer('id_model');
+
+            $table->json('data');
 
             $table->datetime('date_create')
                 ->useCurrent();
@@ -24,18 +23,16 @@ return new class extends Migration
             $table->datetime('date_update')
                 ->useCurrent()
                 ->setCurrentOnUpdate();
-
-            $table->unique(['name']);
         });
-	}
+    }
 
-	/**
+    /**
      * Reverse the migrations.
      *
      * @return void
      */
     public function down(): void
     {
-        $this->schema->dropIfExists('features');
+        $this->schema->dropIfExists('visits');
     }
 };

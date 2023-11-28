@@ -94,6 +94,8 @@ class App
         include 'app/routes.php';
 
         $route->fallback(function () {
+            http_response_code(404);
+            
             if (file_exists($_SERVER['DOCUMENT_ROOT'].'/resources/views/errors/404.blade.php')) {
                 return view('errors/404');
             } else {
