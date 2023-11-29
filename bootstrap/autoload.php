@@ -72,6 +72,7 @@ include __DIR__.'/../commands/commands/tokens-table.php';
 include __DIR__.'/../commands/commands/up.php';
 include __DIR__.'/../commands/commands/vendor-publish.php';
 include __DIR__.'/../commands/commands/view-clear.php';
+include __DIR__.'/../commands/commands/visits-table.php';
 
 include __DIR__.'/../packages/crud/traits/crud.php';
 
