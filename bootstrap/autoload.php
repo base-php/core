@@ -137,6 +137,8 @@ include __DIR__.'/../packages/tokens/middleware/token-based-auth.php';
 include __DIR__.'/../packages/tokens/models/token.php';
 include __DIR__.'/../packages/tokens/traits/has-tokens.php';
 
+include __DIR__.'/../packages/visits/traits/has-visits.php';
+
 include __DIR__.'/../validations/class/rule.php';
 include __DIR__.'/../validations/class/validation.php';
 include __DIR__.'/../validations/interfaces/rule.php';
