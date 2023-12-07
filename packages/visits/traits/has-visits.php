@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use DB;
 
 trait HasVisits
@@ -26,7 +27,48 @@ trait HasVisits
 	public function popularAllTime()
 	{
 		return DB::table('visits')
-			->select('COUNT(1) AS count')
+			->select('*, COUNT(1) AS count')
+			->limit(10)
+			->orderBy('count')
+			->get();
+	}
+
+	public function popularLastDays($days)
+	{
+		$today = new DateTime();
+		$today->modify('-' . $days . 'day');
+
+		$date = $today->format('Y-m-d');
+
+		return DB::table('visits')
+			->select('*, COUNT(1) AS count')
+			->whereDate('date_create', '>=', $date)
+			->limit(10)
+			->orderBy('count')
+			->get();
+	}
+
+	public function popularLastWeek()
+	{
+		$now = Carbon::now();
+		$date = $now->subWeek()->format('Y-m-d');
+
+		return DB::table('visits')
+			->select('*, COUNT(1) AS count')
+			->whereDate('date_create', '>=', $date)
+			->limit(10)
+			->orderBy('count')
+			->get();
+	}
+
+	public function popularThisWeek()
+	{
+		$now = Carbon::now();
+		$date = $now->startOfWeek()->format('Y-m-d');
+
+		return DB::table('visits')
+			->select('*, COUNT(1) AS count')
+			->whereDate('date_create', '>=', $date)
 			->limit(10)
 			->orderBy('count')
 			->get();
@@ -35,7 +77,7 @@ trait HasVisits
 	public function popularToday()
 	{
 		return DB::table('visits')
-			->select('COUNT(1) AS count')
+			->select('*, COUNT(1) AS count')
 			->whereDate('date_create', now('Y-m-d'))
 			->limit(10)
 			->orderBy('count')
