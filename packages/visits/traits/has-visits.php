@@ -48,10 +48,56 @@ trait HasVisits
 			->get();
 	}
 
+	public function popularLastMonth()
+	{
+		$carbon = Carbon::now();
+
+		$start = $carbon->subMonth()->startOfWeek()->format('Y-m-d');
+		$end = $carbon->subMonth()->endOfWeek()->format('Y-m-d');
+
+		return DB::table('visits')
+			->select('*, COUNT(1) AS count')
+			->whereDate('date_create', '>=', $start)
+			->whereDate('date_create', '<=', $end)
+			->limit(10)
+			->orderBy('count')
+			->get();
+	}
+
 	public function popularLastWeek()
 	{
-		$now = Carbon::now();
-		$date = $now->subWeek()->format('Y-m-d');
+		$carbon = Carbon::now();
+
+		$start = $carbon->subWeek()->startOfWeek()->format('Y-m-d');
+		$end = $carbon->subWeek()->endOfWeek()->format('Y-m-d');
+
+		return DB::table('visits')
+			->select('*, COUNT(1) AS count')
+			->whereDate('date_create', '>=', $start)
+			->whereDate('date_create', '<=', $end)
+			->limit(10)
+			->orderBy('count')
+			->get();
+	}
+
+	public function popularThisMonth()
+	{
+		$month = date('m');
+		$year = date('Y');
+
+		return DB::table('visits')
+			->select('*, COUNT(1) AS count')
+			->whereMonth('date_create', $month)
+			->whereYear('date_create', $year)
+			->limit(10)
+			->orderBy('count')
+			->get();
+	}
+
+	public function popularThisWeek()
+	{
+		$carbon = Carbon::now();
+		$date = $carbon->startOfWeek()->format('Y-m-d');
 
 		return DB::table('visits')
 			->select('*, COUNT(1) AS count')
@@ -61,14 +107,13 @@ trait HasVisits
 			->get();
 	}
 
-	public function popularThisWeek()
+	public function popularThisYear()
 	{
-		$now = Carbon::now();
-		$date = $now->startOfWeek()->format('Y-m-d');
+		$year = date('Y');
 
 		return DB::table('visits')
 			->select('*, COUNT(1) AS count')
-			->whereDate('date_create', '>=', $date)
+			->whereYear('date_create', $year)
 			->limit(10)
 			->orderBy('count')
 			->get();
