@@ -72,7 +72,11 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        return view('users.edit', compact('user'));
+        if ($user) {
+            return view('users.edit', compact('user'));
+        }
+
+        return abort(404);
     }
 
     /**
@@ -84,6 +88,11 @@ class UserController extends Controller
     public function update(UserUpdateValidation $validation): Redirect
     {
         $user = User::find(request('id'));
+
+        if (! $user) {
+            return abort(404);
+        }
+
         $user->update([
             'name' => request('name'),
             'email' => request('email'),
@@ -133,7 +142,13 @@ class UserController extends Controller
             return redirect('/dashboard/users')->with('error', lang('users.in_use'));
         }
 
-        User::find($id)->delete();
+        $user = User::find($id);
+
+        if (! $user) {
+            return abort(404);
+        }
+
+        $user->delete();
 
         return redirect('/dashboard/users')->with('info', lang('users.delete'));
     }
@@ -147,6 +162,11 @@ class UserController extends Controller
     public function logoutInOthersDevices(int $id): void
     {
         $user = User::find($id);
+
+        if (! $user) {
+            return abort(404);
+        }
+
         $user->update(['sessions' => '[]']);
 
         return redirect('/dashboard/users/edit/' . $id);

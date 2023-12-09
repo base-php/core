@@ -63,6 +63,11 @@ class UserController extends Controller
     public function update(UserUpdateValidation $validation): Response
     {
         $user = User::find(request('id'));
+
+        if (! $user) {
+            return abort(404);
+        }
+
         $user->update([
             'name' => request('name'),
             'email' => request('email'),
@@ -117,7 +122,13 @@ class UserController extends Controller
             return redirect('/dashboard/users')->with('error', lang('users.in_use'));
         }
 
-        User::find($id)->delete();
+        $user = User::find($id);
+
+        if (! $user) {
+            return abort(404);
+        }
+
+        $user->delete();
 
         return response()->json(['info' => lang('users.delete')]);
     }
@@ -131,6 +142,11 @@ class UserController extends Controller
     public function logoutInOthersDevices(int $id): void
     {
         $user = User::find($id);
+        
+        if (! $user) {
+            return abort(404);
+        }
+
         $user->update(['sessions' => '[]']);
     }
 }
