@@ -8,6 +8,7 @@ use Faker\Factory as Faker;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Client\Factory as HttpClient;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Number;
 use Illuminate\Translation\FileLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
@@ -237,6 +238,11 @@ function mjml($mjml)
     }
 
     return Mjml::new();
+}
+
+function number()
+{
+    return new Number();
 }
 
 function openai()
