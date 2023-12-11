@@ -31,6 +31,11 @@ class MonitorController extends Controller
 	public function show($type, $id)
 	{
 		$item = Monitor::find($id);
+
+		if (! $item) {
+			return abort(404);
+		}
+
 		return view("monitor:$type.show", compact('item'));
 	}
 
