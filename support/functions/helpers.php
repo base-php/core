@@ -21,9 +21,14 @@ use Spatie\OpeningHours\OpeningHours;
 function abort($code = 404)
 {
     http_response_code($code);
-    view('http:' . $code);
 
-    return exit();
+    if (ajax()) {
+        view('http:' . $code);
+    } else {
+        return json(['status' => $code]);
+    }
+
+    exit();
 }
 
 function abort_if($condition, $code)
