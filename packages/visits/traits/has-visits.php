@@ -33,6 +33,17 @@ trait HasVisits
 			->get();
 	}
 
+	public function popularBetween($start, $end)
+	{
+		return DB::table('visits')
+			->select('*, COUNT(1) AS count')
+			->whereDate('date_create', '>=', $start)
+			->whereDate('date_create', '<=', $end)
+			->limit(10)
+			->orderBy('count')
+			->get();
+	}
+
 	public function popularLastDays($days)
 	{
 		$today = new DateTime();
@@ -75,6 +86,21 @@ trait HasVisits
 			->select('*, COUNT(1) AS count')
 			->whereDate('date_create', '>=', $start)
 			->whereDate('date_create', '<=', $end)
+			->limit(10)
+			->orderBy('count')
+			->get();
+	}
+
+	public function popularLastYear()
+	{
+		$datetime = new DateTime();
+		$datetime->modify('-1year');
+
+		$lastYear = $datetime->format('Y');
+
+		return DB::table('visits')
+			->select('*, COUNT(1) AS count')
+			->whereYear('date_create', $lastYear)
 			->limit(10)
 			->orderBy('count')
 			->get();
