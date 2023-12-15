@@ -21,8 +21,10 @@ class Pail extends Command
 
         $filter = $input->getOption('filter');
 
-        $errorLogFilePath = ini_get('error_log');
-        $errors = file_get_contents($errorLogFilePath);
+        $config = require 'app/config.php';
+
+        $errorLogFile = $config['error_log'] ?? 'vendor/base-php/core/tmp/error.log';
+        $errors = file_get_contents($errorLogFile);
 
         foreach (explode("\n", $errors) as $error) {
             if ($filter) {
