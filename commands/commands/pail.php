@@ -26,7 +26,7 @@ class Pail extends Command
         $errorLogFile = $config['error_log'] ?? 'vendor/base-php/core/tmp/error.log';
         $errors = file_get_contents($errorLogFile);
 
-        foreach (explode("\n", $errors) as $error) {
+        foreach (array_filter(explode("\n", $errors)) as $error) {
             if ($filter) {
                 if (strpos($error, $filter)) {
                     $style->error($error);
@@ -34,6 +34,10 @@ class Pail extends Command
             } else {
                 $style->error($error);
             }
+        }
+
+        if (! count(array_filter(explode("\n", $errors)))) {
+            $style->info('No hay registros de errores');
         }
 
         return Command::SUCCESS;
