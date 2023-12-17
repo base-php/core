@@ -13,6 +13,18 @@ class Console
 
         $config = require 'app/config.php';
 
+        $memory_limit = config('memory_limit') ?? -1;
+        $time_limit = config('time_limit') ?? 30;
+        $error_log = config('error_log') ?? 'vendor/base-php/core/tmp/error.log';
+
+        ini_set('memory_limit', $memory_limit);
+        ini_set('error_log', $error_log);
+        set_time_limit($time_limit);
+
+        Lang::set();
+
+        date_default_timezone_set($_ENV['timezone']);
+
         $application = new Application('Base PHP ' . $config['version'] . ' por Nisa Delgado');
 
         foreach (scandir('vendor/base-php/core/commands/commands') as $class) {
