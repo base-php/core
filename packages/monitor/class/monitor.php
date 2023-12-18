@@ -47,6 +47,18 @@ class Monitor
 		return isset($_SERVER['REMOTE_ADDR']) ? gethostbyaddr($_SERVER['REMOTE_ADDR']) : '';
 	}
 
+	public function jobs($class, $queue, $status, $exception)
+	{
+		$content['time'] = date('Y-m-d H:i:s');
+		$content['hostname'] = $this->hostname();
+		$content['class'] = get_class($class);
+		$content['queue'] = $queue;
+		$content['status'] = $status;
+		$content['exception'] = $exception;
+
+		$this->register('jobs', $content);
+	}
+
 	public function notification($channel, $class, $recipient)
 	{
 		$content['time'] = date('Y-m-d H:i:s');

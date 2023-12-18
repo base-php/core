@@ -39,6 +39,12 @@ class QueueWork extends Command
                 $class->handle();
 
                 $style->success($payload->job);
+
+                $schema = $capsule->getConnection('default')->getSchemaBuilder();
+
+                if ($schema->hasTable('monitor') && !strpos(currentRoute(), 'monitor')) {
+                    $monitor->jobs($class, $queue, 'success', null);
+                }
             } catch (Error $exception) {
                 DB::table('failed_jobs')
                     ->insert([
@@ -48,6 +54,10 @@ class QueueWork extends Command
                     ]);
 
                 $style->error($payload->job);
+
+                if ($schema->hasTable('monitor') && !strpos(currentRoute(), 'monitor')) {
+                    $monitor->jobs($class, $queue, 'error', $exception);
+                }
             }
         }
 
