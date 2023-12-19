@@ -24,6 +24,7 @@
 				<option value="command">Comandos</option>
 				<option value="database">Base de datos</option>
 				<option value="email">Correo electrónico</option>
+				<option value="jobs">Trabajos en segundo plano</option>
 				<option value="notification">Notificaciones</option>
 				<option value="request">Solicitudes</option>
 			</select>

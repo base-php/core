@@ -44,5 +44,11 @@ class Job
         ];
 
         DB::table('jobs')->insert($data);
+
+        include 'vendor/base-php/core/database/database.php';
+
+        if ($schema->hasTable('monitor') && !strpos(currentRoute(), 'monitor')) {
+            $monitor->jobs($this, $this->queue, 'pending');
+        }
     }
 }

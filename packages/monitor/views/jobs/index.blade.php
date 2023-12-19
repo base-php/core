@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +15,7 @@
 	<div class="flex justify-between text-4xl py-6 mx-4">
 		<div>
 			<i class="fa fa-shapes"></i> 
-			Correo electrónico	
+			Trabajos en segundo plano	
 		</div>
 
 		<div>
@@ -30,7 +29,7 @@
 				<option value="request">Solicitudes</option>
 			</select>
 
-			<a href="/monitor/delete/email" title="Eliminar datos">
+			<a href="/monitor/delete/jobs" title="Eliminar datos">
 				<i class="fa fa-trash"></i>
 			</a>
 		</div>
@@ -41,7 +40,8 @@
 			<thead class="border-b">
 				<tr class="border-b">
 					<th class="px-6 py-4">#</th>
-					<th class="px-6 py-4">Clase</th>
+					<th class="px-6 py-4">Trabajo</th>
+					<th class="px-6 py-4">Estado</th>
 					<th class="px-6 py-4">Tiempo</th>
 					<th class="px-6 py-4"></th>
 				</tr>
@@ -49,18 +49,27 @@
 
 			<tbody>
 				@foreach($items as $item)
-					<tr class="border-b">
+					<tr class="border-6">
 						<td class="px-6 py-4">{{ $loop->iteration }}</td>
 
-						<td class="px-6 py-4">
-							{{ $item->content->class }} <br>
-							<small class="text-neutral-300">{{ $item->content->subject }}</small>
-						</td>
+						<td class="px-6 py-4">{{ $item->content->class }}</td>
+
+						@if($item->content->status == 'error')
+							<td class="px-6 py-4 text-red-500">{{ $item->content->status }}</td>
+						@endif
+
+						@if($item->content->status == 'success')
+							<td class="px-6 py-4 text-green-500">{{ $item->content->status }}</td>
+						@endif
+
+						@if($item->content->status == 'pending')
+							<td class="px-6 py-4 text-neutral-500">{{ $item->content->status }}</td>
+						@endif
 
 						<td class="px-6 py-4">{{ carbon()->create($item->content->time)->diffForHumans() }}</td>
 
 						<td class="px-6 py-4">
-							<a title="Ver detalles" href="{{ '/monitor/email/' . $item->id }}">
+							<a title="Ver detalles" href="{{ '/monitor/jobs/' . $item->id }}">
 								<i class="fa fa-eye"></i>
 							</a>
 						</td>
