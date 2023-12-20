@@ -21,6 +21,10 @@ class Console
         ini_set('error_log', $error_log);
         set_time_limit($time_limit);
 
+        foreach ($config as $key => $value) {
+            $_ENV[$key] = $value;
+        }
+
         Lang::set();
 
         date_default_timezone_set($_ENV['timezone']);
