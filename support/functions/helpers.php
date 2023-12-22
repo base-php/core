@@ -333,7 +333,7 @@ function session($key = '', $value = '')
     return $session;
 }
 
-function so()
+function os()
 {
     if (strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {
         return 'Android';

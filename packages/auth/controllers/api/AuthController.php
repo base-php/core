@@ -94,8 +94,7 @@ class AuthController extends Controller
             $user->update(['sessions' => json($sessions)]);
 
             session('id', $user->id);
-            $redirect = request('redirect') ? request('redirect') : $this->redirect_login;
-            return response()->json(['redirect' => $redirect]);
+            return response()->json(['user' => $user]);
         }
 
         return response()->json(['error' => lang('auth.incorrect_data')], 401);
