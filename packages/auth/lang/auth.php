@@ -7,6 +7,7 @@ return [
     'confirm_password' => 'Confirmar contraseña',
     'link_invalid' => 'Enlace de recuperación de contraseña inválido.',
     'login' => 'Iniciar sesión',
+    'login_success' => 'Iniciar sesión exitoso',
     'email' => 'Correo electrónico',
     'email_fired' => 'Saludos',
     'email_footer' => 'Si tienes problemas al hacer click en el botón \'Recuperar contraseña\', copia y pega la siguiente URL en tu navegador web',

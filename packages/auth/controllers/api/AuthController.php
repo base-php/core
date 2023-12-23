@@ -54,7 +54,10 @@ class AuthController extends Controller
             email($user->email, new VerifiedEmail($user));
         }
 
-        return response()->json(['info' => lang('auth.register_success')]);
+        return response()->json([
+            'info' => lang('auth.register_success'),
+            'user' => $user
+        ]);
     }
 
     /**
@@ -94,7 +97,10 @@ class AuthController extends Controller
             $user->update(['sessions' => json($sessions)]);
 
             session('id', $user->id);
-            return response()->json(['user' => $user]);
+            return response()->json([
+                'info' => lang('auth.login_success'),
+                'user' => $user
+            ]);
         }
 
         return response()->json(['error' => lang('auth.incorrect_data')], 401);
@@ -116,7 +122,10 @@ class AuthController extends Controller
 
         (new $this->model)->where('hash', $hash)->update(['date_verified_email' => now('Y-m-d H:i:s')]);
 
-        return response()->json(['info' => lang('auth.email_verified_success')]);
+        return response()->json([
+            'info' => lang('auth.email_verified_success'),
+            'user' => $user
+        ]);
     }
 
     /**
@@ -134,7 +143,10 @@ class AuthController extends Controller
 
         email($user->email, new PasswordRecoveryEmail($user));
 
-        return response()->json(['info' => lang('auth.check_email')]);
+        return response()->json([
+            'info' => lang('auth.check_email'),
+            'user' => $user
+        ]);
     }
 
     /**
@@ -158,7 +170,10 @@ class AuthController extends Controller
         $user->password = encrypt(request('password'));
         $user->save();
 
-        return response()->json(['info' => lang('auth.password_not_match')]);
+        return response()->json([
+            'info' => lang('auth.password_not_match'),
+            'user' => $user
+        ]);
     }
 
     /**
