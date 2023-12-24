@@ -55,6 +55,13 @@ class AuthInstall extends Command
         copy('vendor/base-php/core/packages/auth/validations/UserStoreValidation.php', 'app/Validations/UserStoreValidation.php');
         copy('vendor/base-php/core/packages/auth/validations/UserUpdateValidation.php', 'app/Validations/UserUpdateValidation.php');
 
+        if (! file_exists('resources/views/mails')) {
+            mkdir('resources/views/mails');
+        }
+
+        copy('vendor/base-php/core/packages/auth/views/' . $frontend . '/mails/recover.blade.php', 'resources/views/mails/recover.blade.php');
+        copy('vendor/base-php/core/packages/auth/views/' . $frontend . '/mails/verified-email.blade.php', 'resources/views/mails/verified-email.blade.php');
+
         if (! $api) {
             copy('vendor/base-php/core/packages/auth/css/auth.css', 'resources/assets/css/auth.css');
             copy('vendor/base-php/core/packages/auth/css/dashboard.css', 'resources/assets/css/dashboard.css');
@@ -94,13 +101,6 @@ class AuthInstall extends Command
             if (! file_exists('resources/views/users')) {
                 mkdir('resources/views/users');
             }
-
-            if (! file_exists('resources/views/mails')) {
-                mkdir('resources/views/mails');
-            }
-
-            copy('vendor/base-php/core/packages/auth/views/' . $frontend . '/mails/recover.blade.php', 'resources/views/mails/recover.blade.php');
-            copy('vendor/base-php/core/packages/auth/views/' . $frontend . '/mails/verified-email.blade.php', 'resources/views/mails/verified-email.blade.php');
 
             copy('vendor/base-php/core/packages/auth/views/' . $frontend . '/auth/2fa.blade.php', 'resources/views/auth/2fa.blade.php');
             copy('vendor/base-php/core//packages/auth/views/' . $frontend . '/auth/forgot-password.blade.php', 'resources/views/auth/forgot-password.blade.php');

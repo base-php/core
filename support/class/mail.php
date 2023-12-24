@@ -2,6 +2,7 @@
 
 namespace App\Mails;
 
+use Monitor;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Mail
@@ -57,9 +58,12 @@ class Mail
 
         $mail->send();
 
+        include 'vendor/base-php/core/database/database.php';
+
         $schema = $capsule->getConnection('default')->getSchemaBuilder();
 
         if ($schema->hasTable('monitor')) {
+            $monitor = new Monitor();
             $monitor->email($this, $to);
         }
 
