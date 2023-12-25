@@ -106,6 +106,7 @@ include __DIR__.'/../view/view-service-provider.php';
 
 include __DIR__.'/../database/db.php';
 include __DIR__.'/../database/model.php';
+include __DIR__.'/../database/searchable.php';
 
 include __DIR__.'/../jobs/class/job.php';
 
