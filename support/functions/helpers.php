@@ -17,6 +17,7 @@ use Spatie\Dns\Dns;
 use Spatie\Image\Image;
 use Spatie\Mjml\Mjml;
 use Spatie\OpeningHours\OpeningHours;
+use Spatie\PdfToImage\Pdf;
 
 function abort($code = 404)
 {
@@ -354,6 +355,15 @@ function os()
     if (strpos($_SERVER['HTTP_USER_AGENT'], 'Windows')) {
         return 'Windows';
     }
+}
+
+function pdfToImage($pathToPdf)
+{
+    if (! class_exists('Spatie\PdfToImage\Pdf')) {
+        throw new Exception('Please execute `composer require spatie/pdf-to-image`');
+    }
+    
+    return new Pdf($pathToPdf);
 }
 
 function ssh()
