@@ -2,6 +2,7 @@
 
 namespace App\Resources;
 
+#[\AllowDynamicProperties]
 class Resource
 {
     public function __construct($data)
@@ -30,8 +31,8 @@ class Resource
                     }
 
                     foreach ($this->array() as $key => $value) {
-                        $this->result[$i][$key] = $value;
-                        unset($this->$key);
+                        $this->result[$i][$value] = $value;
+                        unset($this->$value);
                     }
 
                     $this->result['data'][$i] = (object) $this->result[$i];
@@ -58,7 +59,10 @@ class Resource
                     }
 
                     foreach ($this->array() as $key => $value) {
-                        $this->result[$i][$key] = $value;
+                        $this->result[$i][$value] = $this->$value;
+                    }
+
+                    foreach ($item as $key => $value) {
                         unset($this->$key);
                     }
 
@@ -83,7 +87,14 @@ class Resource
             }
 
             foreach ($this->array() as $key => $value) {
-                $this->result[$key] = $value;
+                if (isset($this->$value)) {
+                    $this->result[$value] = $this->$value;
+                } else {
+                    $this->result[$key] = $value;
+                }
+            }
+
+            foreach ($data as $key => $value) {
                 unset($this->$key);
             }
         }
@@ -91,7 +102,7 @@ class Resource
 
     public function __toString()
     {
-        return json($this->result);
+        return json_encode($this->result);
     }
 
     public function when($condition, $variable)
