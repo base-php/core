@@ -2,6 +2,10 @@
 
 class Job
 {
+    public $job;
+
+    public $queue;
+
     public function __construct($job)
     {
         $this->job = $job;
@@ -47,8 +51,11 @@ class Job
 
         include 'vendor/base-php/core/database/database.php';
 
+        $schema = $capsule->getConnection('default')->getSchemaBuilder();
+
         if ($schema->hasTable('monitor') && !strpos(currentRoute(), 'monitor')) {
-            $monitor->jobs($this, $this->queue, 'pending');
+            $monitor = new Monitor();
+            $monitor->jobs($this, $this->queue, 'pending', null);
         }
     }
 }
