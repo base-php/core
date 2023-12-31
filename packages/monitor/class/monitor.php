@@ -51,7 +51,7 @@ class Monitor
 	{
 		$content['time'] = date('Y-m-d H:i:s');
 		$content['hostname'] = $this->hostname();
-		$content['class'] = get_class($class);
+		$content['class'] = $class;
 		$content['queue'] = $queue;
 		$content['status'] = $status;
 		$content['exception'] = $exception;

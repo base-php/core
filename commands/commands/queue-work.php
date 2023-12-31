@@ -12,12 +12,14 @@ class QueueWork extends Command
 
     public function configure()
     {
-        $this->addArgument('queue', InputArgument::REQUIRED);
+        $this->addArgument('queue', InputArgument::OPTIONAL);
     }
 
     protected function execute($input, $output)
     {
         include 'vendor/base-php/core/database/database.php';
+
+        $schema = $capsule->getConnection('default')->getSchemaBuilder();
 
         $style = new SymfonyStyle($input, $output);
 
@@ -40,10 +42,9 @@ class QueueWork extends Command
 
                 $style->success($payload->job);
 
-                $schema = $capsule->getConnection('default')->getSchemaBuilder();
-
-                if ($schema->hasTable('monitor') && !strpos(currentRoute(), 'monitor')) {
-                    $monitor->jobs($class, $queue, 'success', null);
+                if ($schema->hasTable('monitor')) {
+                    $monitor = new Monitor();
+                    $monitor->jobs(get_class($class), $queue, 'success', null);
                 }
             } catch (Error $exception) {
                 DB::table('failed_jobs')
@@ -55,7 +56,8 @@ class QueueWork extends Command
 
                 $style->error($payload->job);
 
-                if ($schema->hasTable('monitor') && !strpos(currentRoute(), 'monitor')) {
+                if ($schema->hasTable('monitor')) {
+                    $monitor = new Monitor();
                     $monitor->jobs($class, $queue, 'error', $exception);
                 }
             }
