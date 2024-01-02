@@ -119,6 +119,13 @@ function dispatch($job)
     return new Job($job);
 }
 
+function dispatch_if($condition, $job)
+{
+    if ($condition) {
+        return new Job($job);
+    }
+}
+
 function dns($url)
 {
     if (! class_exists('Spatie\Dns\Dns')) {
