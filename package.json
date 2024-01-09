@@ -1,0 +1,10 @@
+{
+	"dependencies": {
+		"alpinejs": "3.13.3",
+		"bootstrap": "5.3.2",
+		"flowbite": "2.2.1",
+		"jquery": "3.7.1",
+		"mjml": "4.14.1",
+		"sweetalert2": "11.10.2",
+	}
+}
