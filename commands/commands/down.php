@@ -2,6 +2,8 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Down extends Command
 {
@@ -9,7 +11,7 @@ class Down extends Command
 
     protected static $defaultDescription = 'Poner la aplicación en modo mantenimiento';
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $file = 'app/config.php';
 

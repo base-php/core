@@ -3,6 +3,8 @@
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Pail extends Command
 {
@@ -15,7 +17,7 @@ class Pail extends Command
         $this->addOption('filter', null, InputOption::VALUE_NONE, 'Filtra los errores');
     }
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $style = new SymfonyStyle($input, $output);
 

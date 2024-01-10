@@ -1,6 +1,8 @@
 <?php
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ConfigShow extends Command
@@ -9,7 +11,7 @@ class ConfigShow extends Command
 
     protected static $defaultDescription = 'Muestra la información del archivo de configuración';
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $style = new SymfonyStyle($input, $output);
 

@@ -2,6 +2,8 @@
 
 use Psy\Shell as Psysh;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Shell extends Command
 {
@@ -9,7 +11,7 @@ class Shell extends Command
 
     protected static $defaultDescription = 'Interactuar con tu aplicación';
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $shell = new Psysh();
         $shell->setIncludes(['vendor/base-php/core/database/database.php']);

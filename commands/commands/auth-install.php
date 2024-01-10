@@ -1,8 +1,10 @@
 <?php
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class AuthInstall extends Command
 {
@@ -17,7 +19,7 @@ class AuthInstall extends Command
         $this->addOption('api', null, InputOption::VALUE_NONE, 'Instala API para autenticación');
     }
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $frontend = $input->getOption('bootstrap') ? 'bootstrap' : 'tailwind';
         $api = $input->getOption('api') ?? null;

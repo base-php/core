@@ -3,6 +3,8 @@
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class VendorPublish extends Command
 {
@@ -15,7 +17,7 @@ class VendorPublish extends Command
         $this->addOption('tag', null, InputOption::VALUE_OPTIONAL, 'Una o varias etiquetas que tienen activos que desea publicar (se permiten varios valores)', '');
     }
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $tag = $input->getOption('tag');
 

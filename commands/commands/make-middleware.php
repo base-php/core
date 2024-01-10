@@ -5,6 +5,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class MakeMiddleware extends Command
 {
@@ -18,7 +20,7 @@ class MakeMiddleware extends Command
         $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta al middleware');
     }
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $name = $input->getArgument('name');
 

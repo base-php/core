@@ -2,6 +2,8 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class PermissionsTable extends Command
 {
@@ -9,7 +11,7 @@ class PermissionsTable extends Command
 
     protected static $defaultDescription = 'Crear migraciones para las tabla de roles y permisos';
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         copy('vendor/base-php/core/packages/permissions/migrations/permissions.php', 'database/'.date('Y_m_d_His') . '_permissions.php');
         copy('vendor/base-php/core/packages/permissions/migrations/roles.php', 'database/'.date('Y_m_d_His') . '_roles.php');

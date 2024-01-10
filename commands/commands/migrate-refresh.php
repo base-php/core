@@ -2,8 +2,10 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
-
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+
 class MigrateRefresh extends Command
 {
     protected static $defaultName = 'migrate:refresh';
@@ -17,7 +19,7 @@ class MigrateRefresh extends Command
         $this->addOption('step', null, InputOption::VALUE_REQUIRED, 'El número de migraciones que se revertirán y volverán a ejecutar');
     }
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         include 'vendor/base-php/core/database/database.php';
 

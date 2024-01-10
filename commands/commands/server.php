@@ -2,6 +2,8 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Server extends Command
 {
@@ -14,7 +16,7 @@ class Server extends Command
         $this->addArgument('port', InputArgument::OPTIONAL);
     }
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $port = ($input->getArgument('port')) ? $input->getArgument('port') : 8080;
 

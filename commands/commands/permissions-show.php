@@ -4,6 +4,8 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Helper\TableCellStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class PermissionsShow extends Command
 {
@@ -11,7 +13,7 @@ class PermissionsShow extends Command
 
     protected static $defaultDescription = 'Muestra una tabla de roles y permisos';
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         include 'vendor/base-php/core/database/database.php';
 

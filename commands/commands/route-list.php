@@ -6,6 +6,8 @@ use Illuminate\Routing\RoutingServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class RouteList extends Command
 {
@@ -13,7 +15,7 @@ class RouteList extends Command
 
     protected static $defaultDescription = 'Lista de todas las rutas registradas';
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $style = new SymfonyStyle($input, $output);
 

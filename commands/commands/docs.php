@@ -2,6 +2,8 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Docs extends Command
 {
@@ -9,7 +11,7 @@ class Docs extends Command
 
     protected static $defaultDescription = 'Acceso a la documentación';
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $style = new SymfonyStyle($input, $output);
 

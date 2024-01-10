@@ -5,7 +5,9 @@ namespace App\Commands;
 use Symfony\Component\Console\Command\Command as CommandAPI;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
@@ -95,7 +97,7 @@ class Command extends CommandAPI
         return $symfonyStyle->error($text);
     }
 
-    public function execute($input, $output)
+    public function execute(InputInterface $input, OutputInterface $output)
     {
         foreach ($this->args() as $key => $value) {
             $args[$key] = $input->getArgument($key);

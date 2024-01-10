@@ -2,6 +2,8 @@
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Env extends Command
 {
@@ -9,7 +11,7 @@ class Env extends Command
 
     protected static $defaultDescription = 'Muestra el entorno actual del framework';
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $config = require 'app/config.php';
 

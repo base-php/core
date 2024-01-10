@@ -1,6 +1,8 @@
 <?php
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class BillsTable extends Command
@@ -9,7 +11,7 @@ class BillsTable extends Command
 
     protected static $defaultDescription = 'Crear migraciones para las tablas de facturación';
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         copy('vendor/base-php/core/packages/bill/migrations/customers.php', 'database/' . date('Y_m_d_His') . '_customers.php');
         sleep(1);

@@ -3,6 +3,8 @@
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class MakeDatabase extends Command
 {
@@ -15,7 +17,7 @@ class MakeDatabase extends Command
         $this->addArgument('connection', InputArgument::OPTIONAL);
     }
 
-    protected function execute($input, $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $connection = ($input->getArgument('connection')) ? $input->getArgument('connection') : 'default';
 
