@@ -11,7 +11,7 @@ class Docs extends Command
 
     protected static $defaultDescription = 'Acceso a la documentación';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);
 

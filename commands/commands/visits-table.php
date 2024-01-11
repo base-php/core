@@ -11,7 +11,7 @@ class VisitsTable extends Command
 
     protected static $defaultDescription = 'Crear migración para tabla de visitas';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         copy('vendor/base-php/core/packages/visits/migrations/visits.php', 'database/' . date('Y_m_d_His').'_visits.php');
 

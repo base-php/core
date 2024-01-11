@@ -19,7 +19,7 @@ class AuthInstall extends Command
         $this->addOption('api', null, InputOption::VALUE_NONE, 'Instala API para autenticación');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $frontend = $input->getOption('bootstrap') ? 'bootstrap' : 'tailwind';
         $api = $input->getOption('api') ?? null;

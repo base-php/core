@@ -11,7 +11,7 @@ class BillsTable extends Command
 
     protected static $defaultDescription = 'Crear migraciones para las tablas de facturación';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         copy('vendor/base-php/core/packages/bill/migrations/customers.php', 'database/' . date('Y_m_d_His') . '_customers.php');
         sleep(1);

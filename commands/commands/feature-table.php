@@ -11,7 +11,7 @@ class FeatureTable extends Command
 
     protected static $defaultDescription = 'Crear una migración para la tabla de features';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         copy('vendor/base-php/core/packages/feature/migrations/features.php', 'database/' . date('Y_m_d_His') . '_features.php');
 

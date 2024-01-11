@@ -15,7 +15,7 @@ class RouteList extends Command
 
     protected static $defaultDescription = 'Lista de todas las rutas registradas';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);
 

@@ -11,7 +11,7 @@ class TokensTable extends Command
 
     protected static $defaultDescription = 'Crear una migración para la tabla de tokens';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         copy('vendor/base-php/core/packages/tokens/migrations/tokens.php', 'database/' . date('Y_m_d_His') . '_tokens.php');
 

@@ -18,7 +18,7 @@ class DBBackup extends Command
         $this->addArgument('connection', InputArgument::OPTIONAL);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $config = include 'app/config.php';
 

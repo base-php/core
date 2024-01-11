@@ -97,7 +97,7 @@ class Command extends CommandAPI
         return $symfonyStyle->error($text);
     }
 
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach ($this->args() as $key => $value) {
             $args[$key] = $input->getArgument($key);

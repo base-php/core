@@ -11,7 +11,7 @@ class Test extends Command
 
     protected static $defaultDescription = 'Ejecuta las pruebas de la aplicación';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         system('vendor\bin\pest');
         return Command::SUCCESS;

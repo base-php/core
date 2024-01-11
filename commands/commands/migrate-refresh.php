@@ -19,7 +19,7 @@ class MigrateRefresh extends Command
         $this->addOption('step', null, InputOption::VALUE_REQUIRED, 'El número de migraciones que se revertirán y volverán a ejecutar');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         include 'vendor/base-php/core/database/database.php';
 

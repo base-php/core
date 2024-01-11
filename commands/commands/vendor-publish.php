@@ -17,7 +17,7 @@ class VendorPublish extends Command
         $this->addOption('tag', null, InputOption::VALUE_OPTIONAL, 'Una o varias etiquetas que tienen activos que desea publicar (se permiten varios valores)', '');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $tag = $input->getOption('tag');
 

@@ -20,7 +20,7 @@ class MakeChart extends Command
         $this->addArgument('library', InputArgument::OPTIONAL);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $name = $input->getArgument('name');
         $library = $input->getArgument('library') ?? 'chartjs';

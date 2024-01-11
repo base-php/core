@@ -11,7 +11,7 @@ class ViewClear extends Command
 
     protected static $defaultDescription = 'Borra todos los archivos de vista compilados';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         array_map('unlink', glob('vendor/base-php/core/cache/*'));
 

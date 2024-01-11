@@ -11,7 +11,7 @@ class QueueFailed extends Command
 
     protected static $defaultDescription = 'Lista de todos los trabajos fallidos en cola';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         include 'vendor/base-php/core/database/database.php';
 

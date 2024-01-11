@@ -11,7 +11,7 @@ class LanguageTable extends Command
 
     protected static $defaultDescription = 'Crear una migración para la tabla de traducción';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         copy('vendor/base-php/core/packages/language/migrations/language.php', 'database/' . date('Y_m_d_His') . '_language.php');
 

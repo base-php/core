@@ -17,7 +17,7 @@ class MakeDatabase extends Command
         $this->addArgument('connection', InputArgument::OPTIONAL);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $connection = ($input->getArgument('connection')) ? $input->getArgument('connection') : 'default';
 

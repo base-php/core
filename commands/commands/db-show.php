@@ -22,7 +22,7 @@ class DBShow extends Command
         $this->addOption('database', null, InputOption::VALUE_OPTIONAL, 'Conexión de base de datos a utilizar', 'default');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         include 'vendor/base-php/core/database/database.php';
 

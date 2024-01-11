@@ -11,7 +11,7 @@ class Up extends Command
 
     protected static $defaultDescription = 'Sacar la aplicación del modo de mantenimiento';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $file = 'app/config.php';
 

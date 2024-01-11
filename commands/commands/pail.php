@@ -17,7 +17,7 @@ class Pail extends Command
         $this->addOption('filter', null, InputOption::VALUE_NONE, 'Filtra los errores');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);
 

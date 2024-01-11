@@ -17,7 +17,7 @@ class ModelShow extends Command
         $this->addArgument('model', InputArgument::REQUIRED);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         include 'vendor/base-php/core/database/database.php';
 

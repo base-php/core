@@ -11,7 +11,7 @@ class ModelStatusTable extends Command
 
     protected static $defaultDescription = 'Crear una migración para la tabla de estados de modelos';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         copy('vendor/base-php/core/packages/model-status/migrations/model-status.php', 'database/' . date('Y_m_d_His') . '_logs.php');
 

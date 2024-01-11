@@ -11,7 +11,7 @@ class Env extends Command
 
     protected static $defaultDescription = 'Muestra el entorno actual del framework';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $config = require 'app/config.php';
 

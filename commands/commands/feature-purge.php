@@ -17,7 +17,7 @@ class FeaturePurge extends Command
         $this->addArgument('features', InputArgument::OPTIONAL, 'Features a eliminar');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         include 'vendor/base-php/core/database/database.php';
 

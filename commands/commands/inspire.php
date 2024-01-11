@@ -11,7 +11,7 @@ class Inspire extends Command
 
     protected static $defaultDescription = 'Muestra una frase motivacional';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $quotes = file_get_contents('https://frasedeldia.azurewebsites.net/api/phrase');
         $quotes = json_decode($quotes);

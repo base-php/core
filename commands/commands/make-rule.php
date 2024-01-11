@@ -18,7 +18,7 @@ class MakeRule extends Command
         $this->addArgument('name', InputArgument::OPTIONAL);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $name = $input->getArgument('name');
 

@@ -21,7 +21,7 @@ class MakeMigration extends Command
         $this->addOption('path', null, InputOption::VALUE_REQUIRED, 'Ubicación donde el archivo de migración será creado');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $name = $input->getArgument('name');
 

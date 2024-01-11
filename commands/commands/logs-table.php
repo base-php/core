@@ -11,7 +11,7 @@ class LogsTable extends Command
 
     protected static $defaultDescription = 'Crear una migración para la tabla de logs';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         copy('vendor/base-php/core/packages/logs/migrations/logs.php', 'database/' . date('Y_m_d_His') . '_logs.php');
 

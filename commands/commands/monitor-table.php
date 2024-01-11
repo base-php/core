@@ -11,7 +11,7 @@ class MonitorTable extends Command
 
     protected static $defaultDescription = 'Crear migración para tabla de monitor';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         copy('vendor/base-php/core/packages/monitor/migrations/monitor.php', 'database/' . date('Y_m_d_His').'_monitor.php');
 

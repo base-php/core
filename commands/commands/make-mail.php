@@ -20,7 +20,7 @@ class MakeMail extends Command
         $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta al mail');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $name = $input->getArgument('name');
 

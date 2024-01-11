@@ -16,7 +16,7 @@ class Server extends Command
         $this->addArgument('port', InputArgument::OPTIONAL);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $port = ($input->getArgument('port')) ? $input->getArgument('port') : 8080;
 

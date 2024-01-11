@@ -11,7 +11,7 @@ class Down extends Command
 
     protected static $defaultDescription = 'Poner la aplicación en modo mantenimiento';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $file = 'app/config.php';
 

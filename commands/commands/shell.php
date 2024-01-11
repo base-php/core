@@ -11,7 +11,7 @@ class Shell extends Command
 
     protected static $defaultDescription = 'Interactuar con tu aplicación';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $shell = new Psysh();
         $shell->setIncludes(['vendor/base-php/core/database/database.php']);

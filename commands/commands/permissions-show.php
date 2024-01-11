@@ -13,7 +13,7 @@ class PermissionsShow extends Command
 
     protected static $defaultDescription = 'Muestra una tabla de roles y permisos';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         include 'vendor/base-php/core/database/database.php';
 

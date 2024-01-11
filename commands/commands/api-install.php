@@ -11,7 +11,7 @@ class ApiInstall extends Command
 
     protected static $defaultDescription = 'Instala framework en modo API';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         system('rm -rf resources');
         system('rm -rf node_modules');

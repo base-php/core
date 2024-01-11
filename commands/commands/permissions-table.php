@@ -11,7 +11,7 @@ class PermissionsTable extends Command
 
     protected static $defaultDescription = 'Crear migraciones para las tabla de roles y permisos';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         copy('vendor/base-php/core/packages/permissions/migrations/permissions.php', 'database/'.date('Y_m_d_His') . '_permissions.php');
         copy('vendor/base-php/core/packages/permissions/migrations/roles.php', 'database/'.date('Y_m_d_His') . '_roles.php');

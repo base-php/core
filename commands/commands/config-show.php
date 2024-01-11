@@ -11,7 +11,7 @@ class ConfigShow extends Command
 
     protected static $defaultDescription = 'Muestra la información del archivo de configuración';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);
 

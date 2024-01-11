@@ -11,7 +11,7 @@ class Pint extends Command
 
     protected static $defaultDescription = 'Formateador de código PHP';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);
 

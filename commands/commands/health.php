@@ -11,7 +11,7 @@ class HealthCmd extends Command
 
     protected static $defaultDescription = 'Muestra información de salud de su aplicación';
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         require 'vendor/base-php/core/database/database.php';
 
