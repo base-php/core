@@ -49,10 +49,10 @@ function abort_unless($condition, $code)
 function app_path($path)
 {
     if (isset($_SERVER['DOCUMENT_ROOT'])) {
-        return $_SERVER['DOCUMENT_ROOT'] . '/app';
+        return $_SERVER['DOCUMENT_ROOT'] . '/app/';
     }
 
-    return '/app';
+    return '/app/';
 }
 
 function arr()
@@ -96,6 +96,15 @@ function authorize($condition)
 function backup($connection = '')
 {
     return new Backup($connection);
+}
+
+function base_path()
+{
+    if (! isset($_SERVER['DOCUMENT_ROOT'])) {
+        return $_SERVER['DOCUMENT_ROOT'] . '/';
+    }
+
+    return '/';
 }
 
 function bing()
