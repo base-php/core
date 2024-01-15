@@ -132,6 +132,15 @@ function currentRoute()
     return $_SERVER['REQUEST_URI'];
 }
 
+function database_path()
+{
+    if (! isset($_SERVER['DOCUMENT_ROOT'])) {
+        return $_SERVER['DOCUMENT_ROOT'] . '/database/';
+    }
+
+    return '/database/';
+}
+
 function dispatch($job)
 {
     return new Job($job);
