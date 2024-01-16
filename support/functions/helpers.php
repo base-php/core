@@ -328,6 +328,15 @@ function report_unless($condition, $message)
     }
 }
 
+function resource_path()
+{
+    if (! isset($_SERVER['DOCUMENT_ROOT'])) {
+        return $_SERVER['DOCUMENT_ROOT'] . '/resources/';
+    }
+
+    return '/resources/';
+}
+
 function response()
 {
     return new Response();
