@@ -127,6 +127,11 @@ function cashConverter()
     return new CashConverter();
 }
 
+function cookie($key, $value, $lifetime)
+{
+    setcookie($key, $value, time() + $lifetime);
+}
+
 function currentRoute()
 {
     return $_SERVER['REQUEST_URI'];
