@@ -347,6 +347,23 @@ function response()
     return new Response();
 }
 
+function retry($callback, $attempts, $millisecondsBetweenAttempts)
+{
+    $success = false;
+    $attempt = 1;
+
+    while ($success == false && $attempt < $attempts) {
+        try {
+            $callback();
+            $success = true;
+
+        } catch (Exception $exception) {
+            $attempt++;
+            sleep($millisecondsBetweenAttemps);
+        }
+    }
+}
+
 function pdf($object)
 {
     return $object;
