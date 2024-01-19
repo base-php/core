@@ -333,6 +333,20 @@ function report_unless($condition, $message)
     }
 }
 
+function rescue($callback, $default)
+{
+    try {
+        $callback();
+        
+    } catch (Exception $exception) {
+        if ($default) {
+            return $default;
+        }
+
+        return $exception;
+    }
+}
+
 function resource_path()
 {
     if (! isset($_SERVER['DOCUMENT_ROOT'])) {
