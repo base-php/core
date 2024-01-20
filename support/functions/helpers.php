@@ -477,6 +477,15 @@ function strposToArray($needle, $haystack)
     return false;
 }
 
+function tap($value, $closure = '')
+{
+    if ($closure) {
+        return $closure($value);
+    }
+
+    return $value;
+}
+
 function two_fa()
 {
     if (post()) {
