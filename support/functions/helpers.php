@@ -486,6 +486,17 @@ function tap($value, $closure = '')
     return $value;
 }
 
+function transform($value, $closure, $default = '')
+{
+    if ($value) {
+        return $closure($value);
+    }
+
+    if ($default) {
+        return $default;
+    }
+}
+
 function two_fa()
 {
     if (post()) {
