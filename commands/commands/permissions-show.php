@@ -6,13 +6,11 @@ use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Helper\TableCellStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'permissions:show', description: 'Muestra una tabla de roles y permisos')]
 class PermissionsShow extends Command
 {
-    protected static $defaultName = 'permissions:show';
-
-    protected static $defaultDescription = 'Muestra una tabla de roles y permisos';
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         include 'vendor/base-php/core/database/database.php';

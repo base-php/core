@@ -4,13 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'down', description: 'Poner la aplicación en modo mantenimiento')]
 class Down extends Command
 {
-    protected static $defaultName = 'down';
-
-    protected static $defaultDescription = 'Poner la aplicación en modo mantenimiento';
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $file = 'app/config.php';

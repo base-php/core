@@ -9,14 +9,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 
-
+#[AsCommand(name: 'db:show', description: 'Muestra información base de datos dada')]
 class DBShow extends Command
 {
-    protected static $defaultName = 'db:show';
-
-    protected static $defaultDescription = 'Muestra información base de datos dada';
-
     public function configure()
     {
         $this->addOption('database', null, InputOption::VALUE_OPTIONAL, 'Conexión de base de datos a utilizar', 'default');

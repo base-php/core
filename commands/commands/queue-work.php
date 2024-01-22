@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'queue:work', description: 'Comienza a procesar trabajos en la cola')]
 class QueueWork extends Command
 {
-    protected static $defaultName = 'queue:work';
-
-    protected static $defaultDescription = 'Comienza a procesar trabajos en la cola';
-
     public function configure()
     {
         $this->addArgument('queue', InputArgument::OPTIONAL);

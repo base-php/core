@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'db:backup', description: 'Genera copa de seguridad de la conexión a base de datos dada')]
 class DBBackup extends Command
 {
-    protected static $defaultName = 'db:backup';
-
-    protected static $defaultDescription = 'Genera copa de seguridad de la conexión a base de datos dada';
-
     public function configure()
     {
         $this->addArgument('filename', InputArgument::OPTIONAL);

@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'feature:purge', description: 'Eliminar features del almacenamiento')]
 class FeaturePurge extends Command
 {
-    protected static $defaultName = 'feature:purge';
-
-    protected static $defaultDescription = 'Eliminar features del almacenamiento';
-
     public function configure()
     {
         $this->addArgument('features', InputArgument::OPTIONAL, 'Features a eliminar');

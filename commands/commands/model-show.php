@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'model:show', description: 'Muestra información de un modelo Eloquent')]
 class ModelShow extends Command
 {
-    protected static $defaultName = 'model:show';
-
-    protected static $defaultDescription = 'Muestra información de un modelo Eloquent';
-
     public function configure()
     {
         $this->addArgument('model', InputArgument::REQUIRED);

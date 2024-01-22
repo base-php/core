@@ -6,13 +6,11 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'make:validation', description: 'Crea una nueva clase de validación')]
 class MakeValidation extends Command
 {
-    protected static $defaultName = 'make:validation';
-
-    protected static $defaultDescription = 'Crea una nueva clase de validación';
-
     public function configure()
     {
         $this->addArgument('name', InputArgument::OPTIONAL);

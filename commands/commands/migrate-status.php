@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'migrate:status', description: 'Muestra el estado de cada migración')]
 class MigrateStatus extends Command
 {
-    protected static $defaultName = 'migrate:status';
-
-    protected static $defaultDescription = 'Muestra el estado de cada migración';
-
     public function configure()
     {
         $this->addOption('database', null, InputOption::VALUE_OPTIONAL, 'Conexión de base de datos a utilizar', 'default');
@@ -30,11 +28,11 @@ class MigrateStatus extends Command
                 $class = require 'database/' . $item;
 
                 if ($class->connection != $connection) {
-                    return;
+                    return Command::SUCCESS;
                 }
 
                 if ($path && $path != 'database/' . $item) {
-                    return;
+                    return Command::SUCCESS;
                 }
 
                 $name = str_replace('.php', '', $item);

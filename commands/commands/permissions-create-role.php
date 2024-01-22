@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'permissions:create-role', description: 'Crea un rol')]
 class PermissionsCreateRole extends Command
 {
-    protected static $defaultName = 'permissions:create-role';
-
-    protected static $defaultDescription = 'Crea un rol';
-
     public function configure()
     {
         $this->addArgument('name', InputArgument::REQUIRED);

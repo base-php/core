@@ -7,13 +7,11 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'make:middleware', description: 'Crea una nueva clase de middleware')]
 class MakeMiddleware extends Command
 {
-    protected static $defaultName = 'make:middleware';
-
-    protected static $defaultDescription = 'Crea una nueva clase de middleware';
-
     public function configure()
     {
         $this->addArgument('name', InputArgument::OPTIONAL);

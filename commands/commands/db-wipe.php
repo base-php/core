@@ -7,13 +7,11 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'db:wipe', description: 'Eliminar todas las tablas')]
 class DBWipe extends Command
 {
-    protected static $defaultName = 'db:wipe';
-
-    protected static $defaultDescription = 'Eliminar todas las tablas';
-
     public function configure()
     {
         $this->addOption('database', null, InputOption::VALUE_OPTIONAL, 'Conexión de base de datos a utilizar', 'default');

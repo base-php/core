@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'auth:install', description: 'Instala los controladores y recursos de autenticación')]
 class AuthInstall extends Command
 {
-    protected static $defaultName = 'auth:install';
-
-    protected static $defaultDescription = 'Instala los controladores y recursos de autenticación';
-
     public function configure()
     {
         $this->addOption('bootstrap', null, InputOption::VALUE_NONE, 'Autenticación con Bootstrap');

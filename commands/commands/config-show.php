@@ -4,13 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'config:show', description: 'Muestra la información del archivo de configuración')]
 class ConfigShow extends Command
 {
-    protected static $defaultName = 'config:show';
-
-    protected static $defaultDescription = 'Muestra la información del archivo de configuración';
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);

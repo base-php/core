@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'make:database', description: 'Crea las bases de datos establecidas en el archivo config')]
 class MakeDatabase extends Command
 {
-    protected static $defaultName = 'make:database';
-
-    protected static $defaultDescription = 'Crea las bases de datos establecidas en el archivo config';
-
     public function configure()
     {
         $this->addArgument('connection', InputArgument::OPTIONAL);

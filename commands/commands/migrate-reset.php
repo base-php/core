@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'Revertir todas las migraciones', description: 'migrate:reset')]
 class MigrateReset extends Command
 {
-    protected static $defaultName = 'migrate:reset';
-
-    protected static $defaultDescription = 'Revertir todas las migraciones';
-
     public function configure()
     {
         $this->addOption('database', 'default', InputOption::VALUE_NONE, 'Conexión de base de datos a utilizar');

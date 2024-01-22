@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'vendor:publish', description: 'Publica cualquier asset publicable de paquetes de proveedores')]
 class VendorPublish extends Command
 {
-    protected static $defaultName = 'vendor:publish';
-
-    protected static $defaultDescription = 'Publica cualquier asset publicable de paquetes de proveedores';
-
     public function configure()
     {
         $this->addOption('tag', null, InputOption::VALUE_OPTIONAL, 'Una o varias etiquetas que tienen activos que desea publicar (se permiten varios valores)', '');

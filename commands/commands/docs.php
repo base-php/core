@@ -4,13 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'docs', description: 'Acceso a la documentación')]
 class Docs extends Command
 {
-    protected static $defaultName = 'docs';
-
-    protected static $defaultDescription = 'Acceso a la documentación';
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle($input, $output);

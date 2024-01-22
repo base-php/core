@@ -4,13 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'up', description: 'Sacar la aplicación del modo de mantenimiento')]
 class Up extends Command
 {
-    protected static $defaultName = 'up';
-
-    protected static $defaultDescription = 'Sacar la aplicación del modo de mantenimiento';
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $file = 'app/config.php';

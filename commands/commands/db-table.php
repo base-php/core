@@ -9,14 +9,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 
-
+#[AsCommand(name: 'db:table', description: 'Muestra información sobre la tabla de la base de datos dada')]
 class DBTable extends Command
 {
-    protected static $defaultName = 'db:table';
-
-    protected static $defaultDescription = 'Muestra información sobre la tabla de la base de datos dada';
-
     public function configure()
     {
         $this->addArgument('table', InputArgument::REQUIRED);

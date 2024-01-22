@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'pail', description: 'Muestra los registros de error')]
 class Pail extends Command
 {
-    protected static $defaultName = 'pail';
-
-    protected static $defaultDescription = 'Muestra los registros de error';
-
     public function configure()
     {
         $this->addOption('filter', null, InputOption::VALUE_NONE, 'Filtra los errores');

@@ -4,13 +4,11 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'health', description: 'Muestra información de salud de su aplicación')]
 class HealthCmd extends Command
 {
-    protected static $defaultName = 'health';
-
-    protected static $defaultDescription = 'Muestra información de salud de su aplicación';
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         require 'vendor/base-php/core/database/database.php';

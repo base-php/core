@@ -7,13 +7,11 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'make:notification', description: 'Crea una nueva clase de notificación')]
 class MakeNotification extends Command
 {
-    protected static $defaultName = 'make:notification';
-
-    protected static $defaultDescription = 'Crea una nueva clase de notificación';
-
     public function configure()
     {
         $this->addArgument('name', InputArgument::OPTIONAL);

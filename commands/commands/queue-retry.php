@@ -5,13 +5,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'queue:retry', description: 'Reintentar trabajos fallidos en cola')]
 class QueueRetry extends Command
 {
-    protected static $defaultName = 'queue:retry';
-
-    protected static $defaultDescription = 'Reintentar trabajos fallidos en cola';
-
     public function configure()
     {
         $this->addOption(
