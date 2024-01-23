@@ -18,7 +18,11 @@ class Lang
                 if (strpos($file, '.php')) {
                     $key = str_replace('.php', '', $file);
 
-                    $texts[$key] = include $_SERVER['DOCUMENT_ROOT'].'/resources/lang/' . $lang . '/' . $file;
+                    $array = include $_SERVER['DOCUMENT_ROOT'].'/resources/lang/' . $lang . '/' . $file;
+
+                    foreach ($array as $key => $value) {
+                        $texts[$key] = $value;
+                    }
                 }
             }
 
