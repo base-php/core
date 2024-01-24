@@ -263,12 +263,7 @@ function lang($key)
 
     } else {
         try {
-            $array = explode('.', $key);
-
-            $file = $array[0];
-            $key = $array[1];
-
-            return $_ENV['translate'][$file][$key];
+            return $_ENV['translate'][$key];
         } catch (Exception $exception) {
             return $key;
         }
