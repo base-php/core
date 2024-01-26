@@ -18,21 +18,21 @@
 
     <hr class="mb-5">
 
-    <p>{{ lang('auth.email_greeting') }}, {{ $user->name }}.</p>
+    <p>{{ lang('Hello') }}, {{ $user->name }}.</p>
 
-    <p>{{ lang('auth.text') }}</p>
+    <p>{{ lang('You are receiving this email because you made a password recovery request for your account.') }}</p>
 
     <p>
-        <a class="btn btn-primary" href="{{ host() }}/recover/{{ encrypt($user->id) }}">{{ lang('auth.email_recover_password') }}</a>
+        <a class="btn btn-primary" href="{{ host() }}/recover/{{ encrypt($user->id) }}">{{ lang('Recover password') }}</a>
     </p>
 
-    <p>{{ lang('auth.email_warning') }}</p>
+    <p>{{ lang('If you did not make this request, no action is required.') }}</p>
 
-    <p class="mb-5">{{ lang('auth.email_fired') }}, {{ config('application_name') }}.</p>
+    <p class="mb-5">{{ lang('Greetings') }}, {{ config('application_name') }}.</p>
 
     <hr class="mb-5">
 
-    <p>{{ lang('auth.email_footer') }}: <a href="http:{{ host() }}/recover/{{ encrypt($user->id) }}">http:{{ host() }}/recover/{{ encrypt($user->id) }}</a></p>
+    <p>{{ lang('If you have problems clicking the \'Recover Password\' button, copy and paste the following URL into your web browser') }}: <a href="http:{{ host() }}/recover/{{ encrypt($user->id) }}">http:{{ host() }}/recover/{{ encrypt($user->id) }}</a></p>
 
     <script src="{{ node('jquery/dist/jquery.js') }}"></script>
     <script src="{{ node('bootstrap/dist/js/bootstrap.js') }}"></script>

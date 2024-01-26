@@ -4,12 +4,12 @@
         
         <form class="flex flex-col" method="POST" action="/login">
             <div>
-                <x-label for="email" text="{{ lang('auth.email') }}"/>
+                <x-label for="email" text="{{ lang('Email') }}"/>
                 <x-input name="email" required type="email"/>
             </div>
 
             <div class="mt-5">
-                <label for="password">{{ lang('auth.password') }}</label>
+                <label for="password">{{ lang('Password') }}</label>
                 <x-input name="password" required type="password"/>
             </div>
 
@@ -18,25 +18,25 @@
             @endif
 
             <div class="text-center p-5">
-                <a href="/forgot-password" class="text-sm text-black hover:text-black hover:underline mb-6">{{ lang('auth.recover') }}</a>
+                <a href="/forgot-password" class="text-sm text-black hover:text-black hover:underline mb-6">{{ lang('Did you forget your password?') }}</a>
             </div>
 
             <x-button color="black">
                 <i class="fas fa-sign-in-alt mr-2"></i>
-                {{ lang('auth.login') }}
+                {{ lang('Login') }}
             </x-button>
 
             @if(config('facebook'))
                 <x-social-button url="{{ facebook()->url() }}" color="blue-600">
                     <i class="fab fa-facebook mr-2"></i>
-                    {{ lang('auth.login') }}
+                    {{ lang('Login') }}
                 </x-social-button>
             @endif
 
             @if(config('google'))
                 <x-social-button url="{{ google()->url() }}" color="red-600">
                     <i class="fab fa-google mr-2"></i>
-                    {{ lang('auth.login') }}
+                    {{ lang('Login') }}
                 </x-social-button>
             @endif
         </form>

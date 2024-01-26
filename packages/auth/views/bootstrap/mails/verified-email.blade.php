@@ -18,15 +18,15 @@
 
     <hr class="mb-5">
 
-    <p>{{ lang('auth.email_greeting') }}, {{ $user->name }}.</p>
+    <p>{{ lang('Hello') }}, {{ $user->name }}.</p>
 
     <p>
-        <a class="btn btn-primary" href="{{ host() }}/verified-email/{{ encrypt($user->id) }}">{{ lang('auth.email_verified') }}</a>
+        <a class="btn btn-primary" href="{{ host() }}/verified-email/{{ encrypt($user->id) }}">{{ lang('Click here to verify your email.') }}</a>
     </p>
 
     <hr class="mb-5">
 
-    <p>{{ lang('auth.verified_email_footer') }}: <a href="{{ host() }}/verified-email/{{ encrypt($user->id) }}">{{ host() }}/verified-email/{{ encrypt($user->id) }}</a></p>
+    <p>{{ lang('If you have problems clicking the \'Recover Password\' button, copy and paste the following URL into your web browser') }}: <a href="{{ host() }}/verified-email/{{ encrypt($user->id) }}">{{ host() }}/verified-email/{{ encrypt($user->id) }}</a></p>
 
     <script src="{{ node('jquery/dist/jquery.js') }}"></script>
     <script src="{{ node('bootstrap/dist/js/bootstrap.js') }}"></script>

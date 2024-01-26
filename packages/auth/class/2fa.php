@@ -29,7 +29,7 @@ class TwoFA
             return redirect($redirect);
         }
 
-        return redirect(server('referer'))->with('error', lang('auth.2fa_error_code'));
+        return redirect(server('referer'))->with('error', lang('Incorrect code'));
     }
 
     public function qr($key)

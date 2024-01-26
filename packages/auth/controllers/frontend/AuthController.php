@@ -54,11 +54,11 @@ class AuthController extends Controller
             $email = (new $this->model)->where('email', request('email'))->get();
 
             if ($email->count() > 0) {
-                return redirect('/register')->with('error', lang('auth.email_verified_error'));
+                return redirect('/register')->with('error', lang('Email is already registered.'));
             }
 
             if (request('password') != request('confirm_password')) {
-                return redirect('/register')->with('error', lang('auth.password_not_match'));
+                return redirect('/register')->with('error', lang('Passwords do not match.'));
             }
 
             $user = (new $this->model)->create([
@@ -73,7 +73,7 @@ class AuthController extends Controller
                 email($user->email, new VerifiedEmail($user));
             }
 
-            return redirect('/login')->with('info', lang('auth.register_success'));
+            return redirect('/login')->with('info', lang('Registered user, now you can log in.'));
         }
 
         return view('auth.register');
@@ -101,7 +101,7 @@ class AuthController extends Controller
 
         if ($user) {
             if ($this->verified_email && ! $user->date_verified_email) {
-                return redirect('/login')->with('error', lang('auth.verified_email'));
+                return redirect('/login')->with('error', lang('In order to log in you must verify your email first.'));
             }
 
             $sessions = json($user->sessions ?? '[]');
@@ -120,7 +120,7 @@ class AuthController extends Controller
             return redirect($redirect);
         }
 
-        return redirect('/login')->with('error', lang('auth.incorrect_data'));
+        return redirect('/login')->with('error', lang('Incorrect data'));
     }
 
     /**
@@ -134,12 +134,12 @@ class AuthController extends Controller
         $user = (new $this->model)->where('hash', $hash)->first();
 
         if (! $user) {
-            return redirect('/login')->with('error', lang('auth.error_hash'));            
+            return redirect('/login')->with('error', lang('Error verifying email'));            
         }
 
         (new $this->model)->where('hash', $hash)->update(['date_verified_email' => now('Y-m-d H:i:s')]);
 
-        return redirect('/login')->with('info', lang('auth.email_verified_success'));
+        return redirect('/login')->with('info', lang('Email verified successfully, now you can login.'));
     }
 
     /**
@@ -173,12 +173,12 @@ class AuthController extends Controller
             $user = (new $this->model)->where('email', request('email'))->first();
 
             if (! $user) {
-                return redirect('/forgot-password')->with('error', lang('auth.email_not_match'));
+                return redirect('/forgot-password')->with('error', lang('We can\'t find a user with that email address.'));
             }
 
             email($user->email, new PasswordRecoveryEmail($user));
 
-            return redirect('/forgot-password')->with('info', lang('auth.check_email'));
+            return redirect('/forgot-password')->with('info', lang('Check your email to recover your password.'));
         }
 
         return view('auth.forgot-password');
@@ -196,7 +196,7 @@ class AuthController extends Controller
             $user = (new $this->model)->where('hash', request('id'))->first();
 
             if (! $user) {
-                return redirect('/login')->with('error', lang('auth.link_invalid'));
+                return redirect('/login')->with('error', lang('Invalid password recovery link.'));
             }
 
             if (request('password') != request('confirm_password')) {

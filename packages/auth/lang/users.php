@@ -11,6 +11,7 @@ return [
     '2fa_subtitle' => 'Agregue seguridad adicional a su cuenta con la autenticación de dos factores',
     '2fa_title' => 'Autenticación de dos factores',
     'add_name_email' => 'Agregue el nombre y correo electrónico.',
+
     'change_password' => 'Cambia contraseña',
     'change_password_text' => 'Asegúrate de que tu cuenta esté usando una contraseña larga y aleatoria para mantenerse seguro.',
     'confirm_delete_accept' => 'Aceptar',
@@ -21,6 +22,7 @@ return [
     'delete' => 'Eliminar usuario',
     'delete_account' => 'Eliminar cuenta',
     'delete_account_permanently' => 'Eliminar tu cuenta permanentemente.',
+
     'delete_account_text' => 'Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán permanentemente. Antes de eliminar su cuenta, descargue cualquier dato o información  que desee conservar.',
     'delete_photo' => 'Eliminar foto',
     'edit' => 'Editar usuario',
@@ -31,6 +33,7 @@ return [
     'logout_other_browsers' => 'Cerrar sesión en otros navegadores',
     'name' => 'Nombre',
     'password' => 'Contraseña',
+
     'photo' => 'Foto',
     'profile_info' => 'Información del perfil',
     'save' => 'Guardar',
@@ -41,5 +44,6 @@ return [
     'sessions_text' => 'Administre y cierre sesión sus sesiones activas en otros navegadores y dispositivos.',
     'store' => 'Usuario registrado satisfactoriamente.',
     'update' => 'Usuario actualizado satisfactoriamente.',
+
     'users' => 'Usuarios',
 ];
