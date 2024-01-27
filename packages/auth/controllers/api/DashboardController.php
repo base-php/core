@@ -21,6 +21,6 @@ class DashboardController extends Controller
      */
     public function index(): Response
     {
-        return response()->json(['message' => lang('dashboard.text') ]);
+        return response()->json(['message' => lang('You are logged in') ]);
     }
 }

@@ -45,7 +45,7 @@
                     <div class="mt-5">
                         @if(auth())
                             <a href="/dashboard" class="text-decoration-none text-dark d-block">
-                                <i class="fa fa-arrow-right"></i> {{ lang('dashboard.home') }}
+                                <i class="fa fa-arrow-right"></i> {{ lang('Home') }}
                             </a>
                         @else
                             <a href="/login" class="text-decoration-none text-dark d-block">

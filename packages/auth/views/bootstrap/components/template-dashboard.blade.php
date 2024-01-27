@@ -52,11 +52,11 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/dashboard">{{ lang('dashboard.home') }}</a>
+                    <a class="nav-link" href="/dashboard">{{ lang('Home') }}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/dashboard/users">{{ lang('dashboard.users') }}</a>
+                    <a class="nav-link" href="/dashboard/users">{{ lang('Users') }}</a>
                 </li>
             </ul>
 

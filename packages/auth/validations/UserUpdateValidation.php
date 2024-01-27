@@ -30,11 +30,11 @@ class UserUpdateValidation extends Validation
     public function messages(): array
     {
         return [
-            'name.required' => lang('validations.name_required'),
-            'email.required' => lang('validations.email_required'),
-            'email.email' => lang('validations.email_email'),
-            'email.unique' => lang('validations.email_unique'),
-            'confirm_password.same' => lang('validations.password_same'),
+            'name.required' => lang('The name field is required.'),
+            'email.required' => lang('The email field is required.'),
+            'email.email' => lang('You must enter a valid email.'),
+            'email.unique' => lang('This email is already registered.'),
+            'confirm_password.same' => lang('Passwords do not match.'),
         ];
     }
 }
