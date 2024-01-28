@@ -92,8 +92,8 @@
     </div>    
 
     <input type="hidden" id="confirm_delete_text" value="{{ lang('users.confirm_delete_text') }}">
-    <input type="hidden" id="confirm_delete_accept" value="{{ lang('users.confirm_delete_accept') }}">
-    <input type="hidden" id="confirm_delete_cancel" value="{{ lang('users.confirm_delete_cancel') }}">
+    <input type="hidden" id="confirm_delete_accept" value="{{ lang('Accept') }}">
+    <input type="hidden" id="confirm_delete_cancel" value="{{ lang('Cancel') }}">
 
     <script src="{{ node('flowbite/dist/flowbite.js') }}" defer></script>
     <script src="{{ node('alpinejs/dist/cdn.js') }}" defer></script>

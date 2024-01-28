@@ -47,7 +47,7 @@ class UserController extends Controller
         $user->update(['hash' => encrypt($user->id)]);
 
         $response = [
-            'info' => lang('users.store'),
+            'info' => lang('Successfully registered user.'),
             'user' => $user
         ];
 
@@ -103,7 +103,7 @@ class UserController extends Controller
         }
 
         $response = [
-            'info' => lang('users.update'),
+            'info' => lang('User successfully updated.'),
             'user' => $user
         ];
 
@@ -119,7 +119,7 @@ class UserController extends Controller
     public function delete(int $id): Response
     {
         if ($id == session('id')) {
-            return redirect('/dashboard/users')->with('error', lang('users.in_use'));
+            return redirect('/dashboard/users')->with('error', lang('Cannot be deleted, user is in use.'));
         }
 
         $user = User::find($id);
@@ -130,7 +130,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return response()->json(['info' => lang('users.delete')]);
+        return response()->json(['info' => lang('Delete user')]);
     }
 
     /**

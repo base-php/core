@@ -59,7 +59,7 @@ class UserController extends Controller
 
         $user->update(['hash' => encrypt($user->id)]);
 
-        return redirect('/dashboard/users')->with('info', lang('users.store'));
+        return redirect('/dashboard/users')->with('info', lang('Successfully registered user.'));
     }
 
     /**
@@ -127,7 +127,7 @@ class UserController extends Controller
             session('photo', $user->photo);
         }
 
-        return redirect('/dashboard/users')->with('info', lang('users.update'));
+        return redirect('/dashboard/users')->with('info', lang('User successfully updated.'));
     }
 
     /**
@@ -139,7 +139,7 @@ class UserController extends Controller
     public function delete(int $id): Redirect
     {
         if ($id == session('id')) {
-            return redirect('/dashboard/users')->with('error', lang('users.in_use'));
+            return redirect('/dashboard/users')->with('error', lang('Cannot be deleted, user is in use.'));
         }
 
         $user = User::find($id);
@@ -150,7 +150,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect('/dashboard/users')->with('info', lang('users.delete'));
+        return redirect('/dashboard/users')->with('info', lang('Delete user'));
     }
 
     /**

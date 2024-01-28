@@ -1,16 +1,16 @@
 <x-template-dashboard active="users">
 	<div class="w-full p-3">
-        <h1 class="text-3xl mb-4">{{ lang('users.users') }}</h1>
+        <h1 class="text-3xl mb-4">{{ lang('Users') }}</h1>
 
         <div class="grid grid-cols-2 mb-5">
             <div>
-                <input x-on:keyup="search($el)" autofocus type="text" placeholder="{{ lang('users.search') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <input x-on:keyup="search($el)" autofocus type="text" placeholder="{{ lang('Search...') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>
 
             <div class="text-right">
                 <a href="/dashboard/users/create" class="inline-flex items-center p-3 appearance-none bg-black border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-black active:bg-black focus:outline-none focus:border-black focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
                     <i class="fa fa-plus mr-2"></i> 
-                    {{ lang('users.create') }}
+                    {{ lang('Create new user') }}
                 </a>
             </div>
         </div>
@@ -21,10 +21,10 @@
             <table id="table" class="w-full">
                 <thead class="border-b-2">
                     <tr class="hover:bg-gray-100">
-                        <th class="text-left p-2 hidden sm:table-cell">{{ lang('users.id') }}</th>
-                        <th class="text-left p-2">{{ lang('users.photo') }}</th>
-                        <th class="text-left p-2">{{ lang('users.name') }}</th>
-                        <th class="text-left p-2 hidden sm:table-cell">{{ lang('users.email') }}</th>
+                        <th class="text-left p-2 hidden sm:table-cell">{{ lang('ID') }}</th>
+                        <th class="text-left p-2">{{ lang('Photo') }}</th>
+                        <th class="text-left p-2">{{ lang('Name') }}</th>
+                        <th class="text-left p-2 hidden sm:table-cell">{{ lang('Email') }}</th>
                         <th class="text-left p-2"></th>
                     </tr>
                 </thead>
@@ -39,11 +39,11 @@
                         <td class="p-2">{{ $user->name }}</td>
                         <td class="p-2 hidden sm:table-cell">{{ $user->email }}</td>
                         <td class="p-2 text-right">
-                            <a class="hover:text-blue-600 p-1" href="{{ '/dashboard/users/edit/' . $user->id }}" title="{{ lang('users.edit') }}">
+                            <a class="hover:text-blue-600 p-1" href="{{ '/dashboard/users/edit/' . $user->id }}" title="{{ lang('Edit user') }}">
                                 <fa class="fa fa-edit"></fa>
                             </a>
 
-                            <a x-on:click="confirmDelete(event, $el)" class="hover:text-red-600 p-1" href="{{ '/dashboard/users/delete/' . $user->id }}" title="{{ lang('users.delete') }}">
+                            <a x-on:click="confirmDelete(event, $el)" class="hover:text-red-600 p-1" href="{{ '/dashboard/users/delete/' . $user->id }}" title="{{ lang('Delete user') }}">
                                 <fa class="fa fa-trash"></fa>
                             </a>
                         </td>

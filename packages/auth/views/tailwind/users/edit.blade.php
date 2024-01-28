@@ -1,7 +1,7 @@
 <x-template-dashboard title="Editar usuario" active="users">
     <div x-init="$watch('photo', value => preview(value))">
         <div class="w-full p-3">
-            <h1 class="text-4xl">{{ lang('users.edit') }}</h1>
+            <h1 class="text-4xl">{{ lang('Edit user') }}</h1>
 
             <hr class="my-5">
 
@@ -9,8 +9,8 @@
 
             <div class="flex">
                 <div class="w-5/12 p-3">
-                    <h1 class="font-semibold text-2xl mb-3">{{ lang('users.profile_info') }}</h1>
-                    <h2>{{ lang('users.edit_name_email') }}</h2>
+                    <h1 class="font-semibold text-2xl mb-3">{{ lang('Profile info') }}</h1>
+                    <h2>{{ lang('Update name and email.') }}</h2>
                 </div>
 
                 <input type="hidden" id="photo-url" value="{{ $user->photo }}">
@@ -27,30 +27,30 @@
                             <div>
                                 <x-file-button show="photo == ''" click="document.getElementById('photo').click()" id="open-file-selector" border="black" background="white" text="black">
                                     <i class="fa fa-upload mr-2"></i>
-                                    {{ lang('users.select_photo') }}
+                                    {{ lang('Select new photo') }}
                                 </x-file-button>
 
                                 <x-file-button show="photo != ''" click="removePhoto()" background="red-500" text="white" border="red-500">
                                     <i class="fa fa-trash mr-2"></i>
-                                    {{ lang('users.delete_photo') }}
+                                    {{ lang('Delete photo') }}
                                 </x-file-button>
                             </div>
                         </div>
 
                         <div class="mt-5">
-                            <x-label for="name" text="{{ lang('users.name') }}"/>
+                            <x-label for="name" text="{{ lang('Name') }}"/>
                             <x-input name="name" value="{{ $user->name }}" required/>
                         </div>
 
                         <div class="mt-5">
-                            <x-label for="email" text="{{ lang('users.email') }}"/>
+                            <x-label for="email" text="{{ lang('Email') }}"/>
                             <x-input name="email" value="{{ $user->email }}" required type="email"/>
                         </div>
 
                         <div class="mt-5">
                             <x-button color="black">
                                 <i class="fa fa-save mr-2"></i>
-                                {{ lang('users.save') }}
+                                {{ lang('Save') }}
                             </x-button>
                         </div>
 
@@ -64,8 +64,8 @@
 
             <div class="flex">
                 <div class="w-5/12 p-3">
-                    <h1 class="font-semibold text-2xl mb-3">{{ lang('users.change_password') }}</h1>
-                    <h2>{{ lang('users.change_password_text') }}</h2>
+                    <h1 class="font-semibold text-2xl mb-3">{{ lang('Change password') }}</h1>
+                    <h2>{{ lang('Make sure your account is using a long, random password to stay secure.') }}</h2>
                 </div>
 
                 <div class="w-7/12 rounded bg-white p-7">
@@ -73,19 +73,19 @@
                         <x-input type="hidden" name="id" value="{{ $user->id }}"/>
 
                         <div class="mt-5">
-                            <x-label for="password" text="{{ lang('users.password') }}"/>
+                            <x-label for="password" text="{{ lang('Password') }}"/>
                             <x-input name="password" type="password" required/>
                         </div>
 
                         <div class="mt-5">
-                            <x-label for="confirm_password" text="{{ lang('users.confirm_password') }}"/>
+                            <x-label for="confirm_password" text="{{ lang('Confirm Password') }}"/>
                             <x-input name="confirm_password" type="password" required/>
                         </div>
 
                         <div class="mt-5">
                             <x-button color="black">
                                 <i class="fa fa-save mr-2"></i>
-                                {{ lang('users.save') }}
+                                {{ lang('Save') }}
                             </x-button>
                         </div>
 
@@ -100,8 +100,8 @@
 
                 <div class="flex">
                     <div class="w-5/12 p-3">
-                        <h1 class="font-semibold text-2xl mb-3">{{ lang('users.2fa_title') }}</h1>
-                        <h2>{{ lang('users.2fa_subtitle') }}</h2>
+                        <h1 class="font-semibold text-2xl mb-3">{{ lang('Two-factor authentication') }}</h1>
+                        <h2>{{ lang('Add additional security to your account with two-factor authentication') }}</h2>
                     </div>
 
                     <input type="hidden" name="2fa" value="1">
@@ -109,9 +109,9 @@
                     @if($user->two_fa)
                         <div class="w-7/12 rounded bg-white p-7">
                             <div>
-                                <h1 class="font-semibold text-2xl mb-3">{{ lang('users.2fa_enable_warning') }}</h1>
+                                <h1 class="font-semibold text-2xl mb-3">{{ lang('You have enabled two-factor authentication') }}</h1>
 
-                                <p>{{ lang('users.2fa_enable_text') }}</p>
+                                <p>{{ lang('Enable') }}</p>
 
                                 <div>{!! two_fa()->qr($user->two_fa) !!}</div>
 
@@ -120,7 +120,7 @@
                                 <div class="mt-5">
                                     <x-button-link href="{{ '/2fa/' . $user->id }}" color="red-500">
                                         <i class="fa fa-times mr-2"></i>
-                                        {{ lang('users.2fa_disable') }}
+                                        {{ lang('Disable') }}
                                     </x-button-link>
                                 </div>
                             </div>
@@ -128,9 +128,9 @@
                     @else
                         <div class="w-7/12 rounded bg-white p-7">
                             <div>
-                                <h1 class="font-semibold text-2xl mb-3">{{ lang('users.2fa_disable_warning') }}</h1>
+                                <h1 class="font-semibold text-2xl mb-3">{{ lang('You have not enabled two-factor authentication') }}</h1>
 
-                                <p>{{ lang('users.2fa_disable_text') }}</p>
+                                <p>{{ lang('When two-factor authentication is enabled, you will be prompted for a random, secure token during authentication. You can retrieve this token from the Google Authenticator app on your phone.') }}</p>
                             </div>
 
                             <div class="mt-5">
@@ -148,13 +148,13 @@
 
             <div class="flex">
                 <div class="w-5/12 p-3">
-                    <h1 class="font-semibold text-2xl mb-3">{{ lang('users.sessions') }}</h1>
-                    <h2>{{ lang('users.sessions_text') }}</h2>
+                    <h1 class="font-semibold text-2xl mb-3">{{ lang('Sessions') }}</h1>
+                    <h2>{{ lang('Manage and log out of your active sessions on other browsers and devices.') }}</h2>
                 </div>
 
                 <div class="w-7/12 rounded bg-white p-7">
                     <div>
-                        <p>{{ lang('users.sessions_description') }}</p>
+                        <p>{{ lang('If necessary, you can log out of all your devices. Some of their recent sessions are listed below; however, this list may not be exhausted. If you believe your account has been compromised, you should also update your password.') }}</p>
                     </div>
 
                     <div class="mt-5">
@@ -169,7 +169,7 @@
                     <div class="mt-5">
                         <x-button-link href="{{ '/logoutInOthersDevices/' . $user->id }}" color="black">
                             <i class="fa-solid fa-right-from-bracket mr-2"></i>
-                            {{ lang('users.logout_other_browsers') }}
+                            {{ lang('Sign out of other browsers') }}
                         </x-button-link>
                     </div>
                 </div>
@@ -179,19 +179,19 @@
 
             <div class="flex">
                 <div class="w-5/12 p-3">
-                    <h1 class="font-semibold text-2xl mb-3">{{ lang('users.delete_account') }}</h1>
-                    <h2>{{ lang('users.delete_account_permanently') }}</h2>
+                    <h1 class="font-semibold text-2xl mb-3">{{ lang('Delete account') }}</h1>
+                    <h2>{{ lang('Delete your account permanently.') }}</h2>
                 </div>
 
                 <div class="w-7/12 rounded bg-white p-7">
                     <div>
-                        <p>{{ lang('users.delete_account_text') }}</p>
+                        <p>{{ lang('Once your account is deleted, all your resources and data will be permanently deleted. Before deleting your account, download any data or information you want to keep.') }}</p>
                     </div>
 
                     <div class="mt-5">
                         <x-button-link click="confirmDelete(event, $el)" href="{{ '/dashboard/users/delete/' . $user->id }}" color="red-500">
                             <i class="fa fa-trash mr-2"></i>
-                            {{ lang('users.delete_account') }}
+                            {{ lang('Delete account') }}
                         </x-button-link>
                     </div>
                 </div>
