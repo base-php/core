@@ -14,6 +14,7 @@ use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory as Validation;
 use Spatie\Dns\Dns;
+use Spatie\Holidays\Holidays;
 use Spatie\Image\Image;
 use Spatie\Mjml\Mjml;
 use Spatie\OpeningHours\OpeningHours;
@@ -217,6 +218,10 @@ function feature()
 function google()
 {
     return Google::init();
+}
+
+function holidays($country = 've') {
+    return Holidays::for($country)->get();
 }
 
 function image()
