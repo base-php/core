@@ -253,7 +253,7 @@ function http()
     return new HttpClient;
 }
 
-function lang($key)
+function lang($key, $variables = [])
 {
     if (config('translate') == 'database') {
         $db = Language::where('language', $_ENV['language'])
@@ -261,15 +261,28 @@ function lang($key)
             ->first();
 
         if ($db) {
-            return $db->value;
+            foreach ($variables as $k => $v) {
+                $key = str_replace(':' . $k, $v, $db->value);
+            }
+
+            return $key;
         }
 
         return $key;
 
     } else {
         try {
-            return $_ENV['translate'][$key];
+            foreach ($variables as $k => $v) {
+                $key = str_replace(':' . $k, $v, $_ENV['translate'][$key]);
+            }
+
+            return $key;
+
         } catch (Exception $exception) {
+            foreach ($variables as $k => $v) {
+                $key = str_replace(':' . $k, $v, $key);
+            }
+
             return $key;
         }
     }
