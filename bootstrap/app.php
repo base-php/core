@@ -16,19 +16,19 @@ class App
 
         // General settings
 
-        $session_save_path = config('session_save_path') ?? $_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/support/storage/session';
+        $session_save_path = config('session_save_path') ?? $_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/tmp';
         $session_lifetime = config('session_lifetime') ?? 1440;
         $memory_limit = config('memory_limit') ?? -1;
         $time_limit = config('time_limit') ?? 30;
         $error_log = config('error_log') ?? 'vendor/base-php/core/tmp/error.log';
 
-        ini_set('session_save_path', $session_save_path);
         ini_set('memory_limit', $memory_limit);
         ini_set('error_log', $error_log);
 
         set_time_limit($time_limit);
 
         session_set_cookie_params($session_lifetime, '/');
+        session_save_path($session_save_path);
 
         session_start();
 
