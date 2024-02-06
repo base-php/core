@@ -272,18 +272,28 @@ function lang($key, $variables = [])
 
     } else {
         try {
-            foreach ($variables as $k => $v) {
-                $key = str_replace(':' . $k, $v, $_ENV['translate'][$key]);
-            }
+            if ($variables) {
+                foreach ($variables as $k => $v) {
+                    $key = str_replace(':' . $k, $v, $_ENV['translate'][$key]);
+                }
+                
+                return $key;
 
-            return $key;
+            } else {
+                return $_ENV['translate'][$key];
+            }
 
         } catch (Exception $exception) {
-            foreach ($variables as $k => $v) {
-                $key = str_replace(':' . $k, $v, $key);
-            }
+            if ($variables) {
+                foreach ($variables as $k => $v) {
+                    $key = str_replace(':' . $k, $v, $key);
+                }
 
-            return $key;
+                return $key;
+
+            } else {
+                return $key;
+            }
         }
     }
 }
