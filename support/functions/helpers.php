@@ -330,6 +330,29 @@ function openingHours()
     return new OpeningHours();
 }
 
+function pdf($object)
+{
+    return $object;
+}
+
+function phpsessid()
+{
+    return $_COOKIE['PHPSESSID'];
+}
+
+function process()
+{
+    return new Process;
+}
+
+function qr($data)
+{
+    $qr = new QR;
+    $qr->data($data);
+
+    return $qr->generate();
+}
+
 function redirect($to)
 {
     $redirect = new Redirect;
@@ -384,29 +407,6 @@ function response()
     return new Response();
 }
 
-function pdf($object)
-{
-    return $object;
-}
-
-function phpsessid()
-{
-    return $_COOKIE['PHPSESSID'];
-}
-
-function process()
-{
-    return new Process;
-}
-
-function qr($data)
-{
-    $qr = new QR;
-    $qr->data($data);
-
-    return $qr->generate();
-}
-
 function session($key = '', $value = '')
 {
     $session = new Session;
@@ -424,6 +424,11 @@ function session($key = '', $value = '')
     }
 
     return $session;
+}
+
+function setLang($lang)
+{
+    Lang::set($lang);
 }
 
 function os()
