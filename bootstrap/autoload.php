@@ -30,6 +30,7 @@ include __DIR__.'/../commands/commands/make-command.php';
 include __DIR__.'/../commands/commands/make-controller.php';
 include __DIR__.'/../commands/commands/make-database.php';
 include __DIR__.'/../commands/commands/make-excel.php';
+include __DIR__.'/../commands/commands/make-exception.php';
 include __DIR__.'/../commands/commands/make-feature.php';
 include __DIR__.'/../commands/commands/make-job.php';
 include __DIR__.'/../commands/commands/make-mail.php';
