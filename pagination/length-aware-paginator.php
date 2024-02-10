@@ -91,9 +91,9 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
         $paginator['paginator'] = $this;
         $paginator['elements'] = $this->elements();
 
-        $uri = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'];
+        $uri = $_SERVER['REQUEST_URI'] == '/' ? '.' : $_SERVER['REQUEST_URI'];
 
-        $view = 'pagination:' . $view ?? 'pagination:tailwind';
+        $view = $view ?? 'pagination:tailwind';
 
         return view($view, compact('paginator', 'uri'));
     }
