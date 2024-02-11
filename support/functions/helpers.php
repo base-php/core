@@ -147,6 +147,11 @@ function database_path()
     return '/database/';
 }
 
+function db()
+{
+    return new DB();
+}
+
 function dispatch($job)
 {
     return new Job($job);
@@ -227,7 +232,7 @@ function holidays($country = 've') {
 function image()
 {
     if (! class_exists('Spatie\Image\Image')) {
-        throw new Exception('Please execute `spatie/image`');
+        throw new Exception('Please execute `composer require spatie/image`');
     }
 
     return new Image();
@@ -247,7 +252,7 @@ function health()
 function http()
 {
     if (! class_exists('Illuminate\Http\Client\Factory')) {
-        throw new Exception('Please execute `guzzlehttp/guzzle`');
+        throw new Exception('Please execute `composer require guzzlehttp/guzzle`');
     }
 
     return new HttpClient;
