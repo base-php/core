@@ -14,6 +14,7 @@
         "dompdf/dompdf": "2.0.4",
         "endroid/qr-code": "5.0.4",
         "facebook/graph-sdk": "5.7.0",
+        "gemini-api-php/client": "1.4.3",
         "google/apiclient": "2.15.3",
         "guzzlehttp/guzzle": "7.8.1",
         "laravel/prompts": "0.1.15",

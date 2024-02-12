@@ -220,6 +220,11 @@ function feature()
     return new Feature;
 }
 
+function gemini()
+{
+    return new Gemini();
+}
+
 function google()
 {
     return Google::init();
