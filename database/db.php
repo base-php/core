@@ -30,5 +30,10 @@ class DB extends Manager
 		$prompt .= "Podrías generar un SQL para '$question'?";
 
 		$openai = openai()->chat($prompt);
+
+		$explode = explode('```', $openai);
+		$sql = $explode[1];
+
+		return $this->select($this->raw($sql));
 	}
 }
