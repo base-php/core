@@ -31,7 +31,7 @@
 
         <div class="row mb-5">
             <div class="col-6">
-                <p class="text-2xl">{{ lang('home.intro') }}</p>
+                <p class="text-2xl">{{ lang('Quickly and easily start your new project with this base framework that has everything required to make a modern web application.') }}</p>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
         <div class="row">
             @if(class_exists('App\Controllers\AuthController'))
                 <div class="col-6">
-                    <h2>{{ lang('home.explorer') }}</h2>
+                    <h2>{{ lang('Explore') }}</h2>
 
                     <div class="mt-5">
                         @if(auth())
@@ -49,11 +49,11 @@
                             </a>
                         @else
                             <a href="/login" class="text-decoration-none text-dark d-block">
-                                <i class="fa fa-arrow-right"></i> {{ lang('home.login') }}
+                                <i class="fa fa-arrow-right"></i> {{ lang('Login') }}
                             </a>
 
                             <a href="/register" class="text-decoration-none text-dark d-block">
-                                <i class="fa fa-arrow-right"></i> {{ lang('home.register') }}
+                                <i class="fa fa-arrow-right"></i> {{ lang('Register') }}
                             </a>
                         @endif
                     </div>
@@ -61,7 +61,7 @@
             @endif
 
             <div class="col-6">
-                <h2>{{ lang('home.info') }}</h2>
+                <h2>{{ lang('More info') }}</h2>
 
                 <div class="mt-5 mb-5">
                     <a target="_blank" href="https://twitter.com/nisa6delgado" class="text-decoration-none text-dark d-block">
@@ -73,11 +73,11 @@
                     </a>
 
                     <a target="_blank" href="https://nisadelgado.com" class="text-decoration-none text-dark d-block">
-                        <i class="fas fa-globe-americas"></i> {{ lang('home.web') }}
+                        <i class="fas fa-globe-americas"></i> {{ lang('Web site') }}
                     </a>
 
                     <a target="_blank" href="mailto:nisadelgado@gmail.com" class="text-decoration-none text-dark d-block">
-                        <i class="fas fa-envelope"></i> {{ lang('home.email') }}
+                        <i class="fas fa-envelope"></i> {{ lang('Email') }}
                     </a>
                 </div>
             </div>
