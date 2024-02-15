@@ -32,11 +32,9 @@
         </a>
     </header>
 
-    <main>
-        <section>
-            {{ $slot }}
-        </section>
-    </main>
+    <div class="container">
+        {{ $slot }}
+    </div>
 </body>
 
 </html>
