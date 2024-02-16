@@ -27,7 +27,7 @@ function abort($code = 404)
     if (ajax()) {
         view('http:' . $code);
     } else {
-        return json(['status' => $code]);
+        response()->json(['status' => $code]);
     }
 
     exit();

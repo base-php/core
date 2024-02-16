@@ -8,7 +8,7 @@
             </div>
 
             <div class="col-3">
-                <a href="/dashboard/users/create" class="btn btn-dark btn-block">
+                <a href="/dashboard/users/create" class="btn btn-dark btn-block w-100">
                     {{ lang('Create new user') }}
                 </a>
             </div>

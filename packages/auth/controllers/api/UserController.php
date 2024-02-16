@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\User;
 use App\Validations\UserStoreValidation;
 use App\Validations\UserUpdateValidation;
+use Response;
 
 class UserController extends Controller
 {
@@ -137,9 +138,9 @@ class UserController extends Controller
      * Logout in others devices.
      * 
      * @param int $id
-     * @return void
+     * @return Response
      */
-    public function logoutInOthersDevices(int $id): void
+    public function logoutInOthersDevices(int $id): ?Response
     {
         $user = User::find($id);
         
@@ -148,5 +149,7 @@ class UserController extends Controller
         }
 
         $user->update(['sessions' => '[]']);
+
+        return response()->json(['info' => lang('Logout in all devices')]);
     }
 }

@@ -22,6 +22,7 @@ return [
     'In order to log in you must verify your email first.' => 'Para poder iniciar sesión debe verificar su correo electrónico antes.',
     'Login' => 'Iniciar sesión',
     'Login success' => 'Iniciar sesión exitoso',
+    'Logout in all devices' => 'Sesión cerrada en todos los dispositivos',
     'Name' => 'Nombre',
     'Password' => 'Contraseña',
     'Passwords do not match.' => 'Las contraseñas no coinciden.',

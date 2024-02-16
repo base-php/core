@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Validations\UserStoreValidation;
 use App\Validations\UserUpdateValidation;
 use Redirect;
+use Response;
 use View;
 
 class UserController extends Controller
@@ -157,9 +158,9 @@ class UserController extends Controller
      * Logout in others devices.
      * 
      * @param int $id
-     * @return void
+     * @return Response\Redirect
      */
-    public function logoutInOthersDevices(int $id): void
+    public function logoutInOthersDevices(int $id): Response\Redirect
     {
         $user = User::find($id);
 
