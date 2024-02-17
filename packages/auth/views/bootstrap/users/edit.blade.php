@@ -22,19 +22,19 @@
                         <div>
                             <div>
                                 <label for="photo">Foto</label>
-                                <input class="d-none" x-model="photo" id="photo" type="file" name="photo">
+                                <input class="d-none" id="photo" type="file" name="photo">
 
                                 <div>
                                     <img id="photo-preview" class="mb-2 img-photo" src="{{ $user->photo }}" alt="{{ $user->name }}">
                                 </div>
 
                                 <div>
-                                    <x-file-button id="open-file-selector" background="white" text="black" border="dark">
+                                    <x-file-button id="open-file-selector" class="btn btn-outline-secondary">
                                         <i class="fa fa-upload mr-2"></i>
                                         {{ lang('Select new photo') }}
                                     </x-file-button>
 
-                                    <x-file-button background="danger" text="white" border="danger">
+                                    <x-file-button background="danger" text="white" border="danger" class="btn btn-danger">
                                         <i class="fa fa-trash mr-2"></i>
                                         {{ lang('Delete photo') }}
                                     </x-file-button>
