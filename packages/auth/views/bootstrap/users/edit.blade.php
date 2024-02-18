@@ -29,12 +29,12 @@
                                 </div>
 
                                 <div>
-                                    <x-file-button id="open-file-selector" class="btn btn-outline-secondary">
+                                    <x-file-button id="photo" class="btn btn-outline-secondary">
                                         <i class="fa fa-upload mr-2"></i>
                                         {{ lang('Select new photo') }}
                                     </x-file-button>
 
-                                    <x-file-button background="danger" text="white" border="danger" class="btn btn-danger">
+                                    <x-file-button show="photo != ''" click="removePhoto()" class="btn btn-danger">
                                         <i class="fa fa-trash mr-2"></i>
                                         {{ lang('Delete photo') }}
                                     </x-file-button>

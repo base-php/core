@@ -37,8 +37,4 @@ $(document).ready(function () {
             reader.readAsDataURL(input.files[0]);
         }
     });
-
-    $('#open-file-selector').click(function () {
-        $('#photo').click();
-    });
 });

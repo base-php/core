@@ -1,3 +1,5 @@
-<button x-show="{{ $show ?? '' }}" x-on:click="{{ $click ?? '' }}" type="button" id="{{ $id ?? '' }}" class="{{ $class }}">
+<button type="button" class="{{ $class ?? '' }}" onclick="document.getElementById('{{ $id ?? '' }}').click()">
     {{ $slot }}
 </button>
+
+<input type="file" name="{{ $id ?? '' }}" id="{{ $id ?? '' }}" style="display: none">

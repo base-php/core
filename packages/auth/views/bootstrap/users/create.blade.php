@@ -25,12 +25,12 @@
                             </div>
 
                             <div>
-                                <x-file-button show="photo == ''" click="document.getElementById('photo').click()" id="open-file-selector" border="dark" background="white" text="black">
+                                <x-file-button id="photo" class="btn btn-outline-secondary">
                                     <i class="fa fa-upload mr-2"></i>
                                     {{ lang('Select new photo') }}
                                 </x-file-button>
 
-                                <x-file-button show="photo != ''" click="removePhoto()" background="danger" border="danger" text="white">
+                                <x-file-button show="photo != ''" click="removePhoto()" class="btn btn-danger">
                                     <i class="fa fa-trash mr-2"></i>
                                     {{ lang('Delete photo') }}
                                 </x-file-button>
