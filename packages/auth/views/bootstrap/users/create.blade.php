@@ -30,10 +30,10 @@
                                     {{ lang('Select new photo') }}
                                 </x-file-button>
 
-                                <x-file-button show="photo != ''" click="removePhoto()" class="btn btn-danger">
+                                <x-button-link class="btn btn-danger remove-photo">
                                     <i class="fa fa-trash mr-2"></i>
                                     {{ lang('Delete photo') }}
-                                </x-file-button>
+                                </x-button-link>
 
                                 <div class="mt-3">
                                     <x-label for="name" text="{{ lang('Name') }}"/>

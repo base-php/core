@@ -1,3 +1,3 @@
-<a x-on:click="{{ $click ?? '' }}" href="{{ $href ?? '' }}" class="btn btn-{{ $color }}">
+<a href="{{ $href ?? '#' }}" class="{{ $class ?? '' }}">
     {{ $slot }}
 </a>

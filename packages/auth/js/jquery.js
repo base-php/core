@@ -25,7 +25,7 @@ $(document).ready(function () {
         $('#photo-preview').attr('src', url);
     });
 
-    $('.preview').change(function () {
+    $('.photo').change(function () {
         input = document.getElementById('photo');
 
         if (input.files && input.files[0]) {

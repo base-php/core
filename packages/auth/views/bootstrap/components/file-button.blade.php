@@ -2,4 +2,4 @@
     {{ $slot }}
 </button>
 
-<input type="file" name="{{ $id ?? '' }}" id="{{ $id ?? '' }}" style="display: none">
+<input type="file" name="{{ $id ?? '' }}" id="{{ $id ?? '' }}" class="{{ $id ?? '' }}" style="display: none">
