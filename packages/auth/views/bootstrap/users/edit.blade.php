@@ -173,7 +173,7 @@
                     </div>
 
                     <div class="mt-5">
-                        <x-button-link href="{{ '/logoutInOthersDevices/' . $user->id }}" color="black">
+                        <x-button-link href="{{ '/logoutInOthersDevices/' . $user->id }}" class="btn btn-dark">
                             <i class="fa-solid fa-right-from-bracket mr-2"></i>
                             {{ lang('Sign out of other browsers') }}
                         </x-button-link>
@@ -195,7 +195,7 @@
                     </div>
 
                     <div>
-                        <x-button-link click="confirmDelete(event, $el)" href="{{ '/dashboard/users/delete/' . $user->id }}" color="danger">
+                        <x-button-link href="{{ '/dashboard/users/delete/' . $user->id }}" class="confirm-delete btn btn-danger">
                             <i class="fa fa-trash mr-2"></i>
                             {{ lang('Delete account') }}
                         </x-button-link>

@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="mt-3">
-                                <x-label for="confirm_password" text="{{ lang('users.confirm_password') }}"/>
+                                <x-label for="confirm_password" text="{{ lang('Confirm password') }}"/>
                                 <x-input name="confirm_password" required type="password"/>
                             </div>                            
                         </div>

@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="{{ node('bootstrap/dist/css/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ node('@fortawesome/fontawesome-free/css/all.css') }}">
+<link rel="stylesheet" href="{{ node('sweetalert2/dist/sweetalert2.css') }}">
 
 <style>
     body {
@@ -73,7 +74,7 @@
         </div>
     </div>    
 
-    <input type="hidden" id="confirm_delete_text" value="{{ lang('users.confirm_delete_text') }}">
+    <input type="hidden" id="confirm_delete_text" value="{{ lang('Are you sure you want to delete?') }}">
     <input type="hidden" id="confirm_delete_accept" value="{{ lang('Accept') }}">
     <input type="hidden" id="confirm_delete_cancel" value="{{ lang('Cancel') }}">
 
