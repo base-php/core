@@ -52,12 +52,12 @@
 
         <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/dashboard">{{ lang('Home') }}</a>
+                <li class="nav-item">
+                    <a class="nav-link {{ $active == 'home' ? 'active' : '' }}" href="/dashboard">{{ lang('Home') }}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/dashboard/users">{{ lang('Users') }}</a>
+                    <a class="nav-link {{ $active == 'users' ? 'active' : '' }}" href="/dashboard/users">{{ lang('Users') }}</a>
                 </li>
             </ul>
 
