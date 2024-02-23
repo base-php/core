@@ -104,42 +104,50 @@
                         <h2>{{ lang('Add additional security to your account with two-factor authentication') }}</h2>
                     </div>
 
-                    <input type="hidden" name="2fa" value="1">
-
                     @if($user->two_fa)
                         <div class="w-7/12 rounded bg-white p-7">
-                            <div>
-                                <h1 class="font-semibold text-2xl mb-3">{{ lang('You have enabled two-factor authentication') }}</h1>
+                            <form action="/dashboard/users/update" method="POST">
+                                <x-input type="hidden" name="2fa" value="1"/>
+                                <x-input type="hidden" name="id" value="{{ $user->id }}"/>
 
-                                <p>{{ lang('Enable') }}</p>
+                                <div>
+                                    <h1 class="font-semibold text-2xl mb-3">{{ lang('You have enabled two-factor authentication') }}</h1>
 
-                                <div>{!! two_fa()->qr($user->two_fa) !!}</div>
+                                    <p>{{ lang('Enable') }}</p>
 
-                                <p>{{ two_fa()->key() }}</p>
+                                    <div>{!! two_fa()->qr($user->two_fa) !!}</div>
 
-                                <div class="mt-5">
-                                    <x-button-link href="{{ '/2fa/' . $user->id }}" color="red-500">
-                                        <i class="fa fa-times mr-2"></i>
-                                        {{ lang('Disable') }}
-                                    </x-button-link>
+                                    <p>{{ two_fa()->key() }}</p>
+
+                                    <div class="mt-5">
+                                        <x-button color="red-500">
+                                            <i class="fa fa-times mr-2"></i>
+                                            {{ lang('Disable') }}
+                                        </x-button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     @else
                         <div class="w-7/12 rounded bg-white p-7">
-                            <div>
-                                <h1 class="font-semibold text-2xl mb-3">{{ lang('You have not enabled two-factor authentication') }}</h1>
+                            <form action="/dashboard/users/update" method="POST">
+                                <x-input type="hidden" name="2fa" value="1"/>
+                                <x-input type="hidden" name="id" value="{{ $user->id }}"/>
 
-                                <p>{{ lang('When two-factor authentication is enabled, you will be prompted for a random, secure token during authentication. You can retrieve this token from the Google Authenticator app on your phone.') }}</p>
-                            </div>
+                                <div>
+                                    <h1 class="font-semibold text-2xl mb-3">{{ lang('You have not enabled two-factor authentication') }}</h1>
 
-                            <div class="mt-5">
-                                <x-button-link href="{{ '/2fa/' . $user->id }}" color="black">
-                                    <i class="fa fa-check mr-2"></i>
-                                    {{ lang('users.2fa_enable') }}
-                                </x-button-link>
+                                    <p>{{ lang('When two-factor authentication is enabled, you will be prompted for a random, secure token during authentication. You can retrieve this token from the Google Authenticator app on your phone.') }}</p>
+                                </div>
+
+                                <div class="mt-5">
+                                    <x-button color="black">
+                                        <i class="fa fa-check mr-2"></i>
+                                        {{ lang('Enable') }}
+                                    </x-button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     @endif
                 </div>
             @endif
