@@ -18,10 +18,13 @@
                 <div class="w-7/12 rounded bg-white p-7">
                     <form action="/dashboard/users/update" method="POST" enctype="multipart/form-data">
                         <x-input type="hidden" name="id" value="{{ $user->id }}"/>
+                        <x-input type="hidden" name="password" value=""/>
+                        <x-input type="hidden" name="confirm_password" value=""/>
+
+                        <input class="hidden" x-model="photo" id="photo" type="file" name="photo">
 
                         <div>
                             <label for="photo">Foto</label>
-                            <input class="hidden" x-model="photo" id="photo" type="file" name="photo">
                             <img id="photo-preview" class="rounded-full mb-2 block w-1/4" src="{{ $user->photo }}" alt="{{ $user->name }}">
 
                             <div>
@@ -53,9 +56,6 @@
                                 {{ lang('Save') }}
                             </x-button>
                         </div>
-
-                        <input type="hidden" name="password" value="">
-                        <input type="hidden" name="confirm_password" value="">
                     </form>
                 </div>
             </div>
@@ -71,6 +71,8 @@
                 <div class="w-7/12 rounded bg-white p-7">
                     <form action="/dashboard/users/update" method="POST">
                         <x-input type="hidden" name="id" value="{{ $user->id }}"/>
+                        <x-input type="hidden" name="name" value="{{ $user->name }}"/>
+                        <x-input type="hidden" name="email" value="{{ $user->email }}"/>
 
                         <div class="mt-5">
                             <x-label for="password" text="{{ lang('Password') }}"/>
@@ -88,9 +90,6 @@
                                 {{ lang('Save') }}
                             </x-button>
                         </div>
-
-                        <input type="hidden" name="name" value="{{ $user->name }}">
-                        <input type="hidden" name="email" value="{{ $user->email }}">
                     </form>
                 </div>
             </div>
@@ -109,6 +108,8 @@
                             <form action="/dashboard/users/update" method="POST">
                                 <x-input type="hidden" name="2fa" value="1"/>
                                 <x-input type="hidden" name="id" value="{{ $user->id }}"/>
+                                <x-input type="hidden" name="name" value="{{ $user->name }}"/>
+                                <x-input type="hidden" name="email" value="{{ $user->email }}"/>
 
                                 <div>
                                     <h1 class="font-semibold text-2xl mb-3">{{ lang('You have enabled two-factor authentication') }}</h1>
@@ -133,6 +134,8 @@
                             <form action="/dashboard/users/update" method="POST">
                                 <x-input type="hidden" name="2fa" value="1"/>
                                 <x-input type="hidden" name="id" value="{{ $user->id }}"/>
+                                <x-input type="hidden" name="name" value="{{ $user->name }}"/>
+                                <x-input type="hidden" name="email" value="{{ $user->email }}"/>
 
                                 <div>
                                     <h1 class="font-semibold text-2xl mb-3">{{ lang('You have not enabled two-factor authentication') }}</h1>
