@@ -93,6 +93,7 @@ class UserController extends Controller
                 $user->two_fa = null;
             } else {
                 $user->two_fa = two_fa()->key();
+                session('2fa', $user->two_fa);
             }
 
             $user->save();

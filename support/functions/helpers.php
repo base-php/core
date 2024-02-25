@@ -500,12 +500,6 @@ function strposToArray($needle, $haystack)
 
 function two_fa()
 {
-    if (post()) {
-        $two_fa = new TwoFA;
-
-        return $two_fa->verify();
-    }
-
     return new TwoFA;
 }
 

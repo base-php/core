@@ -116,6 +116,11 @@ class AuthController extends Controller
             $user->update(['sessions' => json($sessions)]);
 
             session('id', $user->id);
+
+            if ($user->two_fa) {
+                session('2fa', $user->two_fa);
+            }
+
             $redirect = request('redirect') ? request('redirect') : $this->redirect_login;
             return redirect($redirect);
         }

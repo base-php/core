@@ -97,6 +97,11 @@ class AuthController extends Controller
             $user->update(['sessions' => json($sessions)]);
 
             session('id', $user->id);
+
+            if ($user->two_fa) {
+                session('2fa', $user->two_fa);
+            }
+
             return response()->json([
                 'info' => lang('Login success'),
                 'user' => $user
