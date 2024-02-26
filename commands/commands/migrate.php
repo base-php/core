@@ -34,34 +34,36 @@ class Migrate extends Command
 
                 $class = require $require;
 
-                $exists = DB::connection($class->connection)
-                    ->table('migrations')
-                    ->where('name', $name)
-                    ->get();
-
-                if ($exists->count()) {
-                    continue;
-                }
-
-                try {
-                    $class->up();
-
-                    $batch = DB::connection($class->connection)
+                if ($class->connection) {
+                    $exists = DB::connection($class->connection)
                         ->table('migrations')
-                        ->max('batch');
+                        ->where('name', $name)
+                        ->get();
 
-                    $batch++;
+                    if ($exists->count()) {
+                        continue;
+                    }
 
-                    DB::connection($class->connection)
-                        ->table('migrations')
-                        ->insert([
-                            'name' => $name,
-                            'batch' => $batch,
-                        ]);
+                    try {
+                        $class->up();
 
-                    $style->success($item);
-                } catch (Exception $exception) {
-                    $style->error($exception->getMessage());
+                        $batch = DB::connection($class->connection)
+                            ->table('migrations')
+                            ->max('batch');
+
+                        $batch++;
+
+                        DB::connection($class->connection)
+                            ->table('migrations')
+                            ->insert([
+                                'name' => $name,
+                                'batch' => $batch,
+                            ]);
+
+                        $style->success($item);
+                    } catch (Exception $exception) {
+                        $style->error($exception->getMessage());
+                    }                    
                 }
             }
         }
