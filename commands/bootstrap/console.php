@@ -58,16 +58,18 @@ class Console
 
         $dispatcher = new EventDispatcher();
         $dispatcher->addListener(ConsoleEvents::COMMAND, function ($event) {
-            include 'vendor/base-php/core/database/database.php';
-            
-            $schema = $capsule->getConnection('default')->getSchemaBuilder();
+            if (file_exists($config['database'][0]['database'])) {
+                include 'vendor/base-php/core/database/database.php';
+                
+                $schema = $capsule->getConnection('default')->getSchemaBuilder();
 
-            if ($schema->hasTable('monitor')) {
-                $monitor = new Monitor();
-                $monitor->command($event->getInput());
+                if ($schema->hasTable('monitor')) {
+                    $monitor = new Monitor();
+                    $monitor->command($event->getInput());
 
-                $logs = DB::getQueryLog();
-                $monitor->database($logs);
+                    $logs = DB::getQueryLog();
+                    $monitor->database($logs);
+                }                
             }
         });
 
