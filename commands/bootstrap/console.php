@@ -57,19 +57,21 @@ class Console
         }
 
         $dispatcher = new EventDispatcher();
-        $dispatcher->addListener(ConsoleEvents::COMMAND, function ($event) {
-            if (file_exists($config['database'][0]['database'])) {
-                include 'vendor/base-php/core/database/database.php';
-                
-                $schema = $capsule->getConnection('default')->getSchemaBuilder();
+        $dispatcher->addListener(ConsoleEvents::COMMAND, function ($event) use ($config) {
+            if ($config['database'][0]['driver'] == 'sqlite' && ! file_exists($config['database'][0]['database'])) {
+                return;
+            }
 
-                if ($schema->hasTable('monitor')) {
-                    $monitor = new Monitor();
-                    $monitor->command($event->getInput());
+            include 'vendor/base-php/core/database/database.php';
+            
+            $schema = $capsule->getConnection('default')->getSchemaBuilder();
 
-                    $logs = DB::getQueryLog();
-                    $monitor->database($logs);
-                }                
+            if ($schema->hasTable('monitor')) {
+                $monitor = new Monitor();
+                $monitor->command($event->getInput());
+
+                $logs = DB::getQueryLog();
+                $monitor->database($logs);
             }
         });
 
