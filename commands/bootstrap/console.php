@@ -58,7 +58,7 @@ class Console
 
         $dispatcher = new EventDispatcher();
         $dispatcher->addListener(ConsoleEvents::COMMAND, function ($event) use ($config) {
-            if ($config['database'][0]['driver'] == 'sqlite' && ! file_exists($config['database'][0]['database'])) {
+            if ($config['database'][0]['driver'] == 'sqlite' && ! file_exists($config['database'][0]['database'] . '.sqlite')) {
                 return;
             }
 
