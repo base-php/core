@@ -134,8 +134,8 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->routes = new RouteCollection;
         $this->container = $container ?: new Container;
 
-        $this->match(['get', 'post'], '/crud/{controller}/{method?}/{param?}', function ($class, $method = 'index', $param = []) {
-            $class = str('posts')
+        $this->match(['get', 'post'], '/crud/{controller}/{method?}/{param?}', function ($controller, $method = 'index', $param = []) {
+            $class = str($controller)
                 ->camel()
                 ->singular()
                 ->ucfirst()
