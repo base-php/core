@@ -75,8 +75,6 @@ include __DIR__.'/../commands/commands/vendor-publish.php';
 include __DIR__.'/../commands/commands/view-clear.php';
 include __DIR__.'/../commands/commands/visits-table.php';
 
-include __DIR__.'/../packages/crud/traits/crud.php';
-
 include __DIR__.'/../packages/export/excel.php';
 include __DIR__.'/../packages/export/pdf.php';
 

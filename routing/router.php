@@ -134,18 +134,6 @@ class Router implements BindingRegistrar, RegistrarContract
         $this->routes = new RouteCollection;
         $this->container = $container ?: new Container;
 
-        $this->match(['get', 'post'], '/crud/{controller}/{method?}/{param?}', function ($controller, $method = 'index', $param = []) {
-            $class = str($controller)
-                ->camel()
-                ->singular()
-                ->ucfirst()
-                ->prepend('App\Controllers\\')
-                ->append('Controller')
-                ->toString();
-
-            (new $class)->resolve($method, $param);
-        });
-
         $this->get('health', function () {
             return (new Health())->view();
         });
