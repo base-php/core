@@ -12,4 +12,9 @@ trait CRUD
 		$items = $this->model->get();
 		return view('crud:index', compact('items'));
 	}
+
+	public function create()
+	{
+		return view('crud:create');
+	}
 }
