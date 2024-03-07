@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 trait CRUD
 {
-	public $views;
 	public $model;
+	public $route;
+	public $views;
 
 	public function index()
 	{
@@ -16,5 +17,11 @@ trait CRUD
 	public function create()
 	{
 		return view('crud:create');
+	}
+
+	public function store()
+	{
+		$this->model->create(request());
+		return redirect($route);
 	}
 }
