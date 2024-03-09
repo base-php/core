@@ -31,6 +31,13 @@ trait CRUD
 		return $this->view('edit', compact('item'));
 	}
 
+	public function update()
+	{
+		$item = $this->model->find($id);
+		$item->update(request());
+		return redirect(plural());
+	}
+
 	public function plural()
 	{
 		$class = get_class($this);
