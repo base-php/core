@@ -38,6 +38,13 @@ trait CRUD
 		return redirect(plural());
 	}
 
+	public function delete($id)
+	{
+		$item = $this->model->find($id);
+		$item->delete();
+		return redirect(plural());
+	}
+
 	public function plural()
 	{
 		$class = get_class($this);
