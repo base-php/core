@@ -21,6 +21,7 @@ trait CRUD
 
 	public function store()
 	{
+		validation(request(), $this->validations['store']);
 		$this->model->create(request());
 		return redirect(plural());
 	}
@@ -33,6 +34,7 @@ trait CRUD
 
 	public function update()
 	{
+		validation(request(), $this->validations['update']);
 		$item = $this->model->find($id);
 		$item->update(request());
 		return redirect(plural());

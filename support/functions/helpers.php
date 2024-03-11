@@ -503,7 +503,7 @@ function two_fa()
     return new TwoFA;
 }
 
-function validation($data, $rules, $messages, $redirect)
+function validation($data, $rules, $messages, $redirect = null)
 {
     include $_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/database/database.php';
 
