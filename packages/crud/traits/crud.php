@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 trait CRUD
 {
+	public $layout = 'template-dashboard';
 	public $model;
 	public $route;
-	public $views;
 
 	public function index()
 	{
@@ -67,6 +67,9 @@ trait CRUD
 			return view(plural() . '.' . $view, $data);
 		}
 
-		return ('crud:' . $view, $data);
+		$data['layout'] = $this->layout;
+		$data['route'] = $this->route;
+
+		return view('crud:' . $view, $data);
 	}
 }
