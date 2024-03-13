@@ -69,6 +69,7 @@ trait CRUD
 
 		$data['layout'] = $this->layout;
 		$data['route'] = $this->route;
+		$data['fields'] = $this->model->getFillable();
 
 		return view('crud:' . $view, $data);
 	}
