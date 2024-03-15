@@ -7,6 +7,7 @@ trait CRUD
 	public $layout = 'template-dashboard';
 	public $model;
 	public $route;
+	public $types = [];
 
 	public function index()
 	{
@@ -67,9 +68,10 @@ trait CRUD
 			return view(plural() . '.' . $view, $data);
 		}
 
+		$data['fields'] = $this->model->getFillable();
 		$data['layout'] = $this->layout;
 		$data['route'] = $this->route;
-		$data['fields'] = $this->model->getFillable();
+		$data['types'] = $this->types;
 
 		return view('crud:' . $view, $data);
 	}

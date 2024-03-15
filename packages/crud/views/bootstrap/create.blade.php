@@ -14,7 +14,14 @@
                             @foreach($fields as $field)
                                 <div class="mt-3">
                                     <x-label for="{{ $field }}" text="{{ lang($field) }}"/>
-                                    <x-input name="{{ $field }}" required type="{{ $field }}"/>
+
+                                    @if(!empty($types) && in_array($key, array_keys($types)))
+                                        @if($types[$key] == 'image')
+                                            <x-input type="file" name="{{ $field }}" required type="{{ $field }}"/>
+                                        @endif
+                                    @else
+                                       <x-input name="{{ $field }}" required type="{{ $field }}"/>
+                                    @endif
                                 </div>
                             @endforeach
                         </div>

@@ -33,7 +33,15 @@
                 	@foreach($items as $item)
 	                    <tr class="hover:bg-gray-100">
 	                        @foreach(array_keys($items[0]) as $key)
-	                        	<td class="p-2">{{ $item->$key }}</td>
+	                        	@if(!empty($types) && in_array($key, array_keys($types)))
+                                    @if($types[$key] == 'image')
+                                        <td class="p-2">
+                                            <img src="{{ asset('img/' . $item->$key) }}" width="100px">
+                                        </td>
+                                    @endif
+                                @else
+                                   <td class="p-2">{{ $item->$key }}</td>
+                                @endif
 	                        @endforeach
 
 	                        <td class="p-2 text-right">

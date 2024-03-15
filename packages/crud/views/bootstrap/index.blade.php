@@ -32,7 +32,15 @@
                             @foreach($items as $item)
                                 <tr>
                                 	@foreach(array_keys($items[0]) as $key)
-                                    	<td>{{ $item->$key }}</td>
+                                        @if(!empty($types) && in_array($key, array_keys($types)))
+                                            @if($types[$key] == 'image')
+                                                <td>
+                                                    <img src="{{ asset('img/' . $item->$key) }}" width="100px">
+                                                </td>
+                                            @endif
+                                        @else
+                                    	   <td>{{ $item->$key }}</td>
+                                        @endif
                                     @endforeach
 
                                     <td>
