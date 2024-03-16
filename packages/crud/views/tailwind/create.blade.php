@@ -14,7 +14,7 @@
                             <x-label for="{{ $field }}" text="{{ lang($field) }}"/>
 
                             @if(!empty($types) && in_array($key, array_keys($types)))
-                                @if($types[$key] == 'image')
+                                @if($types[$key] == 'image' || $types[$key] == 'file')
                                     <x-input type="file" name="{{ $field }}" required type="{{ $field }}"/>
                                 @endif
                             @else

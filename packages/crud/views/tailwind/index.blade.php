@@ -33,15 +33,19 @@
                 	@foreach($items as $item)
 	                    <tr class="hover:bg-gray-100">
 	                        @foreach(array_keys($items[0]) as $key)
-	                        	@if(!empty($types) && in_array($key, array_keys($types)))
-                                    @if($types[$key] == 'image')
-                                        <td class="p-2">
+                                <td class="p-2">
+                                    @if(!empty($types) && in_array($key, array_keys($types)))
+                                        @if($types[$key] == 'image')
                                             <img src="{{ asset('img/' . $item->$key) }}" width="100px">
-                                        </td>
+                                        @endif
+
+                                        @if($types[$key] == 'file')
+                                            <a href="{{ asset('files/' . $item->$key) }}">{{ $item->$key }}</a>
+                                        @endif
+                                    @else
+                                        {{ $item->$key }}
                                     @endif
-                                @else
-                                   <td class="p-2">{{ $item->$key }}</td>
-                                @endif
+                                </td>
 	                        @endforeach
 
 	                        <td class="p-2 text-right">

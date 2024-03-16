@@ -16,11 +16,17 @@
                             <x-label for="{{ $field }}" text="{{ lang($field) }}"/>
 
                             @if(!empty($types) && in_array($key, array_keys($types)))
-                                @if($types[$key] == 'image')
+                                @if($types[$key] == 'image' || $types[$key] == 'file')
                                     <x-input type="file" name="{{ $field }}" required type="{{ $field }}"/>
 
                                     <div>
-                                        <img src="{{ asset('img/' . $item->$key) }}" width="100px">
+                                        @if($types[$key] == 'image')
+                                            <img src="{{ asset('img/' . $item->$key) }}" width="100px">
+                                        @endif
+
+                                        @if($types[$key] == 'file')
+                                            <a href="{{ asset('files/' . $item->$field) }}">{{ $item->$field }}</a>
+                                        @endif
                                     </div>
                                 @endif
                             @else
