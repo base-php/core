@@ -15,10 +15,14 @@
 
                             @if(!empty($types) && in_array($key, array_keys($types)))
                                 @if($types[$key] == 'image' || $types[$key] == 'file')
-                                    <x-input type="file" name="{{ $field }}" required type="{{ $field }}"/>
+                                    <x-input type="file" name="{{ $field }}" required/>
+                                @endif
+
+                                @if($types[$key] == 'date')
+                                    <x-input type="date" name="{{ $field }}" required/>
                                 @endif
                             @else
-                               <x-input name="{{ $field }}" required type="{{ $field }}"/>
+                               <x-input name="{{ $field }}" required/>
                             @endif
                         </div>
                     @endforeach
