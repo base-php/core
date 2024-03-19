@@ -23,6 +23,10 @@
                                         @if($types[$key] == 'date')
                                             <x-input type="date" name="{{ $field }}" required/>
                                         @endif
+
+                                        @if($types[$key] == 'datetime')
+                                            <x-input type="datetime-local" name="{{ $field }}" required/>
+                                        @endif
                                     @else
                                        <x-input name="{{ $field }}" required/>
                                     @endif
