@@ -18,15 +18,11 @@
                                     <x-input type="file" name="{{ $field }}" required/>
                                 @endif
 
-                                @if($types[$key] == 'date')
-                                    <x-input type="date" name="{{ $field }}" required/>
-                                @endif
-
                                 @if($types[$key] == 'datetime')
                                     <x-input type="datetime-local" name="{{ $field }}" required/>
                                 @endif
 
-                                @if($types[$key] == 'email')
+                                @if($types[$key] == 'email' || $types[$key] == 'color' || $types[$key] == 'date')
                                     <x-input type="{{ $types[$key] }}" name="{{ $field }}" required/>
                                 @endif
                             @else
