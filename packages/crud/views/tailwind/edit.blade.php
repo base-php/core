@@ -34,7 +34,7 @@
                                     <x-input type="datetime-local" name="{{ $field }}" required value="{{ $item->$field }}"/>
                                 @endif
 
-                                @if($types[$key] == 'email' || $types[$key] == 'color' || $types[$key] == 'date')
+                                @if($types[$key] == 'email' || $types[$key] == 'color' || $types[$key] == 'date' || $types[$key] == 'month')
                                     <x-input type="{{ $types[$key] }}" name="{{ $field }}" required value="{{ $item->$field }}"/>
                                 @endif
                             @else
