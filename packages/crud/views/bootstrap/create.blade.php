@@ -18,13 +18,11 @@
                                     @if(!empty($types) && in_array($key, array_keys($types)))
                                         @if($types[$key] == 'image' || $types[$key] == 'file')
                                             <x-input type="file" name="{{ $field }}" required/>
-                                        @endif
 
-                                        @if($types[$key] == 'datetime')
+                                        @elseif($types[$key] == 'datetime')
                                             <x-input type="datetime-local" name="{{ $field }}" required/>
-                                        @endif
-
-                                        @if($types[$key] == 'email' || $types[$key] == 'color' || $types[$key] == 'date' || $types[$key] == 'month')
+                                            
+                                        @else
                                             <x-input type="{{ $types[$key] }}" name="{{ $field }}" required/>
                                         @endif
                                     @else

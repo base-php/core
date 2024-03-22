@@ -30,13 +30,11 @@
                                                     <a href="{{ asset('files/' . $item->$field) }}">{{ $item->$field }}</a>
                                                 @endif
                                             </div>
-                                        @endif
-
-                                        @if($types[$key] == 'datetime')
+                                        
+                                        @elseif($types[$key] == 'datetime')
                                             <x-input name="datetime-local" required value="{{ $item->$field }}"/>
-                                        @endif
-
-                                        @if($types[$key] == 'email' || $types[$key] == 'color' || $types[$key] == 'date' || $types[$key] == 'month')
+                                        
+                                        @else
                                             <x-input name="{{ $types[$key] }}" required value="{{ $item->$field }}"/>
                                         @endif
                                     @else
