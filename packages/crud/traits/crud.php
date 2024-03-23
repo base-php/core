@@ -7,6 +7,7 @@ trait CRUD
 	public $layout = 'template-dashboard';
 	public $model;
 	public $route;
+	public $scaffolding;
 	public $types = [];
 
 	public function index()
@@ -64,15 +65,15 @@ trait CRUD
 
 	public function view($view, $data)
 	{
-		if (file_exists($_SERVER['DOCUMENT'] . '/resources/views/' . plural() . '/' . $view . '.blade.php')) {
-			return view(plural() . '.' . $view, $data);
-		}
-
 		$data['fields'] = $this->model->getFillable();
 		$data['layout'] = $this->layout;
 		$data['route'] = $this->route;
 		$data['types'] = $this->types;
 
-		return view('crud:' . $view, $data);
+		if (file_exists($_SERVER['DOCUMENT'] . '/resources/views/' . plural() . '/' . $view . '.blade.php')) {
+			return view(plural() . '.' . $view, $data);
+		}
+
+		return view('crud:' . $this->scaffolding . '/' . $view, $data);
 	}
 }
