@@ -15,15 +15,24 @@
                                 <div class="mt-3">
                                     <x-label for="{{ $field }}" text="{{ lang($field) }}"/>
 
-                                    @if(!empty($types) && in_array($key, array_keys($types)))
-                                        @if($types[$key] == 'image' || $types[$key] == 'file')
+                                    @if(!empty($types) && in_array($field, array_keys($types)))
+                                        @if($types[$field] == 'image' || $types[$field] == 'file')
                                             <x-input type="file" name="{{ $field }}" required/>
 
-                                        @elseif($types[$key] == 'datetime')
+                                        @elseif(is_array($types[$field]) && $types[$field][0] == 'select')
+                                            <select name="{{ $field }}" id="{{ $field }}" required class="form-control">
+                                                <option value=""></option>
+
+                                                @foreach($types[$field][1] as $key => $value)
+                                                    <option value="{{ $key }}">{{ $value }}</option>
+                                                @endforeach
+                                            </select>
+
+                                        @elseif($types[$field] == 'datetime')
                                             <x-input type="datetime-local" name="{{ $field }}" required/>
                                             
                                         @else
-                                            <x-input type="{{ $types[$key] }}" name="{{ $field }}" required/>
+                                            <x-input type="{{ $types[$field] }}" name="{{ $field }}" required/>
                                         @endif
                                     @else
                                        <x-input name="{{ $field }}" required/>

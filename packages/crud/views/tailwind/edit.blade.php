@@ -15,25 +15,34 @@
                         <div class="mt-5">
                             <x-label for="{{ $field }}" text="{{ lang($field) }}"/>
 
-                            @if(!empty($types) && in_array($key, array_keys($types)))
-                                @if($types[$key] == 'image' || $types[$key] == 'file')
+                            @if(!empty($types) && in_array($field, array_keys($types)))
+                                @if($types[$field] == 'image' || $types[$field] == 'file')
                                     <x-input type="file" name="{{ $field }}" required/>
 
                                     <div>
-                                        @if($types[$key] == 'image')
-                                            <img src="{{ asset('img/' . $item->$key) }}" width="100px">
+                                        @if($types[$field] == 'image')
+                                            <img src="{{ asset('img/' . $item->$field) }}" width="100px">
                                         @endif
 
-                                        @if($types[$key] == 'file')
+                                        @if($types[$field] == 'file')
                                             <a href="{{ asset('files/' . $item->$field) }}">{{ $item->$field }}</a>
                                         @endif
                                     </div>
 
-                                @elseif($types[$key] == 'datetime')
+                                @elseif(is_array($types[$field]) && $types[$field][0] == 'select')
+                                    <select name="{{ $field }}" id="{{ $field }}" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value=""></option>
+
+                                        @foreach($types[$field][1] as $key => $value)
+                                            <option {{ $key == $item->$field ? 'selected' : '' }} value="{{ $key }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+
+                                @elseif($types[$field] == 'datetime')
                                     <x-input type="datetime-local" name="{{ $field }}" required value="{{ $item->$field }}"/>
 
                                 @else
-                                    <x-input type="{{ $types[$key] }}" name="{{ $field }}" required value="{{ $item->$field }}"/>
+                                    <x-input type="{{ $types[$field] }}" name="{{ $field }}" required value="{{ $item->$field }}"/>
                                 @endif
                             @else
                                <x-input name="{{ $field }}" required value="{{ $item->$field }}"/>
