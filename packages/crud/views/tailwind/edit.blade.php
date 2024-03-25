@@ -38,6 +38,13 @@
                                         @endforeach
                                     </select>
 
+                                @elseif(is_array($types[$field]) && $types[$field][0] == 'checkbox')
+                                    <div>
+                                        @foreach($types[$field][1] as $key => $value)
+                                            <input type="checkbox" name="{{ $field }}" {{ $item->$field == $value ? 'checked' : '' }} value="{{ $value }}"> {{ $key }}
+                                        @endforeach
+                                    </div>
+
                                 @elseif($types[$field] == 'datetime')
                                     <x-input type="datetime-local" name="{{ $field }}" required value="{{ $item->$field }}"/>
 
