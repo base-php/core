@@ -42,7 +42,14 @@
                                                     <a href="{{ asset('files/' . $item->$key) }}">{{ $item->$key }}</a>
                                                 @endif
                                             @else
-                                                {{ $item->$key }}
+                                                @if(strpos($key, 'id') === false)
+                                                    {{ $item->$key }}
+                                                @else
+                                                    @php
+                                                        $key = str_replace(['id_', '_id'], ['', ''], $key);
+                                                        $item->$key
+                                                    @endphp
+                                                @endif
                                             @endif
                                         </td>
                                     @endforeach
