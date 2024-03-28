@@ -57,17 +57,21 @@
 
 	                        <td class="p-2 text-right">
 	                            <a class="hover:text-blue-600 p-1" href="{{{ '/' . $route . '/edit/' . $item->id }}" title="{{ lang('Edit ' . $route) }}">
-	                                <fa class="fa fa-edit"></fa>
+	                                <i class="fa fa-edit"></i>
 	                            </a>
 
 	                            <a x-on:click="confirmDelete(event, $el)" class="hover:text-red-600 p-1" href="{{ '/' . $route . '/delete/' . $item->id }}" title="{{ lang('Delete ' . $route) }}">
-	                                <fa class="fa fa-trash"></fa>
+	                                <i class="fa fa-trash"></i>
 	                            </a>
 	                        </td>
 	                    </tr>
                     @endforeach
                 </tbody>
             </table>
+
+            @if(get_class($items) == 'Illuminate\Pagination\LengthAwarePaginator')
+                {{ $items->links('tailwind', query_string()) }}
+            @endif
         </div>
     </div>
 </x-{{ $layout }}>

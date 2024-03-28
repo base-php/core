@@ -6,6 +6,7 @@ trait CRUD
 {
 	public $layout = 'template-dashboard';
 	public $model;
+	public $paginate = false;
 	public $route;
 	public $scaffolding;
 	public $types = [];
@@ -13,6 +14,11 @@ trait CRUD
 	public function index()
 	{
 		$items = $this->model->get();
+
+		if ($this->paginate) {
+			$items = $this->model->paginate($this->paginate);
+		}
+
 		return $this->view('index', compact('items'));
 	}
 

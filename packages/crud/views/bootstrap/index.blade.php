@@ -67,6 +67,10 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    @if(get_class($items) == 'Illuminate\Pagination\LengthAwarePaginator')
+                        {{ $items->links('bootstrap', query_string()) }}
+                    @endif
                 </div>
             </div>
         </div>
