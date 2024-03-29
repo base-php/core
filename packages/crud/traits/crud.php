@@ -13,10 +13,16 @@ trait CRUD
 
 	public function index()
 	{
-		$items = $this->model->get();
+		$models = $this->model;
+
+		foreach (request() as $key => $value) {
+			$models->where($key, $value);
+		}
+
+		$items = $models->get();
 
 		if ($this->paginate) {
-			$items = $this->model->paginate($this->paginate);
+			$items = $models->paginate($this->paginate);
 		}
 
 		return $this->view('index', compact('items'));
