@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 trait CRUD
 {
+	public $filters = [];
 	public $layout = 'template-dashboard';
 	public $model;
 	public $paginate = false;
@@ -78,6 +79,7 @@ trait CRUD
 	public function view($view, $data)
 	{
 		$data['fields'] = $this->model->getFillable();
+		$data['filters'] = $this->filters;
 		$data['layout'] = $this->layout;
 		$data['route'] = $this->route;
 		$data['types'] = $this->types;

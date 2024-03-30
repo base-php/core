@@ -3,9 +3,11 @@
         <h1 class="text-3xl mb-4">{{ lang($route) }}</h1>
 
         <div class="grid grid-cols-2 mb-5">
-            <div>
-                <input x-on:keyup="search($el)" autofocus type="text" placeholder="{{ lang('Search...') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </div>
+            @if(! count($filters))
+                <div>
+                    <input x-on:keyup="search($el)" autofocus type="text" placeholder="{{ lang('Search...') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+            @endif
 
             <div class="text-right">
                 <a href="/{{ $route }}/create" class="inline-flex items-center p-3 appearance-none bg-black border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-black active:bg-black focus:outline-none focus:border-black focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
@@ -14,6 +16,32 @@
                 </a>
             </div>
         </div>
+
+        @if(count($filters))
+            <div class="grid grid-cols-2 mb-5">
+                @foreach($filters as $filter)
+                    <div>
+                        @if($filter->type == 'text')
+                            <input type="text" name="{{ $filter->name }}" value="{{ get($filter->name) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        @endif
+
+                        @if($filter->type == 'date')
+                            <input type="date" name="{{ $filter->name }}" value="{{ get($filter->name) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        @endif
+
+                        @if($filter->type == 'select')
+                            <select name="{{ $filter->name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value=""></option>
+
+                                @foreach($filter->options as $item)
+                                    <option {{ $item->id == get($filter->name) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                    </div>
+                @endif
+            </div>
+        @endif
 
         <x-alert></x-alert>
 

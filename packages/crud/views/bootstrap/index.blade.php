@@ -3,15 +3,45 @@
         <h1>{{ lang($route) }}</h1>
 
         <div class="row">
-            <div class="col-9">
-                <input type="text" type="text" autofocus class="form-control" placeholder="{{ lang('Search...') }}">
-            </div>
+            @if(! count($filters))
+                <div class="col-9">
+                    <input type="text" type="text" autofocus class="form-control" placeholder="{{ lang('Search...') }}">
+                </div>
+            @endif
 
             <div class="col-3">
                 <a href="/{{ $route }}/create" class="btn btn-dark btn-block w-100">
                     {{ lang('Create new ' . $user) }}
                 </a>
             </div>
+
+            @if(count($filters))
+                @foreach($filters as $filter)
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="{{ $filter->name }}">{{ $filter->name }}</label>
+
+                            @if($filter->type == 'text')
+                                <input class="form-control" type="text" name="{{ $filter->name }}" value="{{ get($filter->name) }}">
+                            @endif
+
+                            @if($filter->type == 'date')
+                                <input class="form-control" type="date" name="{{ $filter->name }}" value="{{ get($filter->name) }}">
+                            @endif
+
+                            @if($filter->type == 'select')
+                                <select name="{{ $filter->name }}" class="form-control">
+                                    <option value=""></option>
+
+                                    @foreach($filter->options as $item)
+                                        <option {{ $item->id == get($filter->name) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            @endif
 
             <x-alert></x-alert>
 
