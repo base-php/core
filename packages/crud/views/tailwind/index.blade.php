@@ -18,7 +18,7 @@
         </div>
 
         @if(count($filters))
-            <div class="grid grid-cols-2 mb-5">
+            <div class="grid grid-cols-subgrid mb-5">
                 @foreach($filters as $filter)
                     <div>
                         @if($filter->type == 'text')
@@ -40,6 +40,24 @@
                         @endif
                     </div>
                 @endif
+            </div>
+        @endif
+
+        @if(count($widgets))
+            <div class="grid grid-cols-subgrid mb-5">
+                @foreach($widgets as $widget)
+                    <div>
+                        <div class="bg-{{ $widget->color }} text-center text-white">
+                            <div>
+                                {{ $widget->icon }}
+                            </div>
+
+                            <div>
+                                {{ $widget->name }}: {{ $widget->value }}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         @endif
 

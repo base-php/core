@@ -16,31 +16,51 @@
             </div>
 
             @if(count($filters))
-                @foreach($filters as $filter)
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="{{ $filter->name }}">{{ $filter->name }}</label>
+                <div class="row">
+                    @foreach($filters as $filter)
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="{{ $filter->name }}">{{ $filter->name }}</label>
 
-                            @if($filter->type == 'text')
-                                <input class="form-control" type="text" name="{{ $filter->name }}" value="{{ get($filter->name) }}">
-                            @endif
+                                @if($filter->type == 'text')
+                                    <input class="form-control" type="text" name="{{ $filter->name }}" value="{{ get($filter->name) }}">
+                                @endif
 
-                            @if($filter->type == 'date')
-                                <input class="form-control" type="date" name="{{ $filter->name }}" value="{{ get($filter->name) }}">
-                            @endif
+                                @if($filter->type == 'date')
+                                    <input class="form-control" type="date" name="{{ $filter->name }}" value="{{ get($filter->name) }}">
+                                @endif
 
-                            @if($filter->type == 'select')
-                                <select name="{{ $filter->name }}" class="form-control">
-                                    <option value=""></option>
+                                @if($filter->type == 'select')
+                                    <select name="{{ $filter->name }}" class="form-control">
+                                        <option value=""></option>
 
-                                    @foreach($filter->options as $item)
-                                        <option {{ $item->id == get($filter->name) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
-                            @endif
+                                        @foreach($filter->options as $item)
+                                            <option {{ $item->id == get($filter->name) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+            @endif
+
+            @if(count($widgets))
+                <div class="row">
+                    @foreach($widgets as $widget)
+                        <div class="col">
+                            <div class="bg-{{ $widget->color }} text-center text-white">
+                                <div>
+                                    {{ $widget->icon }}
+                                </div>
+
+                                <div>
+                                    {{ $widget->name }}: {{ $widget->value }}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             @endif
 
             <x-alert></x-alert>

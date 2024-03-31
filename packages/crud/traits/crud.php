@@ -11,6 +11,7 @@ trait CRUD
 	public $route;
 	public $scaffolding;
 	public $types = [];
+	public $widgets = [];
 
 	public function index()
 	{
@@ -79,10 +80,11 @@ trait CRUD
 	public function view($view, $data)
 	{
 		$data['fields'] = $this->model->getFillable();
-		$data['filters'] = $this->filters;
+		$data['filters'] = (object) $this->filters;
 		$data['layout'] = $this->layout;
 		$data['route'] = $this->route;
-		$data['types'] = $this->types;
+		$data['types'] = (object) $this->types;
+		$data['widgets'] = (object) $this->widgets;
 
 		if (file_exists($_SERVER['DOCUMENT'] . '/resources/views/' . plural() . '/' . $view . '.blade.php')) {
 			return view(plural() . '.' . $view, $data);
