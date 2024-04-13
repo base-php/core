@@ -40,6 +40,9 @@ return new class extends Migration
             $table->boolean('billing_default')
             	->default(false);
 
+            $table->json('meta')
+                ->nullable();
+
             $table->datetime('date_create')
                 ->useCurrent();
 

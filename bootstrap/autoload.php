@@ -182,3 +182,5 @@ include __DIR__.'/../packages/cash-converter/cash-converter.php';
 include __DIR__.'/../packages/chart/chart.php';
 
 include __DIR__.'/../packages/crud/traits/crud.php';
+
+include __DIR__.'/../packages/ecommerce/models/address.php';
