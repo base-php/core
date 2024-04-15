@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Address extends Model
 {
-	protected $table = 'address';
+	protected $table = 'addresses';
 
 	protected $primaryKey = 'id';
 

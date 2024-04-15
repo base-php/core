@@ -184,3 +184,6 @@ include __DIR__.'/../packages/chart/chart.php';
 include __DIR__.'/../packages/crud/traits/crud.php';
 
 include __DIR__.'/../packages/ecommerce/models/address.php';
+include __DIR__.'/../packages/ecommerce/models/country.php';
+include __DIR__.'/../packages/ecommerce/models/currency.php';
+include __DIR__.'/../packages/ecommerce/models/customer.php';
