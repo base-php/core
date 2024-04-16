@@ -19,24 +19,24 @@ return new class extends Migration
                 ->nullable()
                 ->unique();
 
-            $table->string('customer_reference')
+            $table->string('customer_id')
                 ->nullable();
 
-            $table->integer('sub_total')
+            $table->integer('subtotal')
                 ->unsigned()
                 ->index();
 
-            $table->integer('discount_total')
+            $table->integer('discount')
                 ->default(0)
                 ->unsigned()
                 ->index();
 
-            $table->integer('shipping_total')
+            $table->integer('shipping')
                 ->default(0)
                 ->unsigned()
                 ->index();
 
-            $table->integer('tax_total')
+            $table->integer('tax')
                 ->unsigned()
                 ->index();
 
@@ -47,14 +47,7 @@ return new class extends Migration
             $table->text('notes')
                 ->nullable();
 
-            $table->string('currency_code', 3);
-
-            $table->decimal('exchange_rate', 10, 4)
-                ->default(1);
-
-            $table->dateTime('placed_at')
-                ->nullable()
-                ->index();
+            $table->string('currency', 3);
 
             $table->json('meta')
                 ->nullable();            

@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('state')
                 ->nullable();
 
-            $table->string('postcode')
+            $table->string('zip_code')
                 ->nullable();
                 
             $table->string('email')

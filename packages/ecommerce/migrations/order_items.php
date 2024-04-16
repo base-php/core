@@ -20,28 +20,23 @@ return new class extends Migration
 
             $table->string('description');
 
-            $table->integer('unit_price')
-                ->unsigned()
-                ->index();
-
-            $table->smallInteger('unit_quantity')
-                ->default(1)
+            $table->integer('price')
                 ->unsigned()
                 ->index();
 
             $table->smallInteger('quantity')
                 ->unsigned();
 
-            $table->integer('sub_total')
+            $table->integer('subtotal')
                 ->unsigned()
                 ->index();
 
-            $table->integer('discount_total')
+            $table->integer('discount')
                 ->default(0)
                 ->unsigned()
                 ->index();
 
-            $table->integer('tax_total')
+            $table->integer('tax')
                 ->unsigned()
                 ->index();
 
