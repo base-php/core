@@ -190,3 +190,6 @@ include __DIR__.'/../packages/ecommerce/models/customer.php';
 include __DIR__.'/../packages/ecommerce/models/order.php';
 include __DIR__.'/../packages/ecommerce/models/order_address.php';
 include __DIR__.'/../packages/ecommerce/models/order_item.php';
+include __DIR__.'/../packages/ecommerce/models/product_types.php';
+include __DIR__.'/../packages/ecommerce/models/product.php';
+include __DIR__.'/../packages/ecommerce/models/state.php';

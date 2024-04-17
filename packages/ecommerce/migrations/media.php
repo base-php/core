@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('model');
-            $table->int('id_model');
+            $table->int('model_id');
 
             $table->string('filename');
 

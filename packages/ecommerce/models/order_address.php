@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Order extends Model
 {
-	protected $table = 'orders';
+	protected $table = 'order_addresses';
 
 	protected $primaryKey = 'id';
 
