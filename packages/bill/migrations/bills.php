@@ -11,7 +11,7 @@ return new class extends Migration
 	{
 		$this->schema->create('bills', function ($table) {
             $table->id();
-            $table->unsignedBigInteger('id_customer');
+            $table->unsignedBigInteger('customer_id');
 
             $table->float('discount')
                 ->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration
                 ->useCurrent()
                 ->setCurrentOnUpdate();
 
-            $table->foreign('id_customer')
+            $table->foreign('customer_id')
                 ->references('id')
                 ->on('customers');
         });

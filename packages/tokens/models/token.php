@@ -9,7 +9,7 @@ class Token extends Model
     protected $fillable = [
         'name',
         'model',
-        'id_model',
+        'model_id',
         'token',
         'date_expire'
     ];

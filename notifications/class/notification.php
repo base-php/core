@@ -35,7 +35,7 @@ class Notification
         $type = get_class($this);
 
         $data = [
-            'id_user' => $user->id,
+            'user_id' => $user->id,
         ];
 
         foreach ($array as $key => $value) {

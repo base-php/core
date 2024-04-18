@@ -7,7 +7,7 @@ trait HasModelStatus
 	public function history()
 	{
 		$modelStatus = ModelStatus::where('model', $this->model()->model)
-			->where('id_model', $this->model()->id)
+			->where('model_id', $this->model()->id)
 			->get();
 
 		return $modelStatus;
@@ -16,11 +16,11 @@ trait HasModelStatus
 	public function model()
 	{
 		$model = get_class($this);
-		$id_model = $this->id;
+		$model_id = $this->id;
 
 		$return = [
 			'model' => $model,
-			'id_model' => $id_model
+			'model_id' => $model_id
 		];
 
 		return (object) $return;
@@ -32,14 +32,14 @@ trait HasModelStatus
 			'name' => $name,
 			'reason' => $reason,
 			'model' => $this->model()->model,
-			'id_model' => $this->model()->id
+			'model_id' => $this->model()->id
 		]);
 	}
 
 	public function status()
 	{
 		$modelStatus = ModelStatus::where('model', $this->model()->model)
-			->where('id_model', $this->model()->id)
+			->where('model_id', $this->model()->id)
 			->orderByDesc('id')
 			->first();
 

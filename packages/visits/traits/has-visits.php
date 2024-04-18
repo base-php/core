@@ -164,7 +164,7 @@ trait HasVisits
 	public function totalVisitCount()
 	{
 		return DB::table('visits')
-			->where('id_model', $this->id)
+			->where('model_id', $this->id)
 			->count();
 	}
 
@@ -178,7 +178,7 @@ trait HasVisits
 	{
 		$data = [
 			'model' => get_class($this),
-			'id_model' => $this->id,
+			'model_id' => $this->id,
 			'data' => json_encode($this->data),
 			'date_create' => date('Y-m-d H:i:s'),
 			'date_update' => date('Y-m-d H:i:s')

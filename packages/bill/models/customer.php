@@ -9,7 +9,7 @@ class Customer extends Model
 	protected $primaryKey = 'id';
 
 	protected $fillable = [
-		'id_model',
+		'model_id',
 		'model'
 	];
 }

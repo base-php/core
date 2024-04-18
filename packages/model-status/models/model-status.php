@@ -12,6 +12,6 @@ class ModelStatus extends Model
 		'name',
 		'reason',
 		'model',
-		'id_model'
+		'model_id'
 	];
 }

@@ -8,15 +8,15 @@ trait HasRole
 {
     public function assignRole($name)
     {
-        $id_role = DB::table('roles')
+        $role_id = DB::table('roles')
             ->where('name', $name)
             ->first()
             ->id;
 
         DB::table('user_has_roles')
             ->insert([
-                'id_user' => $this->id,
-                'id_role' => $id_role,
+                'user_id' => $this->id,
+                'role_id' => $role_id,
             ]);
     }
 
@@ -28,10 +28,10 @@ trait HasRole
 					p.*
 				FROM
 					permissions p
-						LEFT JOIN role_has_permissions rp ON p.id = rp.id_permission
-						LEFT JOIN roles r ON rp.id_role = r.id
-						LEFT JOIN user_has_roles ur ON ur.id_role = r.id
-						LEFT JOIN users u ON u.id = ur.id_user
+						LEFT JOIN role_has_permissions rp ON p.id = rp.permission_id
+						LEFT JOIN roles r ON rp.role_id = r.id
+						LEFT JOIN user_has_roles ur ON ur.role_id = r.id
+						LEFT JOIN users u ON u.id = ur.user_id
 				WHERE
 					u.id = '{$this->id}'
 			");
@@ -51,8 +51,8 @@ trait HasRole
     public function getRoles()
     {
         $roles = DB::table('roles')
-            ->leftJoin('user_has_roles', 'roles.id', '=', 'user_has_roles.id_role')
-            ->where('user_has_roles.id_role', $this->id)
+            ->leftJoin('user_has_roles', 'roles.id', '=', 'user_has_roles.role_id')
+            ->where('user_has_roles.role_id', $this->id)
             ->get();
 
         return $roles;
@@ -72,7 +72,7 @@ trait HasRole
     public function role($role)
     {
         $db = DB::table('user_has_roles')
-            ->leftJoin('roles', 'roles.id', '=', 'user_has_roles.id_role')
+            ->leftJoin('roles', 'roles.id', '=', 'user_has_roles.role_id')
             ->where('roles.name', $role)
             ->get();
 

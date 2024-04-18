@@ -9,7 +9,7 @@ class BillItem extends Model
 	protected $primaryKey = 'id';
 
 	protected $fillable = [
-		'id_bill',
+		'bill_id',
 		'description',
 		'quantity',
 		'price'
@@ -17,6 +17,6 @@ class BillItem extends Model
 
 	public function bill()
 	{
-		return $this->belongsTo(Bill::class, 'id_bill');
+		return $this->belongsTo(Bill::class, 'bill_id');
 	}
 }

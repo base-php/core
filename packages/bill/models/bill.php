@@ -9,7 +9,7 @@ class Bill extends Model
 	protected $primaryKey = 'id';
 
 	protected $fillable = [
-		'id_customer',
+		'customer_id',
 		'discount',
 		'tax',
 		'total'
@@ -17,12 +17,12 @@ class Bill extends Model
 
 	public function customer()
 	{
-		return $this->belongsTo(Customer::class, 'id_customer');
+		return $this->belongsTo(Customer::class, 'customer_id');
 	}
 
 	public function items()
 	{
-		return $this->hasMany(BillItem::class, 'id_bill');
+		return $this->hasMany(BillItem::class, 'bill_id');
 	}
 
 	public function getSubtotalAttribute()

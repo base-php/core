@@ -11,7 +11,7 @@ return new class extends Migration
 	{
 		$this->schema->create('customers', function ($table) {
             $table->id();
-            $table->integer('id_model');
+            $table->integer('model_id');
             $table->string('model');
 
             $table->text('address');

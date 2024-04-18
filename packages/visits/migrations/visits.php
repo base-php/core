@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('model');
-            $table->integer('id_model');
+            $table->integer('model_id');
 
             $table->json('data');
 

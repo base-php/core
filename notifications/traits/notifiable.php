@@ -18,7 +18,7 @@ trait Notifiable
     public function notifications()
     {
         $notifications = DB::table('notifications')
-            ->where('data->id_user', $this->id)
+            ->where('user_id', $this->id)
             ->get();
 
         return $notifications;
@@ -32,7 +32,7 @@ trait Notifiable
     public function unreadNotifications()
     {
         $notifications = DB::table('notifications')
-            ->where('data->id_user', $this->id)
+            ->where('user_id', $this->id)
             ->whereNull('date_read')
             ->get();
 

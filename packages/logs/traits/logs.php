@@ -9,13 +9,13 @@ trait Logs
 {
     public function action($action)
     {
-        $id_user = $this->id_user ?? null;
-        $id_model = $this->id_model ?? null;
+        $user_id = $this->user_id ?? null;
+        $model_id = $this->model_id ?? null;
         $model = $this->model ?? null;
 
         $data = [
-            'id_user' => $id_user,
-            'id_model' => $id_model,
+            'user_id' => $user_id,
+            'model_id' => $model_id,
             'model' => $model,
             'action' => $action,
         ];
@@ -37,12 +37,12 @@ trait Logs
         static::setEventDispatcher(new EventsDispatcher());
 
         static::created(function ($item) {
-            $id_user = auth()->id ?? null;
+            $user_id = auth()->id ?? null;
             $model = get_class($item);
 
             $data = [
-                'id_user' => $id_user,
-                'id_model' => $item->id,
+                'user_id' => $user_id,
+                'model_id' => $item->id,
                 'model' => $model,
                 'action' => 'create',
                 'parameters' => $item,
@@ -59,15 +59,15 @@ trait Logs
         });
 
         static::updated(function ($item) {
-            $id_user = auth()->id ?? null;
+            $user_id = auth()->id ?? null;
             $model = get_class($item);
 
             $parameters['new'] = $item;
             $parameters['old'] = session('basephp-old-updating');
 
             $data = [
-                'id_user' => $id_user,
-                'id_model' => $item->id,
+                'user_id' => $user_id,
+                'model_id' => $item->id,
                 'model' => $model,
                 'action' => 'update',
                 'parameters' => json_encode($parameters),
@@ -80,12 +80,12 @@ trait Logs
         });
 
         static::deleted(function ($item) {
-            $id_user = auth()->id ?? null;
+            $user_id = auth()->id ?? null;
             $model = get_class($item);
 
             $data = [
-                'id_user' => $id_user,
-                'id_model' => $item->id,
+                'user_id' => $user_id,
+                'model_id' => $item->id,
                 'model' => $model,
                 'action' => 'delete',
                 'parameters' => $item,
@@ -98,7 +98,7 @@ trait Logs
 
     public function by($user)
     {
-        $this->id_user = $user->id ?? $user['id'] ?? $user ?? null;
+        $this->user_id = $user->id ?? $user['id'] ?? $user ?? null;
 
         return $this;
     }
@@ -118,7 +118,7 @@ trait Logs
 
     public function on($model)
     {
-        $this->id_model = $model->id;
+        $this->model_id = $model->id;
         $this->model = get_class($model);
 
         return $this;

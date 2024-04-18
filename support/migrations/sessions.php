@@ -12,7 +12,7 @@ return new class extends Migration
         $this->schema->create('sessions', function ($table) {
             $table->id();
 
-            $table->string('id_session');
+            $table->string('session_id');
             $table->string('key');
             $table->string('value');
 

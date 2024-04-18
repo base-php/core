@@ -12,8 +12,8 @@ return new class extends Migration
         $this->schema->create('role_has_permissions', function ($table) {
             $table->id();
 
-            $table->unsignedBigInteger('id_role');
-            $table->unsignedBigInteger('id_permission');
+            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('permission_id');
 
             $table->datetime('date_create')
                 ->useCurrent();
@@ -22,11 +22,11 @@ return new class extends Migration
                 ->useCurrent()
                 ->setCurrentOnUpdate();
 
-            $table->foreign('id_role')
+            $table->foreign('role_id')
                 ->references('id')
                 ->on('roles');
 
-            $table->foreign('id_permission')
+            $table->foreign('permission_id')
                 ->references('id')
                 ->on('permissions');
         });

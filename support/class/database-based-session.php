@@ -9,7 +9,7 @@ class DatabaseBasedSession
 	{
 		$this->clear();
 		$this->id = $_COOKIE['PHPSESSID'];
-		$this->query = DB::table('sessions')->where('id_session', $this->id);
+		$this->query = DB::table('sessions')->where('session_id', $this->id);
 	}
 
 	public function all()
@@ -62,7 +62,7 @@ class DatabaseBasedSession
 	{
 		DB::table('sessions')
 			->insert([
-				'id_session' => $this->id,
+				'session_id' => $this->id,
 				'key' => $key,
 				'value' => $value
 			]);

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('reason')->nullable();
 
             $table->string('model');
-            $table->integer('id_model');
+            $table->integer('model_id');
 
             $table->datetime('date_create')
                 ->useCurrent();

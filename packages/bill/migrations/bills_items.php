@@ -11,7 +11,7 @@ return new class extends Migration
 	{
 		$this->schema->create('bills_items', function ($table) {
             $table->id();
-            $table->unsignedBigInteger('id_bill');
+            $table->unsignedBigInteger('bill_id');
 
             $table->text('description');
             $table->integer('quantity');
@@ -26,7 +26,7 @@ return new class extends Migration
                 ->useCurrent()
                 ->setCurrentOnUpdate();
 
-            $table->foreign('id_bill')
+            $table->foreign('bill_id')
                 ->references('id')
                 ->on('bills');
         });

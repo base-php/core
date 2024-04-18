@@ -16,7 +16,7 @@ return new class extends Migration
                 ->constrained('tags');
 
             $table->string('model');
-            $table->int('id_model');
+            $table->int('model_id');
 
             $table->datetime('date_create')
                 ->useCurrent();

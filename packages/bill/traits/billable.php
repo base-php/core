@@ -13,11 +13,11 @@ trait Billable
 
 	public function createOrGetCustomer()
 	{
-		$id_model = $this->id;
+		$model_id = $this->id;
 		$model = get_class($this);
 
 		$data = [
-			'id_model' => $id_model,
+			'model_id' => $model_id,
 			'model' => $model
 		];
 
@@ -28,7 +28,7 @@ trait Billable
 	{
 		$this->createOrGetCustomer();
 
-		$bill = Bill::create(['id_customer' => $this->customer->id]);
+		$bill = Bill::create(['customer_id' => $this->customer->id]);
 
 		$total = $tax = $discount = 0;
 
@@ -39,7 +39,7 @@ trait Billable
 			$item->discount = $item->discount ?? 0;
 
 			BillItem::create([
-				'id_bill' => $bill->id,
+				'bill_id' => $bill->id,
 				'description' => $item->description,
 				'quantity' => $item->quantity,
 				'price' => $item->price,
@@ -95,7 +95,7 @@ trait Billable
 	{
 		$this->createOrGetCustomer();
 
-		$bill = Bill::where('id_customer', $this->customer->id)
+		$bill = Bill::where('customer_id', $this->customer->id)
 			->where('id', $id)
 			->with('items')
 			->first();
@@ -107,7 +107,7 @@ trait Billable
 	{
 		$this->createOrGetCustomer();
 
-		$bills = Bill::where('id_customer', $this->customer->id)
+		$bills = Bill::where('customer_id', $this->customer->id)
 			->with('items')
 			->get();
 

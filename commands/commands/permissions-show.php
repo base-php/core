@@ -36,8 +36,8 @@ class PermissionsShow extends Command
 
             foreach ($roles as $role) {
                 $result = DB::table('role_has_permissions')
-                    ->where('id_role', $role->id)
-                    ->where('id_permission', $permission->id)
+                    ->where('role_id', $role->id)
+                    ->where('permission_id', $permission->id)
                     ->get();
 
                 $result = $result->count() ? 'x' : '';

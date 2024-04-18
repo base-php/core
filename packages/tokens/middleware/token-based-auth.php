@@ -20,7 +20,7 @@ class TokenBasedAuth
         }
 
         if ($token->model == 'App\Models\User') {
-            $user = User::find($token->id_model);
+            $user = User::find($token->model_id);
             session('id', $user->id);
         }
 

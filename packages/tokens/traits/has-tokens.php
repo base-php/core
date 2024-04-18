@@ -7,11 +7,11 @@ trait HasTokens
     public function createToken($name)
     {
         $model = get_class($this);
-        $id_model = $this->id;
+        $model_id = $this->id;
 
         $time = time();
 
-        $string = "$time-$name-$model-$id_model";
+        $string = "$time-$name-$model-$model_id";
         $hash = hash('sha256', $string);
 
         $seconds = config('token_expire') ?? 86400;
@@ -23,7 +23,7 @@ trait HasTokens
 
         $token = Token::create([
             'model' => get_class($this),
-            'id_model' => $this->id,
+            'model_id' => $this->id,
             'name' => $name,
             'token' => $hash,
             'date_expire' => $date_expire,
@@ -35,10 +35,10 @@ trait HasTokens
     public function tokens()
     {
         $model = get_class($this);
-        $id_model = $this->id;
+        $model_id = $this->id;
 
         $tokens = Token::where('model', $model)
-            ->where('id_model', $id_model)
+            ->where('model_id', $model_id)
             ->get();
 
         return $tokens;
