@@ -153,6 +153,7 @@ include __DIR__.'/../view/provider-service-provider.php';
 include __DIR__.'/../view/componentes.php';
 
 include __DIR__.'/../support/class/bing-ai.php';
+include __DIR__.'/../support/class/cart.php';
 include __DIR__.'/../support/class/database-based-session.php';
 include __DIR__.'/../support/class/gemini.php';
 include __DIR__.'/../support/class/mail.php';
