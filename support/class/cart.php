@@ -38,6 +38,75 @@ class Cart
 		session('cart', $cart);
 	}
 
+	public function addItemCondition($product, $condition)
+	{
+		$cart = $this->cart();
+		$cart['products'][$product]['conditions'][] = $condition;
+	}
+
+	public function calculate($type, $wconditions = 1)
+	{
+		$return = 0;
+
+		foreach ($this->items() as $item) {
+			$price = $item->price;
+
+			if ($wconditions) {
+				if ($item->conditions) {
+					foreach ($item->conditions as $condition) {
+						if (strpos($condition->value, '+') !== false) {
+							if (strpos($condition->value, '%') !== false) {
+								$value = str_replace(['%', '+'], ['', ''], $condition->value);
+								$price = $price + ($price * 15 / 100);
+							} else {
+								$value = str_replace('+', '', $condition->value);
+								$price = $price + $value;
+							}
+						}
+
+						if (strpos($condition->value, '-') !== false) {
+							if (strpos($condition->value, '%') !== false) {
+								$value = str_replace(['%', '-'], ['', ''], $condition->value);
+								$price = $price - ($price * 15 / 100);
+							} else {
+								$value = str_replace('-', '', $condition->value);
+								$price = $price - $value;
+							}
+						}
+					}
+				}				
+			}
+
+			$return = $return + ($price * $item->quantity);
+		}
+
+		foreach ($this->conditions() as $condition) {
+			if ($condition->target == $type) {
+				if (strpos($condition->value, '+') !== false) {
+					if (strpos($condition->value, '%') !== false) {
+						$value = str_replace(['%', '+'], ['', ''], $condition->value);
+						$return = $return + ($return * 15 / 100);
+					} else {
+						$value = str_replace('+', '', $condition->value);
+						$return = $return + $value;
+					}
+				}
+
+				if (strpos($condition->value, '-') !== false) {
+					if (strpos($condition->value, '%') !== false) {
+						$value = str_replace(['%', '-'], ['', ''], $condition->value);
+						$return = $return - ($return * 15 / 100);
+					} else {
+						$value = str_replace('-', '', $condition->value);
+						$return = $return - $value;
+					}
+				}
+			}
+		}
+
+		return $return;
+	}
+
 	public function cart($user = '')
 	{
 		$user = $user ?? $this->user;
@@ -85,65 +154,19 @@ class Cart
 		unset($cart['products'][$product]);
 	}
 
+	public function subtotal()
+	{
+		return calculate('subtotal');
+	}
+
+	public function subTotalWithoutConditions()
+	{
+		return calculate('subtotal', 0);
+	}
+
 	public function total()
 	{
-		$total = 0;
-
-		foreach ($this->items() as $item) {
-			$price = $item->price;
-
-			if ($item->conditions) {
-				foreach ($item->conditions as $condition) {
-					if (strpos($condition->value, '+') !== false) {
-						if (strpos($condition->value, '%') !== false) {
-							$value = str_replace(['%', '+'], ['', ''], $condition->value);
-							$price = $price + ($price * 15 / 100);
-						} else {
-							$value = str_replace('+', '', $condition->value);
-							$price = $price + $value;
-						}
-					}
-
-					if (strpos($condition->value, '-') !== false) {
-						if (strpos($condition->value, '%') !== false) {
-							$value = str_replace(['%', '-'], ['', ''], $condition->value);
-							$price = $price - ($price * 15 / 100);
-						} else {
-							$value = str_replace('-', '', $condition->value);
-							$price = $price - $value;
-						}
-					}
-				}
-			}
-
-			$total = $total + ($price * $item->quantity);
-		}
-
-		foreach ($this->conditions as $condition) {
-			if ($condition->target == 'total') {
-				if (strpos($condition->value, '+') !== false) {
-					if (strpos($condition->value, '%') !== false) {
-						$value = str_replace(['%', '+'], ['', ''], $condition->value);
-						$total = $total + ($total * 15 / 100);
-					} else {
-						$value = str_replace('+', '', $condition->value);
-						$total = $total + $value;
-					}
-				}
-
-				if (strpos($condition->value, '-') !== false) {
-					if (strpos($condition->value, '%') !== false) {
-						$value = str_replace(['%', '-'], ['', ''], $condition->value);
-						$total = $total - ($total * 15 / 100);
-					} else {
-						$value = str_replace('-', '', $condition->value);
-						$total = $total - $value;
-					}
-				}
-			}
-		}
-
-		return $total;
+		return calculate('total');
 	}
 
 	public function update($product, $data)
