@@ -2,6 +2,8 @@
 
 class Cart
 {
+	public $cart;
+	public $product;
 	public $user;
 
 	public function __construct($user)
@@ -14,7 +16,7 @@ class Cart
 		];
 	}
 
-	public function add($data)
+	public function add($data, $name = '', $price = '', $quantity = '', $extra = [])
 	{
 		/*
 			'id' => 'string|required|unique'
@@ -26,6 +28,16 @@ class Cart
 		*/
 
 		$cart = $this->cart();
+
+		if ($name != '' && $price != '' && $quantity != '') {
+			$data = [
+				'id' => $data,
+				'name' => $name,
+				'price' => $price,
+				'quantity' => $quantity,
+				'extra' => $extra,
+			];
+		}
 
 		if (count($data) == count($data, COUNT_RECURSIVE)) {
 			$cart['products'][$data['id']] = $data;
@@ -42,6 +54,7 @@ class Cart
 	{
 		$cart = $this->cart();
 		$cart['products'][$product]['conditions'][] = $condition;
+		session('cart', $cart);
 	}
 
 	public function calculate($type, $wconditions = 1)
@@ -142,10 +155,28 @@ class Cart
 		session('cart', $cart);
 	}
 
+	public function count()
+	{
+		return count($this->items());
+	}
+
+	public function get($product)
+	{
+		$cart = $this->cart();
+		return json_decode(json_encode($cart['products'][$product]), true);
+	}
+
 	public function items()
 	{
 		$cart = $this->cart();
 		return json_decode(json_encode($cart['products']), true);
+	}
+
+	public function priceSum($product)
+	{
+		$product = $this->get($product);
+		$priceSum = $product->price * $product->quantity;
+		return $priceSum;
 	}
 
 	public function remove($product)
@@ -174,7 +205,15 @@ class Cart
 		$cart = $this->cart();
 
 		foreach ($data as $key => $value) {
-			$cart['products'][$product][$key] = $value;
+			if (is_array($value) && $value['relative'] == false) {
+				$cart['products'][$product][$key] = $value;
+			}
+
+			if ($key == 'quantity') {
+				$cart['products'][$product][$key] = $cart['products'][$product][$key] + ($value);
+			}
 		}
+
+		session('cart', $cart);
 	}
 }
