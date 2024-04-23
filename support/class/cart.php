@@ -57,6 +57,11 @@ class Cart
 		session('cart', $cart);
 	}
 
+	public function array()
+	{
+		return json_decode(json_encode($this->items()), true);
+	}
+
 	public function calculate($type, $wconditions = 1)
 	{
 		$return = 0;
@@ -130,7 +135,7 @@ class Cart
 	public function conditions()
 	{
 		$cart = $this->cart();
-		return json_decode(json_encode($cart['conditions']), true);
+		return json_decode(json_encode($cart['conditions']));
 	}
 
 	public function condition($data)
@@ -163,13 +168,18 @@ class Cart
 	public function get($product)
 	{
 		$cart = $this->cart();
-		return json_decode(json_encode($cart['products'][$product]), true);
+		return json_decode(json_encode($cart['products'][$product]));
 	}
 
 	public function items()
 	{
 		$cart = $this->cart();
-		return json_decode(json_encode($cart['products']), true);
+		return json_decode(json_encode($cart['products']));
+	}
+
+	public function json()
+	{
+		return json_encode($this->items());
 	}
 
 	public function priceSum($product)
@@ -198,6 +208,17 @@ class Cart
 	public function total()
 	{
 		return calculate('total');
+	}
+
+	public function totalQuantity()
+	{
+		$total = 0;
+
+		foreach ($this->items() as $item) {
+			$total = $total + $item->quantity;
+		}
+
+		return $total;
 	}
 
 	public function update($product, $data)
