@@ -14,6 +14,8 @@ class Cart
 			'products' => [],
 			'conditions' => []
 		];
+
+		session('cart', $cart);
 	}
 
 	public function add($data, $name = '', $price = '', $quantity = '', $extra = [])
@@ -132,6 +134,20 @@ class Cart
 		return $cart[$user];
 	}
 
+	public function clear()
+	{
+		$cart = $this->cart();
+		$cart[$this->user]['products'] = [];
+		session('cart', $cart);
+	}
+
+	public function clearConditions()
+	{
+		$cart = $this->cart();
+		$cart[$this->user]['conditions'] = [];
+		session('cart', $cart);
+	}
+
 	public function conditions()
 	{
 		$cart = $this->cart();
@@ -193,6 +209,19 @@ class Cart
 	{
 		$cart = $this->cart();
 		unset($cart['products'][$product]);
+	}
+
+	public function removeCondition($condition)
+	{
+		$cart = $this->cart();
+
+		foreach ($this->conditions() as $item) {
+			if ($condition != $item->name) {
+				$cart['conditions'] = $item;
+			}
+		}
+
+		session('cart', $cart);
 	}
 
 	public function subtotal()
