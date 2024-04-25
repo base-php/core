@@ -137,15 +137,35 @@ class Cart
 	public function clear()
 	{
 		$cart = $this->cart();
-		$cart[$this->user]['products'] = [];
+		$cart['products'] = [];
+		session('cart', $cart);
+	}
+
+	public function clearItemConditions($product)
+	{
+		$cart = $this->cart();
+		$cart['products'][$product]['conditions'] = [];
 		session('cart', $cart);
 	}
 
 	public function clearConditions()
 	{
 		$cart = $this->cart();
-		$cart[$this->user]['conditions'] = [];
+		$cart['conditions'] = [];
 		session('cart', $cart);
+	}
+
+	public function conditionsByType($type)
+	{
+		$return = [];
+
+		foreach ($this->conditions as $condition) {
+			if ($condition->type == $type) {
+				$return[] = $condition;
+			}
+		}
+
+		return json_decode(json_encode($return));
 	}
 
 	public function conditions()
@@ -217,6 +237,19 @@ class Cart
 
 		foreach ($this->conditions() as $item) {
 			if ($condition != $item->name) {
+				$cart['conditions'] = $item;
+			}
+		}
+
+		session('cart', $cart);
+	}
+
+	public function removeConditionsByType($type)
+	{
+		$cart = $this->cart();
+
+		foreach ($this->conditions() as $item) {
+			if ($type != $item->type) {
 				$cart['conditions'] = $item;
 			}
 		}
