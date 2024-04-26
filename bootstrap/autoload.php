@@ -183,16 +183,3 @@ include __DIR__.'/../packages/cash-converter/cash-converter.php';
 include __DIR__.'/../packages/chart/chart.php';
 
 include __DIR__.'/../packages/crud/traits/crud.php';
-
-include __DIR__.'/../packages/ecommerce/models/address.php';
-include __DIR__.'/../packages/ecommerce/models/country.php';
-include __DIR__.'/../packages/ecommerce/models/currency.php';
-include __DIR__.'/../packages/ecommerce/models/customer.php';
-include __DIR__.'/../packages/ecommerce/models/order.php';
-include __DIR__.'/../packages/ecommerce/models/order_address.php';
-include __DIR__.'/../packages/ecommerce/models/order_item.php';
-include __DIR__.'/../packages/ecommerce/models/product_types.php';
-include __DIR__.'/../packages/ecommerce/models/product.php';
-include __DIR__.'/../packages/ecommerce/models/state.php';
-include __DIR__.'/../packages/ecommerce/models/tag.php';
-include __DIR__.'/../packages/ecommerce/models/transaction.php';
