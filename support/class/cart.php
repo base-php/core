@@ -19,7 +19,7 @@ class Cart
 			'conditions' => []
 		];
 
-		session('cart', $cart);
+		$this->save($cart);
 	}
 
 	public function add($data, $name = '', $price = '', $quantity = '', $extra = [])
@@ -53,14 +53,14 @@ class Cart
 			}
 		}
 
-		session('cart', $cart);
+		$this->save($cart);
 	}
 
 	public function addItemCondition($product, $condition)
 	{
 		$cart = $this->cart();
 		$cart['products'][$product]['conditions'][] = $condition;
-		session('cart', $cart);
+		$this->save($cart);
 	}
 
 	public function array()
@@ -142,21 +142,21 @@ class Cart
 	{
 		$cart = $this->cart();
 		$cart['products'] = [];
-		session('cart', $cart);
+		$this->save($cart);
 	}
 
 	public function clearItemConditions($product)
 	{
 		$cart = $this->cart();
 		$cart['products'][$product]['conditions'] = [];
-		session('cart', $cart);
+		$this->save($cart);
 	}
 
 	public function clearConditions()
 	{
 		$cart = $this->cart();
 		$cart['conditions'] = [];
-		session('cart', $cart);
+		$this->save($cart);
 	}
 
 	public function conditionsByType($type)
@@ -197,7 +197,7 @@ class Cart
 			}
 		}
 
-		session('cart', $cart);
+		$this->save($cart);
 	}
 
 	public function count()
@@ -245,7 +245,7 @@ class Cart
 			}
 		}
 
-		session('cart', $cart);
+		$this->save($cart);
 	}
 
 	public function removeConditionsByType($type)
@@ -258,7 +258,21 @@ class Cart
 			}
 		}
 
-		session('cart', $cart);
+		$this->save($cart);
+	}
+
+	public function $this->save($data)
+	{
+		include 'vendor/base-php/core/database/database.php';
+
+		$schema = $capsule->getConnection('default')->getSchemaBuilder();
+
+		if ($schema->hasTable('cart')) {
+			DB::table('cart')->upsert($data, ['user_id'], $data);
+
+		} else {
+			session('cart', $data);
+		}
 	}
 
 	public function subtotal()
@@ -301,6 +315,6 @@ class Cart
 			}
 		}
 
-		session('cart', $cart);
+		$this->save($cart);
 	}
 }

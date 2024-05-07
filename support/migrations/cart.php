@@ -15,6 +15,9 @@ return new class extends Migration
             $table->string('id')
                 ->index();
 
+            $table->unsignedBigInteger('user_id')
+                ->nullable();
+
             $table->longText('data');
 
             $table->datetime('date_create')
@@ -23,6 +26,10 @@ return new class extends Migration
             $table->datetime('date_update')
                 ->useCurrent()
                 ->setCurrentOnUpdate();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 
