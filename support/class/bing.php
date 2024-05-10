@@ -1,17 +1,15 @@
 <?php
 
-use MaximeRenou\BingAI\BingAI as AI;
-use MaximeRenou\BingAI\Chat\Prompt;
-use MaximeRenou\BingAI\Chat\Tone;
+use Fakell\Bing\Bing as API;
 
-class BingAI
+class Bing
 {
 	public $ai;
 	public $tone;
 
 	public function __construct()
 	{
-		$this->ai = new AI(config('bing_cookie'));
+		$this->api = new API();
 	}
 
 	public function ask($text)

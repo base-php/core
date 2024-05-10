@@ -110,7 +110,7 @@ function base_path()
 
 function bing()
 {
-    return new BingAI();
+    return new Bing();
 }
 
 function can($permission)
