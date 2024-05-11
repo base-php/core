@@ -4,7 +4,7 @@ use Fakell\Bing\Bing as API;
 
 class Bing
 {
-	public $ai;
+	public $api;
 	public $tone;
 
 	public function __construct()
@@ -14,9 +14,8 @@ class Bing
 
 	public function ask($text)
 	{
-		$conversation = $this->ai->createChatConversation();
-		$this->params($conversation);
-		return $conversation->ask(new Prompt($text));
+		$this->api->ask($text, $this->tone);
+		return $this->api->getResponse();
 	}
 
 	public function tone($tone)
