@@ -1,6 +1,7 @@
 <?php
 
 use Fakell\Bing\Bing as API;
+use Fakell\Bing\Constant\Tones;
 
 class Bing
 {
@@ -21,15 +22,15 @@ class Bing
 	public function tone($tone)
 	{
 		if ($tone == 'balanced') {
-			$this->tone = Tone::Balanced;
+			$this->tone = Tones::BALANCED;
 		}
 
 		if ($tone == 'creative') {
-			$this->tone = Tone::Creative;
+			$this->tone = Tones::CREATIVE;
 		}
 
 		if ($tone == 'precise') {
-			$this->tone = Tone::Precise;
+			$this->tone = Tones::PRECISE;
 		}
 
 		return $this;
