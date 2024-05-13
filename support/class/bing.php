@@ -10,6 +10,10 @@ class Bing
 
 	public function __construct()
 	{
+		if (! class_exists('OpenAI')) {
+            throw new Exception('Please execute `composer require fakellyh/bing-api-php`');
+        }
+        
 		$this->api = new API();
 	}
 
