@@ -261,7 +261,7 @@ class Cart
 		$this->save($cart);
 	}
 
-	public function $this->save($data)
+	public function save($data)
 	{
 		include 'vendor/base-php/core/database/database.php';
 
