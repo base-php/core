@@ -120,7 +120,12 @@ function can($permission)
 
 function carbon()
 {
-    return new Carbon;
+    return new Carbon();
+}
+
+function cart()
+{
+    return new Cart();
 }
 
 function cashConverter()
