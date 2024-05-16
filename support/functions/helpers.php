@@ -123,9 +123,9 @@ function carbon()
     return new Carbon();
 }
 
-function cart()
+function cart($user)
 {
-    return new Cart();
+    return new Cart($user);
 }
 
 function cashConverter()
