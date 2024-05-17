@@ -133,7 +133,7 @@ class Cart
 
 	public function cart($user = '')
 	{
-		$user = $user ?? $this->user;
+		$user = $user ? $user : $this->user;
 		$cart = session('cart');
 		return $cart[$user];
 	}
