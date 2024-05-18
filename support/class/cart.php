@@ -33,8 +33,6 @@ class Cart
 			'conditions' => 'nullable|iterable',
 		*/
 
-		$cart = $this->cart();
-
 		if ($name != '' && $price != '' && $quantity != '') {
 			$data = [
 				'id' => $data,
@@ -45,11 +43,14 @@ class Cart
 			];
 		}
 
+		$cart = session('cart');
+
 		if (count($data) == count($data, COUNT_RECURSIVE)) {
-			$cart['products'][$data['id']] = $data;
+			$cart[$this->user]['products'][$data['id']] = $data;
+
 		} else {
 			foreach ($data as $item) {
-				$cart['products'][$item['id']] = $item;
+				$cart[$this->user]['products'][$item['id']] = $item;
 			}
 		}
 
