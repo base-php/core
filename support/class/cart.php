@@ -59,8 +59,8 @@ class Cart
 
 	public function addItemCondition($product, $condition)
 	{
-		$cart = $this->cart();
-		$cart['products'][$product]['conditions'][] = $condition;
+		$cart = session('cart');
+		$cart[$this->user]['products'][$product]['conditions'][] = $condition;
 		$this->save($cart);
 	}
 
