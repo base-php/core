@@ -141,8 +141,8 @@ class Cart
 
 	public function clear()
 	{
-		$cart = $this->cart();
-		$cart['products'] = [];
+		$cart = session('cart');
+		$cart[$this->user]['products'] = [];
 		$this->save($cart);
 	}
 
