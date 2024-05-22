@@ -148,8 +148,8 @@ class Cart
 
 	public function clearItemConditions($product)
 	{
-		$cart = $this->cart();
-		$cart['products'][$product]['conditions'] = [];
+		$cart = session('cart');
+		$cart[$this->user]['products'][$product]['conditions'] = [];
 		$this->save($cart);
 	}
 
