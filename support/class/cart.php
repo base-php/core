@@ -45,7 +45,7 @@ class Cart
 
 		$cart = session('cart');
 
-		if (count($data) == count($data, COUNT_RECURSIVE)) {
+		if (! isset($data[0])) {
 			$cart[$this->user]['products'][$data['id']] = $data;
 
 		} else {
@@ -155,8 +155,8 @@ class Cart
 
 	public function clearConditions()
 	{
-		$cart = $this->cart();
-		$cart['conditions'] = [];
+		$cart = session('cart');
+		$cart[$this->user]['conditions'] = [];
 		$this->save($cart);
 	}
 
@@ -188,13 +188,13 @@ class Cart
 			'value' => 'string|required'
 		*/
 
-		$cart = $this->cart();
+		$cart = session('cart');
 
-		if (count($data) == count($data, COUNT_RECURSIVE)) {
-			$cart['conditions'][$data['id']] = $data;
+		if (! isset($data[0])) {
+			$cart[$this->user]['conditions'][] = $data;
 		} else {
 			foreach ($data as $item) {
-				$cart['conditions'][$item['id']] = $item;
+				$cart[$this->user]['conditions'][] = $item;
 			}
 		}
 
