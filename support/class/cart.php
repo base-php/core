@@ -164,7 +164,7 @@ class Cart
 	{
 		$return = [];
 
-		foreach ($this->conditions as $condition) {
+		foreach ($this->conditions() as $condition) {
 			if ($condition->type == $type) {
 				$return[] = $condition;
 			}
