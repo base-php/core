@@ -203,7 +203,8 @@ class Cart
 
 	public function count()
 	{
-		return count($this->items());
+		$cart = session('cart');
+		return count($cart[$this->user]['products']);
 	}
 
 	public function get($product)
