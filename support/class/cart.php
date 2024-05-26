@@ -5,14 +5,17 @@ class Cart
 	public $cart;
 	public $product;
 	public $user;
+	public $decimals;
+	public $dec_point;
+	public $thousands_sep;
 
 	public function __construct($user)
 	{
 		$this->user = $user;
 
-		$decimals = config('cart_decimals') ?? 2;
-		$dec_point = config('cart_dec_point') ?? '.';
-		$thousands_sep = config('cart_thousands_sep') ?? ',';
+		$this->decimals = config('cart_decimals') ?? 2;
+		$this->dec_point = config('cart_dec_point') ?? '.';
+		$this->thousands_sep = config('cart_thousands_sep') ?? ',';
 
 		$cart[$user] = [
 			'products' => [],
@@ -228,7 +231,7 @@ class Cart
 	{
 		$product = $this->get($product);
 		$priceSum = $product->price * $product->quantity;
-		return number_format($priceSum, $decimals, $dec_point, $thousands_sep);
+		return number_format($priceSum, $this->decimals, $this->dec_point, $this->thousands_sep);
 	}
 
 	public function remove($product)
