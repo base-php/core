@@ -236,8 +236,9 @@ class Cart
 
 	public function remove($product)
 	{
-		$cart = $this->cart();
-		unset($cart['products'][$product]);
+		$cart = session('cart');
+		unset($cart[$this->user]['products'][$product]);
+		$this->save($cart);
 	}
 
 	public function removeCondition($condition)
