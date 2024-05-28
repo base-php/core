@@ -243,11 +243,11 @@ class Cart
 
 	public function removeCondition($condition)
 	{
-		$cart = $this->cart();
+		$cart = session('cart');
 
 		foreach ($this->conditions() as $item) {
 			if ($condition != $item->name) {
-				$cart['conditions'] = $item;
+				$cart[$this->user]['conditions'] = $item;
 			}
 		}
 
