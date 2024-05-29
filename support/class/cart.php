@@ -256,11 +256,11 @@ class Cart
 
 	public function removeConditionsByType($type)
 	{
-		$cart = $this->cart();
+		$cart = session('cart');
 
 		foreach ($this->conditions() as $item) {
 			if ($type != $item->type) {
-				$cart['conditions'] = $item;
+				$cart[$this->user]['conditions'] = $item;
 			}
 		}
 
