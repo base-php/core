@@ -80,12 +80,12 @@ class Cart
 			$price = $item->price;
 
 			if ($wconditions) {
-				if ($item->conditions) {
+				if (isset($item->conditions)) {
 					foreach ($item->conditions as $condition) {
 						if (strpos($condition->value, '+') !== false) {
 							if (strpos($condition->value, '%') !== false) {
 								$value = str_replace(['%', '+'], ['', ''], $condition->value);
-								$price = $price + ($price * 15 / 100);
+								$price = $price + ($price * $value / 100);
 							} else {
 								$value = str_replace('+', '', $condition->value);
 								$price = $price + $value;
@@ -95,7 +95,7 @@ class Cart
 						if (strpos($condition->value, '-') !== false) {
 							if (strpos($condition->value, '%') !== false) {
 								$value = str_replace(['%', '-'], ['', ''], $condition->value);
-								$price = $price - ($price * 15 / 100);
+								$price = $price - ($price * $value / 100);
 							} else {
 								$value = str_replace('-', '', $condition->value);
 								$price = $price - $value;
@@ -113,7 +113,7 @@ class Cart
 				if (strpos($condition->value, '+') !== false) {
 					if (strpos($condition->value, '%') !== false) {
 						$value = str_replace(['%', '+'], ['', ''], $condition->value);
-						$return = $return + ($return * 15 / 100);
+						$return = $return + ($return * $value / 100);
 					} else {
 						$value = str_replace('+', '', $condition->value);
 						$return = $return + $value;
@@ -123,7 +123,7 @@ class Cart
 				if (strpos($condition->value, '-') !== false) {
 					if (strpos($condition->value, '%') !== false) {
 						$value = str_replace(['%', '-'], ['', ''], $condition->value);
-						$return = $return - ($return * 15 / 100);
+						$return = $return - ($return * $value / 100);
 					} else {
 						$value = str_replace('-', '', $condition->value);
 						$return = $return - $value;
@@ -132,7 +132,7 @@ class Cart
 			}
 		}
 
-		return number_format($return, $decimals, $dec_point, $thousands_sep);
+		return number_format($return, $this->decimals, $this->dec_point, $this->thousands_sep);
 	}
 
 	public function cart($user = '')
@@ -283,7 +283,7 @@ class Cart
 
 	public function subtotal()
 	{
-		return calculate('subtotal');
+		return $this->calculate('subtotal');
 	}
 
 	public function subTotalWithoutConditions()
