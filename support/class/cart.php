@@ -288,7 +288,7 @@ class Cart
 
 	public function subTotalWithoutConditions()
 	{
-		return calculate('subtotal', 0);
+		return $this->calculate('subtotal', 0);
 	}
 
 	public function total()
