@@ -293,7 +293,7 @@ class Cart
 
 	public function total()
 	{
-		return calculate('total');
+		return $this->calculate('total');
 	}
 
 	public function totalQuantity()
