@@ -309,15 +309,17 @@ class Cart
 
 	public function update($product, $data)
 	{
-		$cart = $this->cart();
+		$cart = session('cart');
 
 		foreach ($data as $key => $value) {
-			if (is_array($value) && $value['relative'] == false) {
-				$cart['products'][$product][$key] = $value;
-			}
+			if (is_array($value) && $value['relative'] == true) {
+				$cart[$this->user]['products'][$product][$key] = $value['value'];
 
-			if ($key == 'quantity') {
-				$cart['products'][$product][$key] = $cart['products'][$product][$key] + ($value);
+			} elseif ($key == 'quantity') {
+				$cart[$this->user]['products'][$product][$key] = $cart[$this->user]['products'][$product][$key] + ($value);
+
+			} else {
+				$cart[$this->user]['products'][$product][$key] = $value;
 			}
 		}
 
