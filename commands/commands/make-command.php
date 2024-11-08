@@ -16,7 +16,7 @@ class MakeCommand extends Command
     {
         $this->addArgument('name', InputArgument::OPTIONAL);
         $this->addOption('command', null, InputOption::VALUE_NONE, 'El comando de terminal al que será asignado [default: "command:name"]');
-        $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta al controlador');
+        $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta al comando');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

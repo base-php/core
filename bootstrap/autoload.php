@@ -27,6 +27,7 @@ include __DIR__.'/../commands/commands/language-table.php';
 include __DIR__.'/../commands/commands/logs-clean.php';
 include __DIR__.'/../commands/commands/logs-table.php';
 include __DIR__.'/../commands/commands/make-chart.php';
+include __DIR__.'/../commands/commands/make-class.php';
 include __DIR__.'/../commands/commands/make-command.php';
 include __DIR__.'/../commands/commands/make-controller.php';
 include __DIR__.'/../commands/commands/make-database.php';
