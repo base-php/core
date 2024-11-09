@@ -31,6 +31,7 @@ include __DIR__.'/../commands/commands/make-class.php';
 include __DIR__.'/../commands/commands/make-command.php';
 include __DIR__.'/../commands/commands/make-controller.php';
 include __DIR__.'/../commands/commands/make-database.php';
+include __DIR__.'/../commands/commands/make-enum.php';
 include __DIR__.'/../commands/commands/make-excel.php';
 include __DIR__.'/../commands/commands/make-exception.php';
 include __DIR__.'/../commands/commands/make-feature.php';
