@@ -35,6 +35,7 @@ include __DIR__.'/../commands/commands/make-enum.php';
 include __DIR__.'/../commands/commands/make-excel.php';
 include __DIR__.'/../commands/commands/make-exception.php';
 include __DIR__.'/../commands/commands/make-feature.php';
+include __DIR__.'/../commands/commands/make-interface.php';
 include __DIR__.'/../commands/commands/make-job.php';
 include __DIR__.'/../commands/commands/make-mail.php';
 include __DIR__.'/../commands/commands/make-middleware.php';
