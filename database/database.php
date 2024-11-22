@@ -11,11 +11,11 @@ foreach ($config['database'] as $item) {
 
     $capsule->addConnection([
         'driver' => $item['driver'],
-        'host' => $item['host'],
+        'host' => $item['host'] ?? '',
         'database' => $database,
-        'username' => $item['username'],
-        'password' => $item['password'],
-        'port' => $item['port'],
+        'username' => $item['username'] ?? '',
+        'password' => $item['password'] ?? '',
+        'port' => $item['port'] ?? '',
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix' => '',
