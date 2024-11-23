@@ -34,7 +34,7 @@ class Migrate extends Command
 
                 $class = require $require;
 
-                if ($class->connection) {
+                if (isset($class->connection)) {
                     $exists = DB::connection($class->connection)
                         ->table('migrations')
                         ->where('name', $name)
