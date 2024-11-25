@@ -7,7 +7,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'desktop:install', description: 'Instala todo los recursos para el desarrollo de escritorio')]
-class BillsTable extends Command
+class DesktopInstall extends Command
 {
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

@@ -2,6 +2,7 @@
 	"dependencies": {
 		"alpinejs": "3.14.3",
 		"bootstrap": "5.3.3",
+		"electron": "33.2.0",
 		"flowbite": "2.5.2",
 		"jquery": "3.7.1",
 		"mjml": "4.15.3",
