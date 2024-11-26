@@ -12,7 +12,6 @@
     "require": {
         "doctrine/dbal": "4.2.1",
         "dompdf/dompdf": "3.0.0",
-        "electron": "33.2.0",
         "endroid/qr-code": "6.0.3",
         "facebook/graph-sdk": "5.7.0",
         "fakellyh/bing-api-php": "1.2.2",
