@@ -17,6 +17,7 @@ include __DIR__.'/../commands/commands/db-show.php';
 include __DIR__.'/../commands/commands/db-table.php';
 include __DIR__.'/../commands/commands/db-wipe.php';
 include __DIR__.'/../commands/commands/desktop-install.php';
+include __DIR__.'/../commands/commands/desktop-server.php';
 include __DIR__.'/../commands/commands/docs.php';
 include __DIR__.'/../commands/commands/down.php';
 include __DIR__.'/../commands/commands/env.php';
