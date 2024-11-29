@@ -12,7 +12,7 @@ class DesktopServer extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         system('php -S localhost:8080');
-        system('electron .');
+        system('electron vendor/base-php/core/packages/desktop');
 
         return Command::SUCCESS;
     }
