@@ -1,0 +1,8 @@
+{
+	"name": "base-php",
+	"version": "1.0.0",
+	"description": "Desktop development in Base PHP",
+	"main": "script.js",
+	"author": "Nisa Delgado",
+	"license": "MIT"
+}
