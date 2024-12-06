@@ -169,6 +169,7 @@ include __DIR__.'/../support/class/qr.php';
 include __DIR__.'/../support/class/session.php';
 include __DIR__.'/../support/class/ssh.php';
 include __DIR__.'/../support/class/storage.php';
+include __DIR__.'/../support/class/uri.php';
 include __DIR__.'/../support/functions/config.php';
 include __DIR__.'/../support/functions/date.php';
 include __DIR__.'/../support/functions/debug.php';

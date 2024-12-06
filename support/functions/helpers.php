@@ -508,6 +508,11 @@ function two_fa()
     return new TwoFA;
 }
 
+function uri($of = '')
+{
+    return new Uri($of);
+}
+
 function validation($data, $rules, $messages, $redirect = null)
 {
     include $_SERVER['DOCUMENT_ROOT'] . '/vendor/base-php/core/database/database.php';
