@@ -110,6 +110,14 @@ include __DIR__.'/../pagination/length-aware-paginator.php';
 include __DIR__.'/../database/builder.php';
 include __DIR__.'/../view/view-service-provider.php';
 
+include __DIR__.'/../errors/snippet-provider.php';
+include __DIR__.'/../errors/file-snippet-provider.php';
+include __DIR__.'/../errors/flare.php';
+include __DIR__.'/../errors/frame.php';
+include __DIR__.'/../errors/null-snippet-provider.php';
+include __DIR__.'/../errors/request-context-provider.php';
+include __DIR__.'/../errors/solution-provider-repository.php';
+
 include __DIR__.'/../database/db.php';
 include __DIR__.'/../database/model.php';
 include __DIR__.'/../database/searchable.php';

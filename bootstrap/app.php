@@ -52,6 +52,8 @@ class App
 
         // Errors
 
+        error_reporting(E_ALL ^ E_DEPRECATED);
+
         if ($_ENV['errors'] == false) {
             error_reporting(0);
         } else {
