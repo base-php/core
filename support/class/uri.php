@@ -23,4 +23,11 @@ class Uri
 			$this->uri = $schema . '://' . $host . $uri;
 		}
 	}
+
+	public function scheme()
+	{
+		$array = explode('://', $this->url);
+		$scheme = $array[0];
+		return $scheme;
+	}
 }
