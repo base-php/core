@@ -7,6 +7,21 @@ class Uri
 		$this->of($uri);
 	}
 
+	public function host()
+	{
+		$array = explode('://', $this->url);
+		$host = $array[1];
+
+		if (strpos($array[1], '/')) {
+			$array = explode('/', $array[1]);
+			$host = $array[0];
+		}
+
+		$host = str_replace('www.', '', $host);
+
+		return $host;
+	}
+
 	public function of($uri = '')
 	{
 		if ($uri) {
