@@ -39,6 +39,23 @@ class Uri
 		}
 	}
 
+	public function path()
+	{
+		$path = null;
+		$array = explode('/', $this->url);
+
+		if (isset($array[2])) {
+			$path = $array[2];
+
+			if (strpos($path, '?')) {
+				$array = explode('?', $path);
+				$path = $array[0];
+			}
+		}
+
+		return $path;
+	}
+
 	public function scheme()
 	{
 		$array = explode('://', $this->url);
