@@ -56,6 +56,16 @@ class Uri
 		return $path;
 	}
 
+	public function query()
+	{
+		return new class {
+			public function all()
+			{
+				return (object) $_GET;
+			}
+		};
+	}
+
 	public function scheme()
 	{
 		$array = explode('://', $this->url);
