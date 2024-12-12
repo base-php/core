@@ -63,6 +63,15 @@ class Uri
 			{
 				return (object) $_GET;
 			}
+
+			public function has($key)
+			{
+				if (isset($_GET[$key])) {
+					return true;
+				}
+
+				return false;
+			}
 		};
 	}
 
