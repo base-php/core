@@ -81,4 +81,10 @@ class Uri
 		$scheme = $array[0];
 		return $scheme;
 	}
+
+	public function withScheme($scheme)
+	{
+		$this->url = str_replace('http', 'https', $this->url);
+		return $this->url;
+	}
 }
