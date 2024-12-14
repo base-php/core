@@ -82,9 +82,15 @@ class Uri
 		return $scheme;
 	}
 
+	public function withHost($host)
+	{
+		$this->url = str_replace($this->host, $host, $this->url);
+		return $this->url;
+	}
+
 	public function withScheme($scheme)
 	{
-		$this->url = str_replace('http', 'https', $this->url);
+		$this->url = str_replace(['http', 'https'], [$scheme, $scheme], $this->url);
 		return $this->url;
 	}
 }
