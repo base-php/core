@@ -88,6 +88,22 @@ class Uri
 		return $this->url;
 	}
 
+	public function withPath($path)
+	{
+		if ($this->path) {
+			$this->url = str_replace($this->path, $path, $this->url);
+		} else {
+			$this->url = $this->scheme . '://' . $this->host . '/' . $path;
+
+			if (! empty($_GET)) {
+				$query = http_build_query($_GET);
+				$this->url = $this->scheme . '://' . $this->host . '/' . $path . '?' . $query;
+			}
+		}
+
+		return $this->url;
+	}
+
 	public function withScheme($scheme)
 	{
 		$this->url = str_replace(['http', 'https'], [$scheme, $scheme], $this->url);
