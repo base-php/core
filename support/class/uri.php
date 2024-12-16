@@ -104,6 +104,23 @@ class Uri
 		return $this->url;
 	}
 
+	public function withQuery($query)
+	{
+		$key = array_keys($query);
+		$key = $key[0];
+
+		$value = array_values($query);
+		$value = $value[0];
+		
+		$_GET[$key] = $value;
+
+		$queryString = http_build_query($_GET);
+
+		$this->url = $this->url . '?' . $queryString;
+
+		return $this->url;
+	}
+
 	public function withScheme($scheme)
 	{
 		$this->url = str_replace(['http', 'https'], [$scheme, $scheme], $this->url);
