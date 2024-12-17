@@ -75,6 +75,25 @@ class Uri
 		};
 	}
 
+	public function replaceQuery($query)
+	{
+		$keys = array_keys($query);
+		$key = $keys[0];
+
+		$values = array_values($query);
+		$value = $values[0];
+
+		if (isset($_GET[$key])) {
+			$_GET[$key] = $value;
+		}
+
+		$queryString = http_build_query($_GET);
+
+		$this->url = $this->url . '?' . $queryString;
+
+		return $this->url;
+	}
+
 	public function scheme()
 	{
 		$array = explode('://', $this->url);
