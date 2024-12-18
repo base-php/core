@@ -7,6 +7,11 @@ class Uri
 		$this->of($uri);
 	}
 
+	public function __toString()
+	{
+		return $this->url;
+	}
+
 	public function host()
 	{
 		$array = explode('://', $this->url);
