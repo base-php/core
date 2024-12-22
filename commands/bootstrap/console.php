@@ -56,26 +56,30 @@ class Console
             }
         }
 
-        $dispatcher = new EventDispatcher();
-        $dispatcher->addListener(ConsoleEvents::COMMAND, function ($event) use ($config) {
-            if ($config['database'][0]['driver'] == 'sqlite' && ! file_exists($config['database'][0]['database'] . '.sqlite')) {
-                return;
-            }
-
-            include 'vendor/base-php/core/database/database.php';
+        $i = array_search('default1', array_column($config['database'], 'name'));
             
-            $schema = $capsule->getConnection('default')->getSchemaBuilder();
+        if ($config['database'][$i]['host'] != 'mysql' && $config['database'][$i]['host'] != 'pgsql') {
+            $dispatcher = new EventDispatcher();
+            $dispatcher->addListener(ConsoleEvents::COMMAND, function ($event) use ($config) {
+                if ($config['database'][0]['driver'] == 'sqlite' && ! file_exists($config['database'][0]['database'] . '.sqlite')) {
+                    return;
+                }
 
-            if ($schema->hasTable('monitor')) {
-                $monitor = new Monitor();
-                $monitor->command($event->getInput());
+                include 'vendor/base-php/core/database/database.php';
+                
+                $schema = $capsule->getConnection('default')->getSchemaBuilder();
 
-                $logs = DB::getQueryLog();
-                $monitor->database($logs);
-            }
-        });
+                if ($schema->hasTable('monitor')) {
+                    $monitor = new Monitor();
+                    $monitor->command($event->getInput());
 
-        $application->setDispatcher($dispatcher);
+                    $logs = DB::getQueryLog();
+                    $monitor->database($logs);
+                }
+            });
+
+            $application->setDispatcher($dispatcher);
+        }
 
         $application->run();
     }
