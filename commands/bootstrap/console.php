@@ -56,7 +56,9 @@ class Console
             }
         }
 
-        $i = array_search('default', array_column($config['database'], 'name'));
+        $i = array_search('default1', array_column($config['database'], 'name'));
+
+        $config['database'][$i]['host'] = $config['database'][$i]['host'] ?? '';
             
         if ($config['database'][$i]['host'] != 'mysql' && $config['database'][$i]['host'] != 'pgsql') {
             $dispatcher = new EventDispatcher();
