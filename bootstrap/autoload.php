@@ -18,6 +18,7 @@ include __DIR__.'/../commands/commands/db-table.php';
 include __DIR__.'/../commands/commands/db-wipe.php';
 include __DIR__.'/../commands/commands/desktop-install.php';
 include __DIR__.'/../commands/commands/desktop-server.php';
+include __DIR__.'/../commands/commands/docker-base.php';
 include __DIR__.'/../commands/commands/docker-down.php';
 include __DIR__.'/../commands/commands/docker-install.php';
 include __DIR__.'/../commands/commands/docker-stop.php';
