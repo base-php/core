@@ -21,6 +21,7 @@ include __DIR__.'/../commands/commands/desktop-server.php';
 include __DIR__.'/../commands/commands/docker-base.php';
 include __DIR__.'/../commands/commands/docker-down.php';
 include __DIR__.'/../commands/commands/docker-install.php';
+include __DIR__.'/../commands/commands/docker-npm.php';
 include __DIR__.'/../commands/commands/docker-php.php';
 include __DIR__.'/../commands/commands/docker-stop.php';
 include __DIR__.'/../commands/commands/docker-up.php';
