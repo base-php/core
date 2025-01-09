@@ -32,6 +32,10 @@ class Migrate extends Command
 
                 $name = str_replace('.php', '', $item);
 
+                if (pathinfo($require)['extension'] == 'sqlite') {
+                    continue;
+                }
+
                 $class = require $require;
 
                 if (isset($class->connection)) {
