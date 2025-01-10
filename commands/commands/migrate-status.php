@@ -25,7 +25,13 @@ class MigrateStatus extends Command
 
         foreach (scandir('database') as $item) {
             if (! is_dir($item)) {
+                if (pathinfo('database/' . $item)['extension'] == 'sqlite') {
+                    continue;
+                }
+
                 $class = require 'database/' . $item;
+
+                $class->connection = $class->connection ?? 'default';
 
                 if ($class->connection != $connection) {
                     return Command::SUCCESS;
