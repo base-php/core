@@ -45,6 +45,10 @@ class MigrateRefresh extends Command
 
             try {
                 $require = $input->getOption('path') ? $migration : 'database/' . $migration;
+
+                if (pathinfo($require)['extension'] == 'sqlite') {
+                    continue;
+                }
                 
                 $class = require $require;
                 $class->down();
