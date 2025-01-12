@@ -34,6 +34,10 @@ class MigrateReset extends Command
         foreach ($migrations as $migration) {
             try {
                 $require = $input->getOption('path') ? $migration : 'database/' . $migration;
+
+                if (pathinfo($require)['extension'] == 'sqlite') {
+                    continue;
+                }
                 
                 $class = require $require;
                 $class->down();
