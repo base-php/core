@@ -48,6 +48,10 @@ class MigrateRollback extends Command
             try {
                 $require = $input->getOption('path') ? $migration : 'database/' . $migration . '.php';
 
+                if (pathinfo($require)['extension'] == 'sqlite') {
+                    continue;
+                }
+
                 $class = require $require;
                 $class->down();
 
