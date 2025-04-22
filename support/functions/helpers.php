@@ -548,3 +548,9 @@ function view($view, $data = [])
 
     return $class->render($view, $data);
 }
+
+function xml($resource)
+{
+    $xml = new XML();
+    return $xml->load($resource);
+}
