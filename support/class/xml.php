@@ -2,15 +2,27 @@
 
 class XML
 {
-    public function load($resource)
+    public $data;
+
+    public function __construct($resource)
     {
         if (file_exists($resource)) {
-            $xml = simplexml_load_file($resource);
+            $string = simplexml_load_file($resource);
         } else {
-            $xml = simplexml_load_string($resource);
+            $string = simplexml_load_string($resource);
         }
 
-        $json = json_encode($xml);
-        return json_decode($json);
+        $json = json_encode($string);
+        $this->data = json_decode($json, true);
+    }
+
+    public function all()
+    {
+        return (object) $this->data;
+    }
+
+    public function set($key, $value)
+    {
+        $this->data[$key] = $value;
     }
 }

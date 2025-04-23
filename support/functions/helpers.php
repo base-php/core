@@ -551,6 +551,6 @@ function view($view, $data = [])
 
 function xml($resource)
 {
-    $xml = new XML();
-    return $xml->load($resource);
+    $xml = new XML($resource);
+    return $xml;
 }
