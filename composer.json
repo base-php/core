@@ -23,6 +23,7 @@
         "phpmailer/phpmailer": "6.9.3",
         "phpoffice/phpspreadsheet": "4.0.0",
         "pragmarx/google2fa-qrcode": "3.0.0",
+        "spatie/array-to-xml": "3.4.0",
         "spatie/holidays": "1.17.0",
         "spatie/mjml-php": "1.2.3",
         "spatie/opening-hours": "4.2.0",

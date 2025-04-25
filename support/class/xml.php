@@ -1,5 +1,7 @@
 <?php
 
+use Spatie\ArrayToXml\ArrayToXml;
+
 class XML
 {
     public $data;
@@ -31,10 +33,21 @@ class XML
     {
         return (object) $this->data;
     }
+    
 
     public function get($key)
     {
         return $this->data[$key] ?? null;
+    }
+
+    public function save($filename)
+    {
+        if (! class_exists('ArrayToXml')) {
+            throw new Exception('Please execute `composer require spatie/array-to-xml`');
+        }
+
+        $data = ArrayToXml::convert($this->data);
+        file_put_contents($filename, $data);
     }
 
     public function set($key, $value)
