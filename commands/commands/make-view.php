@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'make:view', description: 'Crea una nueva clase de vista')]
-class MakeValidation extends Command
+class MakeView extends Command
 {
     public function configure()
     {
