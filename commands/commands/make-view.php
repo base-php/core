@@ -30,6 +30,10 @@ class MakeView extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/view.php');
         $content = str_replace('ViewName', $name, $content);
 
+        if (! file_exists('app/View')) {
+            mkdir('app/View');
+        }
+
         if (! file_exists('app/View/Composers')) {
             mkdir('app/View/Composers');
         }
