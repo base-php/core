@@ -57,6 +57,7 @@ include __DIR__.'/../commands/commands/make-rule.php';
 include __DIR__.'/../commands/commands/make-test.php';
 include __DIR__.'/../commands/commands/make-trait.php';
 include __DIR__.'/../commands/commands/make-validation.php';
+include __DIR__.'/../commands/commands/make-view.php';
 include __DIR__.'/../commands/commands/migrate.php';
 include __DIR__.'/../commands/commands/migrate-refresh.php';
 include __DIR__.'/../commands/commands/migrate-reset.php';
