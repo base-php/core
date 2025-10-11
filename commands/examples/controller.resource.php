@@ -14,7 +14,7 @@ class ControllerName extends Controller
      */
     public function index(): View
     {
-
+        // Your code here
     }
 
     /**
