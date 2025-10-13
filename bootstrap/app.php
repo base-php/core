@@ -100,7 +100,18 @@ class App
         // Router
 
         $route = $app['router'];
+
         include 'app/routes.php';
+
+        if (file_exists('modules')) {
+            foreach (scandir('modules') as $module) {
+                if (! in_array($module, ['.', '..'])) {
+                    if (file_exists('modules/' . $module . '/routes.php')) {
+                        include 'modules/' . $module . '/routes.php';
+                    }
+                }
+            }
+        }
 
         $route->fallback(function () {
             http_response_code(404);
