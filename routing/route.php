@@ -271,6 +271,23 @@ class Route
     {
         if (! $this->controller) {
             $class = 'App\Controllers\\'.$this->parseControllerCallback()[0];
+            
+            if (! class_exists($class)) {
+                if (file_exists('modules')) {
+                    foreach (scandir('modules') as $module) {
+                        if ($module === '.' || $module === '..') {
+                            continue;
+                        }
+    
+                        $moduleClass = 'Modules\\'.$module.'\Controllers\\'.$this->parseControllerCallback()[0];
+
+                        if (class_exists($moduleClass)) {
+                            $class = $moduleClass;
+                            break;
+                        }
+                    }
+                }
+            }
 
             $this->controller = $this->container->make(ltrim($class, '\\'));
         }

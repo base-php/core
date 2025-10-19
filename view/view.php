@@ -34,6 +34,14 @@ class View
                 $find = true;
             }
 
+            if (! file_exists($file)) {
+                $path = ucfirst($path);
+                $file = $_SERVER['DOCUMENT_ROOT'] . '/modules/' . $path . '/Resources/views/' . $view . '.blade.php';
+
+                $view = file_get_contents($file);
+                $find = true;
+            }
+
         } else {
             $viewPath = $view;
             
@@ -47,26 +55,28 @@ class View
             $view = str_replace('/', '.', $view);
             throw new Exception("View [$view] not found");
         }
-        
-        $viewComposers = scandir($_SERVER['DOCUMENT_ROOT'] . '/app/View/Composers');
-        array_shift($viewComposers);
-        array_shift($viewComposers);
 
-        $viewComposers = array_map(function ($item) {
-            return 'App\View\Composers\\' . str_replace('.php', '', $item);
-        }, $viewComposers);
-        
-        foreach ($viewComposers as $composer) {
-            $instance = new $composer();
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . '/app/View/Composers')) {
+            $composers = scandir($_SERVER['DOCUMENT_ROOT'] . '/app/View/Composers');
+            array_shift($composers);
+            array_shift($composers);
 
-            $instanceView = str_replace('.', '/', $instance->view);
+            $composers = array_map(function ($item) {
+                return 'App\View\Composers\\' . str_replace('.php', '', $item);
+            }, $composers);
+            
+            foreach ($composers as $composer) {
+                $instance = new $composer();
 
-            if ($instanceView == $viewPath) {
-                $instance->compose($this);
+                $instanceView = str_replace('.', '/', $instance->view);
+
+                if ($instanceView == $viewPath) {
+                    $instance->compose($this);
+                }
             }
-        }
 
-        $data = array_merge($this->data, $data);
+            $data = array_merge($this->data, $data);
+        }
 
         echo $componentes->render($view, $data);
 
