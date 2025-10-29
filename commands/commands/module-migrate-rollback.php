@@ -9,12 +9,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'module:migrate', description: 'Ejecuta las migraciones de base de datos de un módulo específico')]
-class ModuleMigrate extends Command
+#[AsCommand(name: 'module:migrate-rollback', description: 'Revertir la última migración de la base de datos de un módulo específico')]
+class ModuleMigrateRollback extends Command
 {
     public function configure()
     {
         $this->addArgument('module', InputArgument::OPTIONAL);
+        $this->addOption('step', null, InputOption::VALUE_OPTIONAL, 'Número de migraciones a revertir', 1);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -44,49 +45,34 @@ class ModuleMigrate extends Command
             return Command::FAILURE;
         }
         
-        foreach (scandir("modules/$module/database") as $item) {
-            if (! is_dir($item)) {
-                $require = "modules/$module/database/$item";
+        require 'vendor/base-php/core/database/database.php';
 
-                $file = str_replace('.php', '', $item);
+        $config = require 'app/config.php';
 
-                if (pathinfo($require)['extension'] == 'sqlite') {
+        $step = $input->getOption('step');
+
+        $migrations = DB::table('migrations')
+            ->orderByDesc('batch')
+            ->get();
+
+        foreach ($migrations as $migration) {
+            try {
+                $require = 'modules/' . $module . '/database/' . $migration->name . '.php';
+
+                if (! file_exists($require)) {
                     continue;
                 }
 
                 $class = require $require;
+                $class->down();
 
-                if (isset($class->connection)) {
-                    $exists = DB::connection($class->connection)
-                        ->table('migrations')
-                        ->where('name', $file)
-                        ->get();
+                DB::table('migrations')
+                    ->where('id', $migration->id)
+                    ->delete();
 
-                    if ($exists->count()) {
-                        continue;
-                    }
-
-                    try {
-                        $class->up();
-
-                        $batch = DB::connection($class->connection)
-                            ->table('migrations')
-                            ->max('batch');
-
-                        $batch++;
-
-                        DB::connection($class->connection)
-                            ->table('migrations')
-                            ->insert([
-                                'name' => $file,
-                                'batch' => $batch,
-                            ]);
-
-                        $style->success($item);
-                    } catch (Exception $exception) {
-                        $style->error($exception->getMessage());
-                    }                    
-                }
+                $style->warning($migration->name);
+            } catch (Exception $exception) {
+                $style->error($exception->getMessage());
             }
         }
 
