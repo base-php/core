@@ -68,6 +68,7 @@ include __DIR__.'/../commands/commands/model-status-table.php';
 include __DIR__.'/../commands/commands/module-list.php';
 include __DIR__.'/../commands/commands/module-make.php';
 include __DIR__.'/../commands/commands/module-migrate-refresh.php';
+include __DIR__.'/../commands/commands/module-migrate-reset.php';
 include __DIR__.'/../commands/commands/module-migrate-rollback.php';
 include __DIR__.'/../commands/commands/module-migrate.php';
 include __DIR__.'/../commands/commands/module-unuse.php';
