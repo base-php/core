@@ -51,6 +51,7 @@ class ModuleMakeController extends Command
             $style->error("El módulo '$module' no existe.");
             return Command::FAILURE;
         }
+        
         $name = $input->getArgument('name');
 
         while (! $name) {
