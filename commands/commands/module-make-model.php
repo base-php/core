@@ -84,6 +84,7 @@ class ModuleMakeModel extends Command
 
             $content = file_get_contents('vendor/base-php/core/commands/examples/controller.php');
             $content = str_replace('ControllerName', $controllerName, $content);
+            $content = str_replace('App\Controllers', 'Modules\\' . $module . '\Controllers', $content);
 
             $fopen = fopen('modules/' . $module . '/Controllers/' . $controllerName . '.php', 'w+');
             fwrite($fopen, $content);
@@ -119,6 +120,7 @@ class ModuleMakeModel extends Command
 
             $content = file_get_contents('vendor/base-php/core/commands/examples/' . $file . '.php');
             $content = str_replace('ControllerName', $controllerName, $content);
+            $content = str_replace('App\Controllers', 'Modules\\' . $module . '\Controllers', $content);
 
             $fopen = fopen('modules/' . $module . '/Controllers/' . $controllerName . '.php', 'w+');
             fwrite($fopen, $content);
@@ -136,6 +138,7 @@ class ModuleMakeModel extends Command
 
             $content = file_get_contents('vendor/base-php/core/commands/examples/' . $file . '.php');
             $content = str_replace('ControllerName', $controllerName, $content);
+            $content = str_replace('App\Controllers', 'Modules\\' . $module . '\Controllers', $content);
 
             $fopen = fopen('modules/' . $module . '/Controllers/' . $controllerName . '.php', 'w+');
             fwrite($fopen, $content);
@@ -153,9 +156,10 @@ class ModuleMakeModel extends Command
             foreach ($validations as $validation) {
                 $content = file_get_contents('vendor/base-php/core/commands/examples/validation.php');
                 $content = str_replace('ValidationName', $validation, $content);
+                $content = str_replace('App\Validations', 'Modules\\' . $module . '\Validations', $content);
 
                 if (! file_exists('modules/' . $module . '/Validations')) {
-                    mkdir('app/Validations');
+                    mkdir('modules/' . $module . '/Validations');
                 }
 
                 $fopen = fopen('modules/' . $module . '/Validations/' . $validation . '.php', 'w+');

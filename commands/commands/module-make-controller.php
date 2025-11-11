@@ -84,6 +84,7 @@ class ModuleMakeController extends Command
 
         $content = file_get_contents('vendor/base-php/core/commands/examples/' . $file . '.php');
         $content = str_replace('ControllerName', $name, $content);
+        $content = str_replace('App\Controllers', 'Modules\\' . $module . '\Controllers', $content);
 
         $fopen = fopen('modules/' . $module . '/Controllers/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
@@ -94,6 +95,7 @@ class ModuleMakeController extends Command
         if ($model) {
             $content = file_get_contents('vendor/base-php/core/commands/examples/model.php');
             $content = str_replace('ModelName', $model, $content);
+            $content = str_replace('App\Models', 'Modules\\' . $module . '\Models', $content);
 
             $fopen = fopen('modules/' . $module . '/Models/' . $model . '.php', 'w+');
             fwrite($fopen, $content);
@@ -110,6 +112,7 @@ class ModuleMakeController extends Command
             foreach ($validations as $validation) {
                 $content = file_get_contents('vendor/base-php/core/commands/examples/validation.php');
                 $content = str_replace('ValidationName', $validation, $content);
+                $content = str_replace('App\Validations', 'Modules\\' . $module . '\Validations', $content);
 
                 if (! file_exists('modules/' . $module . '/Validations')) {
                     mkdir('modules/' . $module . '/Validations');

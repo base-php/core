@@ -56,7 +56,7 @@ class ModuleMakeMigration extends Command
             $name = $helper->ask($input, $output, $question);
         }
 
-        $content = file_get_contents('vendor/base-php/core/commands/examples/Migration.php');
+        $content = file_get_contents('vendor/base-php/core/commands/examples/migration.php');
         $content = str_replace('MigrationName', $name, $content);
 
         $var = Str::singular($name);
