@@ -9,15 +9,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'module:make-mail', description: 'Crea una nueva clase de email en módulo')]
-class ModuleMakeMail extends Command
+#[AsCommand(name: 'module:make-notification', description: 'Crea una nueva clase de notificación en módulo')]
+class ModuleMakeNotification extends Command
 {
     public function configure()
     {
         $this->addArgument('name', InputArgument::OPTIONAL);
         $this->addArgument('module', InputArgument::OPTIONAL);
 
-        $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta al mail');
+        $this->addOption('test', null, InputOption::VALUE_NONE, 'Genera una clase de prueba adjunta a la notificación');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -50,25 +50,26 @@ class ModuleMakeMail extends Command
         $name = $input->getArgument('name');
 
         while (! $name) {
-            $question = new Question("\n- ¿Cuál es el nombre del mail?\n> ");
+            $question = new Question("\n- ¿Cuál es el nombre de la notificación?\n> ");
 
             $helper = $this->getHelper('question');
             $name = $helper->ask($input, $output, $question);
         }
 
-        $content = file_get_contents('vendor/base-php/core/commands/examples/mail.php');
-        $content = str_replace('MailName', $name, $content);
-        $content = str_replace('App\Mails', 'Modules\\' . $module . '\Mails', $content);
+        $content = file_get_contents('vendor/base-php/core/commands/examples/notification.php');
+        $content = str_replace('NotificationName', $name, $content);
+        $content = str_replace('App\Notifications', 'Modules\\' . $module . '\Notifications', $content);
 
-        if (! file_exists('modules/' . $module . '/Mails')) {
-            mkdir('modules/' . $module . '/Mails');
+        if (! file_exists('modules/' . $module . '/Notifications')) {
+            mkdir('modules/' . $module . '/Notifications');
         }
 
-        $fopen = fopen('modules/' . $module . '/Mails/' . $name . '.php', 'w+');
+        $fopen = fopen('modules/' . $module . '/Notifications/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
-        
-        $style->success("Clase de email '$name' creada satisfactoriamente.");
+
+        $style = new SymfonyStyle($input, $output);
+        $style->success("Clase de notificación '$name' creada satisfactoriamente.");
 
         $test = $input->getOption('test');
 
