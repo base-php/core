@@ -74,6 +74,7 @@ include __DIR__.'/../commands/commands/module-make-middleware.php';
 include __DIR__.'/../commands/commands/module-make-migration.php';
 include __DIR__.'/../commands/commands/module-make-model.php';
 include __DIR__.'/../commands/commands/module-make-notification.php';
+include __DIR__.'/../commands/commands/module-make-rule.php';
 include __DIR__.'/../commands/commands/module-make-validation.php';
 include __DIR__.'/../commands/commands/module-make.php';
 include __DIR__.'/../commands/commands/module-migrate-refresh.php';
