@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'module:make-rule', description: 'Crea una nueva clase de regla en módulo')]
-class ModuleMakeRule extends Command
+#[AsCommand(name: 'module:make-resource', description: 'Crea una nueva clase de recurso en módulo')]
+class ModuleMakeResource extends Command
 {
     public function configure()
     {
@@ -47,26 +47,25 @@ class ModuleMakeRule extends Command
         $name = $input->getArgument('name');
 
         while (! $name) {
-            $question = new Question("\n- ¿Cuál es el nombre de la regla?\n> ");
+            $question = new Question("\n- ¿Cuál es el nombre del recurso?\n> ");
 
             $helper = $this->getHelper('question');
             $name = $helper->ask($input, $output, $question);
         }
 
-        $content = file_get_contents('vendor/base-php/core/commands/examples/rule.php');
-        $content = str_replace('RuleName', $name, $content);
-        $content = str_replace('App\Rules', 'Modules\\' . $module . '\Rules', $content);
+        $content = file_get_contents('vendor/base-php/core/commands/examples/resource.php');
+        $content = str_replace('ResourceName', $name, $content);
+        $content = str_replace('App\Resources', 'Modules\\' . $module . '\Resources', $content);
 
-        if (! file_exists('modules/' . $module . '/Rules')) {
-            mkdir('modules/' . $module . '/Rules');
+        if (! file_exists('modules/' . $module . '/Resources')) {
+            mkdir('modules/' . $module . '/Resources');
         }
 
-        $fopen = fopen('modules/' . $module . '/Rules/' . $name . '.php', 'w+');
+        $fopen = fopen('modules/' . $module . '/Resources/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
-
-        $style = new SymfonyStyle($input, $output);
-        $style->success("Clase de regla '$name' creada satisfactoriamente.");
+        
+        $style->success("Clase de recurso '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
     }
