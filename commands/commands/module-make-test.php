@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'make:test', description: 'Crea una nueva clase de prueba')]
-class MakeTest extends Command
+#[AsCommand(name: 'module:make-test', description: 'Crea una nueva clase de prueba en módulo')]
+class ModuleMakeTest extends Command
 {
     public function configure()
     {
@@ -18,6 +18,26 @@ class MakeTest extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $style = new SymfonyStyle($input, $output);
+
+        $module = $input->getArgument('module');
+
+        if (! $module) {
+            if (! file_exists('vendor/base-php/core/tmp/module')) {
+                $style->error('No hay ningún módulo seleccionado. Usa el comando module:use para seleccionar un módulo.');
+                return Command::FAILURE;
+            }
+
+            $module = file_get_contents('vendor/base-php/core/tmp/module');
+        }
+
+        while (! $module) {
+            $question = new Question("\n- ¿Cuál es el nombre del módulo?\n> ");
+
+            $helper = $this->getHelper('question');
+            $module = $helper->ask($input, $output, $question);
+        }
+
         $name = $input->getArgument('name');
 
         while (! $name) {
@@ -31,11 +51,10 @@ class MakeTest extends Command
         $content = file_get_contents('vendor/base-php/core/commands/examples/test.php');
         $content = str_replace('TestName', $name, $content);
 
-        $fopen = fopen('tests/' . $name . '.php', 'w+');
+        $fopen = fopen('modules/' . $module . '/tests/' . $name . '.php', 'w+');
         fwrite($fopen, $content);
         fclose($fopen);
-
-        $style = new SymfonyStyle($input, $output);
+        
         $style->success("Clase de prueba '$name' creada satisfactoriamente.");
 
         return Command::SUCCESS;
