@@ -200,6 +200,7 @@ include __DIR__.'/../support/class/cart.php';
 include __DIR__.'/../support/class/database-based-session.php';
 include __DIR__.'/../support/class/gemini.php';
 include __DIR__.'/../support/class/mail.php';
+include __DIR__.'/../support/class/module.php';
 include __DIR__.'/../support/class/openai.php';
 include __DIR__.'/../support/class/qr.php';
 include __DIR__.'/../support/class/session.php';

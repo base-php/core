@@ -330,6 +330,11 @@ function mjml($mjml)
     return Mjml::new();
 }
 
+function module()
+{
+    return new Module();
+}
+
 function number()
 {
     return new Number();
