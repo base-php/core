@@ -2,9 +2,11 @@
 
 class Module
 {
-    public function all()
+    public $modules;
+
+    public function __construct()
     {
-        $modules = [];
+        $this->modules = [];
 
         foreach (scandir('modules') as $module) {
             if ($module === '.' || $module === '..') {
@@ -12,10 +14,18 @@ class Module
             }
 
             if (is_dir('modules' . '/' . $module)) {
-                $modules[] = $module;
+                $this->modules[] = $module;
             }
         }
+    }
 
-        return $modules;
+    public function collection()
+    {
+        return collect($this->modules);
+    }
+
+    public function all()
+    {
+        return $this->modules;
     }
 }
