@@ -24,6 +24,11 @@ class Module
         return collect($this->modules);
     }
 
+    public function has($module)
+    {
+        return in_array($module, $this->modules);
+    }
+
     public function all()
     {
         return $this->modules;
