@@ -335,6 +335,16 @@ abstract class Model implements Arrayable, ArrayAccess, CanBeEscapedWhenCastToSt
     }
 
     /**
+     * Perform any actions required after the model boots.
+     *
+     * @return void
+     */
+    protected static function whenBooted()
+    {
+        //
+    }
+
+    /**
      * Clear the list of booted models so they will be re-booted.
      *
      * @return void
