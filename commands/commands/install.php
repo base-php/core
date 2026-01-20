@@ -13,7 +13,12 @@ class Install extends Command
     {
         $style = new SymfonyStyle($input, $output);
 
-        $style->choice(
+        $frontend = $style->choice(
+            '¿Qué frontend te gustaría instalar?',
+            ['Tailwind', 'Bootstrap']
+        );
+
+        $database = $style->choice(
             '¿Qué base de datos utilizará su aplicación?',
             ['SQLite', 'MySQL', 'PostgreSQL', 'SQL Server']
         );
