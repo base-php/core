@@ -23,6 +23,18 @@ class Install extends Command
             ['SQLite', 'MySQL', 'PostgreSQL', 'SQL Server']
         );
 
+        $databases = [
+            'SQLite' => 'sqlite',
+            'MySQL' => 'mysql',
+            'PostgreSQL' => 'pgsql',
+            'SQL Server' => 'sqlsrv'
+        ];
+
+        $content = file_get_contents('app/config.php');
+        $content = str_replace('sqlite', $databases[$database], $content);
+
+        file_put_contents('app/config.php', $content);
+
         return Command::SUCCESS;
     }
 }
