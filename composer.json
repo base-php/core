@@ -10,24 +10,24 @@
         }
     ],
     "require": {
-        "doctrine/dbal": "4.3.4",
+        "doctrine/dbal": "4.4.1",
         "dompdf/dompdf": "3.1.4",
-        "endroid/qr-code": "6.0.9",
+        "endroid/qr-code": "6.1.0",
         "facebook/graph-sdk": "5.7.0",
         "fakellyh/bing-api-php": "1.2.2",
         "gemini-api-php/client": "1.7.2",
-        "google/apiclient": "2.18.4",
+        "google/apiclient": "2.19.0",
         "guzzlehttp/guzzle": "7.10.0",
-        "laravel/prompts": "0.3.7",
+        "laravel/prompts": "0.3.10",
         "openai-php/client": "0.18.0",
-        "phpmailer/phpmailer": "7.0.0",
-        "phpoffice/phpspreadsheet": "5.2.0",
+        "phpmailer/phpmailer": "7.0.2",
+        "phpoffice/phpspreadsheet": "5.4.0",
         "pragmarx/google2fa-qrcode": "3.0.1",
-        "spatie/array-to-xml": "3.4.1",
+        "spatie/array-to-xml": "3.4.4",
         "spatie/holidays": "1.23.0",
         "spatie/mjml-php": "1.2.5",
         "spatie/opening-hours": "4.2.1",
         "spatie/pdf-to-image": "3.1.0",
-        "spatie/ssh": "1.13.0"
+        "spatie/ssh": "1.13.1"
     }
 }
